@@ -6,13 +6,13 @@
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
-USE_LIBFT = yes
+USE_LIBFT = no
 USE_BONUS = no
 
 
 # Nom de l'exécutable principal et bonus
-NAME        = output/minishell
-NAME_BONUS  = output/minishell_bonus
+NAME        = output/libft.a
+NAME_BONUS  = output/libft_bonus.a
 
 # Compilateur et flags
 CC          = gcc
@@ -37,7 +37,7 @@ UNDERLINE   = \033[4m
 RESET       = \033[0m
 
 # Répertoires
-SRC_DIR     = sources
+SRC_DIR     = source
 MAIN_DIR    = $(SRC_DIR)/main
 BONUS_DIR   = $(SRC_DIR)/bonus
 
@@ -56,7 +56,7 @@ LIBFT_DIR	  = libft
 # Bibliothèques statiques
 FT_PRINTF_LIB = $(LIB_DIR)/$(FT_PRINTF_DIR)/libftprintf.a
 GNL_LIB       = $(LIB_DIR)/$(GNL_DIR)/libgnl.a
-LIBFT_LIB	  = $(LIB_DIR)/$(LIBFT_DIR)/output/libft.a
+LIBFT_LIB	  = $(LIB_DIR)/$(LIBFT_DIR)/libft.a
 
 # Regroupe toutes les libs en foction des option
 
@@ -77,8 +77,41 @@ endif
 # ------------------------------------------------------------------------------
 # Sources Principales (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
-MAIN_SRC = \
-    main \
+MAIN_SRC =	\
+			ft_isalpha \
+			ft_isdigit \
+			ft_isalnum \
+			ft_isascii \
+			ft_isprint \
+			ft_strlen \
+			ft_memset \
+			ft_bzero \
+			ft_memcpy \
+			ft_memmove \
+			ft_strlcpy \
+			ft_strlcat \
+			ft_toupper \
+			ft_tolower \
+			ft_strchr \
+			ft_strrchr \
+			ft_strncmp \
+			ft_memchr \
+			ft_memcmp \
+			ft_strnstr \
+			ft_atoi \
+			ft_calloc \
+			ft_strdup \
+			ft_substr \
+			ft_strjoin \
+			ft_strtrim \
+			ft_split \
+			ft_itoa \
+			ft_strmapi \
+			ft_striteri \
+			ft_putchar_fd \
+			ft_putstr_fd \
+			ft_putendl_fd \
+			ft_putnbr_fd
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
@@ -87,7 +120,16 @@ MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
 # ------------------------------------------------------------------------------
 # Sources Bonus (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
-BONUS_SRC =
+BONUS_SRC =	\
+			ft_lstnew \
+			ft_lstadd_front \
+			ft_lstsize \
+			ft_lstlast \
+			ft_lstadd_back \
+			ft_lstdelone \
+			ft_lstclear \
+			ft_lstiter \
+			ft_lstmap \
 
 # Liste complète des sources bonus
 BONUS_SRCS = $(addprefix $(BONUS_DIR)/, $(addsuffix .c, $(BONUS_SRC)))
@@ -106,17 +148,17 @@ endif
 # ------------------------------------------------------------------------------
 # Compilation du binaire principal
 # ------------------------------------------------------------------------------
-$(NAME): $(MAIN_OBJS) | $(OUTPUT_DIR)
-	@echo "$(CYAN)→ Linking objects for the main build...$(RESET)"
-	$(CC) $(CFLAGS) $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
+$(NAME): $(MAIN_OBJS) $(BONUS_OBJS) | $(OUTPUT_DIR)
+	@echo "$(CYAN)→ Archiving objects for the main build...$(RESET)"
+	ar rcs $@ $(MAIN_OBJS) $(BONUS_OBJS)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
 
 # ------------------------------------------------------------------------------
 # Compilation du binaire bonus
 # ------------------------------------------------------------------------------
 $(NAME_BONUS): $(BONUS_OBJS) | $(OUTPUT_DIR)
-	@echo "$(CYAN)→ Linking objects for the bonus build...$(RESET)"
-	$(CC) $(CFLAGS) $(BONUS_OBJS) $(ALL_LIBS) -o $(NAME_BONUS)
+	@echo "$(CYAN)→ Archiving objects for the bonus build...$(RESET)"
+	ar rcs $@ $(BONUS_OBJS)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME_BONUS)$(RESET)"
 
 # ------------------------------------------------------------------------------
