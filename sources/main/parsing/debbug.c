@@ -6,7 +6,7 @@
 void print_tokken(t_token *tokens)
 {
 	
-	printf("Parsing tokens:\n");
+	printf("Parsing tokens ...\n");
     while (tokens != NULL) {
         printf("Token: %s, Type: %d\n", tokens->str, tokens->type);
         tokens = tokens->next;
