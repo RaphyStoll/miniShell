@@ -8,7 +8,7 @@ void	print_token(t_token *token)
 	t_token	*tmp;
 
 	tmp = token;
-	while (tmp->next != token)
+	while (tmp->next != NULL)
 	{
 		printf("Type : %d, [%s]\n", tmp->type, tmp->str);
 		tmp = tmp->next;
