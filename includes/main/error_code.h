@@ -1,6 +1,8 @@
 #ifndef ERROR_CODE_H
 # define ERROR_CODE_H
 
+//? enum pour les code erreur classique (baser sur le tableau excel)
+//$ pas trouver de tableau officiel des code erreur
 typedef enum e_error {
     SUCCESS = 0,				// La commande s'est exécutée avec succès.
     GENERIC_ERROR = 1,			// Erreur générale ou non spécifiée.
@@ -20,7 +22,8 @@ typedef enum e_error {
     WRAPPER_ERROR = 255			// Erreur dans le wrapper de la commande.
 } t_error;
 
-
+//? enum pour les codes d'erreur des signaux
+//$ je les ai separer parce que je pense qu'ils me sont aps destiner
 typedef enum e_serror {
     SIGINT_ERROR = 130,				// Signal SIGINT (2)
     SIGKILL_ERROR = 137,			// Signal SIGKILL (9)
@@ -33,3 +36,5 @@ typedef enum e_serror {
     SIGXCPU_ERROR = 252,			// Signal SIGXCPU (24)
     SIGXFSZ_ERROR = 253				// Signal SIGXFSZ (25)
 } t_serror;
+
+#endif
