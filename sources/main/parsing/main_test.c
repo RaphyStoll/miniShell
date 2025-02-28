@@ -37,8 +37,8 @@ void read_and_parse() {
     while ((input = readline("minishell> ")) != NULL) {
         if (*input != '\0') {
             t_token *tokens = tokenize(input);
-			print_token(tokens);
-			//init_parsing(tokens);
+			//print_token(tokens);
+			init_parsing(tokens);
 
             // Libérer la mémoire allouée pour les tokens
             t_token *current = tokens;
