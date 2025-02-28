@@ -37,11 +37,6 @@ void read_and_parse() {
     while ((input = readline("minishell> ")) != NULL) {
         if (*input != '\0') {
             t_token *tokens = tokenize(input);
-            printf("Parsing tokens:\n");
-    while (tokens != NULL) {
-        printf("Token: %s, Type: %d\n", tokens->str, tokens->type);
-        tokens = tokens->next;
-    }
 			print_tokken(tokens);
 			//init_parsing(tokens);
 
