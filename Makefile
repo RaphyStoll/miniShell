@@ -173,6 +173,15 @@ endif
 # Nettoyage
 # ------------------------------------------------------------------------------
 clean:
+	
+	@echo "$(RED)→ Removing object files...$(RESET)"
+	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
+	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
+	$(RM) -r $(OBJ_DIR)
+
+fclean: clean
+	@echo "$(RED)→ Removing executables...$(RESET)"
+	$(RM) $(NAME) $(NAME_BONUS)
 	@echo "$(RED)→ Cleaning libraries...$(RESET)"
 ifeq ($(USE_PRINTF), yes)
 	@echo "$(RED)→ Cleaning Printf...$(RESET)"
@@ -186,15 +195,6 @@ ifeq ($(USE_LIBFT), yes)
 	@echo "$(RED)→ Cleaning Libft...$(RESET)"
 	@$(MAKE) -C $(LIB_DIR)/$(LIBFT_DIR) fclean
 endif
-	@echo "$(RED)→ Removing object files...$(RESET)"
-	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
-	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
-	$(RM) -r $(OBJ_DIR)
-
-fclean: clean
-	@echo "$(RED)→ Removing executables...$(RESET)"
-	$(RM) $(NAME) $(NAME_BONUS)
-
 re: fclean all
 
 # ------------------------------------------------------------------------------
