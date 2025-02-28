@@ -108,7 +108,7 @@ endif
 # ------------------------------------------------------------------------------
 $(NAME): $(MAIN_OBJS) | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects for the main build...$(RESET)"
-	$(CC) $(CFLAGS) $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
 
 # ------------------------------------------------------------------------------
