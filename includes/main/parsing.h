@@ -12,10 +12,21 @@
 #include "../../lib/libft/header/libft.h"
 #include "../../lib/libft/header/libft_bonus.h"
 
-typedef struct s_pars {
-	t_token *tokken;
-	int error_code;
-} t_pars;
+//structure pour la partie parsing exemple ci dessous
+//? ex: ls -l -a
+// name = ls
+// argument = [0]-l [1]-a
+// argument_count = 2
+// input = NULL 
+// output = NULL 
+typedef struct s_command {
+	char	*name;				// Nom de la commande 
+	char	**arguments;		// Tableau des arguments de la commande
+	int		argument_count;		// Nombre d'arguments
+	char	*input_file;		// NULL ou = nom de fichier(pas path)
+	char	*output_file;		// NULL ou = nom de fichier(pas path)
+	struct	s_command *next;	// Pointeur vers la commande suivante (pour les pipes)
+} t_command;
 
 //!parsing
 void init_parsing(t_token *tokens);
