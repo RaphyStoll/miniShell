@@ -11,7 +11,7 @@ USE_BONUS = no
 
 
 # Nom de l'exécutable principal et bonus
-NAME        = output/test_parsing
+NAME        = test_parsing
 NAME_BONUS  = output/parsing_bonus
 
 # Compilateur et flags
