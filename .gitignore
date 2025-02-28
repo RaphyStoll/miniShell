@@ -12,3 +12,4 @@ a.out
 *.txt
 test/*
 test.c
+test_parsing
