@@ -9,6 +9,8 @@
 #include "error_code.h"
 #include "colors.h"
 #include "lexing.h"
+#include "../../lib/libft/header/libft.h"
+#include "../../lib/libft/header/libft_bonus.h"
 
 typedef struct s_pars {
 	t_token *tokken;
@@ -25,12 +27,15 @@ void read_and_parse();
 int main();
 
 //! debbug
-void print_tokken(t_token *tokens);
-void nbr_error(t_error error_code, char *message);
+void print_token(t_token *token);
+void	print_tab(char **tab);
+void	print_node(t_token *current);
+void	print_list(t_token **head);
 
 
 //!error
 void	ft_exit_error(t_token *token, char *message, t_error error_code);
+void nbr_error(t_error error_code, char *message);
 
 //!free
 void free_all(t_token *token);
