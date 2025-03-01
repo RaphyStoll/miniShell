@@ -6,6 +6,7 @@
 #include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <stdbool.h>
 #include "error_code.h"
 #include "colors.h"
 #include "lexing.h"
