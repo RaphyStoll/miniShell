@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/01 21:20:26 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/main/lexing.h"
 #include "../../../includes/main/parsing.h"
 
@@ -30,4 +42,3 @@ void nbr_error(t_error error_code, char *message) {
 	printf(YELLOW"%s\n"NC, message);
 	return ;
 }
-

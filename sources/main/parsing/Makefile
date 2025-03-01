@@ -82,7 +82,9 @@ MAIN_SRC = \
 	debbug \
 	error \
 	free \
-	parsing
+	parsing \
+	token_verif \
+	verif_pipe_and_word
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))

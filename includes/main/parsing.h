@@ -45,6 +45,14 @@ void	print_node(t_token *current);
 void	print_list(t_token **head);
 
 
+//!token verif
+bool	if_valide_token(t_token *tokens);
+bool	valid_content(t_token *current);
+
+//! verif pipe and word
+bool	valid_type_pipe(t_token *cur);
+bool	valid_type_word(t_token *current);
+
 //!error
 void	ft_exit_error(t_token *token, char *message, t_error error_code);
 void nbr_error(t_error error_code, char *message);

@@ -1,14 +1,33 @@
 #include "../../../includes/main/parsing.h"
 
-bool	if_valide_token(t_token *token)
+bool	if_valide_token(t_token *tokens)
 {
 	t_token *current;
-	
-	current = token;
+
+	current = tokens;
 	while (current != NULL)
 	{
-		if (current->str == NULL)
-			return false;
-		if (current->type >= WORD || current->type <= C_PARENTHESIS)
+		printf(YELLOW"Not NULL\n"NC);
+		if (!valid_content(current)) //$ false si type_token = NULL ou type inconnu
+			return (false);
+		if (valid_type_pipe(current)) //$ arbre de verification des pipes
+			return (false);
+		if (valid_type_word(current)) //$ arbre de verif des WORd
+			return (false);
 	}
+	return (true);
+}
+
+/*
+Verifie si: 
+ - un tokken est NULL
+ - le type est compris dans la liste des tokken gere
+*/
+bool	valid_content(t_token *current)
+{
+	if (current->str == NULL)
+		return (false);
+	else if (!(current->type >= WORD && current->type <= C_PARENTHESIS))
+		return (false);
+	return (true);
 }
