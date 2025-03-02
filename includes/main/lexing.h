@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/01 19:41:19 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/02 15:27:45 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef enum e_token_type
 {
 	WORD,			// arg or cmd
-	PIPE,			// |	
+	PIPE,			// |
 	REDIRECT_IN,	// <
 	REDIRECT_OUT,	// >
 	HEREDOC,		// <<
@@ -36,6 +36,7 @@ typedef struct	s_token
 {
 	char			*str;
 	t_token_type	type;
+	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
 
@@ -46,6 +47,6 @@ void	classify_token(t_token token);
 void	free_token(t_token token);
 
 // debug
-void	print_token(t_token token);
+void	print_token(t_token *token);
 
 #endif
