@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/02/27 15:32:16 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:15:14 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 // Enum for token type
-typedef enum e_token_type
+typedef enum e_type
 {
 	WORD,			// arg or cmd
 	PIPE,			// |	
@@ -29,19 +30,27 @@ typedef enum e_token_type
 	OR,				// ||
 	O_PARENTHESIS,	// (
 	C_PARENTHESIS,	// )
-}	t_token_type;
+}	t_type;
 
 // Token structure
 typedef struct	s_token
 {
 	char			*str;
-	t_token_type	type;
+	t_type	type;
 	struct s_token	*next;
 }	t_token;
 
-// Function prototypes
+// Function prototypes lexer
 t_token	lexer(const char *input);
+
+
+// Token functions
 t_token	*tokenizing(const char *input);
+bool	handle_operator(t_token **token_list, const char **input);
+bool	add_operator(t_token **token_list, const char **input, t_type op);
+t_token	*tokenizing(const char *input);
+t_type	is_operator(const char *input);
+bool	is_parenthesis(char c);
 void	classify_token(t_token token);
 void	free_token(t_token token);
 

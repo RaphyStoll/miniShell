@@ -3,24 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/02/27 17:00:10 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:15:35 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 
-bool is_separator(char c)
+bool	is_parenthesis(char c)
 {
-	return (c == '|' || c == '<' || c == '>c');
+	return (c == '(' || c == ')');
 }
 
-bool is_special_operator(const char *input)
+t_type	is_operator(const char *input)
 {
-	return ((!ft_strncmp(input, ">>", 2) || (!ft_strncmp(input, "<<", 2)
-			!ft_strncmp(input, "&&", 2) || !ft_strncmp(input, "||", 2));
+	if (!ft_strncmp(input, ">>", 2))
+		return (APPEND);
+	if (!ft_strncmp(input, "<<", 2))
+		return (HEREDOC);
+	if (!ft_strncmp(input, "&&", 2))
+		return (AND);
+	if (!ft_strncmp(input, "||", 2))
+		return (OR);
+	if (*input == '|')
+		return (PIPE);
+	if (*input == '<')
+		return (REDIRECT_IN);
+	if (*input == '>')
+		return (REDIRECT_OUT);
+	return (WORD);
 }
 
 // Split input into a list of raw tokens
@@ -32,45 +45,42 @@ t_token	*tokenizing(const char *input)
 	while (*input)
 	{
 		if (*input == ' ')
+		{
 			input++;
-		else if (is_special_operator(input))
-			add_token(&token_list, handle_separator(&input));
-		else if (is_separator(input))
-			add_token(&token_list, handle_separator(&input));
-		else
-			add_token(&token_list, handle_word(&input));
+			continue ;
+		}
+		if (handle_operators(&token_list, &input))
+			continue ;
+		add_token(&token_list, handle_word(&input));
 	}
 	return (token_list);
 }
 
-bool handle_separators(t_token **token_list, const char **input)
+bool	add_operator(t_token **token_list, const char **input, t_type op)
 {
-    int op
-	
-	op = is_special_operator(*input);
-    if (!op)
-        return (false);
-    if (op == REDIRECT_IN && !add_token(token_list, (ft_strdup("<"), REDIRECT_IN)))
-        return (false);
-    else if (op == HEREDOC && !add_token(token_list,(ft_strdup("<<"), HEREDOC)))
-        return (false);
-    else if (op == REDIRECT_OUT && !add_token(token_list,(ft_strdup(">"), REDIRECT_OUT)))
-        return (false);
-    else if (op == APPEND && !add_token(token_list,ft_strdup(">>"), APPEND))
-        return (false);
-    else if (op == PIPE && !add_token(token_list, ft_strdup("|"), PIPE))
-        return (false);
-    else if (op == OR && !add_token(token_list,(ft_strdup("||"), OR)))
-        return (false);
-    else if (op == AND && !add_token(token_list,(ft_strdup("&&"), AND)))
-        return (false);
-    else if (op == O_PARENTHESIS && !add_token(token_list,(ft_strdup("("), O_PARENTHESIS)))
-        return (false);
-    else if (op == C_PARENTHESIS && !add_token(token_list,(ft_strdup(")"), C_PARENTHESIS)))
-        return (false);
-    if (op == REDIRECT_IN || op == REDIRECT_OUT || op == PIPE || op == O_PARENTHESIS || op == C_PARENTHESIS)
-        (*input)++;
-    else if (op == HEREDOC || op == APPEND || op == OR || op == AND)
-        (*input) += 2;
-    return (true);
+	if (!(add_token(token_list, ft_strdup(*input), op)))
+		return (false);
+	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
+		*input += 2;
+	else
+		*input += 1;
+	return (true);
+}
+
+bool	handle_operator(t_token **token_list, const char **input)
+{
+	t_type	op;
+
+	op = is_operator(*input);
+	if (op != WORD)
+		return (add_operator(token_list, input, op));
+	if (is_parenthesis(**input))
+	{
+		if (**input == '(')
+			op = O_PARENTHESIS;
+		else
+			op = C_PARENTHESIS;
+		return (add_operator(token_list, input, op));
+	}
+	return (false);
 }
