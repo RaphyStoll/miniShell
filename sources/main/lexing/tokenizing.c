@@ -6,11 +6,11 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/04 14:15:35 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:53:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexing.h"
+#include "../../../includes/main/lexing.h"
 
 bool	is_parenthesis(char c)
 {
@@ -49,7 +49,7 @@ t_token	*tokenizing(const char *input)
 			input++;
 			continue ;
 		}
-		if (handle_operators(&token_list, &input))
+		if (handle_operator(&token_list, &input))
 			continue ;
 		add_token(&token_list, handle_word(&input));
 	}
