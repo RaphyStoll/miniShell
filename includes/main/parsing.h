@@ -30,16 +30,16 @@ typedef struct s_command {
 } t_command;
 
 //!parsing
-void init_parsing(t_token *tokens);
+void	init_parsing(t_token *tokens);
 
 //!test
-t_token *create_token(char *str, t_token_type type);
-t_token *tokenize(char *input);
-void read_and_parse();
-int main();
+t_token	*create_token(char *str, t_token_type type);
+t_token	*tokenize(char *input);
+void	read_and_parse();
+int		main();
 
 //! debbug
-void print_token(t_token *token);
+void	print_token(t_token *token);
 void	print_tab(char **tab);
 void	print_node(t_token *current);
 void	print_list(t_token **head);
@@ -55,9 +55,9 @@ bool	valid_type_word(t_token *current);
 
 //!error
 void	ft_exit_error(t_token *token, char *message, t_error error_code);
-void nbr_error(t_error error_code, char *message);
+void	nbr_error(t_error error_code, char *message);
 
 //!free
-void free_all(t_token *token);
+void	free_all(t_token *token);
 
 #endif
