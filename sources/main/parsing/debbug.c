@@ -3,18 +3,58 @@
 #include "../../../includes/main/parsing.h"
 
 
-void print_tokken(t_token *tokens)
+void	print_token(t_token *token)
 {
-	
-	printf("Parsing tokens ...\n");
-    while (tokens != NULL) {
-        printf("Token: %s, Type: %d\n", tokens->str, tokens->type);
-        tokens = tokens->next;
-    }
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp->next != NULL)
+	{
+		printf("Type : %d, [%s]\n", tmp->type, tmp->str);
+		tmp = tmp->next;
+	}
+	printf("Type : %d, [%s]\n",  tmp->type, tmp->str);
 }
 
-void nbr_error(t_error error_code, char *message) {
-		perror(RED BOLD"Error"NC);
-	printf(YELLOW"%s\n"NC, message);
-	(void)error_code;
+void	print_tab(char **tab)
+{
+	int	i;
+
+	if (!(tab))
+	{
+		printf("NULL");
+		return ;
+	}
+	i = 0;
+	printf("[");
+	while (tab[i])
+	{
+		printf("%s", tab[i]);
+		if (tab[i + 1])
+			printf(", ");
+		i++;
+	}
+	printf("]");
 }
+
+//print un noeud de la liste
+void	print_node(t_token *current)
+{
+	printf("(%s) [%d]", current->str, current->type);
+}
+
+//print la liste
+void	print_list(t_token **head)
+{
+	t_token	*current;
+
+	current = *head;
+	while (current != NULL)
+	{
+		print_node(current);
+		current = current->next;
+	}
+	ft_putstr_fd("NULL\n", 1);
+	return ;
+}
+
