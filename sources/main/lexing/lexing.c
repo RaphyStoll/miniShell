@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:00 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 14:16:48 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:01:53 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	is_parenthesis(char c)
 {
 	return (c == '(' || c == ')');
 }
+
 
 int	is_symbol(char c)
 {
