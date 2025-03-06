@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 13:51:32 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:36:42 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_lexer
 	t_token	*lexer;
 	char	*synthax_error;
 }	t_lexer;
+
+// faire une strucutre qui regroupe toutes les variables que jutilise, a voir si jinsere dans s_lexer
 
 
 
