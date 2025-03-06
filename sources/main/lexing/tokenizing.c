@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 14:33:00 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:22:27 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	add_token(t_token **token_list, char *str, t_type op)
 	new_token->type = op;
 	new_token->next = NULL;
 	if (*token_list == NULL)
-		token_list = new_token;
+		*token_list = new_token;
 	else
 	{
 		tmp = *token_list;
@@ -55,7 +55,7 @@ t_token	*tokenizing(const char *input)
 		}
 		if (handle_operator(&token_list, &input))
 			continue ;
-		add_token(&token_list, handle_word(&input));
+		add_token(&token_list, handle_word(&input), 0);
 	}
 	return (token_list);
 }
