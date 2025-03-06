@@ -3,37 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/04 14:53:43 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:33:00 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
 
-bool	is_parenthesis(char c)
+bool	add_token(t_token **token_list, char *str, t_type op)
 {
-	return (c == '(' || c == ')');
-}
+	t_token	*new_token;
+	t_token	*tmp;
 
-t_type	is_operator(const char *input)
-{
-	if (!ft_strncmp(input, ">>", 2))
-		return (APPEND);
-	if (!ft_strncmp(input, "<<", 2))
-		return (HEREDOC);
-	if (!ft_strncmp(input, "&&", 2))
-		return (AND);
-	if (!ft_strncmp(input, "||", 2))
-		return (OR);
-	if (*input == '|')
-		return (PIPE);
-	if (*input == '<')
-		return (REDIRECT_IN);
-	if (*input == '>')
-		return (REDIRECT_OUT);
-	return (WORD);
+	new_token = malloc(sizeof(t_token));
+	if (!new_token)
+		return (false);
+	new_token->str = strdup(str);
+	if (!new_token->str)
+	{
+		free(new_token);
+		return (false);
+	}
+	new_token->type = op;
+	new_token->next = NULL;
+	if (*token_list == NULL)
+		token_list = new_token;
+	else
+	{
+		tmp = *token_list;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_token;
+	}
+	return (true);
 }
 
 // Split input into a list of raw tokens
@@ -65,6 +69,19 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 	else
 		*input += 1;
 	return (true);
+}
+
+char	*handle_word(const char **input)
+{
+	char	*word;
+	int		len;
+
+	len = 0;
+	while ((*input[len] && *input[len] != ' ') && is_symbol(*input[len]) != 0)
+		len++;
+	word = ft_strndup(*input, len);
+	*input += len;
+	return (word);
 }
 
 bool	handle_operator(t_token **token_list, const char **input)
