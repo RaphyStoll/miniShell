@@ -6,12 +6,12 @@
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
-USE_LIBFT = no
+USE_LIBFT = yes
 USE_BONUS = no
 
 
 # Nom de l'exécutable principal et bonus
-NAME        = output/test_parsing
+NAME        = test_parsing
 NAME_BONUS  = output/parsing_bonus
 
 # Compilateur et flags
@@ -48,7 +48,7 @@ BONUS_OBJ   = $(OBJ_DIR)/bonus
 OUTPUT_DIR  = output
 
 # Répertoires des bibliothèques tierces
-LIB_DIR 	  = lib
+LIB_DIR 	  = ../../../lib
 FT_PRINTF_DIR = ft_printf
 GNL_DIR       = gnl
 LIBFT_DIR	  = libft
@@ -82,7 +82,9 @@ MAIN_SRC = \
 	debbug \
 	error \
 	free \
-	parsing
+	parsing \
+	token_verif \
+	verif_pipe_and_word
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
@@ -177,6 +179,13 @@ endif
 # Nettoyage
 # ------------------------------------------------------------------------------
 clean:
+	
+	@echo "$(RED)→ Removing object files...$(RESET)"
+	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
+	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
+	$(RM) -r $(OBJ_DIR)
+
+fclean: clean
 	@echo "$(RED)→ Cleaning libraries...$(RESET)"
 ifeq ($(USE_PRINTF), yes)
 	@echo "$(RED)→ Cleaning Printf...$(RESET)"
@@ -190,14 +199,10 @@ ifeq ($(USE_LIBFT), yes)
 	@echo "$(RED)→ Cleaning Libft...$(RESET)"
 	@$(MAKE) -C $(LIB_DIR)/$(LIBFT_DIR) fclean
 endif
-	@echo "$(RED)→ Removing object files...$(RESET)"
-	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
-	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
-	$(RM) -r $(OBJ_DIR)
-
-fclean: clean
 	@echo "$(RED)→ Removing executables...$(RESET)"
 	$(RM) $(NAME) $(NAME_BONUS)
+	@echo "$(RED)→ Removing '$(OUTPUT_DIR)' directory...$(RESET)"
+	$(RM) -r $(OUTPUT_DIR)
 
 re: fclean all
 

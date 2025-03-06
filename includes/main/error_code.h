@@ -13,12 +13,6 @@ typedef enum e_error {
     PERMISSION_ERROR = 86,		// Erreur de permission refusée.
     SYNTAX_ERROR = 102,			// Erreur de syntaxe ou de paramètre incorrect.
     COMMAND_NOT_FOUND = 127,	// La commande spécifiée n'a pas été trouvée.
-    SIGNAL_ERROR_131 = 131,		// Erreur de signal SIGBUS (10).
-    SIGNAL_ERROR_154 = 154,		// Erreur de signal SIGRTMIN (34).
-    SIGNAL_ERROR_170 = 170,		// Erreur de signal SIGSTKFLT (16).
-    SIGNAL_ERROR_214 = 214,		// Erreur de signal SIGRTMIN+8 (42).
-    SIGNAL_ERROR_252 = 252,		// Erreur de signal SIGXCPU (24).
-    SIGNAL_ERROR_253 = 253,		// Erreur de signal SIGXFSZ (25).
     WRAPPER_ERROR = 255			// Erreur dans le wrapper de la commande.
 } t_error;
 

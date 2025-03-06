@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 16:36:42 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:40:28 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <stdbool.h>
 
 // Enum for token type
 typedef enum e_type
@@ -39,6 +38,7 @@ typedef struct	s_token
 	char			*str;
 	t_type			type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_lexer
@@ -52,16 +52,9 @@ typedef struct s_lexer
 
 
 // Function prototypes lexer
+// Function prototypes
 t_token	lexer(const char *input);
-
-
-// Token functions
 t_token	*tokenizing(const char *input);
-bool	handle_operator(t_token **token_list, const char **input);
-bool	add_operator(t_token **token_list, const char **input, t_type op);
-t_token	*tokenizing(const char *input);
-t_type	is_operator(const char *input);
-bool	is_parenthesis(char c);
 void	classify_token(t_token token);
 void	free_token(t_token token);
 
