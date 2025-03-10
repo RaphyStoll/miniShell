@@ -1,7 +1,7 @@
 #include "../../../includes/main/parsing.h"
 
 // Fonction pour créer un nouveau token
-t_token	*create_token(char *str, t_token_type type)
+t_token	*create_token(char *str, t_type type)
 {
 	t_token	*new_token;
 

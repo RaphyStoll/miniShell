@@ -34,7 +34,7 @@ bool	init_parsing(t_token *tokens);
 
 //!test
 int	parse_tokens(t_token *head);
-t_token	*create_token(char *str, t_token_type type);
+t_token	*create_token(char *str, t_type type);
 void	add_token(t_token **head, t_token *new_token);
 t_token	*create_test_case_1(void);
 t_token	*create_test_case_2(void);
