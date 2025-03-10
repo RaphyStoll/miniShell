@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/05 13:17:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/06 13:16:13 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 
 // Enum for token type
-typedef enum e_token_type
+typedef enum e_type
 {
 	WORD,			// arg or cmd
 	PIPE,			// |	
@@ -29,14 +29,15 @@ typedef enum e_token_type
 	OR,				// ||
 	O_PARENTHESIS,	// (
 	C_PARENTHESIS,	// )
-}	t_token_type;
+}	t_type;
 
 // Token structure
 typedef struct	s_token
 {
 	char			*str;
-	t_token_type	type;
+	t_type	type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 // Function prototypes
