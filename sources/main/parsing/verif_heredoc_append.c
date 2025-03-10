@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:18:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/03 21:18:01 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/09 15:31:31 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	valid_type_heredoc(t_token *cur)
 	return (true);
 }
 
-bool	valid_type_heredoc(t_token *cur)
+bool	valid_type_append(t_token *cur)
 {
 	if (cur->type == APPEND)
 	{

@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:30:11 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/02 21:59:20 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/09 15:30:43 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	valid_type_redirect_in(t_token *cur)
 	return (true);
 }
 
-bool	t_tokenvalid_type_redirect_out(t_token *cur)
+bool	valid_type_redirect_out(t_token *cur)
 {
 	if (cur->type == REDIRECT_OUT)
 	{
