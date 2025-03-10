@@ -84,7 +84,10 @@ MAIN_SRC = \
 	free \
 	parsing \
 	token_verif \
-	verif_pipe_and_word
+	verif_pipe_and_word \
+	verif_and_or \
+	verif_heredoc_append \
+	verif_redirect
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))

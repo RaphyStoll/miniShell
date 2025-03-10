@@ -30,16 +30,21 @@ typedef struct s_command {
 } t_command;
 
 //!parsing
-void	init_parsing(t_token *tokens);
+bool	init_parsing(t_token *tokens);
 
 //!test
+int	parse_tokens(t_token *head);
 t_token	*create_token(char *str, t_token_type type);
-t_token	*tokenize(char *input);
-void	read_and_parse();
-int		main();
+void	add_token(t_token **head, t_token *new_token);
+t_token	*create_test_case_1(void);
+t_token	*create_test_case_2(void);
+t_token	*create_test_case_3(void);
+t_token	*create_test_case_4(void);
+t_token	*create_test_case_5(void);
+int	main(void);
 
 //! debbug
-void	print_token(t_token *token);
+void	print_tokens(t_token *head);
 void	print_tab(char **tab);
 void	print_node(t_token *current);
 void	print_list(t_token **head);
@@ -53,11 +58,22 @@ bool	valid_content(t_token *current);
 bool	valid_type_pipe(t_token *cur);
 bool	valid_type_word(t_token *current);
 
+//! verif
+bool	valid_type_and(t_token *cur);
+bool	valid_type_or(t_token *cur);
+bool	valid_type_heredoc(t_token *cur);
+bool	valid_type_append(t_token *cur);
+bool	valid_type_pipe(t_token *cur);
+bool	valid_type_word(t_token *current);
+bool	valid_type_redirect_in(t_token *cur);
+bool	valid_type_redirect_out(t_token *cur);
+
 //!error
 void	ft_exit_error(t_token *token, char *message, t_error error_code);
 void	nbr_error(t_error error_code, char *message);
 
 //!free
+void	free_tokens(t_token *head);
 void	free_all(t_token *token);
 
 #endif
