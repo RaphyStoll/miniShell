@@ -35,8 +35,10 @@ void	add_token(t_token **head, t_token *new_token)
 // Fonction qui simule ton parsing (à remplacer par ta vraie fonction)
 int	parse_tokens(t_token *head)
 {
+
 	int res = init_parsing(head);
-	return (res);
+	//printf("res = %d", res);
+		return res;
 }
 
 // Fonction pour créer des chaînes de test prédéfinies
@@ -239,22 +241,190 @@ t_token	*create_error_case_10(void)
 	return (head);
 }
 
+// Cas impossibles ou types inexistants
 
-int	main(void)
+t_token	*create_error_case_11(void)
 {
-	t_token	*tokens;
-	int		choice;
+	// Erreur: token avec un type invalide
+	t_token	*head = NULL;
+
+	t_token *invalid_token = create_token("invalid", 10);
+	add_token(&head, invalid_token);
+	return (head);
+}
+
+t_token	*create_error_case_12(void)
+{
+	// Erreur: commande avec redirection vide
+	t_token	*head = NULL;
+
+	add_token(&head, create_token("echo", WORD));
+	add_token(&head, create_token("hello", WORD));
+	add_token(&head, create_token(">", REDIRECT_OUT));
+	add_token(&head, create_token("", WORD)); // Nom de fichier vide
+	return (head);
+}
+
+t_token	*create_error_case_13(void)
+{
+	// Erreur: commande avec plusieurs redirections du même type consécutives
+	t_token	*head = NULL;
+
+	add_token(&head, create_token("cat", WORD));
+	add_token(&head, create_token("<", REDIRECT_IN));
+	add_token(&head, create_token("<", REDIRECT_IN)); // Double redirection
+	add_token(&head, create_token("file.txt", WORD));
+	return (head);
+}
+
+t_token	*create_error_case_14(void)
+{
+	// Erreur: structure imbriquée incorrecte
+	t_token	*head = NULL;
+
+	add_token(&head, create_token("(", O_PARENTHESIS));
+	add_token(&head, create_token("(", O_PARENTHESIS));
+	add_token(&head, create_token("echo", WORD));
+	add_token(&head, create_token("test", WORD));
+	add_token(&head, create_token(")", C_PARENTHESIS));
+	// Parenthèse manquante
+	return (head);
+}
+
+t_token	*create_error_case_15(void)
+{
+	// Erreur: opérateurs logiques consécutifs
+	t_token	*head = NULL;
+
+	add_token(&head, create_token("echo", WORD));
+	add_token(&head, create_token("test", WORD));
+	add_token(&head, create_token("&&", AND));
+	add_token(&head, create_token("||", OR)); // Opérateurs consécutifs
+	add_token(&head, create_token("ls", WORD));
+	return (head);
+}
+
+// Fonction pour analyser une chaîne unique et la diviser en tokens
+t_token *parse_single_argument(char *arg)
+{
+	t_token *head = NULL;
+	char *token;
+	char *rest = arg;
+	char *delimiters = " \t";
+	
+	// Utiliser strtok pour diviser la chaîne par espaces
+	token = strtok(rest, delimiters);
+	while (token != NULL)
+	{
+		t_type type = WORD; // Par défaut
+		
+		// Déterminer le type de token
+		if (strcmp(token, "|") == 0)
+			type = PIPE;
+		else if (strcmp(token, ">") == 0)
+			type = REDIRECT_OUT;
+		else if (strcmp(token, "<") == 0)
+			type = REDIRECT_IN;
+		else if (strcmp(token, ">>") == 0)
+			type = APPEND;
+		else if (strcmp(token, "<<") == 0)
+			type = HEREDOC;
+		else if (strcmp(token, "&&") == 0)
+			type = AND;
+		else if (strcmp(token, "||") == 0)
+			type = OR;
+		else if (strcmp(token, "(") == 0)
+			type = O_PARENTHESIS;
+		else if (strcmp(token, ")") == 0)
+			type = C_PARENTHESIS;
+			
+		// Créer et ajouter le token
+		add_token(&head, create_token(token, type));
+		
+		// Passer au token suivant
+		token = strtok(NULL, delimiters);
+	}
+	
+	return head;
+}
+
+// Fonction pour afficher l'aide
+void	display_help(void)
+{
+	printf("Usage: ./parser [OPTION]\n\n");
+	printf("Options:\n");
+	printf("  Sans argument       Mode interactif avec menu\n");
+	printf("  [1-20]              Exécuter un cas de test prédéfini\n");
+	printf("                      1-5: Commandes valides\n");
+	printf("                      6-20: Commandes avec erreurs\n");
+	printf("  \"tokens...\"         Créer une séquence de tokens personnalisée\n");
+	printf("                      Exemple: ./parser \"ls -la | grep .c > output.txt\"\n");
+	printf("  -h, --help          Afficher cette aide\n");
+}
+
+int	main(int argc, char **argv)
+{
+	t_token	*tokens = NULL;
+	int		choice = 0;
 	int		result;
 
-	printf("Choisissez un cas de test (1-15):\n");
-	printf("1-5: Cas valides\n");
-	printf("6-15: Cas d'erreurs\n");
-	printf("Choix: ");
-	scanf("%d", &choice);
+	// Afficher l'aide si demandé
+	if (argc > 1 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0))
+	{
+		display_help();
+		return (0);
+	}
 
+	if (argc == 1)
+	{
+		// Mode interactif existant avec scanf
+		printf("Choisissez un cas de test (1-20):\n");
+		printf("1-5: Cas valides\n");
+		printf("6-20: Cas d'erreurs\n");
+		printf("Choix: ");
+		scanf("%d", &choice);
+	}
+	else if (argc == 2)
+	{
+		// Essayer de convertir l'argument en nombre pour les cas prédéfinis
+		choice = atoi(argv[1]);
+		
+		if (choice > 0 && choice <= 20)
+		{
+			// C'est un choix numérique valide, utiliser les cas prédéfinis
+		}
+		else
+		{
+			// Ce n'est pas un nombre entre 1 et 20, traiter comme une chaîne de tokens
+			printf("Test personnalisé avec la commande: %s\n", argv[1]);
+			tokens = parse_single_argument(argv[1]);
+			
+			// Aller directement à l'évaluation
+			print_tokens(tokens);
+			result = parse_tokens(tokens);
+			
+			// Afficher le résultat
+			printf("Résultat du parsing: %d ", result);
+			if (result == 0)
+				printf("(Commande considérée comme valide)\n");
+			else
+				printf("(Erreur détectée)\n");
+			
+			free_tokens(tokens);
+			return (0);
+		}
+	}
+	else
+	{
+		printf("Erreur: trop d'arguments. Utilisez des guillemets pour encadrer la commande.\n");
+		printf("Exemple: ./parser \"ls -la | grep .c\"\n");
+		printf("Utilisez --help pour plus d'informations.\n");
+		return (1);
+	}
+
+	// Code existant pour les cas prédéfinis
 	switch (choice)
 	{
-		// Cas valides
 		case 1:
 			tokens = create_test_case_1();
 			printf("Test: ls -la | grep .c > output.txt\n");
@@ -276,7 +446,7 @@ int	main(void)
 			printf("Test: echo \"Bonjour $USER\"\n");
 			break;
 		
-		// Cas d'erreurs
+		// Cas d'erreurs existants
 		case 6:
 			tokens = create_error_case_1();
 			printf("Test ERREUR: | ls (commande commençant par un pipe)\n");
@@ -317,6 +487,28 @@ int	main(void)
 			tokens = create_error_case_10();
 			printf("Test ERREUR: ls | (pipe à la fin sans commande qui suit)\n");
 			break;
+			
+		// Nouveaux cas d'erreurs
+		case 16:
+			tokens = create_error_case_11();
+			printf("Test ERREUR: token avec un type invalide (999)\n");
+			break;
+		case 17:
+			tokens = create_error_case_12();
+			printf("Test ERREUR: echo hello > (redirection vers un fichier vide)\n");
+			break;
+		case 18:
+			tokens = create_error_case_13();
+			printf("Test ERREUR: cat < < file.txt (redirections multiples consécutives)\n");
+			break;
+		case 19:
+			tokens = create_error_case_14();
+			printf("Test ERREUR: ((echo test) (parenthèse imbriquée non fermée)\n");
+			break;
+		case 20:
+			tokens = create_error_case_15();
+			printf("Test ERREUR: echo test && || ls (opérateurs logiques consécutifs)\n");
+			break;
 		default:
 			printf("Choix invalide, utilisation du test 1 par défaut\n");
 			tokens = create_test_case_1();
@@ -326,7 +518,7 @@ int	main(void)
 	print_tokens(tokens);
 	
 	result = parse_tokens(tokens);
-	if (choice >= 6 && choice <= 15)
+	if (choice >= 6 && choice <= 20)
 	{
 		if (result != 0)
 			printf("✅ Erreur correctement détectée! (Code retour: %d)\n", result);
@@ -344,4 +536,3 @@ int	main(void)
 	free_tokens(tokens);
 	return (0);
 }
-

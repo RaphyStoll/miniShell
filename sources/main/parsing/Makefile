@@ -87,7 +87,8 @@ MAIN_SRC = \
 	verif_pipe_and_word \
 	verif_and_or \
 	verif_heredoc_append \
-	verif_redirect
+	verif_redirect \
+	verif_exception
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))

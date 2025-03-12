@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/10 17:51:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/10 18:18:35 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,22 @@ void	print_current_token(t_token *token)
 
 	if (!token)
 	{
-		printf("Token actuel: NULL\n");
+		printf(GREEN "Token actuel: NULL\n"NC);
 		return;
 	}
 	
-	printf("Token actuel: %-15s | Type: %s\n", token->str, type_names[token->type]);
+	printf(GREEN "Token actuel: %-15s | Type: %s\n"NC, token->str, type_names[token->type]);
 	
 	// Afficher les tokens adjacents pour le contexte (optionnel)
 	if (token->prev)
-		printf("Token précédent: %-10s | Type: %s\n", token->prev->str, type_names[token->prev->type]);
+		printf(GREEN "Token précédent: %-10s | Type: %s\n"NC, token->prev->str, type_names[token->prev->type]);
 	else
-		printf("Token précédent: NULL\n");
+		printf(GREEN "Token précédent: NULL\n"NC);
 		
 	if (token->next)
-		printf("Token suivant:  %-10s | Type: %s\n", token->next->str, type_names[token->next->type]);
+		printf(GREEN "Token suivant:  %-10s | Type: %s\n"NC, token->next->str, type_names[token->next->type]);
 	else
-		printf("Token suivant:  NULL\n");
+		printf(GREEN "Token suivant:  NULL\n"NC);
 }
 
 void	print_tab(char **tab)

@@ -6,55 +6,89 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/07 00:07:10 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/12 00:15:44 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/parsing.h"
 
-bool	valid_type_and(t_token *cur)
+bool	valid_type_and_prev(t_token *cur)
 {
 	if (cur->type == AND)
 	{
-		if (cur->prev == NULL || cur->next == NULL)
+		if (cur->prev == NULL)
 			return (false);
-		if (!(cur->prev->type == WORD && cur->next->type == WORD))
+		if (!(cur->prev->type == WORD))
 			return (false);
-		if (cur->prev->type == AND || cur->next->type == AND
-			|| cur->prev->type == OR || cur->next->type == OR)
+		if (cur->prev->type == AND || cur->prev->type == OR)
 			return (false);
-		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND
-			|| cur->prev->type == REDIRECT_IN
-			|| cur->prev->type == REDIRECT_OUT
-			|| cur->next->type == HEREDOC || cur->next->type == APPEND
-			|| cur->next->type == REDIRECT_IN
-			|| cur->next->type == REDIRECT_OUT)
+		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
 			return (false);
-		if (cur->prev->type == PIPE || cur->next->type == PIPE)
+		if (cur->prev->type == REDIRECT_IN || cur->prev->type == REDIRECT_OUT)
+			return (false);
+		if (cur->prev->type == PIPE)
 			return (false);
 	}
 	return (true);
 }
 
-bool	valid_type_or(t_token *cur)
+bool	valid_type_and_next(t_token *cur)
+{
+	if (cur->type == AND)
+	{
+		if (cur->next == NULL)
+			return (false);
+		if (!(cur->next->type == WORD))
+			return (false);
+		if (cur->next->type == AND || cur->next->type == OR)
+			return (false);
+		if (cur->next->type == HEREDOC || cur->next->type == APPEND)
+			return (false);
+		if (cur->next->type == REDIRECT_IN || cur->next->type == REDIRECT_OUT)
+			return (false);
+		if (cur->next->type == PIPE)
+			return (false);
+		
+	}
+	return (true);
+}
+
+bool	valid_type_or_prev(t_token *cur)
 {
 	if (cur->type == OR)
 	{
-		if (cur->prev == NULL || cur->next == NULL)
+		if (cur->prev == NULL)
 			return (false);
-		if (!(cur->prev->type == WORD && cur->next->type == WORD))
+		if (!(cur->prev->type == WORD || cur->prev->type == C_PARENTHESIS))
 			return (false);
-		if (cur->prev->type == AND || cur->next->type == AND
-			|| cur->prev->type == OR || cur->next->type == OR)
+
+		if (cur->prev->type == AND || cur->prev->type == OR)
 			return (false);
-		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND
-			|| cur->prev->type == REDIRECT_IN
-			|| cur->prev->type == REDIRECT_OUT
-			|| cur->next->type == HEREDOC || cur->next->type == APPEND
-			|| cur->next->type == REDIRECT_IN
-			|| cur->next->type == REDIRECT_OUT)
+		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
 			return (false);
-		if (cur->prev->type == PIPE || cur->next->type == PIPE)
+		if (cur->prev->type == REDIRECT_IN || cur->prev->type == REDIRECT_OUT)
+			return (false);
+		if (cur->prev->type == PIPE)
+			return (false);
+	}
+	return (true);
+}
+
+bool	valid_type_or_next(t_token *cur)
+{
+	if (cur->type == OR)
+	{
+		if (cur->next == NULL)
+			return (false);
+		if (!(cur->next->type == WORD || cur->next->type == O_PARENTHESIS))
+			return (false);
+		if (cur->next->type == AND || cur->next->type == OR)
+			return (false);
+		if (cur->next->type == HEREDOC || cur->next->type == APPEND)
+			return (false);
+		if (cur->next->type == REDIRECT_IN || cur->next->type == REDIRECT_OUT)
+			return (false);
+		if (cur->next->type == PIPE)
 			return (false);
 	}
 	return (true);
