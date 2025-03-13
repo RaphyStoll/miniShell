@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 11:00:51 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 12:31:01 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ typedef struct s_lexer
 
 // faire une strucutre qui regroupe toutes les variables que jutilise, a voir si jinsere dans s_lexer
 
+typedef enum e_error
+{
+	UNCLOSED_QUOTE,
+	UNCLOSED_PARENTHESIS,
+	MEMORY_ERROR,
+}	t_error;
 
 
 // Function prototypes lexer
