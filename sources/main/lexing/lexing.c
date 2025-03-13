@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:00 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 11:05:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 12:38:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ t_type	is_operator(const char *input)
 		return (REDIRECT_OUT);
 	return (WORD);
 }
-t_token lexer(const char *input)
+
+t_token	*lexer(const char *input)
 {
-	
+	t_token	*token_list;
+
+	check_unclosed_quotes(input);
+	check_unclosed_parentheses(input);
+	token_list = tokenizing(input);
+	return (token_list);
 }
