@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 13:40:52 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 15:54:57 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,27 @@ bool	add_token(t_token **token_list, char *str, t_type op)
 	return (true);
 }
 
-// Split input into a list of raw tokens
-t_token	*tokenizing(const char *input)
-{
-	t_token	*token_list;
-	char	*word;
-
-	token_list = NULL;
-	while (*input)
-	{
-		if (*input == ' ')
-		{
-			input++;
-			continue ;
-		}
-		if (handle_operator(&token_list, &input))
-			continue ;
-		word = handle_word(&input);
-		if (!word)
-			ft_exit_error(token_list, MEMORY_ERROR, "word");
-		add_token(&token_list, handle_word(&input), 0);
-	}
-	return (token_list);
-}
-
 bool	add_operator(t_token **token_list, const char **input, t_type op)
 {
-	if (!(add_token(token_list, ft_strdup(*input), op)))
-		return (false);
+	char	*operator;
+
 	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
+	{
+		operator = ft_strndup(*input, 2);
 		*input += 2;
+	}
 	else
+	{
+		operator = ft_strndup(*input, 1);
 		*input += 1;
+	}
+	if (!operator)
+		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+	if (!(add_token(token_list, operator, op)))
+	{
+		free(operator);
+		ft_exit_error(*token_list, MEMORY_ERROR, "token");
+	}
 	return (true);
 }
 
@@ -85,18 +74,19 @@ char	*handle_word(const char **input)
 		(*input)++;
 		while ((*input)[len] && (*input)[len] != quote)
 			len++;
-		if ((*input)[len] != quote)
+		if (!(*input)[len])
 			return (NULL);
-		(*input)++;
+		word = ft_strndup(*input, len);
+		*input += len + 1;
 	}
 	else
 	{
-		while ((*input[len] && *input[len] != ' ')
-			&& is_symbol(*input[len]) != 0)
+		while (((*input)[len] && (*input)[len] != ' ')
+			&& !is_operator(*input + len))
 			len++;
+		word = ft_strndup(*input, len);
+		*input += len;
 	}
-	word = ft_strndup(*input, len);
-	*input += len;
 	return (word);
 }
 
@@ -116,4 +106,28 @@ bool	handle_operator(t_token **token_list, const char **input)
 		return (add_operator(token_list, input, op));
 	}
 	return (false);
+}
+
+// Split input into a list of raw tokens
+t_token	*tokenizing(const char *input)
+{
+	t_token	*token_list;
+	char	*word;
+
+	token_list = NULL;
+	while (*input)
+	{
+		if (*input == ' ')
+		{
+			input++;
+			continue ;
+		}
+		if (handle_operator(&token_list, &input))
+			continue ;
+		word = handle_word(&input);
+		if (!word)
+			ft_exit_error(token_list, MEMORY_ERROR, "word");
+		add_token(&token_list, word, 0);
+	}
+	return (token_list);
 }
