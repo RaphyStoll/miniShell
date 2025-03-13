@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 10:52:55 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 13:40:52 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ bool	add_token(t_token **token_list, char *str, t_type op)
 
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		return (false);
+		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
 	new_token->str = strdup(str);
 	if (!new_token->str)
-	{
-		free(new_token);
-		return (false);
-	}
+		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
 	new_token->type = op;
 	new_token->next = NULL;
 	if (*token_list == NULL)
@@ -44,6 +41,7 @@ bool	add_token(t_token **token_list, char *str, t_type op)
 t_token	*tokenizing(const char *input)
 {
 	t_token	*token_list;
+	char	*word;
 
 	token_list = NULL;
 	while (*input)
@@ -55,6 +53,9 @@ t_token	*tokenizing(const char *input)
 		}
 		if (handle_operator(&token_list, &input))
 			continue ;
+		word = handle_word(&input);
+		if (!word)
+			ft_exit_error(token_list, MEMORY_ERROR, "word");
 		add_token(&token_list, handle_word(&input), 0);
 	}
 	return (token_list);

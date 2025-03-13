@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 12:41:14 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 14:02:29 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,20 @@ void	free_all(t_token *token)
 	}
 }
 
-void	ft_exit_error(t_token *tokens, t_error code, char **error_token)
+void	ft_exit_error(t_token *tokens, t_error code, char *error_token)
 {
 	if (!error_token)
 		error_token = "newline";
 	if (code == UNCLOSED_QUOTE)
-		printf(stderr,
+		printf(
 			"Synthax error : unexpected EOF while looking for matching `%s'\n",
 			error_token);
 	if (code == UNCLOSED_PARENTHESIS)
-		printf(stderr, "Syntax error: unexpected '%s'\n" NC, error_token);
+		printf("Syntax error: unexpected '%s'\n" NC, error_token);
 	if (code == MEMORY_ERROR)
-		printf(stderr, "Memory allocation error\n");
+		printf("%s allocation error\n", error_token);
 	else
-		printf(stderr, "Unknown error\n");
+		printf("Unknown error\n");
 	if (tokens)
 		free_all(tokens);
 	exit(code);

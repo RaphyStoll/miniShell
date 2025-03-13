@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:03:44 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/06 13:30:02 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:56:32 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,22 @@ void	test_tokenizing(void)
 	}
 }
 
+void	test_check_unclosed_quotes(void)
+{
+    printf("Testing check_unclosed_quotes:\n");
+    check_unclosed_quotes("echo \"Hello");
+    check_unclosed_quotes("ls -l '");
+    check_unclosed_quotes("'text' \"text\"");
+}
+
+void	test_check_unclosed_parentheses(void)
+{
+    printf("Testing check_unclosed_parentheses:\n");
+    check_unclosed_parentheses("echo (ls | grep");
+    check_unclosed_parentheses(")");
+    check_unclosed_parentheses("(ls | grep)");
+}
+
 int	main(void)
 {
 	test_is_parenthesis();
@@ -86,5 +102,7 @@ int	main(void)
 	test_add_operator();
 	test_handle_operator();
 	test_tokenizing();
+	test_check_unclosed_quotes();
+	test_check_unclosed_parentheses();
 	return (0);
 }

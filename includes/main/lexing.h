@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 12:31:01 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 13:56:11 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,17 @@ typedef enum e_error
 // Function prototypes
 t_token	lexer(const char *input);
 t_token	*tokenizing(const char *input);
-void	classify_token(t_token token);
-void	free_token(t_token token);
+bool	handle_operator(t_token **token_list, const char **input);
+bool	add_operator(t_token **token_list, const char **input, t_type op);
+char	*handle_word(const char **input);
+bool	add_token(t_token **token_list, char *str, t_type op);
+t_type	is_operator(const char *input);
+bool	is_symbol(char c);
+bool	is_parenthesis(char c);
+bool	check_unclosed_quotes(const char *input);
+bool	check_unclosed_parentheses(char *input);
+void	ft_exit_error(t_token *tokens, t_error code, char *error_token);
+void	free_all(t_token *token);
 
 // debug
 void	print_token(t_token token);
