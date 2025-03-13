@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 15:54:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:10:41 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*handle_word(const char **input)
 	else
 	{
 		while (((*input)[len] && (*input)[len] != ' ')
-			&& !is_operator(*input + len))
+			&& !is_symbol((*input)[len]))
 			len++;
 		word = ft_strndup(*input, len);
 		*input += len;
