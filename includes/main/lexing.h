@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 13:56:11 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:07:59 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
+#include "../../lib/libft/header/libft.h"
+#include "../../lib/libft/header/libft_bonus.h"
 
 // Enum for token type
 typedef enum e_type
 {
-	WORD,			// arg or cmd
-	PIPE,			// |	
-	REDIRECT_IN,	// <
-	REDIRECT_OUT,	// >
-	HEREDOC,		// <<
-	APPEND,			// >>
-	AND,			// &&
-	OR,				// ||
-	O_PARENTHESIS,	// (
-	C_PARENTHESIS,	// )
+	WORD,			// arg or cmd 0
+	PIPE,			// | 1
+	REDIRECT_IN,	// < 2
+	REDIRECT_OUT,	// > 3
+	HEREDOC,		// << 4
+	APPEND,			// >> 5
+	AND,			// && 6
+	OR,				// || 7
+	O_PARENTHESIS,	// ( 8
+	C_PARENTHESIS,	// ) 9
 	INVALID_TOKEN
 }	t_type;
 
@@ -60,7 +62,7 @@ typedef enum e_error
 
 // Function prototypes lexer
 // Function prototypes
-t_token	lexer(const char *input);
+t_token	*lexer(const char *input);
 t_token	*tokenizing(const char *input);
 bool	handle_operator(t_token **token_list, const char **input);
 bool	add_operator(t_token **token_list, const char **input, t_type op);
@@ -70,8 +72,8 @@ t_type	is_operator(const char *input);
 bool	is_symbol(char c);
 bool	is_parenthesis(char c);
 bool	check_unclosed_quotes(const char *input);
-bool	check_unclosed_parentheses(char *input);
-void	ft_exit_error(t_token *tokens, t_error code, char *error_token);
+bool	check_unclosed_parentheses(const char *input);
+bool	ft_exit_error(t_token *tokens, t_error code, char *error_token);
 void	free_all(t_token *token);
 
 // debug
