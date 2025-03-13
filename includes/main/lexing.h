@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 16:40:28 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:00:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 // Enum for token type
 typedef enum e_type

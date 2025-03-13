@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 17:22:27 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:52:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,26 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 char	*handle_word(const char **input)
 {
 	char	*word;
+	char	quote;
 	int		len;
 
 	len = 0;
-	while ((*input[len] && *input[len] != ' ') && is_symbol(*input[len]) != 0)
-		len++;
+	if (**input == '"' || **input == '\'')
+	{
+		quote = **input;
+		(*input)++;
+		while ((*input)[len] && (*input)[len] != quote)
+			len++;
+		if ((*input)[len] != quote)
+			return (NULL);
+		(*input)++;
+	}
+	else
+	{
+		while ((*input[len] && *input[len] != ' ')
+			&& is_symbol(*input[len]) != 0)
+			len++;
+	}
 	word = ft_strndup(*input, len);
 	*input += len;
 	return (word);
