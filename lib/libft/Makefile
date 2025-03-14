@@ -101,6 +101,7 @@ MAIN_SRC =	\
 			ft_atoi \
 			ft_calloc \
 			ft_strdup \
+			ft_strndup \
 			ft_substr \
 			ft_strjoin \
 			ft_strtrim \
