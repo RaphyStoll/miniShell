@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 17:17:02 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 18:42:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*handle_word(const char **input, bool *in_double_quotes)
 		word = ft_strjoin(quoted, unquoted);
 		free(quoted);
 		free(unquoted);
+		if (!word)
+			return (NULL);
 		return (word);
 	}
 	return (unquoted);
