@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/06 13:16:13 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:16:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,58 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
+# include "../../../includes/main/error_code.h"
+# include "../../lib/libft/header/libft.h"
 
 // Enum for token type
 typedef enum e_type
 {
-	WORD,			// arg or cmd
-	PIPE,			// |	
-	REDIRECT_IN,	// <
-	REDIRECT_OUT,	// >
-	HEREDOC,		// <<
-	APPEND,			// >>
-	AND,			// &&
-	OR,				// ||
-	O_PARENTHESIS,	// (
-	C_PARENTHESIS,	// )
+	WORD,			// arg or cmd 0
+	PIPE,			// | 1
+	REDIRECT_IN,	// < 2
+	REDIRECT_OUT,	// > 3
+	HEREDOC,		// << 4
+	APPEND,			// >> 5
+	AND,			// && 6
+	OR,				// || 7
+	O_PARENTHESIS,	// ( 8
+	C_PARENTHESIS,	// ) 9
+	INVALID_TOKEN
 }	t_type;
 
 // Token structure
-typedef struct	s_token
+typedef struct s_token
 {
 	char			*str;
-	t_type	type;
+	t_type			type;
+	bool			in_double_quotes;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
 
-// Function prototypes
-t_token	lexer(const char *input);
+// Lexing
+t_token	*lexer(const char *input);
 t_token	*tokenizing(const char *input);
-void	classify_token(t_token token);
-void	free_token(t_token token);
 
-// debug
-void	print_token(t_token token);
+// Token
+char	*handle_word(const char **input, bool *in_double_quotes);
+char	*get_quoted_word(const char **input, bool *in_dquote);
+char	*get_unquoted_word(const char **input);
+bool	handle_operator(t_token **token_list, const char **input);
+bool	add_operator(t_token **token_list, const char **input, t_type op);
+bool	add_token(t_token **token_list, char *str, t_type op, bool dquotes);
+
+// Synthax utils
+t_type	is_operator(const char *input);
+bool	is_symbol(char c);
+bool	is_parenthesis(char c);
+
+//Error handling
+bool	check_unclosed_quotes(const char *input);
+bool	check_unclosed_parentheses(const char *input);
+void	ft_exit_error(t_token *tokens, t_error code, char *error_token);
+void	print_error_message(t_error code, char *error_token);
+void	free_all(t_token *token);
 
 #endif

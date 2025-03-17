@@ -6,40 +6,74 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/04 14:15:35 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 17:17:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexing.h"
+#include "../../../includes/main/lexing.h"
 
-bool	is_parenthesis(char c)
+char	*get_quoted_word(const char **input, bool *in_dquote)
 {
-	return (c == '(' || c == ')');
+	int			len;
+	const char	*start;
+	char		quote;
+	char		*word;
+
+	len = 0;
+	if (**input != '"' && **input != '\'')
+		return (NULL);
+	quote = **input;
+	*in_dquote = (quote == '"');
+	(*input)++;
+	start = *input;
+	while ((*input)[len] && (*input)[len] != quote)
+		len++;
+	if (!(*input)[len])
+		return (NULL);
+	(*input) += len + 1;
+	word = ft_strndup(start, len);
+	return (word);
 }
 
-t_type	is_operator(const char *input)
+char	*get_unquoted_word(const char **input)
 {
-	if (!ft_strncmp(input, ">>", 2))
-		return (APPEND);
-	if (!ft_strncmp(input, "<<", 2))
-		return (HEREDOC);
-	if (!ft_strncmp(input, "&&", 2))
-		return (AND);
-	if (!ft_strncmp(input, "||", 2))
-		return (OR);
-	if (*input == '|')
-		return (PIPE);
-	if (*input == '<')
-		return (REDIRECT_IN);
-	if (*input == '>')
-		return (REDIRECT_OUT);
-	return (WORD);
+	int			len;
+	const char	*start;
+	char		*word;
+
+	len = 0;
+	start = *input;
+	while ((*input)[len] && (*input)[len] != ' ' && !is_symbol((*input)[len]))
+		len++;
+	word = ft_strndup(start, len);
+	*input += len;
+	return (word);
 }
 
-// Split input into a list of raw tokens
+char	*handle_word(const char **input, bool *in_double_quotes)
+{
+	char	*quoted;
+	char	*unquoted;
+	char	*word;
+
+	*in_double_quotes = false;
+	quoted = get_quoted_word(input, in_double_quotes);
+	unquoted = get_unquoted_word(input);
+	if (quoted)
+	{
+		word = ft_strjoin(quoted, unquoted);
+		free(quoted);
+		free(unquoted);
+		return (word);
+	}
+	return (unquoted);
+}
+
 t_token	*tokenizing(const char *input)
 {
 	t_token	*token_list;
+	char	*word;
+	bool	dquote;
 
 	token_list = NULL;
 	while (*input)
@@ -49,38 +83,12 @@ t_token	*tokenizing(const char *input)
 			input++;
 			continue ;
 		}
-		if (handle_operators(&token_list, &input))
+		if (handle_operator(&token_list, &input))
 			continue ;
-		add_token(&token_list, handle_word(&input));
+		word = handle_word(&input, &dquote);
+		if (!word)
+			ft_exit_error(token_list, MEMORY_ERROR, "word");
+		add_token(&token_list, word, WORD, dquote);
 	}
 	return (token_list);
-}
-
-bool	add_operator(t_token **token_list, const char **input, t_type op)
-{
-	if (!(add_token(token_list, ft_strdup(*input), op)))
-		return (false);
-	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
-		*input += 2;
-	else
-		*input += 1;
-	return (true);
-}
-
-bool	handle_operator(t_token **token_list, const char **input)
-{
-	t_type	op;
-
-	op = is_operator(*input);
-	if (op != WORD)
-		return (add_operator(token_list, input, op));
-	if (is_parenthesis(**input))
-	{
-		if (**input == '(')
-			op = O_PARENTHESIS;
-		else
-			op = C_PARENTHESIS;
-		return (add_operator(token_list, input, op));
-	}
-	return (false);
 }

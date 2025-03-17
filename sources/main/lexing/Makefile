@@ -1,207 +1,61 @@
 # ------------------------------------------------------------------------------
-# Configuration principale
+# Configuration de base
 # ------------------------------------------------------------------------------
+CC         = gcc
+CFLAGS     = -Wall -Wextra -Werror
+RM         = rm -f
 
+# Nom de l'exécutable
+NAME       = test_lexing
 
-# activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
-USE_GNL = no
-USE_PRINTF = no
-USE_LIBFT = yes
-USE_BONUS = no
+# Fichiers sources (tous les fichiers .c du dossier actuel)
+SRCS       = $(wildcard *.c)
+OBJS       = $(SRCS:.c=.o)
 
+# Répertoire de la libft (on remonte 3 fois dans l'arborescence)
+LIBFT_DIR  = $(abspath ../../../lib/libft)
+LIBFT_A    = $(LIBFT_DIR)/output/libft.a
 
-# Nom de l'exécutable principal et bonus
-NAME        = output/test_lexing
-NAME_BONUS  = output/parsing_bonus
-
-# Compilateur et flags
-CC          = gcc
-CFLAGS      = -g -Wall -Wextra -Werror
-
-# Commandes pratiques
-MKDIR       = mkdir -p
-RM          = rm -f
-
-# Couleurs et styles
-BLACK       = \033[0;30m
-RED         = \033[0;91m
-GREEN       = \033[0;92m
-YELLOW      = \033[0;93m
-BLUE        = \033[0;94m
-MAGENTA     = \033[0;95m
-CYAN        = \033[0;96m
-WHITE       = \033[0;97m
-
-BOLD        = \033[1m
-UNDERLINE   = \033[4m
-RESET       = \033[0m
-
-# Répertoires
-SRC_DIR     = sources
-MAIN_DIR    = ./
-BONUS_DIR   = $(SRC_DIR)/bonus
-
-OBJ_DIR     = objects
-MAIN_OBJ    = $(OBJ_DIR)/main
-BONUS_OBJ   = $(OBJ_DIR)/bonus
-
-OUTPUT_DIR  = output
-
-# Répertoires des bibliothèques tierces
-LIB_DIR 	  = lib
-FT_PRINTF_DIR = ft_printf
-GNL_DIR       = gnl
-LIBFT_DIR	  = libft
-
-# Bibliothèques statiques
-FT_PRINTF_LIB = $(LIB_DIR)/$(FT_PRINTF_DIR)/libftprintf.a
-GNL_LIB       = $(LIB_DIR)/$(GNL_DIR)/libgnl.a
-LIBFT_LIB	  = $(LIB_DIR)/$(LIBFT_DIR)/output/libft.a
-
-# Regroupe toutes les libs en foction des option
-
-ALL_LIBS =
-
-ifeq ($(USE_PRINTF), yes)
-	ALL_LIBS += $(FT_PRINTF_LIB)
-endif
-
-ifeq ($(USE_GNL), yes)
-	ALL_LIBS += $(GNL_LIB)
-endif
-
-ifeq ($(USE_LIBFT), yes)
-	ALL_LIBS += $(LIBFT_LIB)
-endif
+# Options d'inclusion
+INCLUDES   = -I $(LIBFT_DIR)/header -I/usr/local/opt/readline/include
 
 # ------------------------------------------------------------------------------
-# Sources Principales (NOMS SANS EXTENSION)
+# Compilation principale
 # ------------------------------------------------------------------------------
-MAIN_SRC = \
-    test_token \
-	lexing \
-	tokenizing \
-	utils \
-	error_synthax
+all: $(LIBFT_A) $(NAME)
 
-# Liste complète des sources principales
-MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
-MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
+# Compilation de l'exécutable
+$(NAME): $(OBJS)
+	@echo "🔗 Linking $(NAME)..."
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR)/output -lft -L/usr/local/opt/readline/lib -lreadline -o $(NAME)
+	@echo "✅ Build successful!"
 
-# ------------------------------------------------------------------------------
-# Sources Bonus (NOMS SANS EXTENSION)
-# ------------------------------------------------------------------------------
-BONUS_SRC =
-
-# Liste complète des sources bonus
-BONUS_SRCS = $(addprefix $(BONUS_DIR)/, $(addsuffix .c, $(BONUS_SRC)))
-BONUS_OBJS = $(addprefix $(BONUS_OBJ)/, $(addsuffix .o, $(BONUS_SRC)))
-
-# ------------------------------------------------------------------------------
-# Cibles principales selon option
-# ------------------------------------------------------------------------------
-all: $(ALL_LIBS) $(NAME)
-
-ifeq ($(USE_BONUS), yes)
-bonus: $(ALL_LIBS) $(NAME_BONUS)
-endif
-
-
-# ------------------------------------------------------------------------------
-# Compilation du binaire principal
-# ------------------------------------------------------------------------------
-$(NAME): $(MAIN_OBJS) | $(OUTPUT_DIR)
-	@echo "$(CYAN)→ Linking objects for the main build...$(RESET)"
-	$(CC) $(CFLAGS) -lreadline $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
-	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
-
-# ------------------------------------------------------------------------------
-# Compilation du binaire bonus
-# ------------------------------------------------------------------------------
-$(NAME_BONUS): $(BONUS_OBJS) | $(OUTPUT_DIR)
-	@echo "$(CYAN)→ Linking objects for the bonus build...$(RESET)"
-	$(CC) $(CFLAGS) $(BONUS_OBJS) $(ALL_LIBS) -o $(NAME_BONUS)
-	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME_BONUS)$(RESET)"
-
-# ------------------------------------------------------------------------------
-# Création des répertoires
-# ------------------------------------------------------------------------------
-$(OUTPUT_DIR):
-	@echo "$(YELLOW)Creating output directory '$(OUTPUT_DIR)'$(RESET)"
-	@$(MKDIR) $(OUTPUT_DIR)
-
-$(MAIN_OBJ):
-	@echo "$(YELLOW)Creating object directory '$(MAIN_OBJ)'$(RESET)"
-	@$(MKDIR) $(MAIN_OBJ)
-
-$(BONUS_OBJ):
-	@echo "$(YELLOW)Creating object directory '$(BONUS_OBJ)'$(RESET)"
-	@$(MKDIR) $(BONUS_OBJ)
-
-# ------------------------------------------------------------------------------
-# Règles de compilation pour les sources principales
-# ------------------------------------------------------------------------------
-$(MAIN_OBJ)/%.o: $(MAIN_DIR)/%.c | $(MAIN_OBJ)
-	@echo "$(BLUE)Compiling $< → $@$(RESET)"
+# Compilation des fichiers objets
+%.o: %.c
+	@echo "🛠️  Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 # ------------------------------------------------------------------------------
-# Règles de compilation pour les sources bonus
+# Compilation de libft si nécessaire
 # ------------------------------------------------------------------------------
-$(BONUS_OBJ)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ)
-	@echo "$(MAGENTA)Compiling $< (bonus) → $@$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
-
-# ------------------------------------------------------------------------------
-# Règles pour compiler les bibliothèques tierces selon option
-# ------------------------------------------------------------------------------
-define build_lib
-$(1):
-	@echo "$(YELLOW)→ Building $(2) library...$(RESET)"
-	@$(MAKE) -C $(LIB_DIR)/$(3)
-endef
-
-ifeq ($(USE_PRINTF), yes)
-$(eval $(call build_lib,$(FT_PRINTF_LIB),PRINTF,$(FT_PRINTF_DIR)))
-endif
-
-ifeq ($(USE_GNL), yes)
-$(eval $(call build_lib,$(GNL_LIB),GNL,$(GNL_DIR)))
-endif
-
-ifeq ($(USE_LIBFT), yes)
-$(eval $(call build_lib,$(LIBFT_LIB),LIBFT,$(LIBFT_DIR)))
-endif
+$(LIBFT_A):
+	@echo "📦 Building libft..."
+	@$(MAKE) -C $(LIBFT_DIR)
 
 # ------------------------------------------------------------------------------
 # Nettoyage
 # ------------------------------------------------------------------------------
 clean:
-	@echo "$(RED)→ Cleaning libraries...$(RESET)"
-ifeq ($(USE_PRINTF), yes)
-	@echo "$(RED)→ Cleaning Printf...$(RESET)"
-	@$(MAKE) -C $(LIB_DIR)/$(FT_PRINTF_DIR) fclean
-endif
-ifeq ($(USE_GNL), yes)
-	@echo "$(RED)→ Cleaning GNL...$(RESET)"
-	@$(MAKE) -C $(LIB_DIR)/$(GNL_DIR) fclean
-endif
-ifeq ($(USE_LIBFT), yes)
-	@echo "$(RED)→ Cleaning Libft...$(RESET)"
-	@$(MAKE) -C $(LIB_DIR)/$(LIBFT_DIR) fclean
-endif
-	@echo "$(RED)→ Removing object files...$(RESET)"
-	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
-	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
-	$(RM) -r $(OBJ_DIR)
+	@echo "🧹 Cleaning object files..."
+	$(RM) $(OBJS)
 
 fclean: clean
-	@echo "$(RED)→ Removing executables...$(RESET)"
-	$(RM) $(NAME) $(NAME_BONUS)
+	@echo "🧹 Removing executable..."
+	$(RM) $(NAME)
 
 re: fclean all
 
 # ------------------------------------------------------------------------------
-# Cibles phony
+# Règles phony
 # ------------------------------------------------------------------------------
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

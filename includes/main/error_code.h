@@ -13,7 +13,9 @@ typedef enum e_error {
     PERMISSION_ERROR = 86,		// Erreur de permission refusée.
     SYNTAX_ERROR = 102,			// Erreur de syntaxe ou de paramètre incorrect.
     COMMAND_NOT_FOUND = 127,	// La commande spécifiée n'a pas été trouvée.
-    WRAPPER_ERROR = 255			// Erreur dans le wrapper de la commande.
+    WRAPPER_ERROR = 255,			// Erreur dans le wrapper de la commande.
+    UNCLOSED_QUOTE = SYNTAX_ERROR,
+    UNCLOSED_PARENTHESIS = SYNTAX_ERROR,
 } t_error;
 
 //? enum pour les codes d'erreur des signaux
