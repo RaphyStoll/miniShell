@@ -17,7 +17,7 @@ LIBFT_DIR  = $(abspath ../../../lib/libft)
 LIBFT_A    = $(LIBFT_DIR)/output/libft.a
 
 # Options d'inclusion
-INCLUDES   = -I $(LIBFT_DIR)/header
+INCLUDES   = -I $(LIBFT_DIR)/header -I/usr/local/opt/readline/include
 
 # ------------------------------------------------------------------------------
 # Compilation principale
@@ -27,7 +27,7 @@ all: $(LIBFT_A) $(NAME)
 # Compilation de l'exécutable
 $(NAME): $(OBJS)
 	@echo "🔗 Linking $(NAME)..."
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR)/output -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR)/output -lft -L/usr/local/opt/readline/lib -lreadline -o $(NAME)
 	@echo "✅ Build successful!"
 
 # Compilation des fichiers objets

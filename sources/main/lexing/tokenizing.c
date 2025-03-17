@@ -6,13 +6,13 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 17:10:08 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 17:17:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
 
-static char	*get_quoted_word(const char **input, bool *in_dquote)
+char	*get_quoted_word(const char **input, bool *in_dquote)
 {
 	int			len;
 	const char	*start;
@@ -35,7 +35,7 @@ static char	*get_quoted_word(const char **input, bool *in_dquote)
 	return (word);
 }
 
-static char	*get_unquoted_word(const char **input)
+char	*get_unquoted_word(const char **input)
 {
 	int			len;
 	const char	*start;
@@ -50,7 +50,7 @@ static char	*get_unquoted_word(const char **input)
 	return (word);
 }
 
-static char	*handle_word(const char **input, bool *in_double_quotes)
+char	*handle_word(const char **input, bool *in_double_quotes)
 {
 	char	*quoted;
 	char	*unquoted;
