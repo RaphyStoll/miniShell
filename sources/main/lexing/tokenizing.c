@@ -6,61 +6,11 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 14:28:30 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 17:10:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
-
-bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
-{
-	t_token	*new_token;
-	t_token	*tmp;
-
-	new_token = malloc(sizeof(t_token));
-	if (!new_token)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
-	new_token->str = strdup(str);
-	if (!new_token->str)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
-	new_token->type = op;
-	new_token->in_double_quotes = in_dquotes;
-	new_token->next = NULL;
-	if (*token_list == NULL)
-		*token_list = new_token;
-	else
-	{
-		tmp = *token_list;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_token;
-	}
-	return (true);
-}
-
-bool	add_operator(t_token **token_list, const char **input, t_type op)
-{
-	char	*operator;
-
-	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
-	{
-		operator = ft_strndup(*input, 2);
-		*input += 2;
-	}
-	else
-	{
-		operator = ft_strndup(*input, 1);
-		*input += 1;
-	}
-	if (!operator)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
-	if (!(add_token(token_list, operator, op, false)))
-	{
-		free(operator);
-		ft_exit_error(*token_list, MEMORY_ERROR, "token");
-	}
-	return (true);
-}
 
 static char	*get_quoted_word(const char **input, bool *in_dquote)
 {
@@ -100,7 +50,7 @@ static char	*get_unquoted_word(const char **input)
 	return (word);
 }
 
-char	*handle_word(const char **input, bool *in_double_quotes)
+static char	*handle_word(const char **input, bool *in_double_quotes)
 {
 	char	*quoted;
 	char	*unquoted;
@@ -117,25 +67,6 @@ char	*handle_word(const char **input, bool *in_double_quotes)
 		return (word);
 	}
 	return (unquoted);
-}
-
-
-bool	handle_operator(t_token **token_list, const char **input)
-{
-	t_type	op;
-
-	op = is_operator(*input);
-	if (op != WORD)
-		return (add_operator(token_list, input, op));
-	if (is_parenthesis(**input))
-	{
-		if (**input == '(')
-			op = O_PARENTHESIS;
-		else
-			op = C_PARENTHESIS;
-		return (add_operator(token_list, input, op));
-	}
-	return (false);
 }
 
 t_token	*tokenizing(const char *input)

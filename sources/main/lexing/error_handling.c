@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 15:28:41 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 16:07:59 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,6 @@ bool	check_unclosed_parentheses(const char *input)
 	if (count > 0)
 		ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "(");
 	return (true);
-}
-
-void	free_all(t_token *token)
-{
-	t_token	*tmp;
-
-	while (token)
-	{
-		tmp = token->next;
-		free(token->str);
-		free(token);
-		token = tmp;
-	}
 }
 
 void	print_error_message(t_error code, char *error_token)

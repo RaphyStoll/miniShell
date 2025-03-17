@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:24:59 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/14 14:29:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 16:51:14 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_token *tokens;
+	t_token	*tokens;
 
 	if (argc != 2)
 	{
