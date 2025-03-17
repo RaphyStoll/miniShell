@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 15:55:35 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:28:41 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	check_unclosed_quotes(const char *input)
 		input++;
 	}
 	if (quote)
-		return (ft_exit_error(NULL, UNCLOSED_QUOTE, error_token));
+		ft_exit_error(NULL, UNCLOSED_QUOTE, error_token);
 	return (true);
 }
 
@@ -50,13 +50,13 @@ bool	check_unclosed_parentheses(const char *input)
 		else if (*input == ')')
 		{
 			if (count == 0)
-				return (ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")"));
+				ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")");
 			count--;
 		}
 		input++;
 	}
 	if (count > 0)
-		return (ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "("));
+		ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "(");
 	return (true);
 }
 
@@ -73,21 +73,38 @@ void	free_all(t_token *token)
 	}
 }
 
-bool	ft_exit_error(t_token *tokens, t_error code, char *error_token)
+void	print_error_message(t_error code, char *error_token)
 {
 	if (!error_token)
 		error_token = "newline";
+	write (2, "minishell: ", 11);
 	if (code == UNCLOSED_QUOTE)
-		printf(
-			"Synthax error : unexpected EOF while looking for matching `%s'\n",
-			error_token);
+	{
+		write(2,
+			"syntax error near unexpected EOF while looking for matching '",
+			61);
+		write(2, error_token, 1);
+		write(2, "'\n", 2);
+	}
 	else if (code == UNCLOSED_PARENTHESIS)
-		printf("Syntax error: unexpected '%s'\n", error_token);
+	{
+		write(2, "syntax error near unexpected '", 30);
+		write(2, error_token, 1);
+		write(2, "'\n", 2);
+	}
 	else if (code == MEMORY_ERROR)
-		printf("%s allocation error\n", error_token);
+	{
+		write(2, error_token, ft_strlen(error_token));
+		write(2, "allocation error\n", 18);
+	}
 	else
-		printf("Unknown error\n");
+		write(2, "unknown error\n", 25);
+}
+
+void	ft_exit_error(t_token *tokens, t_error code, char *error_token)
+{
+	print_error_message(code, error_token);
 	if (tokens)
 		free_all(tokens);
-	return (false);
+	exit (code);
 }
