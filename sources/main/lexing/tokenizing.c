@@ -6,13 +6,13 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/13 16:10:41 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/17 14:28:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
 
-bool	add_token(t_token **token_list, char *str, t_type op)
+bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
 {
 	t_token	*new_token;
 	t_token	*tmp;
@@ -24,6 +24,7 @@ bool	add_token(t_token **token_list, char *str, t_type op)
 	if (!new_token->str)
 		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
 	new_token->type = op;
+	new_token->in_double_quotes = in_dquotes;
 	new_token->next = NULL;
 	if (*token_list == NULL)
 		*token_list = new_token;
@@ -53,7 +54,7 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 	}
 	if (!operator)
 		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
-	if (!(add_token(token_list, operator, op)))
+	if (!(add_token(token_list, operator, op, false)))
 	{
 		free(operator);
 		ft_exit_error(*token_list, MEMORY_ERROR, "token");
@@ -61,34 +62,63 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 	return (true);
 }
 
-char	*handle_word(const char **input)
+static char	*get_quoted_word(const char **input, bool *in_dquote)
 {
-	char	*word;
-	char	quote;
-	int		len;
+	int			len;
+	const char	*start;
+	char		quote;
+	char		*word;
 
 	len = 0;
-	if (**input == '"' || **input == '\'')
-	{
-		quote = **input;
-		(*input)++;
-		while ((*input)[len] && (*input)[len] != quote)
-			len++;
-		if (!(*input)[len])
-			return (NULL);
-		word = ft_strndup(*input, len);
-		*input += len + 1;
-	}
-	else
-	{
-		while (((*input)[len] && (*input)[len] != ' ')
-			&& !is_symbol((*input)[len]))
-			len++;
-		word = ft_strndup(*input, len);
-		*input += len;
-	}
+	if (**input != '"' && **input != '\'')
+		return (NULL);
+	quote = **input;
+	*in_dquote = (quote == '"');
+	(*input)++;
+	start = *input;
+	while ((*input)[len] && (*input)[len] != quote)
+		len++;
+	if (!(*input)[len])
+		return (NULL);
+	(*input) += len + 1;
+	word = ft_strndup(start, len);
 	return (word);
 }
+
+static char	*get_unquoted_word(const char **input)
+{
+	int			len;
+	const char	*start;
+	char		*word;
+
+	len = 0;
+	start = *input;
+	while ((*input)[len] && (*input)[len] != ' ' && !is_symbol((*input)[len]))
+		len++;
+	word = ft_strndup(start, len);
+	*input += len;
+	return (word);
+}
+
+char	*handle_word(const char **input, bool *in_double_quotes)
+{
+	char	*quoted;
+	char	*unquoted;
+	char	*word;
+
+	*in_double_quotes = false;
+	quoted = get_quoted_word(input, in_double_quotes);
+	unquoted = get_unquoted_word(input);
+	if (quoted)
+	{
+		word = ft_strjoin(quoted, unquoted);
+		free(quoted);
+		free(unquoted);
+		return (word);
+	}
+	return (unquoted);
+}
+
 
 bool	handle_operator(t_token **token_list, const char **input)
 {
@@ -108,11 +138,11 @@ bool	handle_operator(t_token **token_list, const char **input)
 	return (false);
 }
 
-// Split input into a list of raw tokens
 t_token	*tokenizing(const char *input)
 {
 	t_token	*token_list;
 	char	*word;
+	bool	dquote;
 
 	token_list = NULL;
 	while (*input)
@@ -124,10 +154,10 @@ t_token	*tokenizing(const char *input)
 		}
 		if (handle_operator(&token_list, &input))
 			continue ;
-		word = handle_word(&input);
+		word = handle_word(&input, &dquote);
 		if (!word)
 			ft_exit_error(token_list, MEMORY_ERROR, "word");
-		add_token(&token_list, word, 0);
+		add_token(&token_list, word, WORD, dquote);
 	}
 	return (token_list);
 }
