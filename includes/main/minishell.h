@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/02/26 15:45:46 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:25:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "lexing.h"
+# include "parsing.h"
 
 //! main
 int main();

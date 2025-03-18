@@ -361,7 +361,7 @@ void	display_help(void)
 	printf("                      Exemple: ./parser \"ls -la | grep .c > output.txt\"\n");
 	printf("  -h, --help          Afficher cette aide\n");
 }
-
+#ifdef TEST_PARSING
 int	main(int argc, char **argv)
 {
 	t_token	*tokens = NULL;
@@ -536,3 +536,4 @@ int	main(int argc, char **argv)
 	free_tokens(tokens);
 	return (0);
 }
+#endif

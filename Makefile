@@ -2,7 +2,6 @@
 # Configuration principale
 # ------------------------------------------------------------------------------
 
-
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
@@ -37,13 +36,23 @@ UNDERLINE   = \033[4m
 RESET       = \033[0m
 
 # Répertoires
+
 SRC_DIR     = sources
 MAIN_DIR    = $(SRC_DIR)/main
 BONUS_DIR   = $(SRC_DIR)/bonus
+LEXING_DIR	= ${MAIN_DIR}/lexing
+PARSING_DIR = ${MAIN_DIR}/parsing
 
 OBJ_DIR     = objects
 MAIN_OBJ    = $(OBJ_DIR)/main
+LEXING_OBJ	= $(MAIN_OBJ)/lexing
+PARSING_OBJ	= $(MAIN_OBJ)/parsing
 BONUS_OBJ   = $(OBJ_DIR)/bonus
+
+ALL_OBJ_DIR = $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ)
+ifeq ($(USE_BONUS), yes)
+	ALL_OBJ_DIR += $(BONUS_OBJ)
+endif
 
 OUTPUT_DIR  = output
 
@@ -77,12 +86,28 @@ endif
 # ------------------------------------------------------------------------------
 # Sources Principales (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
+LEXING_SRC = \
+	lexing error_handling memory_utils test_token token_utils tokenizing
+
+PARSING_SRC = 
+
 MAIN_SRC = \
     main \
 
+
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
+LEXING_SRCS = $(addprefix $(LEXING_DIR)/, $(addsuffix .c, $(LEXING_SRC)))
+PARSING_SRCS = $(addprefix $(PARSING_DIR)/, $(addsuffix .c, $(PARSING_SRC)))
+
+ALL_SRCS = $(MAIN_SRCS) $(LEXING_SRCS) $(PARSING_SRCS)
+
 MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
+LEXING_OBJS = $(addprefix $(LEXING_OBJ)/, $(addsuffix .o, $(LEXING_SRC)))
+PARSING_OBJS = $(addprefix $(PARSING_OBJ)/, $(addsuffix .o, $(PARSING_SRC)))
+
+ALL_OBJS = $(MAIN_OBJS) $(LEXING_OBJS) $(PARSING_OBJS)
+
 
 # ------------------------------------------------------------------------------
 # Sources Bonus (NOMS SANS EXTENSION)
@@ -96,7 +121,9 @@ BONUS_OBJS = $(addprefix $(BONUS_OBJ)/, $(addsuffix .o, $(BONUS_SRC)))
 # ------------------------------------------------------------------------------
 # Cibles principales selon option
 # ------------------------------------------------------------------------------
-all: $(ALL_LIBS) $(NAME)
+all: dirs $(ALL_LIBS) $(NAME)
+dirs:
+	@$(MKDIR) $(OUTPUT_DIR) $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ) $(BONUS_OBJ)
 
 ifeq ($(USE_BONUS), yes)
 bonus: $(ALL_LIBS) $(NAME_BONUS)
@@ -106,7 +133,7 @@ endif
 # ------------------------------------------------------------------------------
 # Compilation du binaire principal
 # ------------------------------------------------------------------------------
-$(NAME): $(MAIN_OBJS) | $(OUTPUT_DIR)
+$(NAME): $(ALL_OBJS)  | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects for the main build...$(RESET)"
 	$(CC) $(CFLAGS) -lreadline $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
@@ -123,21 +150,22 @@ $(NAME_BONUS): $(BONUS_OBJS) | $(OUTPUT_DIR)
 # Création des répertoires
 # ------------------------------------------------------------------------------
 $(OUTPUT_DIR):
-	@echo "$(YELLOW)Creating output directory '$(OUTPUT_DIR)'$(RESET)"
-	@$(MKDIR) $(OUTPUT_DIR)
+	@echo "$(YELLOW)Creating output directory '$(ALL_OBJ_DIR)'$(RESET)"
+	@$(MKDIR) $(ALL_OBJ_DIR)
 
 $(MAIN_OBJ):
 	@echo "$(YELLOW)Creating object directory '$(MAIN_OBJ)'$(RESET)"
 	@$(MKDIR) $(MAIN_OBJ)
+	@$(MKDIR) $(MAIN_OBJ)
 
 $(BONUS_OBJ):
-	@echo "$(YELLOW)Creating object directory '$(BONUS_OBJ)'$(RESET)"
+	@echo "$(YELLOW)Creating object directory '$(ALL_OBJ_DIR)'$(RESET)"
 	@$(MKDIR) $(BONUS_OBJ)
 
 # ------------------------------------------------------------------------------
 # Règles de compilation pour les sources principales
 # ------------------------------------------------------------------------------
-$(MAIN_OBJ)/%.o: $(MAIN_DIR)/%.c | $(MAIN_OBJ)
+$(MAIN_OBJ)/%.o: $(MAIN_DIR)/%.c | $(ALL_OBJ_DIR)
 	@echo "$(BLUE)Compiling $< → $@$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
@@ -172,6 +200,7 @@ endif
 # ------------------------------------------------------------------------------
 # Nettoyage
 # ------------------------------------------------------------------------------
+
 clean:
 	
 	@echo "$(RED)→ Removing object files...$(RESET)"

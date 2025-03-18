@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:24:59 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/17 18:22:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/18 16:31:08 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#ifdef TEST_LEXING
 int	main(void)
 {
 	char	*input;
@@ -52,3 +53,4 @@ int	main(void)
 	printf("Exiting minishell...\n");
 	return 0;
 }
+#endif
