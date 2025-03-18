@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:50 by raphael           #+#    #+#             */
-/*   Updated: 2025/02/20 14:11:49 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/06 14:20:23 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

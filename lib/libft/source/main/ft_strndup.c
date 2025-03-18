@@ -1,25 +1,34 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.c                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 14:59:00 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 18:56:38 by Charlye          ###   ########.fr       */
+/*   Created: 2025/03/14 14:31:56 by Charlye           #+#    #+#             */
+/*   Updated: 2025/03/14 14:32:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
+#include "../../header/libft.h"
 
-t_token	*lexer(const char *input)
+char	*ft_strndup(const char *s1, int len)
 {
-	t_token	*token_list;
+	char	*dup;
+	int		i;
 
-	if (!check_unclosed_quotes(input) || !check_unclosed_parentheses(input))
+	i = 0;
+	dup = malloc(len + 1);
+	if (!dup)
+	{
 		return (NULL);
-	token_list = tokenizing(input);
-	if (!token_list)
-		ft_exit_error(token_list, MEMORY_ERROR, "token list");
-	return (token_list);
+	}
+	while (i < len)
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[len] = '\0';
+	return (dup);
 }
