@@ -20,14 +20,39 @@
 // argument_count = 2
 // input = NULL 
 // output = NULL 
-typedef struct s_command {
-	char	*name;				// Nom de la commande 
-	char	**arguments;		// Tableau des arguments de la commande
-	int		argument_count;		// Nombre d'arguments
-	char	*input_file;		// NULL ou = nom de fichier(pas path)
-	char	*output_file;		// NULL ou = nom de fichier(pas path)
-	struct	s_command *next;	// Pointeur vers la commande suivante (pour les pipes)
-} t_command;
+
+//enum pour les redirection (use dans s_redirection)
+typedef enum e_redir_type {
+    REDIR_IN,     // <
+    REDIR_OUT,    // >
+    REDIR_APPEND, // >>
+    HEREDOC       // <<
+} t_redir_type;
+
+// enum pour l'ast
+typedef enum e_node_type {
+	AST_COMMAND,  // nœud représentant une commande simple avec ses arguments et redirections
+	AST_PIPE,     // nœud représentant un pipeline
+	AST_LOGICAL,  // nœud pour les opérateurs logiques (&&, ||)
+	AST_GROUP     // nœud pour une expression entre parenthèses
+} t_node_type;
+
+
+//sous structure pour les redirection
+typedef struct s_redirection {
+    t_redir_type type;
+    char *target;                    // Fichier ou délimiteur
+    struct s_redirection *next;      // Pour chaîner plusieurs redirections
+} t_redirection;
+
+// structure de base de l'ast
+typedef struct s_node {
+    enum e_node_type type;         // Par exemple : CMD, PIPE, LOGICAL, etc.
+    char **args;                   // Tableau d'arguments de la commande
+    struct s_node *child;          // Premier enfant (pour des sous-commandes ou pipelines)
+    struct s_node *brother;        // Frère suivant (pour chaîner des commandes au même niveau)
+    t_redirection *redirections;   // Liste des redirections associées à cette commande
+} t_node;
 
 //!parsing
 bool	init_parsing(t_token *tokens);
