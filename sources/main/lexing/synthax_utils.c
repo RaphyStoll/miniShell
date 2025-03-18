@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/17 16:51:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/18 08:25:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	is_parenthesis(char c)
 bool	is_symbol(char c)
 {
 	return (c == '(' || c == ')' || c == '<' || c == '>'
-		|| c == '&' || c == '|');
+		|| c == '&' || c == '|' || c == '\'' || c == ';');
 }
 
 t_type	is_operator(const char *input)
