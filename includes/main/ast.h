@@ -28,15 +28,11 @@ typedef struct s_node {
     t_redirection *redirections;   // Liste des redirections associées à cette commande
 } t_node;
 
-//!ast test
-t_node *create_node(t_node_type type);
-t_token *lex_input(char *input);
-t_node *ast_from_tokens(t_token *tokens);
-void print_ast_node(t_node *node, int indent);
-void print_redirections(t_redirection *redir, int indent);
-void print_ast(t_node *node, int indent);
-void free_redirections(t_redirection *redir);
-void free_ast(t_node *node);
-int main(int argc, char **argv);
+
+//! utils
+t_node *create_node(t_node_type type, char **args);
+void add_child(t_node *parent, t_node *child);
+void add_brother(t_node *node, t_node *brother);
+void add_redirection(t_node *cmd, t_redirection *redir);
 
 #endif

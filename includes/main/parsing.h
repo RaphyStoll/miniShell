@@ -17,8 +17,6 @@
 //!parsing
 bool	init_parsing(t_token *tokens);
 
-
-
 //!test
 int	parse_tokens(t_token *head);
 t_token	*create_token(char *str, t_type type);

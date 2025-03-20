@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_verif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:28 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 16:43:07 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 14:39:34 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,7 @@ bool	valid_content(t_token *current)
     {
         printf(RED"invalid token type: %d\n"NC, current->type);
         return (false);
-    }
-    
+    }    
     printf(CYAN"content verif end\n"NC);
     return (true);
 }
