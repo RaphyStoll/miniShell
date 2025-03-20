@@ -16,7 +16,7 @@ t_token	*create_token(char *str, t_type type)
 }
 
 // Fonction pour ajouter un token à la fin de la liste
-void	add_token(t_token **head, t_token *new_token)
+void	add_token2(t_token **head, t_token *new_token)
 {
 	t_token	*current;
 
@@ -47,13 +47,13 @@ t_token	*create_test_case_1(void)
 	// Test case: ls -la | grep .c > output.txt
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token("-la", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("grep", WORD));
-	add_token(&head, create_token(".c", WORD));
-	add_token(&head, create_token(">", REDIRECT_OUT));
-	add_token(&head, create_token("output.txt", WORD));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("-la", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("grep", WORD));
+	add_token2(&head, create_token(".c", WORD));
+	add_token2(&head, create_token(">", REDIRECT_OUT));
+	add_token2(&head, create_token("output.txt", WORD));
 	return (head);
 }
 
@@ -62,15 +62,15 @@ t_token	*create_test_case_2(void)
 	// Test case: cat < input.txt | sort | uniq >> result.txt
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("cat", WORD));
-	add_token(&head, create_token("<", REDIRECT_IN));
-	add_token(&head, create_token("input.txt", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("sort", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("uniq", WORD));
-	add_token(&head, create_token(">>", APPEND));
-	add_token(&head, create_token("result.txt", WORD));
+	add_token2(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("<", REDIRECT_IN));
+	add_token2(&head, create_token("input.txt", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("sort", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("uniq", WORD));
+	add_token2(&head, create_token(">>", APPEND));
+	add_token2(&head, create_token("result.txt", WORD));
 	return (head);
 }
 
@@ -79,20 +79,20 @@ t_token	*create_test_case_3(void)
 	// Test case: (echo hello && ls) || (cat file && grep pattern)
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("hello", WORD));
-	add_token(&head, create_token("&&", AND));
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token(")", C_PARENTHESIS));
-	add_token(&head, create_token("||", OR));
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("cat", WORD));
-	add_token(&head, create_token("file", WORD));
-	add_token(&head, create_token("&&", AND));
-	add_token(&head, create_token("grep", WORD));
-	add_token(&head, create_token("pattern", WORD));
-	add_token(&head, create_token(")", C_PARENTHESIS));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("hello", WORD));
+	add_token2(&head, create_token("&&", AND));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token(")", C_PARENTHESIS));
+	add_token2(&head, create_token("||", OR));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("file", WORD));
+	add_token2(&head, create_token("&&", AND));
+	add_token2(&head, create_token("grep", WORD));
+	add_token2(&head, create_token("pattern", WORD));
+	add_token2(&head, create_token(")", C_PARENTHESIS));
 	return (head);
 }
 
@@ -101,12 +101,12 @@ t_token	*create_test_case_4(void)
 	// Test case: cat << EOF | wc -l
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("cat", WORD));
-	add_token(&head, create_token("<<", HEREDOC));
-	add_token(&head, create_token("EOF", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("wc", WORD));
-	add_token(&head, create_token("-l", WORD));
+	add_token2(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("<<", HEREDOC));
+	add_token2(&head, create_token("EOF", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("wc", WORD));
+	add_token2(&head, create_token("-l", WORD));
 	return (head);
 }
 
@@ -115,8 +115,8 @@ t_token	*create_test_case_5(void)
 	// Test case: echo "Bonjour $USER"
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("Bonjour $USER", WORD)); // Supposé être traité comme un seul token avec variable
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("Bonjour $USER", WORD)); // Supposé être traité comme un seul token avec variable
 	return (head);
 }
 
@@ -128,8 +128,8 @@ t_token	*create_error_case_1(void)
 	// Commande commençant par un pipe
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("ls", WORD));
 	return (head);
 }
 
@@ -139,10 +139,10 @@ t_token	*create_error_case_2(void)
 	// Pipes consécutifs
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("grep", WORD));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("grep", WORD));
 	return (head);
 }
 
@@ -152,8 +152,8 @@ t_token	*create_error_case_3(void)
 	// Redirection sans fichier
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token(">", REDIRECT_OUT));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token(">", REDIRECT_OUT));
 	return (head);
 }
 
@@ -163,8 +163,8 @@ t_token	*create_error_case_4(void)
 	// Parenthèses non fermées
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("ls", WORD));
 	return (head);
 }
 
@@ -174,8 +174,8 @@ t_token	*create_error_case_5(void)
 	// Parenthèse fermante sans ouvrante
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token(")", C_PARENTHESIS));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token(")", C_PARENTHESIS));
 	return (head);
 }
 
@@ -185,10 +185,10 @@ t_token	*create_error_case_6(void)
 	// Opérateurs logiques mal placés
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token("|", PIPE));
-	add_token(&head, create_token("&&", AND));
-	add_token(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("&&", AND));
+	add_token2(&head, create_token("cat", WORD));
 	return (head);
 }
 
@@ -198,8 +198,8 @@ t_token	*create_error_case_7(void)
 	// Heredoc sans délimiteur
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("cat", WORD));
-	add_token(&head, create_token("<<", HEREDOC));
+	add_token2(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("<<", HEREDOC));
 	return (head);
 }
 
@@ -209,13 +209,13 @@ t_token	*create_error_case_8(void)
 	// Deuxième paire de parenthèses non fermée
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("hello", WORD));
-	add_token(&head, create_token(")", C_PARENTHESIS));
-	add_token(&head, create_token("&&", AND));
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("hello", WORD));
+	add_token2(&head, create_token(")", C_PARENTHESIS));
+	add_token2(&head, create_token("&&", AND));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("ls", WORD));
 	return (head);
 }
 
@@ -225,8 +225,8 @@ t_token	*create_error_case_9(void)
 	// Commande commençant par un opérateur logique
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("||", OR));
-	add_token(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("||", OR));
+	add_token2(&head, create_token("ls", WORD));
 	return (head);
 }
 
@@ -236,8 +236,8 @@ t_token	*create_error_case_10(void)
 	// Pipe à la fin sans commande qui suit
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("ls", WORD));
-	add_token(&head, create_token("|", PIPE));
+	add_token2(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("|", PIPE));
 	return (head);
 }
 
@@ -249,7 +249,7 @@ t_token	*create_error_case_11(void)
 	t_token	*head = NULL;
 
 	t_token *invalid_token = create_token("invalid", 10);
-	add_token(&head, invalid_token);
+	add_token2(&head, invalid_token);
 	return (head);
 }
 
@@ -258,10 +258,10 @@ t_token	*create_error_case_12(void)
 	// Erreur: commande avec redirection vide
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("hello", WORD));
-	add_token(&head, create_token(">", REDIRECT_OUT));
-	add_token(&head, create_token("", WORD)); // Nom de fichier vide
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("hello", WORD));
+	add_token2(&head, create_token(">", REDIRECT_OUT));
+	add_token2(&head, create_token("", WORD)); // Nom de fichier vide
 	return (head);
 }
 
@@ -270,10 +270,10 @@ t_token	*create_error_case_13(void)
 	// Erreur: commande avec plusieurs redirections du même type consécutives
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("cat", WORD));
-	add_token(&head, create_token("<", REDIRECT_IN));
-	add_token(&head, create_token("<", REDIRECT_IN)); // Double redirection
-	add_token(&head, create_token("file.txt", WORD));
+	add_token2(&head, create_token("cat", WORD));
+	add_token2(&head, create_token("<", REDIRECT_IN));
+	add_token2(&head, create_token("<", REDIRECT_IN)); // Double redirection
+	add_token2(&head, create_token("file.txt", WORD));
 	return (head);
 }
 
@@ -282,11 +282,11 @@ t_token	*create_error_case_14(void)
 	// Erreur: structure imbriquée incorrecte
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("(", O_PARENTHESIS));
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("test", WORD));
-	add_token(&head, create_token(")", C_PARENTHESIS));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("(", O_PARENTHESIS));
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("test", WORD));
+	add_token2(&head, create_token(")", C_PARENTHESIS));
 	// Parenthèse manquante
 	return (head);
 }
@@ -296,11 +296,11 @@ t_token	*create_error_case_15(void)
 	// Erreur: opérateurs logiques consécutifs
 	t_token	*head = NULL;
 
-	add_token(&head, create_token("echo", WORD));
-	add_token(&head, create_token("test", WORD));
-	add_token(&head, create_token("&&", AND));
-	add_token(&head, create_token("||", OR)); // Opérateurs consécutifs
-	add_token(&head, create_token("ls", WORD));
+	add_token2(&head, create_token("echo", WORD));
+	add_token2(&head, create_token("test", WORD));
+	add_token2(&head, create_token("&&", AND));
+	add_token2(&head, create_token("||", OR)); // Opérateurs consécutifs
+	add_token2(&head, create_token("ls", WORD));
 	return (head);
 }
 
@@ -339,7 +339,7 @@ t_token *parse_single_argument(char *arg)
 			type = C_PARENTHESIS;
 			
 		// Créer et ajouter le token
-		add_token(&head, create_token(token, type));
+		add_token2(&head, create_token(token, type));
 		
 		// Passer au token suivant
 		token = strtok(NULL, delimiters);
@@ -361,7 +361,7 @@ void	display_help(void)
 	printf("                      Exemple: ./parser \"ls -la | grep .c > output.txt\"\n");
 	printf("  -h, --help          Afficher cette aide\n");
 }
-#ifdef TEST_PARSING
+
 int	main(int argc, char **argv)
 {
 	t_token	*tokens = NULL;
@@ -536,4 +536,3 @@ int	main(int argc, char **argv)
 	free_tokens(tokens);
 	return (0);
 }
-#endif

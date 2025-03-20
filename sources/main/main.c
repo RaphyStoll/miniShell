@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/18 16:26:38 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/18 17:26:04 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
     t_token *tokens;
 
     // Affichage du prompt et lecture de l'input utilisateur
-    input = readline("minishell$ ");
+    input = readline("> minishell$ ");
     if (!input)
     {
         // Si readline retourne NULL (ex: CTRL+D), on quitte

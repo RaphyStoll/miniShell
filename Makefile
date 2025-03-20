@@ -42,12 +42,15 @@ MAIN_DIR    = $(SRC_DIR)/main
 BONUS_DIR   = $(SRC_DIR)/bonus
 LEXING_DIR	= ${MAIN_DIR}/lexing
 PARSING_DIR = ${MAIN_DIR}/parsing
+COMMUN_DIR = ${MAIN_DIR}/commun #! < ici
 
 OBJ_DIR     = objects
 MAIN_OBJ    = $(OBJ_DIR)/main
+BONUS_OBJ   = $(OBJ_DIR)/
+
 LEXING_OBJ	= $(MAIN_OBJ)/lexing
 PARSING_OBJ	= $(MAIN_OBJ)/parsing
-BONUS_OBJ   = $(OBJ_DIR)/bonus
+COMMUN_OBJ	= $(MAIN_OBJ)/commun #! < ici
 
 ALL_OBJ_DIR = $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ)
 ifeq ($(USE_BONUS), yes)
@@ -89,7 +92,11 @@ endif
 LEXING_SRC = \
 	lexing error_handling memory_utils test_token token_utils tokenizing
 
-PARSING_SRC = 
+PARSING_SRC = parsing free error \
+	token_verif verif_and_or verif_exception verif_heredoc_append \
+	verif_pipe_and_word verif_redirect
+
+COMMUN_SRC = #! < ici
 
 MAIN_SRC = \
     main \
@@ -99,14 +106,16 @@ MAIN_SRC = \
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
 LEXING_SRCS = $(addprefix $(LEXING_DIR)/, $(addsuffix .c, $(LEXING_SRC)))
 PARSING_SRCS = $(addprefix $(PARSING_DIR)/, $(addsuffix .c, $(PARSING_SRC)))
+COMMUN_SRC = $(addprefix $(PARSING_DIR)/, $(addsuffix .c, $(PARSING_SRC)))
 
 ALL_SRCS = $(MAIN_SRCS) $(LEXING_SRCS) $(PARSING_SRCS)
 
 MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
 LEXING_OBJS = $(addprefix $(LEXING_OBJ)/, $(addsuffix .o, $(LEXING_SRC)))
 PARSING_OBJS = $(addprefix $(PARSING_OBJ)/, $(addsuffix .o, $(PARSING_SRC)))
+COMMUN_OBJS = $(addprefix $(COMMUN_OBJ)/, $(addsuffix .o, $(COMMUN_SRC)))
 
-ALL_OBJS = $(MAIN_OBJS) $(LEXING_OBJS) $(PARSING_OBJS)
+ALL_OBJS = $(MAIN_OBJS) $(LEXING_OBJS) $(PARSING_OBJS) $(COMMUN_OBJS)
 
 
 # ------------------------------------------------------------------------------
@@ -122,8 +131,10 @@ BONUS_OBJS = $(addprefix $(BONUS_OBJ)/, $(addsuffix .o, $(BONUS_SRC)))
 # Cibles principales selon option
 # ------------------------------------------------------------------------------
 all: dirs $(ALL_LIBS) $(NAME)
+
 dirs:
-	@$(MKDIR) $(OUTPUT_DIR) $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ) $(BONUS_OBJ)
+	@$(MKDIR) $(OUTPUT_DIR) $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ) \
+	$(BONUS_OBJ) $(COMMUN_OBJ)
 
 ifeq ($(USE_BONUS), yes)
 bonus: $(ALL_LIBS) $(NAME_BONUS)
