@@ -6,19 +6,19 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/01 21:20:26 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/18 19:24:46 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
 #include "../../../includes/main/parsing.h"
 
-void	ft_exit_error(t_token *token, char *message, t_error error_code)
-{
-	free_all(token);
-	nbr_error(error_code, message);
-	exit(error_code);
-}
+// void	ft_exit_error(t_token *token, char *message, t_error error_code)
+// {
+// 	free_all(token);
+// 	nbr_error(error_code, message);
+// 	exit(error_code);
+// }
 
 void nbr_error(t_error error_code, char *message) {
 	if (error_code == GENERIC_ERROR)

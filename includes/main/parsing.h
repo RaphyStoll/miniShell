@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 14:35:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/20 15:08:15 by Charlye          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PARSING_H
 # define PARSING_H
 
@@ -22,25 +10,28 @@
 # include "error_code.h"
 # include "colors.h"
 # include "lexing.h"
+# include "ast.h"
 # include "../../lib/libft/header/libft.h"
 # include "../../lib/libft/header/libft_bonus.h"
-
-//structure pour la partie parsing exemple ci dessous
-//? ex: ls -l -a
-// name = ls
-// argument = [0]-l [1]-a
-// argument_count = 2
-// input = NULL 
-// output = NULL 
 
 //!parsing
 bool	init_parsing(t_token *tokens);
 
+//!ast test
+t_node *create_node(t_node_type type);
+t_token *lex_input(char *input);
+t_node *ast_from_tokens(t_token *tokens);
+void print_ast_node(t_node *node, int indent);
+void print_redirections(t_redirection *redir, int indent);
+void print_ast(t_node *node, int indent);
+void free_redirections(t_redirection *redir);
+void free_ast(t_node *node);
+int main(int argc, char **argv);
+
 //!test
 int		parse_tokens(t_token *head);
 t_token	*create_token(char *str, t_type type);
-
-//void	add_token(t_token **head, t_token *new_token);
+void	add_token2(t_token **head, t_token *new_token);
 t_token	*create_test_case_1(void);
 t_token	*create_test_case_2(void);
 t_token	*create_test_case_3(void);
@@ -54,6 +45,8 @@ void	print_tab(char **tab);
 void	print_node(t_token *current);
 void	print_list(t_token **head);
 void	print_current_token(t_token *token);
+void	print_ast(t_node *node, int indent);
+void	print_redirections(t_redirection *redir, int indent);
 
 
 //!token verif
@@ -89,11 +82,13 @@ bool	valid_type_append_next(t_token *cur);
 bool	handle_redirection_exceptions(t_token *token_list);
 
 //!error
-void	ft_exit_error(t_token *token, char *message, t_error error_code);
+//void	ft_exit_error(t_token *token, char *message, t_error error_code);
 void	nbr_error(t_error error_code, char *message);
 
 //!free
 void	free_tokens(t_token *head);
 void	free_all(t_token *token);
+void	free_ast(t_node *node);
+void	free_redirections(t_redirection *redir);
 
 #endif
