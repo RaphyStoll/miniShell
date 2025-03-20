@@ -6,11 +6,35 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/20 15:26:41 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:26:35 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/main/minishell.h"
+
+void	print_tokens(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("Token après parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
+		tmp = tmp->next;
+	}
+}
+
+void	print_current_tokens(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("Token avant parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
+		tmp = tmp->next;
+	}
+}
 
 int	main(void)
 {
@@ -34,14 +58,15 @@ int	main(void)
 			free(input);
 			continue ;
 		}
-		if (!init_parsing(tokens))
+		if (!init_parsing(tokens) == 0)
 		{
-			write(2, "Lexing Error.\n\n", 15);
+			write(2, "Parsing Error.\n\n", 15);
 			free_tokens(tokens);
 			free(input);
 			continue ;
 		}
 		print_tokens(tokens);
+		printf("Parsing succeeded!\n");
 		free_tokens(tokens);
 		free(input);
 	}

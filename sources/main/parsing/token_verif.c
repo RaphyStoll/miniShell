@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_verif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:28 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 16:43:07 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 16:26:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	if_valide_token_prev(t_token *current)
 {
 	while (current != NULL)
 	{
-		print_current_token(current);
+		print_current_tokens(current);
 		printf(CYAN"valid_content = true\n");
 		if (!valid_type_pipe_prev(current))
 		{
@@ -82,7 +82,7 @@ bool	if_valide_token_next(t_token *current)
 {
 	while (current != NULL)
 	{
-		print_current_token(current);
+		//print_current_token(current);
 		if (!valid_type_pipe_next(current))
 		{
 			printf(RED"valid_type_pipe next = false\n");

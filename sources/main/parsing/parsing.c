@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/20 15:27:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:00:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 // Fonction d'initialisation du parsing (à implémenter)
 
+// il faut peut etre mettre return 1 au lieu de 0, car le main est a l envers ?
+
 bool	init_parsing(t_token *tokens)
 {
 	//t_command *cmd;
-	print_current_token(tokens);
+	//print_current_token(tokens);
 	printf(CYAN"start init parsing\n"NC);
 	if (!valid_content(tokens))
 	{

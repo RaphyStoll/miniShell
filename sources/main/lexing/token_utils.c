@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/20 14:24:53 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:37:17 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
 	new_token->type = op;
 	new_token->in_double_quotes = in_dquotes;
 	new_token->next = NULL;
+	new_token->prev = NULL;
 	if (*token_list == NULL)
 		*token_list = new_token;
 	else
@@ -37,6 +38,7 @@ bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_token;
+		new_token->prev = tmp;
 	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 14:33:47 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 16:21:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ bool	check_unclosed_quotes(const char *input)
 		input++;
 	}
 	if (quote)
+	{
 		ft_exit_error2(NULL, UNCLOSED_QUOTE, error_token);
+		return (false);
+	}
 	return (true);
 }
 
@@ -50,13 +53,19 @@ bool	check_unclosed_parentheses(const char *input)
 		else if (*input == ')')
 		{
 			if (count == 0)
+			{
 				ft_exit_error2(NULL, UNCLOSED_PARENTHESIS, ")");
+				return (false);
+			}
 			count--;
 		}
 		input++;
 	}
 	if (count > 0)
+	{
 		ft_exit_error2(NULL, UNCLOSED_PARENTHESIS, "(");
+		return (false);
+	}
 	return (true);
 }
 
@@ -93,5 +102,4 @@ void	ft_exit_error2(t_token *tokens, t_error code, char *error_token)
 	print_error_message(code, error_token);
 	if (tokens)
 		free_all2(tokens);
-	exit (code);
 }
