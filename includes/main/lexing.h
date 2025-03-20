@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 14:32:30 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 18:23:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ bool	add_token(t_token **token_list, char *str, t_type op, bool dquotes);
 t_type	is_operator(const char *input);
 bool	is_symbol(char c);
 bool	is_parenthesis(char c);
+bool	is_forbidden_char(char c);
 
 //Error handling
 bool	check_unclosed_quotes(const char *input);
 bool	check_unclosed_parentheses(const char *input);
-void	ft_exit_error2(t_token *tokens, t_error code, char *error_token);
+t_token	*ft_exit_error2(t_token *tokens, t_error code, char *error_token);
 void	print_error_message(t_error code, char *error_token);
 void	free_all2(t_token *token);
 

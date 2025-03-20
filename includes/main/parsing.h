@@ -26,7 +26,7 @@ void print_redirections(t_redirection *redir, int indent);
 void print_ast(t_node *node, int indent);
 void free_redirections(t_redirection *redir);
 void free_ast(t_node *node);
-int main(int argc, char **argv);
+//int main(int argc, char **argv);
 
 //!test
 int		parse_tokens(t_token *head);
@@ -37,10 +37,10 @@ t_token	*create_test_case_2(void);
 t_token	*create_test_case_3(void);
 t_token	*create_test_case_4(void);
 t_token	*create_test_case_5(void);
-int		main(int argc, char **argv);
 
 //! debbug
 void	print_tokens(t_token *head);
+void	print_current_tokens(t_token *tokens);
 void	print_tab(char **tab);
 void	print_node(t_token *current);
 void	print_list(t_token **head);
