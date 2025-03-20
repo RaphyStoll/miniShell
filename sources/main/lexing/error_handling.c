@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 16:21:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 18:26:49 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	print_error_message(t_error code, char *error_token)
 		write(2, error_token, 1);
 		write(2, "'\n", 2);
 	}
-	else if (code == UNCLOSED_PARENTHESIS)
+	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
 	{
 		write(2, "syntax error near unexpected '", 30);
 		write(2, error_token, 1);
@@ -91,15 +91,16 @@ void	print_error_message(t_error code, char *error_token)
 	else if (code == MEMORY_ERROR)
 	{
 		write(2, error_token, ft_strlen(error_token));
-		write(2, "allocation error\n", 18);
+		write(2, " allocation error\n", 18);
 	}
 	else
 		write(2, "unknown error\n", 25);
 }
 
-void	ft_exit_error2(t_token *tokens, t_error code, char *error_token)
+t_token	*ft_exit_error2(t_token *tokens, t_error code, char *error_token)
 {
 	print_error_message(code, error_token);
 	if (tokens)
 		free_all2(tokens);
+	return (NULL);
 }

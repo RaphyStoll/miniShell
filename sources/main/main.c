@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/20 16:26:35 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:53:21 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(void)
 		printf("Parsing succeeded!\n");
 		free_tokens(tokens);
 		free(input);
+		system("leaks minishell| grep 'leaks Report' -A 10");
 	}
 	clear_history();
 	return EXIT_SUCCESS;
