@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 18:24:36 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 19:16:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ t_token	*tokenizing(const char *input)
 			input++;
 			continue ;
 		}
-		if (is_forbidden_char(*input))
-			return (ft_exit_error2(token_list, SYNTAX_ERROR, (char *)input));
 		if (handle_operator(&token_list, &input))
 			continue ;
+		if (is_forbidden_char(*input))
+			return (ft_exit_error2(token_list, SYNTAX_ERROR, (char *)input));
 		word = handle_word(&input, &dquote);
 		if (!word)
 			return (ft_exit_error2(token_list, MEMORY_ERROR, "word"));

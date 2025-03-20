@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 18:26:49 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 19:25:32 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_error_message(t_error code, char *error_token)
 	}
 	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
 	{
-		write(2, "syntax error near unexpected '", 30);
+		write(2, "syntax error near unexpected token '", 30);
 		write(2, error_token, 1);
 		write(2, "'\n", 2);
 	}
