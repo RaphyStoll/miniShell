@@ -17,16 +17,7 @@
 //!parsing
 bool	init_parsing(t_token *tokens);
 
-//!ast test
-t_node *create_node(t_node_type type);
-t_token *lex_input(char *input);
-t_node *ast_from_tokens(t_token *tokens);
-void print_ast_node(t_node *node, int indent);
-void print_redirections(t_redirection *redir, int indent);
-void print_ast(t_node *node, int indent);
-void free_redirections(t_redirection *redir);
-void free_ast(t_node *node);
-int main(int argc, char **argv);
+
 
 //!test
 int	parse_tokens(t_token *head);
