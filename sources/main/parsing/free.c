@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/10 17:15:26 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 14:32:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void free_all(t_token *token)
 {
 	(void)token;
-	return;
+	return ;
 }
 
 // Fonction pour libérer la liste de tokens

@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/17 18:42:08 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:24:53 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
 
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+		ft_exit_error2(*token_list, MEMORY_ERROR, "memory");
 	new_token->str = strdup(str);
 	if (!new_token->str)
 	{
 		free(new_token);
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+		ft_exit_error2(*token_list, MEMORY_ERROR, "memory");
 	}
 	new_token->type = op;
 	new_token->in_double_quotes = in_dquotes;
@@ -56,11 +56,11 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 		*input += 1;
 	}
 	if (!operator)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+		ft_exit_error2(*token_list, MEMORY_ERROR, "memory");
 	if (!(add_token(token_list, operator, op, false)))
 	{
 		free(operator);
-		ft_exit_error(*token_list, MEMORY_ERROR, "token");
+		ft_exit_error2(*token_list, MEMORY_ERROR, "token");
 	}
 	return (true);
 }

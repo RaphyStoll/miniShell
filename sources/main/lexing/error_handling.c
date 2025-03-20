@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_syntax.c                                     :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/17 16:07:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:33:47 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	check_unclosed_quotes(const char *input)
 		input++;
 	}
 	if (quote)
-		ft_exit_error(NULL, UNCLOSED_QUOTE, error_token);
+		ft_exit_error2(NULL, UNCLOSED_QUOTE, error_token);
 	return (true);
 }
 
@@ -50,13 +50,13 @@ bool	check_unclosed_parentheses(const char *input)
 		else if (*input == ')')
 		{
 			if (count == 0)
-				ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")");
+				ft_exit_error2(NULL, UNCLOSED_PARENTHESIS, ")");
 			count--;
 		}
 		input++;
 	}
 	if (count > 0)
-		ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "(");
+		ft_exit_error2(NULL, UNCLOSED_PARENTHESIS, "(");
 	return (true);
 }
 
@@ -88,10 +88,10 @@ void	print_error_message(t_error code, char *error_token)
 		write(2, "unknown error\n", 25);
 }
 
-void	ft_exit_error(t_token *tokens, t_error code, char *error_token)
+void	ft_exit_error2(t_token *tokens, t_error code, char *error_token)
 {
 	print_error_message(code, error_token);
 	if (tokens)
-		free_all(tokens);
+		free_all2(tokens);
 	exit (code);
 }

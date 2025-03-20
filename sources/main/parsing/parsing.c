@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 16:44:26 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 15:00:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/parsing.h"
 
 // Fonction d'initialisation du parsing (à implémenter)
-bool init_parsing(t_token *tokens) {
+
+bool	init_parsing(t_token *tokens)
+{
 	//t_command *cmd;
 	print_current_token(tokens);
 	printf(CYAN"start init parsing\n"NC);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/18 13:53:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 14:32:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ bool	is_parenthesis(char c);
 //Error handling
 bool	check_unclosed_quotes(const char *input);
 bool	check_unclosed_parentheses(const char *input);
-void	ft_exit_error(t_token *tokens, t_error code, char *error_token);
+void	ft_exit_error2(t_token *tokens, t_error code, char *error_token);
 void	print_error_message(t_error code, char *error_token);
-void	free_all(t_token *token);
+void	free_all2(t_token *token);
 
 #endif
