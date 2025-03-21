@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 00:15:44 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/20 19:30:25 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ bool	valid_type_and_next(t_token *cur)
 			return (false);
 		if (cur->next->type == PIPE)
 			return (false);
-		
 	}
 	return (true);
 }
@@ -61,7 +60,6 @@ bool	valid_type_or_prev(t_token *cur)
 			return (false);
 		if (!(cur->prev->type == WORD || cur->prev->type == C_PARENTHESIS))
 			return (false);
-
 		if (cur->prev->type == AND || cur->prev->type == OR)
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
