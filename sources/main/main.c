@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/21 17:56:20 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:57:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	print_current_tokens(t_token *tokens)
 		tmp = tmp->next;
 	}
 }
-
 
 int	main(void)
 {
