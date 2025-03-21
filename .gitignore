@@ -13,3 +13,4 @@ a.out
 test/*
 test.c
 test_parsing
+test_ast
