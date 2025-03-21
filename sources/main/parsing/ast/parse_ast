@@ -1,0 +1,23 @@
+#include "../../../../includes/main/ast.h"
+#include "../../../../includes/main/lexing.h"
+
+t_node *parse_command(t_token **tokens)
+{
+
+}
+t_node *parse_pipe(t_token **tokens)
+{
+
+}
+t_node *parse_logical(t_token **tokens)
+{
+
+}
+t_node *parse_subshell(t_token **tokens)
+{
+
+}
+t_node *build_ast(t_token *tokens)
+{
+
+}
