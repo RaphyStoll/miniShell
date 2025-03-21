@@ -3,10 +3,10 @@
 # ------------------------------------------------------------------------------
 
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
-USE_GNL = no
-USE_PRINTF = no
-USE_LIBFT = yes
-USE_BONUS = no
+USE_GNL		= no
+USE_PRINTF	= no
+USE_LIBFT	= yes
+USE_BONUS	= no
 
 
 # Nom de l'exécutable principal et bonus
