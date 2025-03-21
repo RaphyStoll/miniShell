@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/20 19:58:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/21 16:51:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(void)
 		input = readline("minishell$ ");
 		if (!input)
 		{
-			printf("exit/n");
+			printf("exit\n");
 			break ;
 		}
 		if (*input)
