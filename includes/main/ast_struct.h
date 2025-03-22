@@ -5,6 +5,8 @@
 typedef enum e_redirection_type {
 	REDIRECTION_IN,
 	REDIRECTION_OUT,
+	REDIRECTION_APPEND,
+	REDIRECTION_HEREDOC
 } t_redirection_type;
 
 //sous structure pour les redirection
