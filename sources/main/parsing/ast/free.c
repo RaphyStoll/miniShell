@@ -1,36 +1,51 @@
 #include "../../../../includes/main/ast.h"
 
-void free_redirections(t_redirection *redir)
+
+void	free_redirections(t_redirection *redir)
 {
-    while (redir)
-    {
-        t_redirection *temp = redir;
-        redir = redir->next;
-        free(temp->target);
-        free(temp);
-    }
+	t_redirection	*tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		free(redir->target);
+		free(redir);
+		redir = tmp;
+	}
 }
 
-void free_ast(t_node *node)
+void	free_args(char **args)
 {
-    if (!node)
-        return;
-    
-    // Libérer récursivement l'enfant et le frère
-    free_ast(node->child);
-    free_ast(node->brother);
-    
-    // Libérer le tableau d'arguments
-    if (node->args)
-    {
-        for (int i = 0; node->args[i] != NULL; i++)
-            free(node->args[i]);
-        free(node->args);
-    }
-    
-    // Libérer la liste des redirections
-    free_redirections(node->redirections);
-    
-    // Libérer le nœud lui-même
-    free(node);
+	int	i;
+
+	if (!args)
+		return ;
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+void	free_all_ast(t_node *ast)
+{
+	if (ast)
+		free_node(ast);
+}
+
+void	free_node(t_node *node)
+{
+	if (!node)
+		return ;
+	if (node->args)
+		free_args(node->args);
+	if (node->redirections)
+		free_redirections(node->redirections);
+	if (node->child)
+		free_node(node->child);
+	if (node->brother)
+		free_node(node->brother);
+	free(node);
 }
