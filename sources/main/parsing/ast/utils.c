@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/22 02:28:54 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../includes/main/ast.h"
 
+/**
+ * @brief Alloue et initialise un nœud AST.
+ * @param type Type du nœud.
+ * @return Nouveau nœud ou NULL.
+ */
 t_node	*malloc_node(t_ast_type type)
 {
 	t_node	*node;
@@ -15,6 +32,12 @@ t_node	*malloc_node(t_ast_type type)
 	return (node);
 }
 
+/**
+ * @brief Ajoute un argument au nœud.
+ * @param node Nœud cible.
+ * @param arg Argument à ajouter.
+ * @return 1 en cas de succès, 0 sinon.
+ */
 int	add_arg_to_node(t_node *node, char *arg)
 {
 	char	**new_args;
@@ -45,6 +68,11 @@ int	add_arg_to_node(t_node *node, char *arg)
 	return (1);
 }
 
+/**
+ * @brief Ajoute une redirection au nœud.
+ * @param node Nœud cible.
+ * @param redir Redirection à ajouter.
+ */
 void	add_redirection_to_node(t_node *node, t_redirection *redir)
 {
 	t_redirection	*cur;
@@ -62,6 +90,12 @@ void	add_redirection_to_node(t_node *node, t_redirection *redir)
 	cur->next = redir;
 }
 
+/**
+ * @brief Gère une redirection dans les tokens.
+ * @param tokens Liste de tokens.
+ * @param node Nœud cible.
+ * @return 1 en cas de succès, 0 sinon.
+ */
 int	handle_redirection(t_token **tokens, t_node *node)
 {
 	t_redirection	*redir;
@@ -88,6 +122,11 @@ int	handle_redirection(t_token **tokens, t_node *node)
 	return (1);
 }
 
+/**
+ * @brief Parse une commande ou une sous-coquille.
+ * @param tokens Liste de tokens.
+ * @return Nœud correspondant ou NULL.
+ */
 t_node	*parse_command_or_subshell(t_token **tokens)
 {
 	if (!tokens || !*tokens)

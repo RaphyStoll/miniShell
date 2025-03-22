@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_ast.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/22 02:28:56 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../includes/main/ast.h"
 #include "../../../../includes/main/lexing.h"
 
-
+/**
+ * @brief Parse les opérateurs logiques (&&, ||).
+ * @param tokens Liste de tokens à parser.
+ * @return Racine de l’AST logique.
+ */
 t_node	*parse_logical(t_token **tokens)
 {
 	t_node	*left;
@@ -26,6 +42,11 @@ t_node	*parse_logical(t_token **tokens)
 	return (left);
 }
 
+/**
+ * @brief Parse une commande simple.
+ * @param tokens Liste de tokens à parser.
+ * @return Nœud de commande ou NULL.
+ */
 t_node	*parse_command(t_token **tokens)
 {
 	t_node	*node;
@@ -59,6 +80,11 @@ t_node	*parse_command(t_token **tokens)
 	return (node);
 }
 
+/**
+ * @brief Parse une sous-coquille entre parenthèses.
+ * @param tokens Liste de tokens à parser.
+ * @return Nœud de sous-shell ou NULL.
+ */
 t_node	*parse_subshell(t_token **tokens)
 {
 	t_node	*node;
@@ -78,6 +104,11 @@ t_node	*parse_subshell(t_token **tokens)
 	return (node);
 }
 
+/**
+ * @brief Parse une séquence de commandes reliées par des pipes.
+ * @param tokens Liste de tokens à parser.
+ * @return Nœud de pipe ou NULL.
+ */
 t_node	*parse_pipe(t_token **tokens)
 {
 	t_node	*left;
