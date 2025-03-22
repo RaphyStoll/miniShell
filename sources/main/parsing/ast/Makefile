@@ -6,7 +6,7 @@
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
-USE_LIBFT = yes
+USE_LIBFT = no
 USE_BONUS = no
 
 
@@ -78,9 +78,11 @@ endif
 # Sources Principales (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
 MAIN_SRC = \
-	test_ast_utils \
+	parse_ast \
+	ast_test_main \
 	utils \
-
+	free \
+	debbug
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
