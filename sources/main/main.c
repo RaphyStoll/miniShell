@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/20 19:58:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:57:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ int	main(void)
 	char	*input;
 	t_token	*tokens;
 
+	set_signals();
+	ignore_ctrl_display();
 	while (1)
 	{
 		input = readline("minishell$ ");
 		if (!input)
 		{
-			printf("exit/n");
+			printf("minishell$ exit\n");
 			break ;
 		}
 		if (*input)
