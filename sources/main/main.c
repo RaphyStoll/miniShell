@@ -3,57 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/18 17:26:04 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/21 17:57:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/main/minishell.h"
 
-	int main(void)
+void	print_tokens(t_token *tokens)
 {
-    char    *input;
-    t_token *tokens;
+	t_token	*tmp;
 
-    // Affichage du prompt et lecture de l'input utilisateur
-    input = readline("> minishell$ ");
-    if (!input)
-    {
-        // Si readline retourne NULL (ex: CTRL+D), on quitte
-        printf("exit\n");
-        return EXIT_SUCCESS;
-    }
-    if (input[0] != '\0')
-        add_history(input);
-
-    // Appel de la fonction lexer pour analyser la commande
-    tokens = lexer(input);
-    if (!tokens)
-    {
-        fprintf(stderr, "Erreur lors du lexing.\n");
-        free(input);
-        return EXIT_FAILURE;
-    }
-
-    // Initialisation du parsing avec les tokens générés par le lexer
-    // if (!init_parsing(tokens))
-    // {
-    //     fprintf(stderr, "Erreur lors du parsing.\n");
-    //     // Ici, pense à libérer les ressources associées aux tokens si nécessaire
-    //     free(input);
-    //     return EXIT_FAILURE;
-    // }
-
-    /* 
-       Suite du traitement du minishell...
-       Par exemple, lancer l'exécution des commandes analysées.
-    */
-
-    // Libération des ressources
-    free(input);
-    // free_tokens(tokens); // Décommenter si tu as une fonction pour libérer tes tokens
-
-    return EXIT_SUCCESS;
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("Token après parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
+		tmp = tmp->next;
+	}
 }
+
+void	print_current_tokens(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("Token avant parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
+		tmp = tmp->next;
+	}
+}
+
+int	main(void)
+{
+	char	*input;
+	t_token	*tokens;
+
+	set_signals();
+	ignore_ctrl_display();
+	while (1)
+	{
+		input = readline("minishell$ ");
+		if (!input)
+		{
+			printf("minishell$ exit\n");
+			break ;
+		}
+		if (*input)
+			add_history(input);
+		tokens = lexer(input);
+		if (!tokens)
+		{
+			write(2, "Lexing Error.\n\n", 15);
+			free(input);
+			continue ;
+		}
+		if (!init_parsing(tokens) == 0)
+		{
+			write(2, "Parsing Error.\n\n", 15);
+			free_tokens(tokens);
+			free(input);
+			continue ;
+		}
+		print_tokens(tokens);
+		printf("Parsing succeeded!\n");
+		free_tokens(tokens);
+		free(input);
+		system("leaks minishell| grep 'leaks Report' -A 10");
+	}
+	clear_history();
+	return EXIT_SUCCESS;
+}
+

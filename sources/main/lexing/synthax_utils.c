@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/18 08:25:43 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 09:53:28 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ bool	is_symbol(char c)
 {
 	return (c == '(' || c == ')' || c == '<' || c == '>'
 		|| c == '&' || c == '|' || c == '\'' || c == ';');
+}
+
+bool	is_forbidden_char(char c)
+{
+	return (c == '&' || c == ';' || c == '\\');
 }
 
 t_type	is_operator(const char *input)

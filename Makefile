@@ -40,9 +40,11 @@ RESET       = \033[0m
 SRC_DIR     = sources
 MAIN_DIR    = $(SRC_DIR)/main
 BONUS_DIR   = $(SRC_DIR)/bonus
-LEXING_DIR	= ${MAIN_DIR}/lexing
-PARSING_DIR = ${MAIN_DIR}/parsing
-COMMUN_DIR = ${MAIN_DIR}/commun #! < ici
+LEXING_DIR	= $(MAIN_DIR)/lexing
+PARSING_DIR = $(MAIN_DIR)/parsing
+VERIF_DIR = $(PARSING_DIR)/verif
+AST_DIR = $(PARSING_DIR)/ast
+UTILS_DIR = $(MAIN_DIR)/utils
 
 OBJ_DIR     = objects
 MAIN_OBJ    = $(OBJ_DIR)/main
@@ -50,9 +52,13 @@ BONUS_OBJ   = $(OBJ_DIR)/
 
 LEXING_OBJ	= $(MAIN_OBJ)/lexing
 PARSING_OBJ	= $(MAIN_OBJ)/parsing
-COMMUN_OBJ	= $(MAIN_OBJ)/commun #! < ici
+VERIF_OBJ	= $(PARSING_OBJ)/verif
+AST_OBJ		= $(PARSING_OBJ)/ast
+UTILS_OBJ	= $(MAIN_OBJ)/utils
 
-ALL_OBJ_DIR = $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ)
+ALL_OBJ_DIR = $(MAIN_OBJ) $(LEXING_OBJ) $(PARSING_OBJ) $(AST_OBJ) $(VERIF_OBJ) \
+UTILS_OBJ
+
 ifeq ($(USE_BONUS), yes)
 	ALL_OBJ_DIR += $(BONUS_OBJ)
 endif
@@ -92,11 +98,15 @@ endif
 LEXING_SRC = \
 	lexing error_handling memory_utils test_token token_utils tokenizing
 
-PARSING_SRC = parsing free error \
+PARSING_SRC =
+
+VERIF_SRC = free error \
 	token_verif verif_and_or verif_exception verif_heredoc_append \
 	verif_pipe_and_word verif_redirect
 
-COMMUN_SRC = #! < ici
+AST_SRC = build_ast debbug parse_ast ast_utils
+
+UTILS_SRC = error memory_utils
 
 MAIN_SRC = \
     main \
@@ -106,16 +116,22 @@ MAIN_SRC = \
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
 LEXING_SRCS = $(addprefix $(LEXING_DIR)/, $(addsuffix .c, $(LEXING_SRC)))
 PARSING_SRCS = $(addprefix $(PARSING_DIR)/, $(addsuffix .c, $(PARSING_SRC)))
-COMMUN_SRC = $(addprefix $(PARSING_DIR)/, $(addsuffix .c, $(PARSING_SRC)))
+VERIF_SRCS = $(addprefix $(VERIF_DIR)/, $(addsuffix .c, $(VERIF_SRC)))
+AST_SRCS = $(addprefix $(AST_DIR)/, $(addsuffix .c, $(AST_SRC)))
+UTILS_SRC = $(addprefix $(UTILS_DIR)/, $(addsuffix .c, $(UTILS_SRC)))
 
-ALL_SRCS = $(MAIN_SRCS) $(LEXING_SRCS) $(PARSING_SRCS)
+ALL_SRCS = $(MAIN_SRCS) $(LEXING_SRCS) $(PARSING_SRCS) $(VERIF_SRCS) \
+$(AST_SRCS)
 
 MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
 LEXING_OBJS = $(addprefix $(LEXING_OBJ)/, $(addsuffix .o, $(LEXING_SRC)))
 PARSING_OBJS = $(addprefix $(PARSING_OBJ)/, $(addsuffix .o, $(PARSING_SRC)))
-COMMUN_OBJS = $(addprefix $(COMMUN_OBJ)/, $(addsuffix .o, $(COMMUN_SRC)))
+VERIF_OBJS = $(addprefix $(VERIF_OBJ)/, $(addsuffix .o, $(VERIF_SRC)))
+AST_OBJS = $(addprefix $(AST_OBJ)/, $(addsuffix .o, $(AST_SRC)))
+UTILS_OBJS = $(addprefix $(UTILS_OBJ)/, $(addsuffix .o, $(UTILS_SRC)))
 
-ALL_OBJS = $(MAIN_OBJS) $(LEXING_OBJS) $(PARSING_OBJS) $(COMMUN_OBJS)
+ALL_OBJS = $(MAIN_OBJS) $(LEXING_OBJS) $(PARSING_OBJS) $(COMMUN_OBJS) \
+$(AST_OBJS) $(VERIF_OBJS)
 
 
 # ------------------------------------------------------------------------------

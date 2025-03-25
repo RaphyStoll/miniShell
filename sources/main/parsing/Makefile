@@ -78,8 +78,8 @@ endif
 # Sources Principales (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
 MAIN_SRC = \
-    main_test \
-	debbug \
+    main_test_parsing \
+	debbug_parsing \
 	error \
 	free \
 	parsing \

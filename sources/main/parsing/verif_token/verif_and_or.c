@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verif_heredoc_append.c                             :+:      :+:    :+:   */
+/*   verif_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:18:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 00:21:21 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/20 19:30:25 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/parsing.h"
 
-bool	valid_type_heredoc_prev(t_token *cur)
+bool	valid_type_and_prev(t_token *cur)
 {
-	if (cur->type == HEREDOC)
+	if (cur->type == AND)
 	{
 		if (cur->prev == NULL)
 			return (false);
 		if (!(cur->prev->type == WORD))
+			return (false);
+		if (cur->prev->type == AND || cur->prev->type == OR)
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
 			return (false);
@@ -26,21 +28,19 @@ bool	valid_type_heredoc_prev(t_token *cur)
 			return (false);
 		if (cur->prev->type == PIPE)
 			return (false);
-		if (cur->prev->type == AND)
-			return (false);
-		if(cur->prev->type == O_PARENTHESIS)
-			return (false);
 	}
 	return (true);
 }
 
-bool	valid_type_heredoc_next(t_token *cur)
+bool	valid_type_and_next(t_token *cur)
 {
-	if (cur->type == HEREDOC)
+	if (cur->type == AND)
 	{
 		if (cur->next == NULL)
 			return (false);
 		if (!(cur->next->type == WORD))
+			return (false);
+		if (cur->next->type == AND || cur->next->type == OR)
 			return (false);
 		if (cur->next->type == HEREDOC || cur->next->type == APPEND)
 			return (false);
@@ -48,21 +48,19 @@ bool	valid_type_heredoc_next(t_token *cur)
 			return (false);
 		if (cur->next->type == PIPE)
 			return (false);
-		if (cur->next->type == OR)
-			return (false);
-		if (cur->next->type == C_PARENTHESIS)
-			return (false);
 	}
 	return (true);
 }
 
-bool	valid_type_append_prev(t_token *cur)
+bool	valid_type_or_prev(t_token *cur)
 {
-	if (cur->type == APPEND)
+	if (cur->type == OR)
 	{
 		if (cur->prev == NULL)
 			return (false);
-		if (!(cur->prev->type == WORD))
+		if (!(cur->prev->type == WORD || cur->prev->type == C_PARENTHESIS))
+			return (false);
+		if (cur->prev->type == AND || cur->prev->type == OR)
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
 			return (false);
@@ -70,31 +68,25 @@ bool	valid_type_append_prev(t_token *cur)
 			return (false);
 		if (cur->prev->type == PIPE)
 			return (false);
-		if (cur->prev->type == AND)
-			return (false);
-		if (cur->prev->type == O_PARENTHESIS)
-			return (false);
 	}
 	return (true);
 }
 
-bool	valid_type_append_next(t_token *cur)
+bool	valid_type_or_next(t_token *cur)
 {
-	if (cur->type == APPEND)
+	if (cur->type == OR)
 	{
 		if (cur->next == NULL)
 			return (false);
-		if (!(cur->next->type == WORD))
+		if (!(cur->next->type == WORD || cur->next->type == O_PARENTHESIS))
+			return (false);
+		if (cur->next->type == AND || cur->next->type == OR)
 			return (false);
 		if (cur->next->type == HEREDOC || cur->next->type == APPEND)
 			return (false);
 		if (cur->next->type == REDIRECT_IN || cur->next->type == REDIRECT_OUT)
 			return (false);
 		if (cur->next->type == PIPE)
-			return (false);
-		if (cur->next->type == AND)
-			return (false);
-		if (cur->next->type == O_PARENTHESIS)
 			return (false);
 	}
 	return (true);

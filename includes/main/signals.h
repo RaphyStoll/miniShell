@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/25 12:14:06 by Charlye          ###   ########.fr       */
+/*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
+/*   Updated: 2025/03/25 12:12:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "error_code.h"
-# include "signals.h"
-# include "lexing.h"
-# include "parsing.h"
-# include "utils.h"
+# include <signal.h>
+# include <termios.h>
 
-int	main(void);
+void	sigint_handler(int signal);
+void	set_signals(void);
+void	ignore_ctrl_display(void);
 
 #endif

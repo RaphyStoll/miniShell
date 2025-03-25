@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/18 13:53:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 12:13:00 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXING_H
 # define LEXING_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include "../../includes/main/error_code.h"
+# include "error_code.h"
+# include "utils.h"
 # include "../../lib/libft/header/libft.h"
 
 // Enum for token type
@@ -45,6 +43,7 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+
 // Lexing
 t_token	*lexer(const char *input);
 t_token	*tokenizing(const char *input);
@@ -55,18 +54,18 @@ char	*get_quoted_word(const char **input, bool *in_dquote);
 char	*get_unquoted_word(const char **input);
 bool	handle_operator(t_token **token_list, const char **input);
 bool	add_operator(t_token **token_list, const char **input, t_type op);
-bool	add_token(t_token **token_list, char *str, t_type op, bool dquotes);
+t_token	*init_token(t_token *head, char *str, t_type op, bool in_dquotes);
+bool	add_token(t_token **head, char *str, t_type op, bool dquotes);
 
 // Synthax utils
 t_type	is_operator(const char *input);
 bool	is_symbol(char c);
 bool	is_parenthesis(char c);
+bool	is_forbidden_char(char c);
 
 //Error handling
 bool	check_unclosed_quotes(const char *input);
 bool	check_unclosed_parentheses(const char *input);
-void	ft_exit_error(t_token *tokens, t_error code, char *error_token);
-void	print_error_message(t_error code, char *error_token);
 void	free_all(t_token *token);
 
 #endif

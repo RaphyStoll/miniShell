@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/18 19:24:46 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 09:56:48 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
-#include "../../../includes/main/parsing.h"
+#include "../../../includes/main/utils.h"
+
 
 // void	ft_exit_error(t_token *token, char *message, t_error error_code)
 // {
@@ -41,4 +41,40 @@ void nbr_error(t_error error_code, char *message) {
 		perror(RED BOLD"Error"NC);
 	printf(YELLOW"%s\n"NC, message);
 	return ;
+}
+
+void	print_error_message(t_error code, char *error_token)
+{
+	if (!error_token)
+		error_token = "newline";
+	write (2, "minishell: ", 11);
+	if (code == UNCLOSED_QUOTE)
+	{
+		write(2,
+			"syntax error near unexpected EOF while looking for matching '",
+			61);
+		write(2, error_token, 1);
+		write(2, "'\n", 2);
+	}
+	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
+	{
+		write(2, "syntax error near unexpected token '", 30);
+		write(2, error_token, 1);
+		write(2, "'\n", 2);
+	}
+	else if (code == MEMORY_ERROR)
+	{
+		write(2, error_token, ft_strlen(error_token));
+		write(2, " allocation error\n", 18);
+	}
+	else
+		write(2, "unknown error\n", 25);
+}
+
+t_token	*ft_exit_error(t_token *tokens, t_error code, char *error_token)
+{
+	print_error_message(code, error_token);
+	if (tokens)
+		free_all(tokens);
+	return (NULL);
 }
