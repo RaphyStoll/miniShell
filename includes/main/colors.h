@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 10:47:25 by Charlye           #+#    #+#             */
+/*   Updated: 2025/03/25 10:47:28 by Charlye          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COLORS_H
 # define COLORS_H
 
@@ -10,13 +22,13 @@
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define LIGHT_GRAY "\033[1;90m"
-#define LIGHT_RED "\033[1;91m"
-#define LIGHT_GREEN "\033[1;92m"
-#define LIGHT_YELLOW "\033[1;93m"
-#define LIGHT_BLUE "\033[1;94m"
-#define LIGHT_MAGENTA "\033[1;95m"
-#define LIGHT_CYAN "\033[1;96m"
-#define LIGHT_WHITE "\033[1;97m"
+# define LIGHT_RED "\033[1;91m"
+# define LIGHT_GREEN "\033[1;92m"
+# define LIGHT_YELLOW "\033[1;93m"
+# define LIGHT_BLUE "\033[1;94m"
+# define LIGHT_MAGENTA "\033[1;95m"
+# define LIGHT_CYAN "\033[1;96m"
+# define LIGHT_WHITE "\033[1;97m"
 
 # define RESET "\033[0m"
 # define BOLD "\033[1m"

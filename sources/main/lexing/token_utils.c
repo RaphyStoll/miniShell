@@ -6,40 +6,53 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 10:32:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:49:20 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/lexing.h"
 
-bool	add_token(t_token **token_list, char *str, t_type op, bool in_dquotes)
+t_token	*init_token(t_token *head, char *str, t_type op, bool in_dquotes)
 {
 	t_token	*new_token;
-	t_token	*tmp;
 
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+		ft_exit_error(head, MEMORY_ERROR, "memory");
 	new_token->str = strdup(str);
 	if (!new_token->str)
 	{
 		free(new_token);
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
+		ft_exit_error(head, MEMORY_ERROR, "memory");
 	}
 	new_token->type = op;
 	new_token->in_double_quotes = in_dquotes;
 	new_token->next = NULL;
 	new_token->prev = NULL;
-	if (*token_list == NULL)
-		*token_list = new_token;
-	else
+	return (new_token);
+}
+
+bool	add_token(t_token **head, char *str, t_type op, bool in_dquotes)
+{
+	t_token	*new_token;
+	t_token	*token;
+
+	new_token = init_token(*head, str, op, in_dquotes);
+	if (!new_token)
 	{
-		tmp = *token_list;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_token;
-		new_token->prev = tmp;
+		free(new_token);
+		ft_exit_error(*head, MEMORY_ERROR, "memory");
 	}
+	if (!*head)
+	{
+		*head = new_token;
+		return (true);
+	}
+	token = *head;
+	while (token->next)
+		token = token->next;
+	token->next = new_token;
+	new_token->prev = token;
 	return (true);
 }
 
