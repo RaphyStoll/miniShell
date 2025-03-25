@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 15:54:08 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 16:11:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_env
 typedef struct s_exec
 {
 	t_env	*env_list;
+	t_error	errors;
 	int		input_fd;
 	int		output_fd;
 }	t_exec;

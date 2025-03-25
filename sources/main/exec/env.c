@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 14:50:56 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 16:30:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	expand_variables(t_node *node, t_env *env_list)
 
 // pour trouver la value dans expand variable
 char	*get_env_value(t_env *env_list, char *type)
+{
+	
+}
+
+// permet de convertir env_list pour execve
+char	**get_envp(t_env*env_list)
 {
 	
 }

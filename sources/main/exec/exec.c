@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 16:08:53 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 17:01:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ void	execute_ast(t_node *ast_node, t_env *env_list)
 		execute_subshell(ast_node, env_list);
 }
 
-void	execute_command(t_node *cmd, t_env *env_list)
+bool	is_builtin(char *cmd)
 {
-	
+	if (!cmd)
+		return (false)
+	if ()
+	// list : 
+	// echo cd pwdexport unset env exit
 }
+
+
 void	execute_pipe(t_node *pide, t_env *env_list)
 {
 	
