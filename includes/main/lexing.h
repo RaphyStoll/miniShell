@@ -6,16 +6,13 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 11:49:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:13:00 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXING_H
 # define LEXING_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
 # include "error_code.h"
 # include "utils.h"
 # include "../../lib/libft/header/libft.h"

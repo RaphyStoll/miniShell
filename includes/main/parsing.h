@@ -6,19 +6,13 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 12:02:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:13:20 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PARSING_H
 # define PARSING_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdbool.h>
 # include "lexing.h"
 # include "error_code.h"
 # include "colors.h"
@@ -31,7 +25,7 @@
 bool	init_parsing(t_token *tokens);
 
 //!ast test
-t_node	*create_node(t_node_type type);
+//t_node	*create_node(t_node_type type);
 t_token	*lex_input(char *input);
 t_node	*ast_from_tokens(t_token *tokens);
 void	print_ast_node(t_node *node, int indent);
