@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 11:55:38 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:46:09 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include "colors.h"
-# include "lexing.h"
-
-typedef struct s_token	t_token;
+# include "lexing_struct.h"
+# include "minishell.h"
 
 // Error handling
 void	nbr_error(t_error error_code, char *message);

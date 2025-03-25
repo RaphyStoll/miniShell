@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/25 12:14:06 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:35:53 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,12 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "error_code.h"
-# include "signals.h"
-# include "lexing.h"
-# include "parsing.h"
-# include "utils.h"
+# include "../../lib/libft/header/libft.h"
+# include "../../lib/libft/header/libft_bonus.h"
 
 int	main(void);
 

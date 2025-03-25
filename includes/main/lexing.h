@@ -3,46 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 12:13:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:48:02 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXING_H
 # define LEXING_H
 
-# include "error_code.h"
+# include "lexing_struct.h"
 # include "utils.h"
-# include "../../lib/libft/header/libft.h"
-
-// Enum for token type
-typedef enum e_type
-{
-	WORD,			// arg or cmd 0
-	PIPE,			// | 1
-	REDIRECT_IN,	// < 2
-	REDIRECT_OUT,	// > 3
-	HEREDOC,		// << 4
-	APPEND,			// >> 5
-	AND,			// && 6
-	OR,				// || 7
-	O_PARENTHESIS,	// ( 8
-	C_PARENTHESIS,	// ) 9
-	INVALID_TOKEN
-}	t_type;
-
-// Token structure
-typedef struct s_token
-{
-	char			*str;
-	t_type			type;
-	bool			in_double_quotes;
-	struct s_token	*next;
-	struct s_token	*prev;
-}	t_token;
-
+# include "minishell.h"
 
 // Lexing
 t_token	*lexer(const char *input);

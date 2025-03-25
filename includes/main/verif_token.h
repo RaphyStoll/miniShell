@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   verif_token.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 19:47:57 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/03/25 19:47:14 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/25 19:48:06 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-
-# include "lexing.h"
-# include "error_code.h"
-# include "colors.h"
-# include "ast.h"
-# include "utils.h"
-# include "../../lib/libft/header/libft.h"
-# include "../../lib/libft/header/libft_bonus.h"
-
-//!parsing
-bool	init_parsing(t_token *tokens);
-
-//! debbug
-void	print_tokens(t_token *head);
-void	print_current_tokens(t_token *tokens);
-void	print_tab(char **tab);
-void	print_node(t_token *current);
-void	print_list(t_token **head);
-void	print_current_token(t_token *token);
-void	print_ast(t_node *node, int indent);
-void	print_redirections(t_redirection *redir, int indent);
+#ifndef VERIF_TOKEN_H
+# define VERIF_TOKEN_H
+# include "lexing_struct.h"
 
 //!token verif
 bool	if_valide_token_prev(t_token *current);
@@ -65,11 +45,5 @@ bool	valid_type_append_next(t_token *cur);
 
 //! verif exception
 bool	handle_redirection_exceptions(t_token *token_list);
-
-//!free
-void	free_tokens(t_token *head);
-void	free_all(t_token *token);
-void	free_ast(t_node *node);
-void	free_redirections(t_redirection *redir);
 
 #endif

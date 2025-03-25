@@ -6,19 +6,19 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 22:46:52 by raphael           #+#    #+#             */
-/*   Updated: 2025/02/20 14:10:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 19:34:23 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/libft_bonus.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *l_new)
 {
-	if (lst && new)
+	if (lst && l_new)
 	{
-		if (new == NULL)
+		if (l_new == NULL)
 			return ;
-		new->next = *lst;
-		*lst = new;
+		l_new->next = *lst;
+		*lst = l_new;
 	}
 }
