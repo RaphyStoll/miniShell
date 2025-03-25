@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 10:32:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:46:25 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
+#include "lexing.h"
+#include "lexing_struct.h"
 
 bool	check_unclosed_quotes(const char *input)
 {

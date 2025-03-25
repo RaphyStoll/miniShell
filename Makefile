@@ -12,10 +12,11 @@ USE_BONUS	= no
 # Nom de l'exécutable principal et bonus
 NAME        = output/minishell
 NAME_BONUS  = output/minishell_bonus
-
 # Compilateur et flags
-CC          = gcc
-CFLAGS      = -g -Wall -Wextra -Werror
+CC          	= gcc
+CFLAGS      	= -g -Wall -Wextra -Werror
+INCLUDES		= -I includes/main/
+INCLUDES_BONUS	= -I includes/bonus/
 
 # Commandes pratiques
 MKDIR       = mkdir -p
@@ -104,7 +105,7 @@ VERIF_SRC = free error \
 	token_verif verif_and_or verif_exception verif_heredoc_append \
 	verif_pipe_and_word verif_redirect
 
-AST_SRC = build_ast debbug parse_ast ast_utils
+AST_SRC = build_ast debbug parse_ast ast_utils free_ast
 
 UTILS_SRC = error memory_utils
 
@@ -201,7 +202,7 @@ $(MAIN_OBJ)/%.o: $(MAIN_DIR)/%.c | $(ALL_OBJ_DIR)
 # ------------------------------------------------------------------------------
 $(BONUS_OBJ)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ)
 	@echo "$(MAGENTA)Compiling $< (bonus) → $@$(RESET)"
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES_BONUS)
 
 # ------------------------------------------------------------------------------
 # Règles pour compiler les bibliothèques tierces selon option

@@ -6,11 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:17:38 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/11 23:55:21 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 21:57:56 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 /* 
 verifie si pipe est :

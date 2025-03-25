@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   verif_exception.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/20 20:02:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:57:46 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 bool	handle_redirection_exceptions(t_token *token_list)
 {

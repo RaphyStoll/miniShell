@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/21 17:57:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 22:19:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/main/minishell.h"
+#include "minishell.h"
+#include "lexing_struct.h"
 
 void	print_tokens(t_token *tokens)
 {

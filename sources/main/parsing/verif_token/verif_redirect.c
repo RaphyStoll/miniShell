@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   verif_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:30:11 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/20 16:32:45 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:58:03 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 bool	valid_type_redirect_in_prev(t_token *cur)
 {

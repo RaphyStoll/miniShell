@@ -6,11 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:29:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/22 02:29:30 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 21:50:08 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/main/ast.h"
+#include "ast.h"
+#include "ast_struct.h"
 
 
 static void	print_branch_prefix(int level, int is_last)

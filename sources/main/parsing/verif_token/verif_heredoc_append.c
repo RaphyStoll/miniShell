@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   verif_heredoc_append.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:18:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 09:52:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:57:52 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 bool	valid_type_heredoc_prev(t_token *cur)
 {

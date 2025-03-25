@@ -6,11 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:57 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/22 02:28:59 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 21:50:16 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/main/ast.h"
+#include "ast.h"
+#include "ast_struct.h"
 
 /**
  * @brief Libère une liste de redirections.

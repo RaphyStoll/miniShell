@@ -1,4 +1,17 @@
-#include "../../../../includes/main/ast.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_test_main.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 21:49:26 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/03/25 21:49:33 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ast.h"
+#include "ast_struct.h"
 
 extern t_node *malloc_node(t_ast_type type);
 extern int add_arg_to_node(t_node *node, char *arg);

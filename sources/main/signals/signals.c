@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/21 18:06:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 22:19:19 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/minishell.h"
+#include "signals.h"
+#include "minishell.h"
 
 void	sigint_handler(int signal)
 {

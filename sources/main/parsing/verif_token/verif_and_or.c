@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   verif_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/20 19:30:25 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:57:36 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 bool	valid_type_and_prev(t_token *cur)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:00 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/20 18:34:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 20:49:06 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
+#include "lexing_struct.h"	
+#include "lexing.h"
 
 t_token	*lexer(const char *input)
 {

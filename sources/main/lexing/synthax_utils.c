@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 09:53:28 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:48:16 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
+#include "lexing.h"
+#include "lexing_struct.h"
 
 bool	is_parenthesis(char c)
 {

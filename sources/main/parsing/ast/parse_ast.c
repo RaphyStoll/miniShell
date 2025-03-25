@@ -6,12 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/22 02:28:56 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 22:29:18 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/main/ast.h"
-#include "../../../../includes/main/lexing.h"
+#include "ast.h"
+#include "ast_struct.h"
+#include "lexing_struct.h"
 
 /**
  * @brief Parse les opérateurs logiques (&&, ||).
@@ -56,10 +57,8 @@ t_node	*parse_command(t_token **tokens)
 	node = malloc_node(AST_COMMAND);
 	if (!node)
 		return (NULL);
-	while (*tokens && (*tokens)->type != PIPE
-		&& (*tokens)->type != AND
-		&& (*tokens)->type != OR
-		&& (*tokens)->type != C_PARENTHESIS)
+	while (*tokens && (*tokens)->type != PIPE && (*tokens)->type != AND
+		&& (*tokens)->type != OR && (*tokens)->type != C_PARENTHESIS)
 	{
 		if ((*tokens)->type == WORD)
 		{
@@ -67,13 +66,12 @@ t_node	*parse_command(t_token **tokens)
 				return (free_all_ast(node), NULL);
 		}
 		else if ((*tokens)->type == REDIRECT_IN
-			|| (*tokens)->type == REDIRECT_OUT
-			|| (*tokens)->type == APPEND
+			|| (*tokens)->type == REDIRECT_OUT || (*tokens)->type == APPEND
 			|| (*tokens)->type == HEREDOC)
 		{
 			if (!handle_redirection(tokens, node))
 				return (NULL);
-			continue;
+			continue ;
 		}
 		*tokens = (*tokens)->next;
 	}

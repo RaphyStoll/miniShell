@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 10:00:47 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 22:11:28 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/utils.h"
+#include "utils.h"
 
 void	free_all(t_token *token)
 {

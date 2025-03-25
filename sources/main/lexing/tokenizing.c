@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 10:43:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:48:47 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/lexing.h"
+#include "lexing.h"
+#include "lexing_struct.h"
 
 char	*get_quoted_word(const char **input, bool *in_dquote)
 {

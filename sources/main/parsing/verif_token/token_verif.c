@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token_verif.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:28 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 12:03:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:57:14 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/parsing.h"
+#include "parsing.h"
+#include "lexing_struct.h"
 
 
 //? dans un if la norme dit que c'est 1 pour vrais et 0 pour false

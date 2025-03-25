@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/22 02:28:54 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 22:28:32 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/main/ast.h"
+#include "ast.h"
+#include "ast_struct.h"
 
 /**
  * @brief Alloue et initialise un nœud AST.
@@ -64,8 +65,7 @@ int	add_arg_to_node(t_node *node, char *arg)
 	new_args[i++] = strdup(arg);
 	new_args[i] = NULL;
 	free(node->args);
-	node->args = new_args;
-	return (1);
+	return (node->args = new_args, 1);
 }
 
 /**
