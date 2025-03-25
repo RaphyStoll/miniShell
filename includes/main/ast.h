@@ -4,12 +4,13 @@
 # include "lexing.h"
 
 // enum pour l'ast
-typedef enum e_node_type {
+typedef enum e_node_type
+{
 	AST_COMMAND,  // nœud représentant une commande simple avec ses arguments et redirections
 	AST_PIPE,     // nœud représentant un pipeline
 	AST_LOGICAL,  // nœud pour les opérateurs logiques (&&, ||)
 	AST_GROUP     // nœud pour une expression entre parenthèses
-} t_node_type;
+}   t_node_type;
 
 
 //sous structure pour les redirection
@@ -20,7 +21,8 @@ typedef struct s_redirection {
 } t_redirection;
 
 // structure de base de l'ast
-typedef struct s_node {
+typedef struct s_node
+{
     enum e_node_type type;         // Par exemple : CMD, PIPE, LOGICAL, etc.
     char **args;                   // Tableau d'arguments de la commande
     struct s_node *child;          // Premier enfant (pour des sous-commandes ou pipelines)

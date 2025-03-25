@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_heredoc_append.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:18:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/12 00:21:21 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/25 09:52:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	valid_type_heredoc_prev(t_token *cur)
 			return (false);
 		if (cur->prev->type == AND)
 			return (false);
-		if(cur->prev->type == O_PARENTHESIS)
+		if (cur->prev->type == O_PARENTHESIS)
 			return (false);
 	}
 	return (true);
