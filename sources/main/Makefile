@@ -6,7 +6,7 @@
 #    By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/20 14:12:04 by Charlye           #+#    #+#              #
-#    Updated: 2025/03/20 14:47:54 by Charlye          ###   ########.fr        #
+#    Updated: 2025/03/25 10:41:05 by Charlye          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,20 +23,22 @@ NAME       = minishell
 # Répertoires des sources
 LEXING_DIR  = ./lexing
 PARSING_DIR = ./parsing
+UTILS_DIR = ./utils
 LIBFT_DIR   = $(abspath ../../lib/libft)
 
 # Récupération automatique des fichiers sources dans lexing/ et parsing/
 LEXING_SRCS  = $(wildcard $(LEXING_DIR)/*.c)
 PARSING_SRCS = $(wildcard $(PARSING_DIR)/*.c)
+UTILS_SRCS = $(wildcard $(UTILS_DIR)/*.c)
 MAIN_SRC     = main.c
 
 # Tous les fichiers sources
-SRCS       = $(LEXING_SRCS) $(PARSING_SRCS) $(MAIN_SRC)
+SRCS       = $(LEXING_SRCS) $(PARSING_SRCS) $(UTILS_SRCS) $(MAIN_SRC)
 OBJS       = $(SRCS:.c=.o)
 
 # Librairies et includes
 LIBFT_A    = $(LIBFT_DIR)/output/libft.a
-INCLUDES   = -I$(LIBFT_DIR)/header -I/usr/local/opt/readline/include -I$(LEXING_DIR) -I$(PARSING_DIR)
+INCLUDES   = -I$(LIBFT_DIR)/header -I/usr/local/opt/readline/include -I$(LEXING_DIR) -I$(PARSING_DIR) -I$(UTILS_DIR)
 
 # ------------------------------------------------------------------------------
 # Compilation principale
@@ -73,6 +75,12 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+debug:
+	@echo "LEXING_SRCS = $(LEXING_SRCS)"
+	@echo "PARSING_SRCS = $(PARSING_SRCS)"
+	@echo "UTILS_SRCS = $(UTILS_SRCS)"
+	@echo "OBJS = $(OBJS)"
 
 # ------------------------------------------------------------------------------
 # Règles phony
