@@ -6,20 +6,27 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/21 18:06:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:36:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/minishell.h"
 
+void	handle_signals(int signal)
+{
+	if (g_signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 void	sigint_handler(int signal)
 {
-	(void)signal;
-
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (signal == SIGINT)
+		g_signal = signal;
 }
 
 // SIGINT : Ctrl + C  //

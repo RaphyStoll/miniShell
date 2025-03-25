@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/21 17:57:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:34:05 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,23 @@ int	main(void)
 	}
 	clear_history();
 	return EXIT_SUCCESS;
+}
+
+void	minishell(void)
+{
+	char *input;
+	
+	set_signals();
+
+	while (1)
+	{
+		input = readline("minishell$ ");
+		if (!input)
+			break ;
+			if (*input)
+				add_history(input);
+		handle_signal();
+		...
+	}
 }
 

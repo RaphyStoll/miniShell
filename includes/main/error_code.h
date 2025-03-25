@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 11:06:08 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/25 16:05:10 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //? enum pour les code erreur classique (baser sur le tableau excel)
 //$ pas trouver de tableau officiel des code erreur
-typedef enum e_error
+typedef enum e_error_code
 {
 	SUCCESS = 0,				// La commande s'est exécutée avec succès.
 	GENERIC_ERROR = 1,			// Erreur générale ou non spécifiée.
@@ -29,7 +29,7 @@ typedef enum e_error
 	WRAPPER_ERROR = 255,		// Erreur dans le wrapper de la commande.
 	UNCLOSED_QUOTE = 103,
 	UNCLOSED_PARENTHESIS = 104,
-}	t_error;
+}	t_error_code;
 
 //? enum pour les codes d'erreur des signaux
 //$ je les ai separer parce que je pense qu'ils me sont aps destiner
@@ -46,5 +46,14 @@ typedef enum e_serror
 	SIGXCPU_ERROR = 252,			// Signal SIGXCPU (24)
 	SIGXFSZ_ERROR = 253				// Signal SIGXFSZ (25)
 }	t_serror;
+
+typedef struct s_error
+{
+	t_error_code	error_code;
+	int				last_status;
+	char			*error_msg;
+	char			*error_token;
+}	t_error;
+
 
 #endif
