@@ -6,14 +6,18 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/26 17:51:37 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:36:46 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexing.h"
 #include "lexing_struct.h"
 #include "colors.h"
+#include "signals.h"
+#include "parsing.h"
 #include "ast_struct.h"
+#include "ast.h"
 
 //! pour les test
 #include "ast.h"

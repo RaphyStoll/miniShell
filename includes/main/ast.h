@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 19:47:18 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:37:50 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "lexing_struct.h"
 # include <stdlib.h>
 # include "ast_struct.h"
+
+//! build ast
+t_node	*build_ast(t_token *tokens);
 
 //! utils
 int		add_arg_to_node(t_node *node, char *arg);

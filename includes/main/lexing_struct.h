@@ -6,12 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:48:07 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 20:12:55 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:25:12 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXING_STRUCT_H
 # define LEXING_STRUCT_H
+
+# include <stdbool.h>
 
 // Enum for token type
 /**

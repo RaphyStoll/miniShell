@@ -6,10 +6,11 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:29:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:50:08 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:38:14 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "stdio.h"
 #include "ast.h"
 #include "ast_struct.h"
 

@@ -6,12 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/26 16:59:58 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:40:37 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "ast_struct.h"
+#include "../../../../lib/libft/header/libft.h"
+
 
 /**
  * @brief Alloue et initialise un nœud AST.
@@ -62,7 +64,7 @@ int	add_arg_to_node(t_node *node, char *arg)
 		new_args[i] = node->args[i];
 		i++;
 	}
-	new_args[i++] = strdup(arg);
+	new_args[i++] = ft_strdup(arg);
 	new_args[i] = NULL;
 	free(node->args);
 	return (node->args = new_args, 1);
