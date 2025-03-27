@@ -6,12 +6,17 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/25 22:19:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/26 17:51:37 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexing_struct.h"
+#include "colors.h"
+#include "ast_struct.h"
+
+//! pour les test
+#include "ast.h"
 
 void	print_tokens(t_token *tokens)
 {
@@ -69,7 +74,9 @@ int	main(void)
 			continue ;
 		}
 		print_tokens(tokens);
-		printf("Parsing succeeded!\n");
+		printf(GREEN"token and verif succeeded!\n"NC);
+		t_node *ast = build_ast(tokens);
+		print_ast_debug(ast, 0, "child");
 		free_tokens(tokens);
 		free(input);
 		system("leaks minishell| grep 'leaks Report' -A 10");
