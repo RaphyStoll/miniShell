@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/27 11:36:46 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/27 11:58:00 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ int	main(void)
 		free(input);
 		system("leaks minishell| grep 'leaks Report' -A 10");
 	}
-	clear_history();
+	if(!input)
+		free(input);
+	rl_clear_history();
 	return EXIT_SUCCESS;
 }
 
