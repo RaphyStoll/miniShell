@@ -13,8 +13,18 @@ NAME        = output/minishell
 NAME_BONUS  = output/minishell_bonus
 
 # Compilateur et flags
-CC          = gcc
-CFLAGS      = -g -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin) # macOS
+	READLINE_DIR = /opt/homebrew/opt/readline
+	CFLAGS  += -I$(READLINE_DIR)/include
+	LDFLAGS += -L$(READLINE_DIR)/lib -lreadline
+else # Linux (ou tout sauf macOS)
+	LDFLAGS += -lreadline
+endif
 INCLUDES		= -I includes/main/ -I includes/bonus/
 INCLUDES_BONUS = -I includes/bonus/
 
@@ -101,7 +111,7 @@ endif
 # ------------------------------------------------------------------------------
 $(NAME): $(ALL_OBJS) | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects...$(RESET)"
-	$(CC) $(CFLAGS) $(ALL_OBJS) $(ALL_LIBS) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(ALL_OBJS) $(ALL_LIBS) -o $(NAME) $(LDFLAGS)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
 
 # ------------------------------------------------------------------------------
@@ -109,7 +119,7 @@ $(NAME): $(ALL_OBJS) | $(OUTPUT_DIR)
 # ------------------------------------------------------------------------------
 $(NAME_BONUS): $(BONUS_OBJ_FILES) | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects for the bonus build...$(RESET)"
-	$(CC) $(CFLAGS) $(BONUS_OBJ_FILES) $(ALL_LIBS) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(BONUS_OBJ_FILES) $(ALL_LIBS) -o $(NAME_BONUS) $(LDFLAGS)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME_BONUS)$(RESET)"
 
 # ------------------------------------------------------------------------------
