@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 22:29:18 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:59:39 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ t_node	*parse_command(t_token **tokens)
 	if (!tokens || !*tokens)
 		return (NULL);
 	node = malloc_node(AST_COMMAND);
-	if (!node)
-		return (NULL);
 	while (*tokens && (*tokens)->type != PIPE && (*tokens)->type != AND
 		&& (*tokens)->type != OR && (*tokens)->type != C_PARENTHESIS)
 	{
