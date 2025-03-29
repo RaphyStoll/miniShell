@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/27 11:58:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/29 08:43:35 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,23 @@ int	main(void)
 		free(input);
 	rl_clear_history();
 	return EXIT_SUCCESS;
+}
+
+void	minishell(void)
+{
+	char *input;
+	
+	set_signals();
+
+	while (1)
+	{
+		input = readline("minishell$ ");
+		if (!input)
+			break ;
+			if (*input)
+				add_history(input);
+		handle_signal();
+		...
+	}
 }
 

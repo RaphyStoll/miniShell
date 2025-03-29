@@ -3,24 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/27 11:18:29 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/29 08:43:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signals.h"
 #include "minishell.h"
 
+void	handle_signals(int signal)
+{
+	if (g_signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 void	sigint_handler(int signal)
 {
-	(void)signal;
-
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (signal == SIGINT)
+		g_signal = signal;
 }
 
 // SIGINT : Ctrl + C  //

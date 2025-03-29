@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/29 08:42:59 by Charlye          ###   ########.fr       */
+/*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
+/*   Updated: 2025/03/25 17:02:59 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+void	execute_child_process
 
-# include <stdio.h>
-# include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
+void	handle_parent_process
 
-void	sigint_handler(int signal);
-void	handle_signals(int signal);
-void	set_signals(void);
-void	ignore_ctrl_display(void);
+void	execute_command(t_node *cmd, t_exec *exec)
+{
+	pid_t	pid;
+	char	*cmd_path;
+	char	**envp;
 
-#endif
+	if (!cmd || !cmd->args || !cmd->args[0])
+		return ;
+	if (is_builtin(cmd->args[0]))
+	{
+		exec->errors.last_status = execute_builtin(cmd->args, exec->env_list);
+		return ;
+	}
+	
+}
