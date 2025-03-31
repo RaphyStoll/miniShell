@@ -6,29 +6,48 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:56:07 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/29 19:53:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 14:57:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/env_struct.h"
+#include "env_struct.h"
+
+void	print_env_list(t_env *env_list)
+{
+	while (env_list)
+	{
+		printf("%s=%s\n", env_list->type, env_list->value);
+		env_list = env_list->next;
+	}
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env_list;
-	t_env	*tmp;
-	int		j;
 
 	(void)argc;
 	(void)argv;
 
 	env_list = init_env(envp);
-	tmp = env_list;
-	j = 0;
-	while (tmp)
-	{
-		printf("env[%d] = %s=%s\n", j, tmp->type, tmp->value);
-		tmp = tmp->next;
-		j++;
-	}
+	printf("🔹 ENV INITIALE :\n");
+	print_env_list(env_list);
+
+	printf("\n🔹 Ajout / modif de PATH et ajout de NOUVELLE_VAR :\n");
+	set_env_value(&env_list, "PATH", "/custom/path");
+	set_env_value(&env_list, "NOUVELLE_VAR", "test123");
+	print_env_list(env_list);
+
+	printf("\n🔹 Suppression de USER :\n");
+	unset_env(&env_list, "USER");
+	print_env_list(env_list);
+
+	printf("\n🔹 Test get_env_value(\"SHELL\") :\n");
+	char *val = get_env_value(env_list, "SHELL");
+	if (val)
+		printf("Valeur de SHELL = %s\n", val);
+	else
+		printf("SHELL non trouvée\n");
+
+	// Tu peux ajouter ici un free_env(env_list) si tu l’as
 	return (0);
 }

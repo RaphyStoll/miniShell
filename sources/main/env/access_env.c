@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 11:54:48 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 14:20:12 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // pour trouver la value dans expand variable
 char	*get_env_value(t_env *env, char	*type)
 {
+	if (!type)
+		return (NULL);
 	while (env)
 	{
 		if (ft_strcmp(env->type, type) == 0)
