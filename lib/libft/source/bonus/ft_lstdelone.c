@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 23:29:26 by raphael           #+#    #+#             */
-/*   Updated: 2025/02/20 14:10:13 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/31 12:07:32 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
