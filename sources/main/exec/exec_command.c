@@ -6,9 +6,11 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 17:02:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:31:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "exec.h"
 
 void	execute_child_process
 

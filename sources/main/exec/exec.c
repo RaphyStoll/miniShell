@@ -6,11 +6,11 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 17:01:30 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:30:45 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/main/exec.h"
+#include "exec.h"
 
 void	execute_ast(t_node *ast_node, t_env *env_list)
 {
