@@ -6,13 +6,19 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 14:20:12 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:22:45 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
 
-// pour trouver la value dans expand variable
+/**
+ * @brief Get the value of a variable from the environment list.
+ * 
+ * @param env Environment list.
+ * @param type Type of variable to search.
+ * @return The value associated with the variable, or NULL if not found.
+ */
 char	*get_env_value(t_env *env, char	*type)
 {
 	if (!type)
@@ -26,7 +32,13 @@ char	*get_env_value(t_env *env, char	*type)
 	return (NULL);
 }
 
-// permet de convertir env_list pour execve
+/**
+ * @brief Converts the environment list into a NULL-terminated array of strings
+ * that is adequate for the execve function.
+ * 
+ * @param env Environment list.
+ * @return Array of strings in the format VAR=VALUE.
+ */
 char	**get_envp(t_env *env)
 {
 	t_env	*tmp;
@@ -45,7 +57,7 @@ char	**get_envp(t_env *env)
 	if (!envp)
 		return (NULL);
 	count = 0;
-	while (env)	
+	while (env)
 	{
 		tmp_type = ft_strjoin(env->type, "=");
 		envp[count++] = ft_strjoin(tmp_type, env->value);

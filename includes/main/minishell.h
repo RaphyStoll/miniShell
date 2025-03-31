@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/25 19:35:53 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/03/31 15:09:41 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 # include "../../lib/libft/header/libft.h"
 # include "../../lib/libft/header/libft_bonus.h"
 
-int	main(void);
+//int	main(void);
 
 #endif

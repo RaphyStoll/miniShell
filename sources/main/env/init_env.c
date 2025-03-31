@@ -6,12 +6,19 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 11:17:41 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:25:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
 
+/**
+ * @brief Adds a new t_env node at the end of the environment list.
+ * 
+ * @param env_list Address of the pointer to the head of the list.
+ * @param new Node to add to the list.
+ * @return A pointer to the head of the updated list.
+ */
 t_env	*add_env_node(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
@@ -28,7 +35,12 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 	return (*env_list);
 }
 
-// initialiser les variables d environnement dans le main tout au debut
+/**
+ * @brief Initializes the environment list from the given envp array.
+ * 
+ * @param env Array of strings in the format VAR=VALUE (envp).
+ * @return A pointer to the head of the list, or NULL on failure.
+ */
 t_env	*init_env(char **env)
 {
 	t_env	*env_list;
@@ -57,4 +69,3 @@ t_env	*init_env(char **env)
 	}
 	return (env_list);
 }
-

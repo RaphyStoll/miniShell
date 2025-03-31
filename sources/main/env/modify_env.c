@@ -6,12 +6,19 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 14:44:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:24:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
 
+/**
+ * @brief Allocates and initializes a new t_env node.
+ * 
+ * @param type Type of the environment variable.
+ * @param value Value associated with the variable.
+ * @return Pointer to the new node, or NULL on allocation failure.
+ */
 t_env	*create_env_node(char *type, char *value)
 {
 	t_env	*node;
@@ -22,8 +29,17 @@ t_env	*create_env_node(char *type, char *value)
 	node->type = ft_strdup(type);
 	node->value = ft_strdup(value);
 	node->next = NULL;
+	return (node);
 }
 
+/**
+ * @brief Sets or updates a variable in the environment list.
+ * 
+ * @param env_list Address of the pointer to the environment list.
+ * @param type Type of variable to set or update.
+ * @param value New value to assign to the variable.
+ * @return true if successful, false on failure to handle error.
+ */
 bool	set_env_value(t_env **env_list, char *type, char *value)
 {
 	t_env	*tmp;
@@ -51,7 +67,11 @@ bool	set_env_value(t_env **env_list, char *type, char *value)
 	return (true);
 }
 
-
+/**
+ * @brief Frees a single t_env node, including its type and value.
+ * 
+ * @param to_delete Node to free.
+ */
 void	env_delone(t_env *node)
 {
 	if (!node)
@@ -61,6 +81,12 @@ void	env_delone(t_env *node)
 	free(node);
 }
 
+/**
+ * @brief Removes a variable from the environment list.
+ * 
+ * @param env Address of the pointer to the environment list.
+ * @param type Name of the variable to remove.
+ */
 void	unset_env(t_env **env, char *type)
 {
 	t_env	*delete_node;
