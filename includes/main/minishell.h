@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/01 19:31:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 19:32:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_shell
 	t_env		*env;          // Variables d'environnement (liées à export/unset/env)
 	t_node		*ast;          // Arbre de commandes
 	int			last_exit;     // Valeur de $? utilisée partout
-}	t_shell;git 
+}	t_shell; 
 
 
 //int	main(int argc, char **argv, char **envp);
