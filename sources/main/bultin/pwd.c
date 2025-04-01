@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:20:21 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 16:20:34 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 16:46:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	builtin_pwd(void)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
-		perror("pwd");
-		return (GENERIC_ERROR);
-	}
+		return (perror("pwd"), GENERIC_ERROR);
 	printf("%s\n", cwd);
 	free(cwd);
 	return (SUCCESS);
