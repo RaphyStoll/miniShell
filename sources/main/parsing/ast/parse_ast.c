@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/26 16:59:39 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 14:02:44 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_node	*parse_command(t_token **tokens)
 	{
 		if ((*tokens)->type == WORD)
 		{
-			if (!add_arg_to_node(node, (*tokens)->str))
+			if (!add_arg_to_node(node, (*tokens)->str, (*tokens)->quote_type))
 				return (free_all_ast(node), NULL);
 		}
 		else if ((*tokens)->type == REDIRECT_IN
@@ -124,4 +124,18 @@ t_node	*parse_pipe(t_token **tokens)
 		left = node;
 	}
 	return (left);
+}
+
+/**
+ * @brief Parse une commande ou une sous-coquille.
+ * @param tokens Liste de tokens.
+ * @return Nœud correspondant ou NULL.
+ */
+t_node	*parse_command_or_subshell(t_token **tokens)
+{
+	if (!tokens || !*tokens)
+		return (NULL);
+	if ((*tokens)->type == O_PARENTHESIS)
+		return (parse_subshell(tokens));
+	return (parse_command(tokens));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/27 11:37:50 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 14:06:41 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 t_node	*build_ast(t_token *tokens);
 
 //! utils
-int		add_arg_to_node(t_node *node, char *arg);
+int		realloc_arg(t_node *node, char *arg, t_quote quote_type, int len);
+int		add_arg_to_node(t_node *node, char *arg, t_quote quote_type);
 t_node	*malloc_node(t_ast_type type);
 int		handle_redirection(t_token **tokens, t_node *node);
 void	add_redirection_to_node(t_node *node, t_redirection *redir);

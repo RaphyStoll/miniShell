@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:57 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:50:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 13:26:45 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	free_node(t_node *node)
 		return ;
 	if (node->args)
 		free_args(node->args);
+	if (node->arg_quotes)
+		free(node->arg_quotes);
 	if (node->redirections)
 		free_redirections(node->redirections);
 	if (node->child)
