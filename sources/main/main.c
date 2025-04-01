@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/31 15:09:14 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:15:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	minishell(void)
 			if (*input)
 				add_history(input);
 		handle_signal();
-		...
 	}
 }
 
