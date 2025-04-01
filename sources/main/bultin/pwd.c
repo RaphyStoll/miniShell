@@ -16,9 +16,11 @@ int builtin_pwd(void)
 	return (SUCCESS);
 }
 
+/*
 int main ()
 {
 	if (!builtin_pwd())
 		return 1;
 	return 0;
 }
+*/
