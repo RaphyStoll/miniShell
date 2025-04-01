@@ -14,3 +14,4 @@ test/*
 test.c
 test_parsing
 test_ast
+test_env
