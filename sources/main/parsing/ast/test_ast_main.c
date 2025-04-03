@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_test_main.c                                    :+:      :+:    :+:   */
+/*   test_ast_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:49:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:49:33 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/03 19:57:44 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ int main(void)
 
 	//print_ast(logic, 0);
 	print_ast_debug(logic, 0, "child");
+
+	free_all_ast(logic);
+
 	return (0);
 }
