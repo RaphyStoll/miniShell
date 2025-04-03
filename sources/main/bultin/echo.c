@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 16:29:43 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/03 16:34:44 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	bultin_echo(char **args)
 /*
 int main ()
 {
-	char *args[] = {"echo", "-n", "-n", "Hello", "world", "!", NULL};
+	char *args[] = {"echo", "-nnnnnnnnnnnnnnn", "Hello", "world", "!", NULL};
 	return (bultin_echo(args));
 }
 */
