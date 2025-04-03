@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_code.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 16:05:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/02 18:37:42 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef enum e_error_code
 	MATH_ERROR = 3,				// Erreur mathématique
 	MEMORY_ERROR = 8,			// Erreur de mémoire insuffisante.
 	SPECIFIC_ERROR_42 = 42,		// Code d'erreur spéc. utilisé par programme
-	PERMISSION_ERROR = 86,		// Erreur de permission refusée.
 	SYNTAX_ERROR = 102,			// Erreur de syntaxe ou de paramètre incorrect.
+	PERMISSION_ERROR = 126,		// Erreur de permission refusée.
 	COMMAND_NOT_FOUND = 127,	// La commande spécifiée n'a pas été trouvée.
 	WRAPPER_ERROR = 255,		// Erreur dans le wrapper de la commande.
 	UNCLOSED_QUOTE = 103,
