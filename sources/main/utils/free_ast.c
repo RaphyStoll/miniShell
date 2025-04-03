@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:57 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:50:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/03 10:36:54 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ void	free_args(char **args)
 }
 
 /**
- * @brief Libère un AST complet.
- * @param ast Racine de l’AST.
- */
-void	free_all_ast(t_node *ast)
-{
-	if (ast)
-		free_node(ast);
-}
-
-/**
  * @brief Libère un nœud et ses sous-éléments.
  * @param node Nœud à libérer.
  */
@@ -77,3 +67,14 @@ void	free_node(t_node *node)
 		free_node(node->brother);
 	free(node);
 }
+
+/**
+ * @brief Libère un AST complet.
+ * @param ast Racine de l’AST.
+ */
+void	free_all_ast(t_node *ast)
+{
+	if (ast)
+		free_node(ast);
+}
+
