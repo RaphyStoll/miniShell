@@ -1,14 +1,13 @@
 # ------------------------------------------------------------------------------
 # Configuration principale
 # ------------------------------------------------------------------------------
-
+INCLUDES		= -I ../../../../includes/main/ -I ../../../../includes/bonus/
 
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
 USE_LIBFT = no
 USE_BONUS = no
-
 
 # Nom de l'exécutable principal et bonus
 NAME        = test_ast
@@ -78,15 +77,21 @@ endif
 # Sources Principales (NOMS SANS EXTENSION)
 # ------------------------------------------------------------------------------
 MAIN_SRC = \
+	test_ast_main \
 	parse_ast \
-	ast_test_main \
-	utils \
-	free \
-	debbug
+	ast_utils \
+	debbug \
+
+EXTERNAL_SRC = ../../utils/free_ast.c
+EXTERNAL_OBJ = $(MAIN_OBJ)/free_ast.o
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
 MAIN_OBJS = $(addprefix $(MAIN_OBJ)/, $(addsuffix .o, $(MAIN_SRC)))
+
+ALL_OBJS = $(MAIN_OBJS) $(EXTERNAL_OBJ)
+
+
 
 # ------------------------------------------------------------------------------
 # Sources Bonus (NOMS SANS EXTENSION)
@@ -110,9 +115,9 @@ endif
 # ------------------------------------------------------------------------------
 # Compilation du binaire principal
 # ------------------------------------------------------------------------------
-$(NAME): $(MAIN_OBJS) | $(OUTPUT_DIR)
+$(NAME): $(ALL_OBJS) | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects for the main build...$(RESET)"
-	$(CC) $(CFLAGS) -lreadline $(MAIN_OBJS) $(ALL_LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline $(ALL_OBJS) $(ALL_LIBS) -o $(NAME) ../../../../lib/libft/output/libft.a
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)"
 
 # ------------------------------------------------------------------------------
@@ -122,6 +127,8 @@ $(NAME_BONUS): $(BONUS_OBJS) | $(OUTPUT_DIR)
 	@echo "$(CYAN)→ Linking objects for the bonus build...$(RESET)"
 	$(CC) $(CFLAGS) $(BONUS_OBJS) $(ALL_LIBS) -o $(NAME_BONUS)
 	@echo "$(BOLD)$(GREEN)✔ Finished building $(NAME_BONUS)$(RESET)"
+
+
 
 # ------------------------------------------------------------------------------
 # Création des répertoires
@@ -137,6 +144,11 @@ $(MAIN_OBJ):
 $(BONUS_OBJ):
 	@echo "$(YELLOW)Creating object directory '$(BONUS_OBJ)'$(RESET)"
 	@$(MKDIR) $(BONUS_OBJ)
+
+$(EXTERNAL_OBJ): $(EXTERNAL_SRC) | $(MAIN_OBJ)
+	@echo "$(BLUE)Compiling external $< → $@$(RESET)"
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 # ------------------------------------------------------------------------------
 # Règles de compilation pour les sources principales
@@ -179,7 +191,7 @@ endif
 clean:
 	
 	@echo "$(RED)→ Removing object files...$(RESET)"
-	$(RM) $(MAIN_OBJS) $(BONUS_OBJS)
+	$(RM) $(ALL_OBJS) $(BONUS_OBJS)
 	@echo "$(RED)→ Removing '$(OBJ_DIR)' directory...$(RESET)"
 	$(RM) -r $(OBJ_DIR)
 
