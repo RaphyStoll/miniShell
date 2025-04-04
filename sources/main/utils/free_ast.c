@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 02:28:57 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/03 10:36:54 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/04 15:08:09 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/04 15:08:10 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ast.h"
 #include "ast_struct.h"
@@ -59,6 +60,8 @@ void	free_node(t_node *node)
 		return ;
 	if (node->args)
 		free_args(node->args);
+	if (node->arg_quotes)
+		free(node->arg_quotes);
 	if (node->redirections)
 		free_redirections(node->redirections);
 	if (node->child)

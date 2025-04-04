@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/03 10:38:34 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/04 15:05:36 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 //! Error handling
 void	nbr_error(t_error error_code, char *message);
-t_token	*ft_exit_error(t_token *tokens, t_error code, char *error_token);
-void	print_error_message(t_error code, char *error_token);
+t_token	*ft_exit_error(t_token *tokens, t_error_code code, char *error_token);
+void	print_error_message(t_error_code code, char *error_token);
 
 //! Memory utils
 void	free_all(t_token *token);

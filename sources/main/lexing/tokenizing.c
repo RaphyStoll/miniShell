@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 21:48:47 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 12:34:00 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
 
-char	*get_quoted_word(const char **input, bool *in_dquote)
+char	*get_quoted_word(const char **input, t_quote *quote_type)
 {
 	int			len;
 	const char	*start;
@@ -25,7 +25,9 @@ char	*get_quoted_word(const char **input, bool *in_dquote)
 		return (NULL);
 	quote = **input;
 	if (quote == '"')
-		*in_dquote = true;
+		*quote_type = DOUBLE_QUOTE;
+	else
+		*quote_type = SINGLE_QUOTE;
 	(*input)++;
 	start = *input;
 	while ((*input)[len] && (*input)[len] != quote)
@@ -52,32 +54,34 @@ char	*get_unquoted_word(const char **input)
 	return (word);
 }
 
-char	*handle_word(const char **input, bool *in_double_quotes)
+char	*handle_word(const char **input, t_quote *quote_type)
 {
 	char	*quoted;
 	char	*unquoted;
 	char	*word;
 
-	*in_double_quotes = false;
-	quoted = get_quoted_word(input, in_double_quotes);
+	*quote_type = NO_QUOTE;
+	quoted = get_quoted_word(input, quote_type);
 	unquoted = get_unquoted_word(input);
-	if (quoted)
+	if (quoted || unquoted)
 	{
+		if (!quoted)
+			return (unquoted);
+		if (!unquoted)
+			return (quoted);
 		word = ft_strjoin(quoted, unquoted);
 		free(quoted);
 		free(unquoted);
-		if (!word)
-			return (NULL);
 		return (word);
 	}
-	return (unquoted);
+	return (NULL);
 }
 
 t_token	*tokenizing(const char *input)
 {
-	t_token	*token_list;
-	char	*word;
-	bool	dquote;
+	t_token			*token_list;
+	t_quote			quote_type;
+	char			*word;
 
 	token_list = NULL;
 	while (*input)
@@ -91,10 +95,10 @@ t_token	*tokenizing(const char *input)
 			continue ;
 		if (is_forbidden_char(*input))
 			return (ft_exit_error(token_list, SYNTAX_ERROR, (char *)input));
-		word = handle_word(&input, &dquote);
+		word = handle_word(&input, &quote_type);
 		if (!word)
 			return (ft_exit_error(token_list, MEMORY_ERROR, "word"));
-		add_token(&token_list, word, WORD, dquote);
+		add_token(&token_list, word, WORD, quote_type);
 	}
 	return (token_list);
 }

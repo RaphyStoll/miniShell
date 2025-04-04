@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ast_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:48:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 20:07:35 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 13:50:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_STRUCT_H
 # define AST_STRUCT_H
+# include "quote_type.h"
 
 /**
  * @brief Enum pour type de redirection
@@ -38,6 +39,7 @@ typedef struct s_redirection
 {
 	t_redirection_type		type;
 	char					*target;
+	t_quote					quote_type;
 	struct s_redirection	*next;
 }	t_redirection;
 
@@ -79,6 +81,7 @@ typedef struct s_node
 {
 	t_ast_type		type;
 	char			**args;
+	t_quote			*arg_quotes;
 	t_logical_type	logic_type;
 	t_redirection	*redirections;
 	struct s_node	*child;

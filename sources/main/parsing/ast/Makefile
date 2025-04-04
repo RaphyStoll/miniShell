@@ -1,12 +1,13 @@
 # ------------------------------------------------------------------------------
 # Configuration principale
 # ------------------------------------------------------------------------------
-INCLUDES		= -I ../../../../includes/main/ -I ../../../../includes/bonus/
+
+INCLUDES = -I ../../../../includes/main -I ../../../../lib/libft/header -I /usr/local/opt/readline/include
 
 # activation des library mettre yes ou non selon si l'on veut les use ou pas dans le projet
 USE_GNL = no
 USE_PRINTF = no
-USE_LIBFT = no
+USE_LIBFT = yes
 USE_BONUS = no
 
 # Nom de l'exécutable principal et bonus
@@ -79,11 +80,11 @@ endif
 MAIN_SRC = \
 	test_ast_main \
 	parse_ast \
+	build_ast \
+	test_ast_main \
 	ast_utils \
-	debbug \
-
-EXTERNAL_SRC = ../../utils/free_ast.c
-EXTERNAL_OBJ = $(MAIN_OBJ)/free_ast.o
+	free_ast \
+	debbug
 
 # Liste complète des sources principales
 MAIN_SRCS = $(addprefix $(MAIN_DIR)/, $(addsuffix .c, $(MAIN_SRC)))
@@ -110,7 +111,6 @@ all: $(ALL_LIBS) $(NAME)
 ifeq ($(USE_BONUS), yes)
 bonus: $(ALL_LIBS) $(NAME_BONUS)
 endif
-
 
 # ------------------------------------------------------------------------------
 # Compilation du binaire principal

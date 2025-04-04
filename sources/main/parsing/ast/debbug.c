@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:29:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/27 11:38:14 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 13:57:21 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,12 @@ void	print_ast(t_node *node, int level)
 			printf(" args:");
 			i = 0;
 			while (node->args[i])
+			{
 				printf(" %s", node->args[i++]);
+				if (node->arg_quotes)
+					printf("(%s)", node->arg_quotes[i - 1] == QUOTE_DOUBLE ? "dquote" :
+						node->arg_quotes[i - 1] == QUOTE_SINGLE ? "squote" : "noquote");
+			}
 		}
 		printf("\n");
 		redir = node->redirections;
@@ -115,7 +120,32 @@ void	print_ast_debug(t_node *node, int level, const char *label)
 		while (node->args[i])
 		{
 			printf(" \"%s\"", node->args[i]);
+			if (node->arg_quotes)
+				printf(" (%s)", node->arg_quotes[i] == QUOTE_DOUBLE ? "dquote" :
+					node->arg_quotes[i] == QUOTE_SINGLE ? "squote" : "noquote");
 			i++;
+		}
+	}
+	if (node->redirections)
+	{
+		t_redirection *redir = node->redirections;
+		while (redir)
+		{
+			int j = 0;
+			while (j < level + 1)
+			{
+				printf("│   ");
+				j++;
+			}
+			printf("redir: type=%d target=\"%s\"", redir->type, redir->target);
+			if (redir->quote_type == QUOTE_DOUBLE)
+				printf(" (dquote)");
+			else if (redir->quote_type == QUOTE_SINGLE)
+				printf(" (squote)");
+			else
+				printf(" (noquote)");
+			printf("\n");
+			redir = redir->next;
 		}
 	}
 	printf("\n");
