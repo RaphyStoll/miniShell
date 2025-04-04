@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 14:52:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:13:22 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,5 @@ void	unset_env(t_env **env, char *type);
 void	env_delone(t_env *node);
 bool	set_env_value(t_env **env_list, char *type, char *value);
 t_env	*create_env_node(char *type, char *value);
-
-
 
 #endif
