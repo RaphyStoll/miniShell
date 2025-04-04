@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/03 16:34:44 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/04 16:23:17 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	init_options(t_echo_opts *options)
  * @param args tableau d'argument que resoit echo ex:["-n","-n","Hello world!"]
  * @return int qui est le code d'erreur/succes de bash
  */
-int	bultin_echo(char **args)
+int	builtin_echo(char **args)
 {
 	t_echo_opts	options;
 	int			i;

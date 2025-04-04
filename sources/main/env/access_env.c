@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 14:37:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:33:13 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_env_value(t_env *env, char	*type)
 	if (!type)
 		return (NULL);
 	if (ft_strcmp(type, "?") == 0)
-		return (ft_itoa(last_exit));
+		return (ft_itoa(last_exit_status));
 	while (env)
 	{
 		if (ft_strcmp(env->type, type) == 0)

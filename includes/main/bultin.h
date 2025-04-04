@@ -8,6 +8,7 @@
 #include <sys/errno.h>
 
 int builtin_pwd(void);
-int bultin_echo(char **args);
+int builtin_echo(char **args);
+
 
 #endif
