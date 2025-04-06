@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:29:02 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 22:28:15 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 10:48:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 #include "lexing_struct.h"
 
 /**
- * @brief Construit l'arbre de syntaxe abstraite (AST)
- * 		à partir d'une liste de tokens.
+ * @brief contruct all AST leave a token list.
  *
- * @param tokens La liste chaînée de tokens analysés lexicalement.
- * @return Un pointeur vers la racine de l'AST construit,
- * 		ou NULL si la liste est vide.
+ * @param tokens list of tokens generated on lexing part.
+ * @return a pointer for the head of ast or NULL is list is empty
  */
 t_node	*build_ast(t_token *tokens)
 {

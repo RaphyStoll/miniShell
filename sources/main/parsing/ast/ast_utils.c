@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 14:05:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 10:46:33 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 
 /**
- * @brief Alloue et initialise un nœud AST.
- * @param type Type du nœud.
- * @return Nouveau nœud ou NULL.
+ * @brief Allocate memory for a AST node.
+ * @param type type of node.
+ * @return new node or NULL.
  */
 t_node	*malloc_node(t_ast_type type)
 {
@@ -75,10 +75,10 @@ int	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 }
 
 /**
- * @brief Ajoute un argument au nœud.
- * @param node Nœud cible.
- * @param arg Argument à ajouter.
- * @return 1 en cas de succès, 0 sinon.
+ * @brief ADD a arg to a node
+ * @param node target node.
+ * @param arg arg to add.
+ * @return 1 is succes, 0 is false.
  */
 int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
 {
@@ -122,9 +122,9 @@ int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
 // }
 
 /**
- * @brief Ajoute une redirection au nœud.
- * @param node Nœud cible.
- * @param redir Redirection à ajouter.
+ * @brief add a redirection to a node
+ * @param node target node.
+ * @param redir redirection need add in the node.
  */
 void	add_redirection_to_node(t_node *node, t_redirection *redir)
 {
@@ -144,10 +144,10 @@ void	add_redirection_to_node(t_node *node, t_redirection *redir)
 }
 
 /**
- * @brief Gère une redirection dans les tokens.
- * @param tokens Liste de tokens.
- * @param node Nœud cible.
- * @return 1 en cas de succès, 0 sinon.
+ * @brief Handles a redirection in the tokens.
+ * @param tokens List of tokens.
+ * @param node target node.
+ * @return 1 is succes, 0 is false.
  */
 int	handle_redirection(t_token **tokens, t_node *node)
 {

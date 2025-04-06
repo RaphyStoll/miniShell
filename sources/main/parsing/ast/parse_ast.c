@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 14:02:44 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 10:51:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "lexing_struct.h"
 
 /**
- * @brief Parse les opérateurs logiques (&&, ||).
- * @param tokens Liste de tokens à parser.
- * @return Racine de l’AST logique.
+ * @brief Pars logical operator (&&, ||).
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_logical(t_token **tokens)
 {
@@ -44,9 +44,9 @@ t_node	*parse_logical(t_token **tokens)
 }
 
 /**
- * @brief Parse une commande simple.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de commande ou NULL.
+ * @brief Pars a command.
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_command(t_token **tokens)
 {
@@ -77,9 +77,9 @@ t_node	*parse_command(t_token **tokens)
 }
 
 /**
- * @brief Parse une sous-coquille entre parenthèses.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de sous-shell ou NULL.
+ * @brief Parse a subshell ("(", ")")
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_subshell(t_token **tokens)
 {
@@ -101,9 +101,9 @@ t_node	*parse_subshell(t_token **tokens)
 }
 
 /**
- * @brief Parse une séquence de commandes reliées par des pipes.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de pipe ou NULL.
+ * @brief Parse a pipe
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_pipe(t_token **tokens)
 {
@@ -127,9 +127,9 @@ t_node	*parse_pipe(t_token **tokens)
 }
 
 /**
- * @brief Parse une commande ou une sous-coquille.
- * @param tokens Liste de tokens.
- * @return Nœud correspondant ou NULL.
+ * @brief Pars a command or a subshell.
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_command_or_subshell(t_token **tokens)
 {
