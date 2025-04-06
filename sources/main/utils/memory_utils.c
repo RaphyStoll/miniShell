@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/03 10:35:49 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 12:30:33 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_tokens(t_token *head)
 	}
 }
 
-void free_env(t_env *head)
+void	free_env(t_env *head)
 {
 	t_env	*current;
 	t_env	*next;

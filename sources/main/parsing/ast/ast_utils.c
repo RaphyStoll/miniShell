@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 10:46:33 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 11:30:59 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "ast_struct.h"
 #include "../../../../lib/libft/header/libft.h"
-
 
 /**
  * @brief Allocate memory for a AST node.
@@ -160,7 +159,6 @@ int	handle_redirection(t_token **tokens, t_node *node)
 	redir = malloc(sizeof(t_redirection));
 	if (!redir)
 		return (0);
-
 	if ((*tokens)->type == REDIRECT_IN)
 		redir->type = REDIRECTION_IN;
 	else if ((*tokens)->type == REDIRECT_OUT)
@@ -169,7 +167,6 @@ int	handle_redirection(t_token **tokens, t_node *node)
 		redir->type = REDIRECTION_APPEND;
 	else
 		redir->type = REDIRECTION_HEREDOC;
-
 	redir->target = ft_strdup((*tokens)->next->str);
 	redir->quote_type = (*tokens)->next->quote_type;
 	redir->next = NULL;

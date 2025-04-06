@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:28 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 10:55:17 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 11:34:40 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ bool	if_valide_token_next(t_token *current)
 
 bool	valid_content(t_token *current)
 {
-    
-    if (current == NULL)
-        return (false);
-    if (current->str == NULL)
-        return (false);
-    if (!(current->type >= WORD && current->type <= C_PARENTHESIS))
-        return (false);
-    return (true);
+	if (current == NULL)
+		return (false);
+	if (current->str == NULL)
+		return (false);
+	if (!(current->type >= WORD && current->type <= C_PARENTHESIS))
+		return (false);
+	return (true);
 }

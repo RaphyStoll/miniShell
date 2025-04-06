@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:47:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/02 18:37:42 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 14:57:13 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ typedef struct s_error
 	char			*error_msg;
 	char			*error_token;
 }	t_error;
-
 
 #endif

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 14:57:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 12:28:34 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
-
 
 /**
  * @brief Expands variables in redirection targets.

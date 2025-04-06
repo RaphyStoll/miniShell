@@ -6,21 +6,22 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 11:15:06 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 12:41:32 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bultin.h"
+#include "builtin.h"
 #include "error_code.h"
-#include "bultin_struct.h"
+#include "builtin_struct.h"
 #include "../../../lib/libft/header/libft.h"
 
 /**
  * @brief Activates an option in the structure.
  *
- * This function activates the corresponding option in the options structure based on
- * the given option character. To add additional options, include a new condition such
- * as "if (arg == 'x')" and set the corresponding option to true.
+ * This function activates the corresponding option in the options structure
+ * based on the given option character. To add additional options, include
+ * a new condition such as "if (arg == 'x')" and set the corresponding
+ * option to true.
  * 
  * @param arg The option character to activate.
  * @param options Pointer to the options structure where all
@@ -73,7 +74,6 @@ static void	parse_echo(char **args, t_echo_opts *options, int *i)
 		(*i)++;
 	}
 }
-
 
 /**
  * @brief Initializes the echo options with default values.

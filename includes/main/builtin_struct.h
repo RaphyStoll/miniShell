@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   builtin_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 14:31:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:38:41 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/06 12:39:05 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/06 14:54:11 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/libft.h"
+#ifndef BUILTIN_STRUCT_H
+# define BUILTIN_STRUCT_H
 
-char	*ft_strndup(const char *s1, int len)
+// prend une structure pour permettre de prendre en compte d'autres argument
+//? (pas speciallement utile dans minishell)
+//! ajouter bool x pour l'option prise en compte (bool e = echo -e)
+typedef struct s_echo_opts
 {
-	char	*dup;
-	int		i;
+	bool	n;
+}	t_echo_opts;
 
-	i = 0;
-	dup = malloc(len + 1);
-	if (!dup)
-	{
-		return (NULL);
-	}
-	while (i < len)
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[len] = '\0';
-	return (dup);
-}
+#endif

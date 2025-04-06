@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 15:08:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 15:08:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 12:29:02 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ast.h"
 #include "ast_struct.h"
@@ -80,4 +79,3 @@ void	free_all_ast(t_node *ast)
 	if (ast)
 		free_node(ast);
 }
-

@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/06 14:56:13 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/06 14:56:51 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-# include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "error_code.h"
-# include "env_struct.h"
-# include "ast_struct.h"
-# include "../../lib/libft/header/libft.h"
-# include "../../lib/libft/header/libft_bonus.h"
+# include <sys/errno.h>
 
-typedef struct s_shell
-{
-	t_env		*env;
-	t_node		*ast;
-	int			last_exit;
-}	t_shell;
-
-//int	main(int argc, char **argv, char **envp);
+int	builtin_pwd(void);
+int	bultin_echo(char **args);
 
 #endif

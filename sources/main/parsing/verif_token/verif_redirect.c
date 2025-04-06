@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:30:11 by raphalme          #+#    #+#             */
-/*   Updated: 2025/03/25 21:58:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 11:34:07 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ bool	valid_type_redirect_out_prev(t_token *cur)
 	if (cur->type == REDIRECT_OUT)
 	{
 		if (cur->prev == NULL)
-		{
-			printf("DEBUG : prev est NULL\n");
 			return (false);
-		}
-		printf("DEBUG: prev = \"%s\" (Type: %d)\n", cur->prev->str, cur->prev->type);
 		if (!(cur->prev->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
@@ -114,18 +110,18 @@ bool	valid_type_redirect_out(t_token *cur)
 		if (!(cur->prev->type == WORD && cur->next->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND
-				|| cur->prev->type == REDIRECT_IN
-				|| cur->prev->type == REDIRECT_OUT
-				|| cur->next->type == HEREDOC || cur->next->type == APPEND
-				|| cur->next->type == REDIRECT_IN
-				|| cur->next->type == REDIRECT_OUT)
+			|| cur->prev->type == REDIRECT_IN
+			|| cur->prev->type == REDIRECT_OUT
+			|| cur->next->type == HEREDOC || cur->next->type == APPEND
+			|| cur->next->type == REDIRECT_IN
+			|| cur->next->type == REDIRECT_OUT)
 			return (false);
 		if (cur->prev->type == PIPE || cur->next->type == PIPE)
 			return (false);
-		if(cur->prev->type == AND || cur->next->type == OR)
+		if (cur->prev->type == AND || cur->next->type == OR)
 			return (false);
-		if (cur->prev->type == O_PARENTHESIS 
-		|| cur->next->type == C_PARENTHESIS)
+		if (cur->prev->type == O_PARENTHESIS
+			|| cur->next->type == C_PARENTHESIS)
 			return (false);
 		printf(MAGENTA BOLD"REDIRECT OUT is valid\n"NC);
 	}

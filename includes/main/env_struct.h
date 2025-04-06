@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/01 17:13:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 14:54:55 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#ifndef ENV_STRUCT_H
+# define ENV_STRUCT_H
 
 # include <stdio.h>
 # include "minishell.h"
@@ -22,7 +22,6 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
-
 
 t_env	*add_env_node(t_env **env_list, t_env *new);
 t_env	*init_env(char **env);

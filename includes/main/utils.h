@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 15:05:36 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 14:57:02 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_error_message(t_error_code code, char *error_token);
 //! Memory utils
 void	free_all(t_token *token);
 void	free_tokens(t_token *head);
-void free_env(t_env *head);
+void	free_env(t_env *head);
 
 //! free ast
 

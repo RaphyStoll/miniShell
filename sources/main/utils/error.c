@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 12:20:47 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 12:29:10 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
 
 // void	ft_exit_error(t_token *token, char *message, t_error error_code)
 // {

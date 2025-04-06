@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_one_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:44:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 14:59:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/06 12:28:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

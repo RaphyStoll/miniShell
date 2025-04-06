@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:17:38 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 10:52:36 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 11:32:07 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	valid_type_word_prev(t_token *cur)
 		if (cur->prev == NULL)
 			return (true);
 		if (cur->prev->type == C_PARENTHESIS)
-				return (false);
+			return (false);
 	}
 	return (true);
 }
