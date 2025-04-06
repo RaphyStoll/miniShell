@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/27 11:40:37 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 10:46:33 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 
 /**
- * @brief Alloue et initialise un nœud AST.
- * @param type Type du nœud.
- * @return Nouveau nœud ou NULL.
+ * @brief Allocate memory for a AST node.
+ * @param type type of node.
+ * @return new node or NULL.
  */
 t_node	*malloc_node(t_ast_type type)
 {
@@ -29,6 +29,7 @@ t_node	*malloc_node(t_ast_type type)
 		return (NULL);
 	node->type = type;
 	node->args = NULL;
+	node->arg_quotes = NULL;
 	node->redirections = NULL;
 	node->child = NULL;
 	node->brother = NULL;
@@ -36,44 +37,94 @@ t_node	*malloc_node(t_ast_type type)
 }
 
 /**
- * @brief Ajoute un argument au nœud.
- * @param node Nœud cible.
- * @param arg Argument à ajouter.
- * @return 1 en cas de succès, 0 sinon.
+ * @brief Reallocates and expands the arguments and their quote types for a node.
+ * 
+ * @param node Target AST node to modify.
+ * @param arg New argument to add.
+ * @param quote_type Quote type of the argument.
+ * @param len Current number of arguments before expansion.
+ * @return 1 on success, 0 on failure.
  */
-int	add_arg_to_node(t_node *node, char *arg)
+int	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 {
-	char	**new_args;
-	int		len;
-	int		i;
+	char			**new_args;
+	t_quote			*new_quotes;
+	int				i;
+
+	new_args = malloc(sizeof(char *) * (len + 2));
+	if (!new_args)
+		return (0);
+	new_quotes = malloc(sizeof(t_quote) * (len + 1));
+	if (!new_quotes)
+		return (free(new_args), 0);
+	i = 0;
+	while (i < len)
+	{
+		new_args[i] = node->args[i];
+		new_quotes[i] = node->arg_quotes[i];
+		i++;
+	}
+	new_args[i] = ft_strdup(arg);
+	new_args[i + 1] = NULL;
+	new_quotes[i] = quote_type;
+	free(node->args);
+	free(node->arg_quotes);
+	node->args = new_args;
+	node->arg_quotes = new_quotes;
+	return (1);
+}
+
+/**
+ * @brief ADD a arg to a node
+ * @param node target node.
+ * @param arg arg to add.
+ * @return 1 is succes, 0 is false.
+ */
+int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
+{
+	int	len;
 
 	if (!node || !arg)
 		return (0);
 	len = 0;
 	if (node->args)
-	{
 		while (node->args[len])
 			len++;
-	}
-	new_args = malloc(sizeof(char *) * (len + 2));
-	if (!new_args)
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		new_args[i] = node->args[i];
-		i++;
-	}
-	new_args[i++] = ft_strdup(arg);
-	new_args[i] = NULL;
-	free(node->args);
-	return (node->args = new_args, 1);
+	return (store_arg(node, arg, quote_type, len));
 }
+// int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
+// {
+// 	char	**new_args;
+// 	int		len;
+// 	int		i;
+
+// 	if (!node || !arg)
+// 		return (0);
+// 	len = 0;
+// 	if (node->args)
+// 	{
+// 		while (node->args[len])
+// 			len++;
+// 	}
+// 	new_args = malloc(sizeof(char *) * (len + 2));
+// 	if (!new_args)
+// 		return (0);
+// 	i = 0;
+// 	while (i < len)
+// 	{
+// 		new_args[i] = node->args[i];
+// 		i++;
+// 	}
+// 	new_args[i++] = ft_strdup(arg);
+// 	new_args[i] = NULL;
+// 	free(node->args);
+// 	return (node->args = new_args, 1);
+// }
 
 /**
- * @brief Ajoute une redirection au nœud.
- * @param node Nœud cible.
- * @param redir Redirection à ajouter.
+ * @brief add a redirection to a node
+ * @param node target node.
+ * @param redir redirection need add in the node.
  */
 void	add_redirection_to_node(t_node *node, t_redirection *redir)
 {
@@ -93,10 +144,10 @@ void	add_redirection_to_node(t_node *node, t_redirection *redir)
 }
 
 /**
- * @brief Gère une redirection dans les tokens.
- * @param tokens Liste de tokens.
- * @param node Nœud cible.
- * @return 1 en cas de succès, 0 sinon.
+ * @brief Handles a redirection in the tokens.
+ * @param tokens List of tokens.
+ * @param node target node.
+ * @return 1 is succes, 0 is false.
  */
 int	handle_redirection(t_token **tokens, t_node *node)
 {
@@ -105,10 +156,11 @@ int	handle_redirection(t_token **tokens, t_node *node)
 	if (!tokens || !*tokens || !node)
 		return (0);
 	if (!(*tokens)->next || (*tokens)->next->type != WORD)
-		return (0); // erreur : pas de cible après redirection
+		return (0);
 	redir = malloc(sizeof(t_redirection));
 	if (!redir)
 		return (0);
+
 	if ((*tokens)->type == REDIRECT_IN)
 		redir->type = REDIRECTION_IN;
 	else if ((*tokens)->type == REDIRECT_OUT)
@@ -117,23 +169,11 @@ int	handle_redirection(t_token **tokens, t_node *node)
 		redir->type = REDIRECTION_APPEND;
 	else
 		redir->type = REDIRECTION_HEREDOC;
-	redir->target = strdup((*tokens)->next->str);
+
+	redir->target = ft_strdup((*tokens)->next->str);
+	redir->quote_type = (*tokens)->next->quote_type;
 	redir->next = NULL;
 	add_redirection_to_node(node, redir);
-	*tokens = (*tokens)->next->next; // skip l'opérateur et sa cible
+	*tokens = (*tokens)->next->next;
 	return (1);
-}
-
-/**
- * @brief Parse une commande ou une sous-coquille.
- * @param tokens Liste de tokens.
- * @return Nœud correspondant ou NULL.
- */
-t_node	*parse_command_or_subshell(t_token **tokens)
-{
-	if (!tokens || !*tokens)
-		return (NULL);
-	if ((*tokens)->type == O_PARENTHESIS)
-		return (parse_subshell(tokens));
-	return (parse_command(tokens));
 }

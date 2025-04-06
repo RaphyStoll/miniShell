@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/01 17:15:48 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 20:53:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,23 @@ void	print_current_tokens(t_token *tokens)
 	}
 }
 
+void	init_shell(t_shell *s)
+{
+	s = malloc(sizeof(t_shell));
+	if (!s)
+		return NULL;
+	s->env = NULL;
+	s->ast = NULL;
+	s->ast = build_ast;
+}
+
 int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
-
+	t_shell	*shell;
 	set_signals();
+	init_shell(shell);
 	ignore_ctrl_display();
 	while (1)
 	{
@@ -79,8 +90,7 @@ int	main(void)
 		}
 		print_tokens(tokens);
 		printf(GREEN"token and verif succeeded!\n"NC);
-		t_node *ast = build_ast(tokens);
-		print_ast_debug(ast, 0, "child");
+		print_ast_debug(shell->ast, 0, "child");
 		free_tokens(tokens);
 		free(input);
 		system("leaks minishell| grep 'leaks Report' -A 10");

@@ -9,7 +9,7 @@ RM         = rm -f
 NAME       = test_lexing
 
 # Fichiers sources (tous les fichiers .c du dossier actuel)
-SRCS       = $(wildcard *.c)
+SRCS       = $(wildcard *.c) $(wildcard ../../../sources/main/utils/*.c)
 OBJS       = $(SRCS:.c=.o)
 
 # Répertoire de la libft (on remonte 3 fois dans l'arborescence)
@@ -17,7 +17,7 @@ LIBFT_DIR  = $(abspath ../../../lib/libft)
 LIBFT_A    = $(LIBFT_DIR)/output/libft.a
 
 # Options d'inclusion
-INCLUDES   = -I $(LIBFT_DIR)/header -I/usr/local/opt/readline/include
+INCLUDES = -I $(LIBFT_DIR)/header -I ../../../includes/main -I/usr/local/opt/readline/include
 
 # ------------------------------------------------------------------------------
 # Compilation principale

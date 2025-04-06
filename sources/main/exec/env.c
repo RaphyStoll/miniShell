@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 16:02:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/01 10:20:15 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	expand_one_arg(char *arg, t_env *env)
 {
 	char	*result;
-	int	i;
+	int		i;
 	
+	result = NULL;
 	while (arg[i])
 	{
 		if (arg[i] != '$')

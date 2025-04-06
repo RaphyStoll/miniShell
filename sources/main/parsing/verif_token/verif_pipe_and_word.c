@@ -6,19 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:17:38 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:57:56 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 10:52:36 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "lexing_struct.h"
-
-/* 
-verifie si pipe est :
- - au debut ou a la fin de la liste
- - entourer de word
- - suivi ou preceder d'un autre pipe
-*/
 
 bool	valid_type_pipe_prev(t_token *cur)
 {
@@ -71,11 +64,7 @@ bool	valid_type_word_prev(t_token *cur)
 	}
 	return (true);
 }
-/*
-Pour chaque token de type WORD,
-vérifiez qu'il est précédé et suivi de tokens appropriés (par exemple,
-pas de WORD directement après un PIPE sans un autre WORD avant)
-*/
+
 bool	valid_type_word_next(t_token *cur)
 {
 	if (cur->type == WORD)

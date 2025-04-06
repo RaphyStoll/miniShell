@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 16:29:43 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 11:15:06 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 #include "../../../lib/libft/header/libft.h"
 
 /**
- * @brief sert a activer les options dans la structure
- * si nouvelle option necessaire
- * refaire un if (arg == 'x') puis passer l'option a true dans  la structure
+ * @brief Activates an option in the structure.
+ *
+ * This function activates the corresponding option in the options structure based on
+ * the given option character. To add additional options, include a new condition such
+ * as "if (arg == 'x')" and set the corresponding option to true.
  * 
- * @param arg uniquement le char de l'option a activer
- * @param options pointeur vers la structure d'option par defaut tous sont a 0
+ * @param arg The option character to activate.
+ * @param options Pointer to the options structure where all
+ * 				  options are initially false.
  * @return true 
  * @return false 
  */
@@ -35,12 +38,16 @@ static bool	check_args(char arg, t_echo_opts *options)
 }
 
 /**
- * @brief sert a parser echo pour que builtin_echo sache ou commence le texte
- * et sert aussi a activer les differentes option de echo
+ * @brief Parses the echo command arguments.
  * 
- * @param args tableau d'argument que reçoit echo (ex "-n", "-e")
- * @param options pointeur vers la structure d'option par defaut tous sont a 0
- * @param i conteur pour que bultin_echo sache ou commence le texte
+ * This function processes the array of arguments received by echo.
+ * It determines the starting index for the text to be echoed and activates
+ * the corresponding options in the options structure.
+ *
+ * @param args Array of arguments received by echo (e.g., "-n", "-e").
+ * @param options Pointer to the options structure.
+ * @param i Pointer to an integer that will be updated with the index
+ * 			where the text begins.
  */
 static void	parse_echo(char **args, t_echo_opts *options, int *i)
 {
@@ -67,12 +74,14 @@ static void	parse_echo(char **args, t_echo_opts *options, int *i)
 	}
 }
 
+
 /**
- * @brief sert a set par defaut les variable de la structure (default = 0)
- * prevu pour acceuillir plusieurs options a l'avenir et garantir 25 lignes
- * dans builtin_echo
- * 
- * @param options pointeur vers la structure d'option
+ * @brief Initializes the echo options with default values.
+ *
+ * This function sets the default values for the echo options structure.
+ * It currently initializes the -n option to false.
+ *
+ * @param options Pointer to the echo options structure.
  */
 static void	init_options(t_echo_opts *options)
 {
@@ -81,12 +90,18 @@ static void	init_options(t_echo_opts *options)
 }
 
 /**
- * @brief Bult-in echo: affiche les arguments, gere l'optionn -n
- * mais est prevu pour etre modulaire et rapidement inclure d'autres options
- * Exemple: echo -n -n "Hello world!"
- * 
- * @param args tableau d'argument que resoit echo ex:["-n","-n","Hello world!"]
- * @return int qui est le code d'erreur/succes de bash
+ * @brief Built-in echo command: displays the arguments.
+ *
+ * This built-in command prints the provided arguments to the standard output.
+ * It handles the -n option to suppress the trailing newline and
+ * is designed to be modular, allowing for the easy inclusion
+ * of additional options in the future.
+ *
+ * For example: echo -n -n "Hello world!".
+ *
+ * @param args Array of arguments received by echo
+ * 				(e.g., {"-n", "-n", "Hello world!"}).
+ * @return int SUCCESS on success or an appropriate error code on failure.
  */
 int	bultin_echo(char **args)
 {
@@ -116,7 +131,7 @@ int	bultin_echo(char **args)
 /*
 int main ()
 {
-	char *args[] = {"echo", "-n", "-n", "Hello", "world", "!", NULL};
+	char *args[] = {"echo", "-nnnnnnnnnnnnnnn", "Hello", "world", "!", NULL};
 	return (bultin_echo(args));
 }
 */
