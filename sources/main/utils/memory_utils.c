@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/03 10:35:49 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/04 22:14:30 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void free_env(t_env *head)
 	t_env	*current;
 	t_env	*next;
 
+	if (!head)
+		return ;
 	current = head;
 	while (current != NULL)
 	{

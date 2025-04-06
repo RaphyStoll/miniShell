@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:25:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 20:58:50 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "env.h"
 
 /**
  * @brief Adds a new t_env node at the end of the environment list.
@@ -19,18 +20,18 @@
  * @param new Node to add to the list.
  * @return A pointer to the head of the updated list.
  */
-t_env	*add_env_node(t_env **env_list, t_env *new)
+t_env	*add_env_node(t_env **env_list, t_env *new_node)
 {
 	t_env	*tmp;
 
 	if (*env_list == NULL)
-		*env_list = new;
+		*env_list = new_node;
 	else
 	{
 		tmp = *env_list;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = new;
+		tmp->next = new_node;
 	}
 	return (*env_list);
 }

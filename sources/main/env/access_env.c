@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:22:45 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 21:04:45 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "env.h"
 
 /**
  * @brief Get the value of a variable from the environment list.

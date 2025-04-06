@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/03 10:38:34 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/04 21:10:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,13 @@ void	free_redirections(t_redirection *redir);
 void	free_args(char **args);
 void	free_all_ast(t_node *ast);
 void	free_node(t_node *node);
+
+//! lst_utils
+t_env	*env_dup(t_env *src);
+
+//!mege sort
+t_env *sorted_merge(t_env *a, t_env *b);
+void split_list(t_env *source, t_env **front, t_env **back);
+void sort_env(t_env **head_ref);
 
 #endif

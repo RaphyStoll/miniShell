@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:24:42 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 21:05:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "env.h"
 
 /**
  * @brief Allocates and initializes a new t_env node.

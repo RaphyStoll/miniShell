@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   test_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:56:07 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 14:57:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 21:05:04 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "env.h"
 
 void	print_env_list(t_env *env_list)
 {
