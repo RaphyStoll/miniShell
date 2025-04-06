@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 11:30:59 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 15:22:07 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,10 @@ t_node	*malloc_node(t_ast_type type)
 {
 	t_node	*node;
 
-	node = malloc(sizeof(t_node));
+	node = ft_calloc(1, sizeof(t_node));
 	if (!node)
 		return (NULL);
 	node->type = type;
-	node->args = NULL;
-	node->arg_quotes = NULL;
-	node->redirections = NULL;
-	node->child = NULL;
-	node->brother = NULL;
 	return (node);
 }
 
@@ -44,18 +39,23 @@ t_node	*malloc_node(t_ast_type type)
  * @param len Current number of arguments before expansion.
  * @return 1 on success, 0 on failure.
  */
-int	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
+bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 {
 	char			**new_args;
 	t_quote			*new_quotes;
 	int				i;
 
-	new_args = malloc(sizeof(char *) * (len + 2));
+	if (!node || !arg)
+		return (GENERIC_ERROR);
+	new_args = ft_calloc(1, sizeof(char *) * (len + 2));
 	if (!new_args)
-		return (0);
-	new_quotes = malloc(sizeof(t_quote) * (len + 1));
+		return (GENERIC_ERROR);
+	new_quotes = ft_calloc(1, sizeof(t_quote) * (len + 1));
 	if (!new_quotes)
-		return (free(new_args), 0);
+	{
+		free(new_args);
+		return (GENERIC_ERROR);
+	}
 	i = 0;
 	while (i < len)
 	{
@@ -64,6 +64,12 @@ int	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 		i++;
 	}
 	new_args[i] = ft_strdup(arg);
+	if (!new_args)
+	{
+		free(new_args);
+		free(new_quotes);
+		return (GENERIC_ERROR);
+	}
 	new_args[i + 1] = NULL;
 	new_quotes[i] = quote_type;
 	free(node->args);
@@ -156,7 +162,7 @@ int	handle_redirection(t_token **tokens, t_node *node)
 		return (0);
 	if (!(*tokens)->next || (*tokens)->next->type != WORD)
 		return (0);
-	redir = malloc(sizeof(t_redirection));
+	redir = ft_calloc(1, sizeof(t_redirection));
 	if (!redir)
 		return (0);
 	if ((*tokens)->type == REDIRECT_IN)
