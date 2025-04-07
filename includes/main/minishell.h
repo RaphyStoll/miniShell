@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/04 15:17:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:44:34 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "error_code.h"
 # include "env_struct.h"
 # include "ast_struct.h"
+# include "signal.h"
 # include "../../lib/libft/header/libft.h"
 # include "../../lib/libft/header/libft_bonus.h"
 
