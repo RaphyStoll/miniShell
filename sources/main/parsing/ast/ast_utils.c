@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 11:30:59 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/07 14:25:32 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
 {
 	int	len;
+	(void) quote_type;
 
 	if (!node || !arg)
 		return (0);
@@ -89,36 +90,8 @@ int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
 	if (node->args)
 		while (node->args[len])
 			len++;
-	return (store_arg(node, arg, quote_type, len));
+	return (realloc_arg(node, arg, quote_type, len));
 }
-// int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
-// {
-// 	char	**new_args;
-// 	int		len;
-// 	int		i;
-
-// 	if (!node || !arg)
-// 		return (0);
-// 	len = 0;
-// 	if (node->args)
-// 	{
-// 		while (node->args[len])
-// 			len++;
-// 	}
-// 	new_args = malloc(sizeof(char *) * (len + 2));
-// 	if (!new_args)
-// 		return (0);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		new_args[i] = node->args[i];
-// 		i++;
-// 	}
-// 	new_args[i++] = ft_strdup(arg);
-// 	new_args[i] = NULL;
-// 	free(node->args);
-// 	return (node->args = new_args, 1);
-// }
 
 /**
  * @brief add a redirection to a node
