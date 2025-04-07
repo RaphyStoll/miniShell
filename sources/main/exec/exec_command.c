@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 18:12:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/04 23:37:38 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ char	*find_cmd_path(char *cmd, t_env *env)
 	i = 0;
 	while (paths[i])
 	{
-		cmd_path = ft_strjoin(path[i], cmd);
+		cmd_path = ft_strjoin(paths[i], cmd);
+		if (!cmd_path)
+			return (free(cmd_path), NULL);
 		if (access(cmd_path, X_OK) == 0)
 			return (cmd_path);
 		free(cmd_path);
