@@ -6,12 +6,22 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 10:55:56 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:08:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
-#include "minishell.h"
+#include "../../../includes/main/signals.h"
+// #include "minishell.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <termios.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+int	g_signal = 0;
 
 void	handle_signals(void)
 {
@@ -36,7 +46,7 @@ void	sigint_handler(int signal)
 
 void	set_signals(void)
 {
-	struct sigaction	sa;
+	//struct sigaction	sa;
 
 	// sa.sa_handler = sigint_handler;
 	// sigemptyset(&sa.sa_mask);
@@ -55,3 +65,31 @@ void	ignore_ctrl_display(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
+int	main(void)
+{
+	char *input;
+
+	set_signals();
+	ignore_ctrl_display();
+
+	while (1)
+	{
+		input = readline("test$ ");
+		if (!input)
+		{
+			if (g_signal == SIGINT)
+			{
+				handle_signals(); // réaffiche proprement le prompt
+				continue;
+			}
+			printf("exit\n");
+			break;
+		}
+		handle_signals(); // au cas où SIGINT est arrivé après readline
+		if (*input)
+			add_history(input);
+		free(input);
+	}
+	rl_clear_history();
+	return (0);
+}
