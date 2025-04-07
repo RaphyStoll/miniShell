@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/01 20:53:01 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/07 11:01:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include "ast_struct.h"
 #include "ast.h"
 
-//! pour les test
-#include "ast.h"
+int	g_signal = 0;
 
+// pour les test!
 void	print_tokens(t_token *tokens)
 {
 	t_token	*tmp;
@@ -56,17 +56,26 @@ void	init_shell(t_shell *s)
 	s->ast = build_ast;
 }
 
+
 int	main(void)
 {
 	char	*input;
 	t_token	*tokens;
 	t_shell	*shell;
+
 	set_signals();
-	init_shell(shell);
 	ignore_ctrl_display();
+	init_shell(shell);
 	while (1)
 	{
 		input = readline("minishell$ ");
+		if (g_signal == SIGINT)
+		{
+			handle_signals();
+			if (input)
+				free(input);
+			continue ;
+		}
 		if (!input)
 		{
 			printf("minishell$ exit\n");
