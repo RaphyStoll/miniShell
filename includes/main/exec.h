@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 11:45:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:32:13 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 # include "ast_struct.h"
 # include "env_struct.h"
+# include "signals.h"
 # include "expand.h"
 # include "error_code.h"
 # include <sys/wait.h>

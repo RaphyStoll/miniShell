@@ -6,12 +6,23 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 18:16:17 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:53:04 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+
+/**
+ * @brief Executes an AST node.
+ *
+ * Based on the type of node (command, pipe, logical, subshell),
+ * it executes the appropriate function to handle the node.
+ *
+ * @param ast_node AST node to execute.
+ * @param shell Shell context.
+ * @return Exit status of the command executed.
+ */
 int	execute_ast(t_node *ast_node, t_shell *shell)
 {
 	int	status;

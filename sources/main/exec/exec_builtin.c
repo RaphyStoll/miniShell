@@ -6,12 +6,18 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 16:31:54 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:52:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+/**
+ * @brief Checks if a command is a shell builtin.
+ *
+ * @param cmd Command to check.
+ * @return true if the command is a builtin, false otherwise.
+ */
 bool	is_builtin(char *cmd)
 {
 	if (!cmd)
@@ -24,6 +30,15 @@ bool	is_builtin(char *cmd)
 	return (false);
 }
 
+
+/**
+ * @brief Executes a shell builtin command. Calls the corresponding builtin 
+ * function based on the command.
+ *
+ * @param args Arguments for the builtin command.
+ * @param shell Shell context with environment.
+ * @return Exit status of the builtin command.
+ */
 int	execute_builtin(char **args, t_shell *shell)
 {
 	if (!args || !args[0])

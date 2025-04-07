@@ -6,12 +6,19 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 12:55:27 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:51:38 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+/**
+ * @brief Searches for an executable command in a list of paths.
+ *
+ * @param paths Array of directory paths.
+ * @param cmd Command name to search.
+ * @return Full path to the executable or NULL if not found.
+ */
 char	*check_all_paths(char **paths, char *cmd)
 {
 	char	*tmp;
@@ -36,6 +43,13 @@ char	*check_all_paths(char **paths, char *cmd)
 	return (NULL);
 }
 
+/**
+ * @brief Finds the full path of a command.
+ *
+ * @param cmd Command to resolve.
+ * @param env Environment list to get PATH from.
+ * @return Full path or NULL if not found.
+ */
 char	*find_cmd_path(char *cmd, t_env *env)
 {
 	char	**paths;
@@ -57,12 +71,21 @@ char	*find_cmd_path(char *cmd, t_env *env)
 	return (cmd_path);
 }
 
+/**
+ * @brief Executes a command in the child process.
+ *
+ * Applies redirections, resolves the command path,
+ * and calls execve. Exits with the appropriate code on failure.
+ *
+ * @param cmd AST command node.
+ * @param shell Shell context with environment.
+ */
 void	execute_child_process(t_node *cmd, t_shell *shell)
 {
 	char	*cmd_path;
 	char	**envp;
 
-	if (!apply_redirections(cmd->redirections))
+	if (!apply_redirections(cmd->redirections), shell->env)
 		exit (1);
 	envp = get_envp(shell->env);
 	cmd_path = find_cmd_path(cmd->args[0], shell->env);
@@ -82,6 +105,15 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	}
 }
 
+/**
+ * @brief Waits for a child process and updates shell status.
+ *
+ * Updates shell->last_exit_status and g_signal based on exit or signal.
+ *
+ * @param pid PID of the child to wait for.
+ * @param shell Shell context.
+ * @return Exit status of the child.
+ */
 int	handle_parent_process(pid_t pid, t_shell *shell)
 {
 	int	status;
@@ -104,6 +136,16 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 	return (shell->last_exit_status);
 }
 
+/**
+ * @brief Executes a single command (builtin or external).
+ *
+ * Forks a child process for external commands.
+ * Handles builtins in the parent.
+ *
+ * @param cmd AST command node.
+ * @param shell Shell context.
+ * @return Exit status of the command.
+ */
 int	execute_command(t_node *cmd, t_shell *shell)
 {
 	pid_t	pid;
