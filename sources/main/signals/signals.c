@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 14:08:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:18:49 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	sigint_handler(int signal)
 
 void	set_signals(void)
 {
-	//struct sigaction	sa;
+	struct sigaction	sa;
 
-	// sa.sa_handler = sigint_handler;
-	// sigemptyset(&sa.sa_mask);
-	// sa.sa_flags = 0;
-	// sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -71,7 +71,7 @@ int	main(void)
 
 	set_signals();
 	ignore_ctrl_display();
-
+	rl_catch_signals = 0;
 	while (1)
 	{
 		input = readline("test$ ");
