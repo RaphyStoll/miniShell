@@ -2,28 +2,6 @@
 #include "utils.h"
 #include "bultin.h"
 
-bool is_valid_identifier(const char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str || str[0] == '\0')
-		return (false);
-	if(!((str[0] >= 'a' && str[0] <= 'z')
-		|| (str[0] >= 'A' && str[0] <= 'Z')
-		|| str[0] == '_'))
-		return (false);
-	while (str[i++])
-	{
-		if (!((str[i] >= 'a' && str[i] <= 'z')
-			|| (str[i] >= 'A' && str[i] <= 'Z')
-			|| (str[i] >= '0' && str[i] <= '9')
-			|| str[i] == '_'))
-			return (false);
-	}
-	return (true);
-}
-
 void builtin_export(t_env *env)
 {
 	t_env *dup_env = env_dup(env);
@@ -32,28 +10,12 @@ void builtin_export(t_env *env)
 
 	while (dup_env != NULL)
 	{
-		printf("%s=%s", dup_env->type, dup_env->value);
+		printf("%s=%s\n", dup_env->type, dup_env->value);
 		dup_env = dup_env->next;
 	}
 	return ;
 }
-
-t_env	*add_env_node(t_env **env_list, t_env *new_node)
-{
-	t_env	*tmp;
-
-	if (*env_list == NULL)
-		*env_list = new_node;
-	else
-	{
-		tmp = *env_list;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_node;
-	}
-	return (*env_list);
-}
-
+ //! test
 t_env	*init_env(char **env)
 {
 	t_env	*env_list;
@@ -97,7 +59,7 @@ int main (int ac, char **av, char **envp)
 	(void)av;
 	t_env *env = init_env(envp);
 	if (!env)
-		return NULL;
+		return 1;
 	builtin_export(env);
 	return 0;
 }
