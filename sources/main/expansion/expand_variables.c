@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:28:34 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 22:31:42 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,4 @@ void	expand_variables(t_node *node, t_env *env)
 		}
 		i++;
 	}
+}

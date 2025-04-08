@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 14:54:55 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 20:26:28 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ENV_STRUCT_H
 
 # include <stdio.h>
-# include "minishell.h"
+# include <stdbool.h>
 
 typedef struct s_env
 {
