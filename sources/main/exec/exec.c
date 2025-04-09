@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 16:53:04 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:32:34 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 	else if (ast_node->type == AST_SUBSHELL)
 		status = execute_subshell(ast_node, shell);
 	else
-		status = 1;
+		status = GENERIC_ERROR;
 	shell->last_exit_status = status;
 	return (status);
 }

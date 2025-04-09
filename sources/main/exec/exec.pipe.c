@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 12:09:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:56:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
 	if (pid < 0)
 	{
 		perror("fork after pipe");
-		return (1);
+		return (GENERIC_ERROR);
 	}
 	else if (pid == 0)
 	{
@@ -95,7 +95,7 @@ int	create_pipe(int pipe_fd[2], t_shell *shell)
 	{
 		perror("pipe creation failed");
 		shell->last_exit_status = GENERIC_ERROR;
-		return (1);
+		return (shell->last_exit_status);
 	}
 	return (0);
 }
@@ -118,8 +118,7 @@ int	execute_pipe(t_node *pipe, t_shell *shell)
 	if (pid < 0)
 	{
 		perror("fork failed");
-		shell->last_exit_status = GENERIC_ERROR;
-		exit (GENERIC_ERROR);
+		return (GENERIC_ERROR);
 	}
 	else if (pid == 0)
 	{

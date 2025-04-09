@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 11:47:15 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:53:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	char	**envp;
 
 	if (!apply_redirections(cmd->redirections), shell->env)
-		exit (1);
+		exit (GENERIC_ERROR);
 	envp = get_envp(shell->env);
 	cmd_path = find_cmd_path(cmd->args[0], shell->env);
 	if (!cmd_path)
@@ -94,7 +94,7 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 		free_array(envp);
 		write(2, cmd->args[0], ft_strlen(cmd->args[0]));
 		write(2, ": command not found\n", 20);
-		exit(COMMAND_NOT_FOUND);
+		exit (COMMAND_NOT_FOUND);
 	}
 	if (execve(cmd_path, cmd->args, envp) == -1)
 	{
@@ -121,7 +121,7 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 	if (waitpid(pid, &status, 0) == -1)
 	{
 		perror("waitpid");
-		return (1);
+		return (GENERIC_ERROR);
 	}
 	if (WIFEXITED(status))
 	{
@@ -161,8 +161,7 @@ int	execute_command(t_node *cmd, t_shell *shell)
 	if (pid < 0)
 	{
 		perror("fork");
-		shell->last_exit_status = GENERIC_ERROR;
-		exit (GENERIC_ERROR);
+		return (GENERIC_ERROR);
 	}
 	else if (pid == 0)
 		execute_child_process(cmd, shell);
