@@ -6,11 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 20:36:09 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/10 00:34:56 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "../../../lib/libft/header/libft.h"
 
 /**
  * @brief Adds a new t_env node at the end of the environment list.

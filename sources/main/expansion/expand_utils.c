@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 14:59:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/10 00:39:55 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "../../../lib/libft/header/libft.h"
 
 /**
  * @brief Expands the special variable `$?`.

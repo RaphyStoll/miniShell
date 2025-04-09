@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/10 00:27:44 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/10 00:41:17 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	next_step(char **input,t_token *tokens, t_shell *shell)
 	return (perror("Expand Error :"), free(shell->ast),
 	free(shell->env), true);
 	if (!) //! Execution
-	return (perror("Execution Error :"), free(shell->ast),
+		return (perror("Execution Error :"), free(shell->ast),
 	free(shell->env), true);
 }
 

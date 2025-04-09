@@ -6,11 +6,12 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:44:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:28:48 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/10 00:38:21 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "../../../lib/libft/header/libft.h"
 
 /**
  * @brief Expands all variables inside a single argument.
