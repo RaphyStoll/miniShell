@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 16:51:38 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 11:47:15 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 		free_array(envp);
 		write(2, cmd->args[0], ft_strlen(cmd->args[0]));
 		write(2, ": command not found\n", 20);
-		exit(127);
+		exit(COMMAND_NOT_FOUND);
 	}
 	if (execve(cmd_path, cmd->args, envp) == -1)
 	{
 		free(cmd_path);
 		free_array(envp);
 		perror(cmd->args[0]);
-		exit (126);
+		exit (PERMISSION_ERROR);
 	}
 }
 
@@ -161,7 +161,8 @@ int	execute_command(t_node *cmd, t_shell *shell)
 	if (pid < 0)
 	{
 		perror("fork");
-		return (1);
+		shell->last_exit_status = GENERIC_ERROR;
+		exit (GENERIC_ERROR);
 	}
 	else if (pid == 0)
 		execute_child_process(cmd, shell);

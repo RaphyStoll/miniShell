@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:25:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/08 11:19:27 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
+	if (!env_list)
+		return NULL;
 	if (*env_list == NULL)
 		*env_list = new;
 	else
