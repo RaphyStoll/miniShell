@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 15:56:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:16:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  *
  * @param pipe_fd The file descriptors for the pipe (read and write).
  * @param pipe AST node for the pipe.
- * @param shell The shell context containing the environment and exit status.
+ * @param shell Shell context.
  * @return 0 on success, or 1 if an error occurs.
  */
 int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
@@ -86,7 +86,7 @@ void	redirect_output_to_pipe(int pipe_fd[2])
  * If fails, reports the error and updates the shell's exit status.
  *
  * @param pipe_fd File descriptors of the pipe (read and write).
- * @param shell The shell context containing the exit status.
+ * @param shell Shell context.
  * @return 0 on success, 1 on failure.
  */
 int	create_pipe(int pipe_fd[2], t_shell *shell)
@@ -104,7 +104,7 @@ int	create_pipe(int pipe_fd[2], t_shell *shell)
  * @brief Executes a command with a pipe.
  *
  * @param pipe AST node for the pipe.
- * @param shell The shell context.
+ * @param shell Shell context.
  * @return 0 on success, 1 on failure.
  */
 int	execute_pipe(t_node *pipe, t_shell *shell)

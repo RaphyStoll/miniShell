@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 16:52:54 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:16:15 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	is_builtin(char *cmd)
  * function based on the command.
  *
  * @param args Arguments for the builtin command.
- * @param shell Shell context with environment.
+ * @param shell Shell context.
  * @return Exit status of the builtin command.
  */
 int	execute_builtin(char **args, t_shell *shell)
