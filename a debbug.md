@@ -40,3 +40,4 @@
 - `handle_regular_char` guard a strjoin
 - `expand_variables` si expand_one_arg = NULL pas de gestion d'erreur
   - si probleme dans la boucle pas de rollback (peut etre voulu)
+  - doit pas etre un void mais un bool pour pouvoir gere les erreurs
