@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:29:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/01 13:57:21 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/08 12:04:30 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
 #include "ast.h"
 #include "ast_struct.h"
 

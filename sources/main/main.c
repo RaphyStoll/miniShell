@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/07 11:01:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/10 00:27:44 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,109 +21,80 @@
 
 int	g_signal = 0;
 
-// pour les test!
-void	print_tokens(t_token *tokens)
+void	init_shell(t_shell *s, char **envp)
 {
-	t_token	*tmp;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		printf("Token après parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
-		tmp = tmp->next;
-	}
-}
-
-void	print_current_tokens(t_token *tokens)
-{
-	t_token	*tmp;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		printf("Token avant parsing: \"%s\" (Type: %d)\n", tmp->str, tmp->type);
-		tmp = tmp->next;
-	}
-}
-
-void	init_shell(t_shell *s)
-{
-	s = malloc(sizeof(t_shell));
+	s = ft_calloc(1, sizeof(t_shell));
 	if (!s)
 		return NULL;
-	s->env = NULL;
-	s->ast = NULL;
-	s->ast = build_ast;
-}
-
-
-int	main(void)
-{
-	char	*input;
-	t_token	*tokens;
-	t_shell	*shell;
-
+	s->env = init_env(envp);
 	set_signals();
 	ignore_ctrl_display();
-	init_shell(shell);
-	while (1)
-	{
-		input = readline("minishell$ ");
-		if (g_signal == SIGINT)
-		{
-			handle_signals();
-			if (input)
-				free(input);
-			continue ;
-		}
-		if (!input)
-		{
-			printf("minishell$ exit\n");
-			break ;
-		}
-		if (*input)
-			add_history(input);
-		tokens = lexer(input);
-		if (!tokens)
-		{
-			write(2, "Lexing Error.\n\n", 15);
-			free(input);
-			continue ;
-		}
-		if (!init_parsing(tokens) == 0)
-		{
-			write(2, "Parsing Error.\n\n", 15);
-			free_tokens(tokens);
-			free(input);
-			continue ;
-		}
-		print_tokens(tokens);
-		printf(GREEN"token and verif succeeded!\n"NC);
-		print_ast_debug(shell->ast, 0, "child");
-		free_tokens(tokens);
-		free(input);
-		system("leaks minishell| grep 'leaks Report' -A 10");
-	}
-	if(!input)
-		free(input);
-	rl_clear_history();
-	return EXIT_SUCCESS;
 }
 
-void	minishell(void)
+
+bool	set_input(char **input)
 {
-	char *input;
-	
-	set_signals();
-
-	while (1)
+	if (g_signal == SIGINT)
 	{
-		input = readline("minishell$ ");
-		if (!input)
-			break ;
-			if (*input)
-				add_history(input);
-		handle_signal();
+		handle_signals();
+		if (input)
+		free(input);
+		return true;
+	}
+	if (!input)
+	{
+		printf("exit");
+		return false ;
+		
+	}
+	if (*input)
+	add_history(input);
+}
+
+bool	next_step(char **input,t_token *tokens, t_shell *shell)
+{
+	tokens = lexer(input);
+	if (!tokens)
+	return (perror("Lexing Error :"), free(input), true);
+	free(input);
+	if (!init_parsing(tokens))
+	return (perror("Parsing Error :"), free_tokens(tokens), true);
+	shell->ast = build_ast(tokens);
+	if (!shell->ast)
+	return (perror("AST Error :"), free(tokens), true);
+	free(tokens);
+	if (!expand_variables(shell->ast, shell->env))
+	return (perror("Expand Error :"), free(shell->ast),
+	free(shell->env), true);
+	if (!) //! Execution
+	return (perror("Execution Error :"), free(shell->ast),
+	free(shell->env), true);
+}
+
+int	loop_shell(char *input, t_token *tokens, t_shell *shell)
+{
+	while(1)
+	{
+		input = readline("minishell-0.2$ ");
+		if (!set_input)
+		continue ;
+		else
+		break ;
+		if (!next_step(input, tokens, shell))
+		continue ;
+		else
+		break ;
 	}
 }
 
+int main (int argc, char **argv, char **envp)
+{
+	(void)argc;
+	(void)argv;
+	t_shell *shell;
+	t_token *tokens;
+	char *input;
+
+	init_shell(shell, envp);
+	loop_shell(input, tokens, shell);
+}
