@@ -6,13 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/10 00:41:17 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/10 16:25:58 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexing.h"
 #include "lexing_struct.h"
+#include "utils.h"
 #include "colors.h"
 #include "signals.h"
 #include "parsing.h"
@@ -55,36 +56,43 @@ bool	next_step(char **input,t_token *tokens, t_shell *shell)
 {
 	tokens = lexer(input);
 	if (!tokens)
-	return (perror("Lexing Error :"), free(input), true);
+	return (perror("Lexing Error :"), free(input), false);
 	free(input);
 	if (!init_parsing(tokens))
-	return (perror("Parsing Error :"), free_tokens(tokens), true);
+	return (perror("Parsing Error :"), free_tokens(tokens), false);
 	shell->ast = build_ast(tokens);
 	if (!shell->ast)
-	return (perror("AST Error :"), free(tokens), true);
+	return (perror("AST Error :"), free(tokens), false);
 	free(tokens);
 	if (!expand_variables(shell->ast, shell->env))
-	return (perror("Expand Error :"), free(shell->ast),
-	free(shell->env), true);
+	return (perror("Expand Error :"), free(shell), false);
 	if (!) //! Execution
-		return (perror("Execution Error :"), free(shell->ast),
-	free(shell->env), true);
+		return (perror("Execution Error :"), free_shell(shell), false);
+	return true;
 }
 
 int	loop_shell(char *input, t_token *tokens, t_shell *shell)
 {
 	while(1)
 	{
+		free_shell(shell);
 		input = readline("minishell-0.2$ ");
 		if (!set_input)
 		continue ;
 		else
 		break ;
 		if (!next_step(input, tokens, shell))
-		continue ;
+		{
+
+			continue ;
+		}
 		else
-		break ;
+		{
+
+			continue ;
+		}
 	}
+	free_shell(shell);
 }
 
 int main (int argc, char **argv, char **envp)

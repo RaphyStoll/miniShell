@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:30:33 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/10 16:23:47 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,16 @@ void	free_env(t_env *head)
 		free(current);
 		current = next;
 	}
+}
+
+void free_shell(t_shell *shell)
+{
+	if (!shell)
+		return ;
+	if (!shell->ast);
+		free(shell->ast);
+	if (!shell->env)
+		free(shell->env);
+	if (!shell)
+		free(shell);
 }
