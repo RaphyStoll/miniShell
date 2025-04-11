@@ -5,29 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:16:39 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/06 12:39:05 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/11 11:34:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef BUILTIN_STRUCT_H
+# define BUILTIN_STRUCT_H
 
-void	execute_child_process
-
-void	handle_parent_process
-
-void	execute_command(t_node *cmd, t_exec *exec)
+// prend une structure pour permettre de prendre en compte d'autres argument
+//? (pas speciallement utile dans minishell)
+//! ajouter bool x pour l'option prise en compte (bool e = echo -e)
+typedef struct s_echo_opts
 {
-	pid_t	pid;
-	char	*cmd_path;
-	char	**envp;
+	bool	n;
+}	t_echo_opts;
 
-	if (!cmd || !cmd->args || !cmd->args[0])
-		return ;
-	if (is_builtin(cmd->args[0]))
-	{
-		exec->errors.last_status = execute_builtin(cmd->args, exec->env_list);
-		return ;
-	}
-	
-}
+#endif
