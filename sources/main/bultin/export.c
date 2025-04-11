@@ -4,15 +4,28 @@
 
 void builtin_export(t_env *env)
 {
-	t_env *dup_env = env_dup(env);
-	is_valid_identifier(dup_env->type);
+	t_env *dup_env;
+	t_env *current;
+
+	dup_env = env_dup(env);
+	current = dup_env;
+	if (!dup_env)
+		return ;
+	while (current != NULL)
+	{
+		is_valid_identifier(current->type);
+		current = current->next;
+	}
 	sort_env(&dup_env);
 
-	while (dup_env != NULL)
+	current = dup_env;
+	while (current != NULL)
 	{
-		printf("%s=%s\n", dup_env->type, dup_env->value);
-		dup_env = dup_env->next;
+		printf("declare -x %s=%s\n", current->type, current->value);
+		current = current->next;
 	}
+	free_env(dup_env);
+	free_env(current);
 	return ;
 }
  //! test
