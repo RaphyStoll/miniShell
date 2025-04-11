@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 22:23:44 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/11 15:02:56 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,12 @@ void	env_delone(t_env *node)
 {
 	if (!node)
 		return ;
-	free(node->type);
-	free(node->value);
-	free(node);
+	if (!node->type)
+		free(node->type);
+	if (!node->value)
+		free(node->value);
+	if (!node)	
+		free(node);
 }
 
 /**
@@ -92,6 +95,8 @@ void	unset_env(t_env **env, char *type)
 {
 	t_env	*delete_node;
 
+	if (!env || !*env)
+		return ;
 	while (env && *env)
 	{
 		if (strcmp((*env)->type, type) == 0)
