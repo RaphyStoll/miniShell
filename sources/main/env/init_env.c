@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/10 00:34:56 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/11 11:19:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
+	if (!env_list)
+		return NULL;
 	if (*env_list == NULL)
 		*env_list = new;
 	else

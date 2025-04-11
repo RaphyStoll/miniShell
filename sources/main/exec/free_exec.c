@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_struct.h                                   :+:      :+:    :+:   */
+/*   free_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:16:39 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/07 11:52:09 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/07 16:53:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	execute_child_process
-
-void	handle_parent_process
-
-void	execute_command(t_node *cmd, t_exec *exec)
+/**
+ * @brief Frees a dynamically allocated array of strings.
+ *
+ * Iterates over the array and frees each string, then frees the array itself.
+ *
+ * @param array Array of strings to free.
+ */
+void	free_array(char **array)
 {
-	pid_t	pid;
-	char	*cmd_path;
-	char	**envp;
+	int	i;
 
-	if (!cmd || !cmd->args || !cmd->args[0])
+	if (!array)
 		return ;
-	if (is_builtin(cmd->args[0]))
+	i = 0;
+	while (array[i])
 	{
-		exec->errors.last_status = execute_builtin(cmd->args, exec->env_list);
-		return ;
+		free(array[i]);
+		i++;
 	}
-	
+	free(array);
 }

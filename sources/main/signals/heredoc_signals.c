@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_struct.h                                   :+:      :+:    :+:   */
+/*   heredoc_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:16:39 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/07 16:20:08 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/07 16:26:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "signals.h"
 
-void	execute_child_process
-
-void	handle_parent_process
-
-void	execute_command(t_node *cmd, t_exec *exec)
+void	heredoc_sigint_handler(int sig)
 {
-	pid_t	pid;
-	char	*cmd_path;
-	char	**envp;
+	(void)sig;
+	write(1, "\n", 1);
+	exit(130);
+}
 
-	if (!cmd || !cmd->args || !cmd->args[0])
-		return ;
-	if (is_builtin(cmd->args[0]))
-	{
-		exec->errors.last_status = execute_builtin(cmd->args, exec->env_list);
-		return ;
-	}
-	
+void	restore_signals(struct sigaction *old)
+{
+	sigaction(SIGINT, old, NULL);
+}
+
+void	set_heredoc_signals(struct sigaction *old)
+{
+	struct sigaction	new;
+
+	new.sa_handler = heredoc_sigint_handler;
+	new.sa_flags = SA_RESTART;
+	sigemptyset(&new.sa_mask);
+	sigaction(SIGINT, &new, old);
 }

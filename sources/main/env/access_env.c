@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 20:30:31 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/11 11:20:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_env_value(t_env *env, char	*type)
 	if (!type)
 		return (NULL);
 	if (ft_strcmp(type, "?") == 0)
-		return (ft_itoa(last_exit));
+		return (ft_itoa(last_exit_status));
 	while (env)
 	{
 		if (ft_strcmp(env->type, type) == 0)

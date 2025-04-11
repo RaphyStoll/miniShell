@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 12:41:32 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/11 11:20:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	init_options(t_echo_opts *options)
  * 				(e.g., {"-n", "-n", "Hello world!"}).
  * @return int SUCCESS on success or an appropriate error code on failure.
  */
-int	bultin_echo(char **args)
+int	builtin_echo(char **args)
 {
 	t_echo_opts	options;
 	int			i;
