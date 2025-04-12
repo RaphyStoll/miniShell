@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 19:17:17 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 19:32:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
  */
 int	g_signal = 0;
 
+/**
+ * @brief Initializes the shell structure.
+ *
+ * Sets up environment, signals, and terminal behavior.
+ *
+ * @param envp Program environment variables.
+ * @return Pointer to t_shell or NULL on failure.
+ */
 t_shell	*init_shell(char **envp)
 {
 	t_shell	*shell;
@@ -43,7 +51,15 @@ t_shell	*init_shell(char **envp)
 	return (shell);
 }
 
-
+/**
+ * @brief Processes a single input line.
+ *
+ * Performs lexing, parsing, expansion, and execution.
+ *
+ * @param input User input string.
+ * @param shell Shell context.
+ * @return true on success, false on error.
+ */
 bool	process_input(char *input, t_shell *shell)
 {
 	t_token	*tokens;
@@ -71,15 +87,20 @@ bool	process_input(char *input, t_shell *shell)
 	return (true);
 }
 
+/**
+ * @brief Main shell loop.
+ *
+ * Reads input, handles signals, and runs commands.
+ *
+ * @param shell Shell context.
+ */
 void	loop_shell(t_shell *shell)
 {
 	char	*input;
 
 	while (1)
 	{
-		printf("avant readline\n");
 		input = readline("minishell-0.2$ ");
-		printf("apres readline\n");
 		if (!input)
 		{
 			printf("exit\n");
