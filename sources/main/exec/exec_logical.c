@@ -24,12 +24,12 @@
  */
 int	execute_logical(t_node *logic, t_shell *shell)
 {
-	if (logic->type == LOGICAL_AND)
+	if (logic->logic_type == LOGICAL_AND)
 	{
 		if (execute_command(logic->child, shell) == 0)
 			execute_command(logic->brother, shell);
 	}
-	else if (logic->type == LOGICAL_OR)
+	else if (logic->logic_type == LOGICAL_OR)
 	{
 		if (execute_command(logic->child, shell) != 0)
 			execute_command(logic->brother, shell);
