@@ -6,16 +6,20 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 19:36:34 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 19:40:32 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/main/parsing.h"
 
-// Fonction d'initialisation du parsing (à implémenter)
-
-// il faut peut etre mettre return 1 au lieu de 0, car le main est a l envers ?
-
+/**
+ * @brief Validates the token list before building the AST.
+ *
+ * Checks general structure, redirection exceptions, and token placement.
+ *
+ * @param tokens Token list to validate.
+ * @return true if valid, false otherwise.
+ */
 bool	init_parsing(t_token *tokens)
 {
 	if (!valid_content(tokens))
