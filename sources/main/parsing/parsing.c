@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 19:02:32 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 19:36:34 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ bool	init_parsing(t_token *tokens)
 		return (false);
 	if (!if_valide_token_next(tokens))
 		return (false);
-	return (0);
+	return (true);
 }
