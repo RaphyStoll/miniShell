@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:06:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:25:17 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	execute_pipe(t_node *pipe, t_shell *shell)
 	{
 		redirect_output_to_pipe(pipe_fd);
 		execute_child_process(pipe->child, shell);
+		exit (GENERIC_ERROR);
 	}
 	else
 	{

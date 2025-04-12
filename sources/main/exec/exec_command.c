@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:22:28 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:32:53 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	char	*cmd_path;
 	char	**envp;
 
-	if (!apply_redirections(cmd->redirections, shell->env))
+	if (!apply_redirections(cmd->redirections, shell))
 		exit (GENERIC_ERROR);
 	envp = get_envp(shell->env);
 	cmd_path = find_cmd_path(cmd->args[0], shell);

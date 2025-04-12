@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 16:51:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:35:18 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ void	sigint_handler(int signal);
 void	handle_signals(void);
 void	set_signals(void);
 void	ignore_ctrl_display(void);
+
+//signaux pour redirections
+void	set_heredoc_signals(struct sigaction *old);
+void	restore_signals(struct sigaction *old);
+void	heredoc_sigint_handler(int sig);
 
 #endif

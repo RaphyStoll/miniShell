@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/07 16:48:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:33:38 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 /**
  * @brief Reads heredoc input and writes it to a file.
@@ -22,7 +23,7 @@
  * @param env Environment list.
  * @return true on success, false on malloc error.
  */
-bool	write_heredoc_lines(int fd, t_redirection *redir, t_env *env)
+bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 {
 	char	*input;
 	char	*line;
@@ -36,7 +37,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_env *env)
 			break ;
 		}
 		if (redir->quote_type == QUOTE_NONE)
-			line = expand_one_arg(input, env);
+			line = expand_one_arg(input, shell);
 		else
 			line = ft_strdup(input);
 		free(input);
@@ -58,7 +59,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_env *env)
  * @param env Environment list.
  * @return Read fd or -1 on error.
  */
-int	handle_heredoc(t_redirection *redir, t_env *env)
+int	handle_heredoc(t_redirection *redir, t_shell *shell)
 {
 	int					fd;
 	struct sigaction	old_sa;
@@ -71,7 +72,7 @@ int	handle_heredoc(t_redirection *redir, t_env *env)
 		restore_signals(&old_sa);
 		return (-1);
 	}
-	if (!write_heredoc_lines(fd, redir, env))
+	if (!write_heredoc_lines(fd, redir, shell))
 	{
 		close(fd);
 		restore_signals(&old_sa);
@@ -95,7 +96,7 @@ int	handle_heredoc(t_redirection *redir, t_env *env)
  * @param env Environment list (for heredoc).
  * @return File descriptor or -1 on error.
  */
-int	open_redirection_file(t_redirection *redir, t_env *env)
+int	open_redirection_file(t_redirection *redir, t_shell *shell)
 {
 	int	fd;
 
@@ -108,7 +109,7 @@ int	open_redirection_file(t_redirection *redir, t_env *env)
 	else if (redir->type == REDIRECTION_APPEND)
 		fd = open(redir->target, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (redir->type == REDIRECTION_HEREDOC)
-		fd = handle_heredoc(redir, env);
+		fd = handle_heredoc(redir, shell);
 	return (fd);
 }
 
@@ -121,7 +122,7 @@ int	open_redirection_file(t_redirection *redir, t_env *env)
  * @param env Environment list.
  * @return true on success, false on error.
  */
-bool	single_redirection(t_redirection *redir, t_env *env)
+bool	single_redirection(t_redirection *redir, t_shell *shell)
 {
 	int	fd;
 	int	target_fd;
@@ -132,7 +133,7 @@ bool	single_redirection(t_redirection *redir, t_env *env)
 		target_fd = STDIN_FILENO;
 	else if (type == REDIRECTION_OUT || type == REDIRECTION_APPEND)
 		target_fd = STDOUT_FILENO;
-	fd = open_redirection_file(redir, env);
+	fd = open_redirection_file(redir, shell);
 	if (fd == -1)
 	{
 		perror(redir->target);
@@ -157,12 +158,12 @@ bool	single_redirection(t_redirection *redir, t_env *env)
  * @param env Environment list.
  * @return true on success, false otherwise.
  */
-bool	apply_redirections(t_redirection *redir, t_env *env)
+bool	apply_redirections(t_redirection *redir, t_shell *shell)
 {
 
 	while (redir)
 	{
-		if (!single_redirection(redir, env))
+		if (!single_redirection(redir, shell))
 			return (false);
 		redir = redir->next;
 	}
