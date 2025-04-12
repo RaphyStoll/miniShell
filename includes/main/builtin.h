@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/11 14:56:13 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 18:52:01 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include "minishell.h"
 
 int		builtin_pwd(void);
+int		builtin_cd(t_shell *shell, char **args);
+int		builtin_unset(t_shell *shell, char **args);
 int		builtin_echo(char **args);
-void	builtin_env(t_env *env);
-void	buildin_exit(t_shell *shell, int error);
+int		builtin_env(t_env *env);
+void	builtin_exit(t_shell *shell, int error);
 
 #endif

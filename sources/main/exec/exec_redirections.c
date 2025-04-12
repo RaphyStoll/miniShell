@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:33:38 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:43:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	open_redirection_file(t_redirection *redir, t_shell *shell)
 {
 	int	fd;
 
+	fd = -1;
 	if (!redir || !redir->target)
 		return (-1);
 	if (redir->type == REDIRECTION_IN)

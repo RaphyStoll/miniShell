@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:30:03 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/11 13:50:49 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 18:51:20 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * and prints each one in the format "KEY=VALUE" to the standard output.
  * @param env A pointer to the head of the environment variables linked list.
  */
-void	builtin_env(t_env *env)
+int	builtin_env(t_env *env)
 {
 	t_env	*cur;
 
@@ -32,5 +32,5 @@ void	builtin_env(t_env *env)
 		printf("%s=%s\n", cur->type, cur->value);
 		cur = cur->next;
 	}
-	return ;
+	return (0);
 }
