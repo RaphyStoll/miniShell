@@ -100,6 +100,7 @@ t_token	*tokenizing(const char *input)
 		if (!word)
 			return (ft_exit_error(token_list, MEMORY_ERROR, "word"));
 		add_token(&token_list, word, WORD, quote_type);
+		free(word);
 	}
 	return (token_list);
 }
