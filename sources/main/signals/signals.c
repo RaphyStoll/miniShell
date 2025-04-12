@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:41:14 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 19:08:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 #include <termios.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
-/**
- * @brief Global variable used to store the last caught signal number.
- *
- * Only used for signal handling (e.g., SIGINT during prompt input).
- */
-int	g_signal = 0;
 
 /**
  * @brief Handles SIGINT after it has been captured.

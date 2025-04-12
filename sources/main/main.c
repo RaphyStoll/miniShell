@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 18:04:33 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 19:17:17 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 #include "ast.h"
 #include "exec.h"
 
+/**
+ * @brief Global variable used to store the last caught signal number.
+ *
+ * Only used for signal handling (e.g., SIGINT during prompt input).
+ */
 int	g_signal = 0;
 
 t_shell	*init_shell(char **envp)
@@ -31,7 +36,7 @@ t_shell	*init_shell(char **envp)
 	if (!shell)
 		return (NULL);
 	shell->env = init_env(envp);
-	if (shell->env)
+	if (!shell->env)
 		return (free(shell), NULL);
 	set_signals();
 	ignore_ctrl_display();
@@ -72,7 +77,9 @@ void	loop_shell(t_shell *shell)
 
 	while (1)
 	{
+		printf("avant readline\n");
 		input = readline("minishell-0.2$ ");
+		printf("apres readline\n");
 		if (!input)
 		{
 			printf("exit\n");
