@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 19:32:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 22:35:46 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ bool	process_input(char *input, t_shell *shell)
 	shell->ast = build_ast(tokens);
 	free_tokens(tokens);
 	if (!shell->ast)
-		return (perror("AST Error :"), false);
+		return (perror("AST Error "), false);
 	if (!expand_variables(shell->ast, shell))
-		return (perror("Expand Error :"), false);
-	if (!execute_ast(shell->ast, shell))
-		return (perror("Execution Error :"), false);
+		return (false);
+	if (execute_ast(shell->ast, shell))
+		return (perror("Execution Error "), false);
 	return (true);
 }
 
@@ -100,7 +100,7 @@ void	loop_shell(t_shell *shell)
 
 	while (1)
 	{
-		input = readline("minishell-0.2$ ");
+		input = readline("minishell-0.6$ ");
 		if (!input)
 		{
 			printf("exit\n");

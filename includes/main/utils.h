@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/10 16:23:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 22:10:11 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	print_error_message(t_error_code code, char *error_token);
 void	free_all(t_token *token);
 void	free_tokens(t_token *head);
 void	free_env(t_env *head);
+
+//!env list utils
+t_env	*env_dup(t_env *src);
+t_env *sorted_merge(t_env *a, t_env *b);
+void split_list(t_env *source, t_env **front, t_env **back);
+void sort_env(t_env **head_ref);
 
 //! free ast
 
