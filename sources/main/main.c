@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 15:56:04 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 16:03:26 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "parsing.h"
 #include "ast_struct.h"
 #include "ast.h"
+#include "exec.h"
 
 int	g_signal = 0;
 
@@ -31,7 +32,6 @@ void	init_shell(t_shell *s, char **envp)
 	set_signals();
 	ignore_ctrl_display();
 }
-
 
 bool	set_input(char **input)
 {
@@ -72,8 +72,8 @@ bool	next_step(char **input,t_token *tokens, t_shell *shell)
 	}
 	if (!expand_variables(shell->ast, shell->env))
 		return (perror("Expand Error :"), free(shell), false);
-	if (!execute_ast(()))
-		return (perror("Execution Error :"), free_shell(shell), false);
+	if (!execute_ast(shell->ast, shell);
+		return (perror("Execution Error :"), free(token), false);
 	return (true);
 }
 
