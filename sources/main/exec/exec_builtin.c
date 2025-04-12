@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:49:43 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:56:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int	execute_builtin(char **args, t_shell *shell)
 	if (ft_strcmp(args[0], "env") == 0)
 		return (builtin_env(shell->env));
 	if (ft_strcmp(args[0], "exit") == 0)
-		return (builtin_exit(shell, shell->last_exit_status));
+	{
+		builtin_exit(shell, shell->last_exit_status);
+		return (0);
+	}
 	return (1);
 }
