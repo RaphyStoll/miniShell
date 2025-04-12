@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 17:55:02 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:11:29 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 
 /**
@@ -32,7 +33,7 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 	status = 0;
 	if (ast_node->type == AST_COMMAND)
 	{
-		expand_redirections(ast_node, shell->env);
+		expand_redirections(ast_node, shell);
 		status = execute_command(ast_node, shell);
 	}
 	else if (ast_node->type == AST_PIPE)
