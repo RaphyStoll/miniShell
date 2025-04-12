@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 15:53:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:22:28 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 /**
  * @brief Searches for an executable command in a list of paths.
@@ -50,13 +51,13 @@ char	*check_all_paths(char **paths, char *cmd)
  * @param env Environment list to get PATH from.
  * @return Full path or NULL if not found.
  */
-char	*find_cmd_path(char *cmd, t_env *env)
+char	*find_cmd_path(char *cmd, t_shell *shell)
 {
 	char	**paths;
 	char	*path_var;
 	char	*cmd_path;
 
-	path_var = get_env_value(env, "PATH");
+	path_var = get_env_value(shell, "PATH");
 	if (!path_var)
 		return (NULL);
 	if (access(cmd, X_OK) == 0
@@ -85,10 +86,10 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	char	*cmd_path;
 	char	**envp;
 
-	if (!apply_redirections(cmd->redirections), shell->env)
+	if (!apply_redirections(cmd->redirections, shell->env))
 		exit (GENERIC_ERROR);
 	envp = get_envp(shell->env);
-	cmd_path = find_cmd_path(cmd->args[0], shell->env);
+	cmd_path = find_cmd_path(cmd->args[0], shell);
 	if (!cmd_path)
 	{
 		free_array(envp);
@@ -164,7 +165,10 @@ int	execute_command(t_node *cmd, t_shell *shell)
 		return (GENERIC_ERROR);
 	}
 	else if (pid == 0)
+	{
 		execute_child_process(cmd, shell);
+		exit (GENERIC_ERROR);
+	}
 	else
 		return (handle_parent_process(pid, shell));
 }

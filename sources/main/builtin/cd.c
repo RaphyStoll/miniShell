@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:20:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 16:49:05 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:16:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	builtin_cd(t_shell *shell, char **args)
 
 	if (!args[1] || ft_strcmp(args[1], "~") == 0)
 	{
-		target = get_env_value(shell->env, "HOME");
+		target = get_env_value(shell, "HOME");
 		if (!target)
 			return (perror("cd: HOME not set"), GENERIC_ERROR);
 	}

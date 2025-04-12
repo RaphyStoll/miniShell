@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:23:27 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:18:39 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		execute_ast(t_node *ast_node, t_shell *shell);
 int		execute_command(t_node *cmd, t_shell *shell);
 int		handle_parent_process(pid_t pid, t_shell *shell);
 void	execute_child_process(t_node *cmd, t_shell *shell);
-char	*find_cmd_path(char *cmd, t_env *env);
+char	*find_cmd_path(char *cmd, t_shell *shell);
 char	*check_all_paths(char **paths, char *cmd);
 
 /*execute builtin*/
