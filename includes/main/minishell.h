@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/04 18:15:51 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 21:59:18 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 # include "error_code.h"
 # include "env_struct.h"
 # include "ast_struct.h"
+# include "signals.h"
 # include "../../lib/libft/header/libft.h"
 # include "../../lib/libft/header/libft_bonus.h"
 
 typedef struct s_shell
 {
-	t_env		*env;          // Variables d'environnement (liées à export/unset/env)
-	t_node		*ast;          // Arbre de commandes
-	int			last_exit;     // Valeur de $? utilisée partout
-}	t_shell; 
-
+	t_env		*env;
+	t_node		*ast;
+	int			last_exit_status;
+}	t_shell;
 
 //int	main(int argc, char **argv, char **envp);
 

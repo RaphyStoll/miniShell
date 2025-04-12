@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/04 20:58:50 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 22:00:04 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
-#include "env.h"
 
 /**
  * @brief Adds a new t_env node at the end of the environment list.
@@ -24,6 +23,8 @@ t_env	*add_env_node(t_env **env_list, t_env *new_node)
 {
 	t_env	*tmp;
 
+	if (!env_list)
+		return NULL;
 	if (*env_list == NULL)
 		*env_list = new_node;
 	else

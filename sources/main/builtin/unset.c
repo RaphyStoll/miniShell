@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 14:31:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:38:41 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/11 16:22:19 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/11 16:22:51 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/libft.h"
+#include "minishell.h"
+#include "env_struct.h"
 
-char	*ft_strndup(const char *s1, int len)
+int	builtin_unset(t_shell *shell, char **args)
 {
-	char	*dup;
-	int		i;
+	int	i;
 
 	i = 0;
-	dup = malloc(len + 1);
-	if (!dup)
+	while (args[i])
 	{
-		return (NULL);
-	}
-	while (i < len)
-	{
-		dup[i] = s1[i];
+		unset_env(&(shell->env), args[i]);
 		i++;
 	}
-	dup[len] = '\0';
-	return (dup);
+	return (0);
 }

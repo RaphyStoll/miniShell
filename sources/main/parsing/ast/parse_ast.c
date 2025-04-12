@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/26 16:59:39 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 10:51:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "lexing_struct.h"
 
 /**
- * @brief Parse les opérateurs logiques (&&, ||).
- * @param tokens Liste de tokens à parser.
- * @return Racine de l’AST logique.
+ * @brief Pars logical operator (&&, ||).
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_logical(t_token **tokens)
 {
@@ -44,9 +44,9 @@ t_node	*parse_logical(t_token **tokens)
 }
 
 /**
- * @brief Parse une commande simple.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de commande ou NULL.
+ * @brief Pars a command.
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_command(t_token **tokens)
 {
@@ -60,7 +60,7 @@ t_node	*parse_command(t_token **tokens)
 	{
 		if ((*tokens)->type == WORD)
 		{
-			if (!add_arg_to_node(node, (*tokens)->str))
+			if (!add_arg_to_node(node, (*tokens)->str, (*tokens)->quote_type))
 				return (free_all_ast(node), NULL);
 		}
 		else if ((*tokens)->type == REDIRECT_IN
@@ -77,9 +77,9 @@ t_node	*parse_command(t_token **tokens)
 }
 
 /**
- * @brief Parse une sous-coquille entre parenthèses.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de sous-shell ou NULL.
+ * @brief Parse a subshell ("(", ")")
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_subshell(t_token **tokens)
 {
@@ -101,9 +101,9 @@ t_node	*parse_subshell(t_token **tokens)
 }
 
 /**
- * @brief Parse une séquence de commandes reliées par des pipes.
- * @param tokens Liste de tokens à parser.
- * @return Nœud de pipe ou NULL.
+ * @brief Parse a pipe
+ * @param tokens token list for parsing.
+ * @return head of the AST.
  */
 t_node	*parse_pipe(t_token **tokens)
 {
@@ -124,4 +124,18 @@ t_node	*parse_pipe(t_token **tokens)
 		left = node;
 	}
 	return (left);
+}
+
+/**
+ * @brief Pars a command or a subshell.
+ * @param tokens token list for parsing.
+ * @return head of the AST.
+ */
+t_node	*parse_command_or_subshell(t_token **tokens)
+{
+	if (!tokens || !*tokens)
+		return (NULL);
+	if ((*tokens)->type == O_PARENTHESIS)
+		return (parse_subshell(tokens));
+	return (parse_command(tokens));
 }

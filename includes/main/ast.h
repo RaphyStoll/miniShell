@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/03 10:39:08 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/06 15:13:27 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 t_node	*build_ast(t_token *tokens);
 
 //! utils
-int		add_arg_to_node(t_node *node, char *arg);
+bool		realloc_arg(t_node *node, char *arg, t_quote quote_type, int len);
+int		add_arg_to_node(t_node *node, char *arg, t_quote quote_type);
 t_node	*malloc_node(t_ast_type type);
 int		handle_redirection(t_token **tokens, t_node *node);
 void	add_redirection_to_node(t_node *node, t_redirection *redir);

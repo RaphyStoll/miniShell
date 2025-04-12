@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 02:28:57 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/03 10:36:54 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/04 15:08:09 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/06 12:29:02 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	free_node(t_node *node)
 		return ;
 	if (node->args)
 		free_args(node->args);
+	if (node->arg_quotes)
+		free(node->arg_quotes);
 	if (node->redirections)
 		free_redirections(node->redirections);
 	if (node->child)
@@ -77,4 +79,3 @@ void	free_all_ast(t_node *ast)
 	if (ast)
 		free_node(ast);
 }
-

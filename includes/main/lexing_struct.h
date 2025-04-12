@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing_struct.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:48:07 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/27 11:25:12 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/01 12:50:04 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXING_STRUCT_H
 
 # include <stdbool.h>
+# include "quote_type.h"
 
 // Enum for token type
 /**
@@ -42,11 +43,12 @@ typedef enum e_type
  * @param next pointe vers le noeu suivant
  * @param prev pointe vers le noeu precedent
  */
+
 typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	bool			in_double_quotes;
+	t_quote			quote_type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;

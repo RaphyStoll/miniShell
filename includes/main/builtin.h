@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:35:18 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/12 18:52:01 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
 # include <stdio.h>
-# include <signal.h>
-# include <termios.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <readline/readline.h>
+# include <stdbool.h>
+# include <sys/errno.h>
+# include "env_struct.h"
+# include "minishell.h"
 
-extern int	g_signal;
-
-void	sigint_handler(int signal);
-void	handle_signals(void);
-void	set_signals(void);
-void	ignore_ctrl_display(void);
-
-//signaux pour redirections
-void	set_heredoc_signals(struct sigaction *old);
-void	restore_signals(struct sigaction *old);
-void	heredoc_sigint_handler(int sig);
+int		builtin_pwd(void);
+int		builtin_cd(t_shell *shell, char **args);
+int		builtin_unset(t_shell *shell, char **args);
+int		builtin_echo(char **args);
+int		builtin_env(t_env *env);
+void	builtin_exit(t_shell *shell, int error);
 
 #endif

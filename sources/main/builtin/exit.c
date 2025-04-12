@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 14:31:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:38:41 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/11 16:22:16 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/12 18:55:48 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/libft.h"
+#include "minishell.h"
+#include "utils.h"
+#include <stdio.h>
 
-char	*ft_strndup(const char *s1, int len)
+
+void	builtin_exit(t_shell *shell, int error)
 {
-	char	*dup;
-	int		i;
-
-	i = 0;
-	dup = malloc(len + 1);
-	if (!dup)
-	{
-		return (NULL);
-	}
-	while (i < len)
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[len] = '\0';
-	return (dup);
+	free_shell(shell);
+	exit(error);
 }

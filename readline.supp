@@ -1,0 +1,17 @@
+{
+   readline_leak
+   Memcheck:Leak
+   fun:malloc
+   fun:xmalloc
+   fun:_rl_init_terminal_io
+   fun:readline
+}
+{
+   tgetent_leak
+   Memcheck:Leak
+   fun:strdup
+   fun:_nc_trim_sgr0
+   fun:tgetent_sp
+   fun:_rl_init_terminal_io
+   fun:readline
+}

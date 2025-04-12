@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   quote_type.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 14:31:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/06 12:38:41 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/01 12:49:33 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/01 12:51:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/libft.h"
+#ifndef QUOTE_TYPE_H
+# define QUOTE_TYPE_H
 
-char	*ft_strndup(const char *s1, int len)
+typedef enum e_quote
 {
-	char	*dup;
-	int		i;
+	QUOTE_NONE,
+	QUOTE_SINGLE,
+	QUOTE_DOUBLE
+}	t_quote;
 
-	i = 0;
-	dup = malloc(len + 1);
-	if (!dup)
-	{
-		return (NULL);
-	}
-	while (i < len)
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[len] = '\0';
-	return (dup);
-}
+#endif
