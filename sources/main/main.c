@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/10 16:25:58 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 15:55:13 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,37 @@ bool	next_step(char **input,t_token *tokens, t_shell *shell)
 {
 	tokens = lexer(input);
 	if (!tokens)
-	return (perror("Lexing Error :"), free(input), false);
-	free(input);
+	{
+		return (perror("Lexing Error :"), free(input), false);
+		free(input);
+	}
 	if (!init_parsing(tokens))
-	return (perror("Parsing Error :"), free_tokens(tokens), false);
-	shell->ast = build_ast(tokens);
+	{
+		return (perror("Parsing Error :"), free_tokens(tokens), false);
+		shell->ast = build_ast(tokens);
+	}
 	if (!shell->ast)
-	return (perror("AST Error :"), free(tokens), false);
-	free(tokens);
+	{
+		return (perror("AST Error :"), free(tokens), false);
+		free(tokens);
+	}
 	if (!expand_variables(shell->ast, shell->env))
-	return (perror("Expand Error :"), free(shell), false);
-	if (!) //! Execution
+		return (perror("Expand Error :"), free(shell), false);
+	if (!execute_ast(()))
 		return (perror("Execution Error :"), free_shell(shell), false);
-	return true;
+	return (true);
 }
 
 int	loop_shell(char *input, t_token *tokens, t_shell *shell)
 {
-	while(1)
+	while (1)
 	{
 		free_shell(shell);
 		input = readline("minishell-0.2$ ");
 		if (!set_input)
-		continue ;
+			continue ;
 		else
-		break ;
+			break ;
 		if (!next_step(input, tokens, shell))
 		{
 
@@ -95,14 +101,14 @@ int	loop_shell(char *input, t_token *tokens, t_shell *shell)
 	free_shell(shell);
 }
 
-int main (int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void)argc;
-	(void)argv;
-	t_shell *shell;
-	t_token *tokens;
-	char *input;
+	t_shell	*shell;
+	t_token	*tokens;
+	char	*input;
 
+	(void) argc;
+	(void) argv;
 	init_shell(shell, envp);
 	loop_shell(input, tokens, shell);
 }
