@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/06 21:40:42 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 19:04:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
 		return (NULL);
 	quote = **input;
 	if (quote == '"')
-		*quote_type = DOUBLE_QUOTE;
+		*quote_type = QUOTE_DOUBLE;
 	else
-		*quote_type = SINGLE_QUOTE;
+		*quote_type = QUOTE_SINGLE;
 	(*input)++;
 	start = *input;
 	while ((*input)[len] && (*input)[len] != quote)
@@ -61,7 +61,7 @@ char	*handle_word(const char **input, t_quote *quote_type)
 	char	*unquoted;
 	char	*word;
 
-	*quote_type = NO_QUOTE;
+	*quote_type = QUOTE_NONE;
 	quoted = get_quoted_word(input, quote_type);
 	unquoted = get_unquoted_word(input);
 	if (quoted || unquoted)
