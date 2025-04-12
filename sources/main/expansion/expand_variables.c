@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:23:02 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 17:59:40 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "minishell.h"
 
 /**
  * @brief Expands variables in redirection targets.
@@ -21,7 +22,7 @@
  * @param node The AST command node containing redirections.
  * @param env Environment variable list.
  */
-void	expand_redirections(t_node *node, t_env *env)
+void	expand_redirections(t_node *node, t_shell *shell)
 {
 	t_redirection	*redir;
 	char			*expanded;
@@ -31,7 +32,7 @@ void	expand_redirections(t_node *node, t_env *env)
 	{
 		if (redir->quote_type != QUOTE_SINGLE)
 		{
-			expanded = expand_one_arg(redir->target, env);
+			expanded = expand_one_arg(redir->target, shell);
 			free(redir->target);
 			redir->target = expanded;
 		}
@@ -46,15 +47,18 @@ void	expand_redirections(t_node *node, t_env *env)
  * Arguments inside single quotes are left untouched.
  *
  * @param node AST command node whose arguments may be expanded.
- * @param env Environment variable list 
+ * @param env Environment variable list
+ * @return ture if expansion succeeded for all arguemnts else false
  */
-void	expand_variables(t_node *node, t_env *env)
+bool	expand_variables(t_node *node, t_shell *shell)
 {
 	char	**args;
 	char	*new_arg;
 	int		quote_type;
 	int		i;
 
+	if (!node || !shell || !node->args || !node->arg_quotes)
+		return (false);
 	i = 0;
 	args = node->args;
 	while (args[i])
@@ -62,10 +66,13 @@ void	expand_variables(t_node *node, t_env *env)
 		quote_type = node->arg_quotes[i];
 		if (quote_type == QUOTE_NONE || quote_type == QUOTE_DOUBLE)
 		{
-			new_arg = expand_one_arg(args[i], env);
+			new_arg = expand_one_arg(args[i], shell);
+			if (!new_arg)
+				return (false);
 			free(args[i]);
 			args[i] = new_arg;
 		}
 		i++;
 	}
+	return (true);
 }

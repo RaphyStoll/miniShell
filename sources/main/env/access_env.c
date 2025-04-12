@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:20:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 16:59:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,25 @@
  * @param type Type of variable to search.
  * @return The value associated with the variable, or NULL if not found.
  */
-char	*get_env_value(t_env *env, char	*type)
+char	*get_env_value(t_shell *shell, char	*type)
 {
-	if (!type)
+	t_env	*env;
+	char	*value;
+
+	if (!shell || !type)
 		return (NULL);
 	if (ft_strcmp(type, "?") == 0)
-		return (ft_itoa(last_exit_status));
+		return (ft_itoa(shell->last_exit_status));
+	env = shell->env;
 	while (env)
 	{
 		if (ft_strcmp(env->type, type) == 0)
-			return (env->value);
+		{
+			value = ft_strdup(env->value);
+			if (!value)
+				return (NULL);
+			return (value);
+		}
 		env = env->next;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 16:16:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:04:33 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,86 +23,89 @@
 
 int	g_signal = 0;
 
-void	init_shell(t_shell *s, char **envp)
+t_shell	*init_shell(char **envp)
 {
-	s = ft_calloc(1, sizeof(t_shell));
-	if (!s)
-		return NULL;
-	s->env = init_env(envp);
+	t_shell	*shell;
+
+	shell = ft_calloc(1, sizeof(t_shell));
+	if (!shell)
+		return (NULL);
+	shell->env = init_env(envp);
+	if (shell->env)
+		return (free(shell), NULL);
 	set_signals();
 	ignore_ctrl_display();
+	return (shell);
 }
 
-bool	set_input(char **input)
-{
-	if (g_signal == SIGINT)
-	{
-		handle_signals();
-		if (input)
-		free(input);
-		return true;
-	}
-	if (!input)
-	{
-		printf("exit");
-		return false ;
-		
-	}
-	if (*input)
-	add_history(input);
-}
 
-bool	next_step(char **input, t_token *tokens, t_shell *shell)
+bool	process_input(char *input, t_shell *shell)
 {
+	t_token	*tokens;
+
 	tokens = lexer(input);
 	if (!tokens)
-		return (perror("Lexing Error :"), free(input), false);
-	free(input);
+	{
+		write(2, "Lexing Error\n", 14);
+		return (false);
+	}
 	if (!init_parsing(tokens))
-		return (perror("Parsing Error :"), free_tokens(tokens), false);
+	{
+		write(2, "Parsing Error\n", 15);
+		free_tokens(tokens);
+		return (false);
+	}
 	shell->ast = build_ast(tokens);
+	free_tokens(tokens);
 	if (!shell->ast)
-		return (perror("AST Error :"), free(tokens), false);
-	free(tokens);
-	if (!expand_variables(shell->ast, shell->env))
-		return (perror("Expand Error :"), free(shell), false);
+		return (perror("AST Error :"), false);
+	if (!expand_variables(shell->ast, shell))
+		return (perror("Expand Error :"), false);
 	if (!execute_ast(shell->ast, shell))
-		return (perror("Execution Error :"), free_shell(shell), false);
+		return (perror("Execution Error :"), false);
 	return (true);
 }
 
-int	loop_shell(char *input, t_token *tokens, t_shell *shell)
+void	loop_shell(t_shell *shell)
 {
+	char	*input;
+
 	while (1)
 	{
-		free_shell(shell);
 		input = readline("minishell-0.2$ ");
-		if (!set_input)
-			continue ;
-		else
+		if (!input)
+		{
+			printf("exit\n");
 			break ;
-		if (!next_step(input, tokens, shell))
+		}
+		if (g_signal == SIGINT)
 		{
-
+			handle_signals();
+			free(input);
 			continue ;
 		}
-		else
+		if (*input)
+			add_history(input);
+		if (process_input(input, shell))
 		{
-
-			continue ;
+			free_all_ast(shell->ast);
+			shell->ast = NULL;
 		}
+		free(input);
 	}
-	free_shell(shell);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
-	t_token	*tokens;
-	char	*input;
 
 	(void) argc;
 	(void) argv;
-	init_shell(shell, envp);
-	loop_shell(input, tokens, shell);
+	shell = init_shell(envp);
+	if (!shell)
+		return (EXIT_FAILURE);
+	loop_shell(shell);
+	free_shell(shell);
+	rl_clear_history();
+	return (EXIT_SUCCESS);
 }

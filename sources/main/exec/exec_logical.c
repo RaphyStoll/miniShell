@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:15:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 16:16:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:06:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 /**
  * @brief Executes logical operations (AND/OR) between two commands.

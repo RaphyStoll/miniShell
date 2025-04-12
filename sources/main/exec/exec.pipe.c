@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/09 16:16:43 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 18:06:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 /**
  * @brief Executes the second command in the pipe chain.

@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 11:31:39 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 17:55:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 	status = 0;
 	if (ast_node->type == AST_COMMAND)
 	{
-		expand_variable(ast_node, shell->env);
 		expand_redirections(ast_node, shell->env);
 		status = execute_command(ast_node, shell);
 	}

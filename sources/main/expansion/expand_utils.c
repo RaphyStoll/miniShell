@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/10 00:39:55 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 17:06:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "minishell.h"
 #include "../../../lib/libft/header/libft.h"
 
 /**
@@ -21,12 +22,12 @@
  * @param result Pointer to the result string to update.
  * @return 1 on success, 0 on failure.
  */
-int	handle_exit_status(char **result)
+int	handle_exit_status(char **result, t_shell *shell)
 {
 	char	*value;
 	char	*tmp;
 
-	value = ft_itoa(last_exit_status);
+	value = ft_itoa(shell->last_exit_status);
 	if (!value)
 		return (0);
 	tmp = *result;
@@ -50,7 +51,7 @@ int	handle_exit_status(char **result)
  * @param env Environment variable list
  * @return 1 on success, 0 on failure.
  */
-int	handle_variable(char **result, char *arg, int *i, t_env *env)
+int	handle_variable(char **result, char *arg, int *i, t_shell *shell)
 {
 	char	*type;
 	char	*value;
@@ -63,7 +64,7 @@ int	handle_variable(char **result, char *arg, int *i, t_env *env)
 	type = ft_strndup(&arg[start], *i - start);
 	if (!type)
 		return (0);
-	value = get_env_value(env, type);
+	value = get_env_value(shell, type);
 	tmp = *result;
 	if (value)
 		*result = ft_strjoin(*result, value);

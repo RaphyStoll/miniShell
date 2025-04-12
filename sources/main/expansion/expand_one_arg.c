@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_one_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:44:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/10 00:38:21 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 17:06:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+#include "minishell.h"
 #include "../../../lib/libft/header/libft.h"
 
 /**
@@ -20,7 +21,7 @@
  * @param env Environment variable list
  * @return A new allocated string with expanded content, or NULL on failure.
  */
-char	*expand_one_arg(char *arg, t_env *env)
+char	*expand_one_arg(char *arg, t_shell *shell)
 {
 	char	*result;
 	int		i;
@@ -37,10 +38,10 @@ char	*expand_one_arg(char *arg, t_env *env)
 			if (arg[i] == '?')
 			{
 				i++;
-				if (!handle_exit_status(&result))
+				if (!handle_exit_status(&result, shell))
 					return (free(result), NULL);
 			}
-			else if (!handle_variable(&result, arg, &i, env))
+			else if (!handle_variable(&result, arg, &i, shell))
 				return (free(result), NULL);
 		}
 		else if (!handle_regular_char(&result, arg[i++]))
