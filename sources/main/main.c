@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 19:32:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/12 20:18:43 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	loop_shell(t_shell *shell)
 
 	while (1)
 	{
-		input = readline("minishell-0.2$ ");
+		input = readline("minishell-0.3$ ");
 		if (!input)
 		{
 			printf("exit\n");
