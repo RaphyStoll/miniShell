@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/11 15:02:56 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/12 16:41:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool	set_env_value(t_env **env_list, char *type, char *value)
 {
 	t_env	*tmp;
 	t_env	*new;
+	char	*new_value;
 
 	if (!env_list || !type || !*type)
 		return (false);
@@ -53,12 +54,13 @@ bool	set_env_value(t_env **env_list, char *type, char *value)
 	{
 		if (ft_strcmp(tmp->type, type) == 0)
 		{
+			new_value = ft_strdup(value);
+			if (!new_value)
+				return (false);
 			free(tmp->value);
-			tmp->value = ft_strdup(value);
+			tmp->value = new_value;
 			return (true);
 		}
-		if (!tmp->next)
-			break ;
 		tmp = tmp->next;
 	}
 	new = create_env_node(type, value);
