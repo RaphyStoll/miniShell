@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 17:59:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 15:46:06 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
  * except when the target is surrounded by single quotes.
  *
  * @param node The AST command node containing redirections.
- * @param env Environment variable list.
+ * @param shell The shell context.
+ * @return true on success, false on error.
  */
-void	expand_redirections(t_node *node, t_shell *shell)
+bool	expand_redirections(t_node *node, t_shell *shell)
 {
 	t_redirection	*redir;
 	char			*expanded;
@@ -33,11 +34,14 @@ void	expand_redirections(t_node *node, t_shell *shell)
 		if (redir->quote_type != QUOTE_SINGLE)
 		{
 			expanded = expand_one_arg(redir->target, shell);
+			if (!expanded)
+				return (false);
 			free(redir->target);
 			redir->target = expanded;
 		}
 		redir = redir->next;
 	}
+	return (true);
 }
 
 /**
@@ -73,6 +77,21 @@ bool	expand_variables(t_node *node, t_shell *shell)
 			args[i] = new_arg;
 		}
 		i++;
+	}
+	return (true);
+}
+
+bool	expand_all(t_node *node, t_shell *shell)
+{
+	if (!expand_variables(node, shell))
+	{
+		perror("Error expanding variables");
+		return (false);
+	}
+	if (!expand_redirections(node, shell))
+	{
+		perror("Error rexpanding redirections");
+		return (false);
 	}
 	return (true);
 }

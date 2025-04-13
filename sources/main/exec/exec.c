@@ -6,13 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:11:29 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 15:47:04 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
-
 
 /**
  * @brief Executes an AST node.
@@ -33,7 +32,11 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 	status = 0;
 	if (ast_node->type == AST_COMMAND)
 	{
-		expand_redirections(ast_node, shell);
+		if (!expand_all(ast_node, shell))
+		{
+			shell->last_exit_status = GENERIC_ERROR;
+			return (shell->last_exit_status);
+		}
 		status = execute_command(ast_node, shell);
 	}
 	else if (ast_node->type == AST_PIPE)

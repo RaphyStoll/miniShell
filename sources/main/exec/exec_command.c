@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:32:53 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 14:33:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 	if (!paths)
 		return (NULL);
 	cmd_path = check_all_paths(paths, cmd);
-	free_array(paths);
+	if (!cmd_path)
+		free_array(paths);
 	return (cmd_path);
 }
 
@@ -99,6 +100,7 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	}
 	if (execve(cmd_path, cmd->args, envp) == -1)
 	{
+		shell->last_exit_status = PERMISSION_ERROR;
 		free(cmd_path);
 		free_array(envp);
 		perror(cmd->args[0]);
@@ -165,10 +167,8 @@ int	execute_command(t_node *cmd, t_shell *shell)
 		return (GENERIC_ERROR);
 	}
 	else if (pid == 0)
-	{
 		execute_child_process(cmd, shell);
-		exit (GENERIC_ERROR);
-	}
 	else
 		return (handle_parent_process(pid, shell));
+	return (GENERIC_ERROR);
 }

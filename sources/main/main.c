@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 22:35:46 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/13 15:27:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ bool	process_input(char *input, t_shell *shell)
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (perror("AST Error "), false);
-	if (!expand_variables(shell->ast, shell))
-		return (false);
 	if (execute_ast(shell->ast, shell))
 		return (perror("Execution Error "), false);
 	return (true);
