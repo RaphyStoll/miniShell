@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:15:50 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 17:08:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 17:36:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 
 /**
  * @brief Executes a subshell by forking a new process.
@@ -35,7 +36,14 @@ int	execute_subshell(t_node *subshell, t_shell *shell)
 	}
 	else if (pid == 0)
 	{
-		status = execute_command(subshell->child, shell);
+		free(shell->prompt);
+		shell->prompt = ft_strdup("(subshell) minishell-0.7$ ");
+		if (!shell->prompt)
+		{
+			perror("strdup failed of prompt subshell");
+			exit(GENERIC_ERROR);
+		}
+		status = execute_ast(subshell->child, shell);
 		return (status);
 	}
 	else

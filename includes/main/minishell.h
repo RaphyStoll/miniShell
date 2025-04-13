@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 18:33:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 17:30:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_shell
 	t_env		*env;
 	t_node		*ast;
 	int			last_exit_status;
+	char		*prompt;
 }	t_shell;
 
 //int	main(int argc, char **argv, char **envp);
