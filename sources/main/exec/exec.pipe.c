@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 15:48:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:11:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
 	else if (pid == 0)
 	{
 		redirect_input_from_pipe(pipe_fd);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
 		execute_child_process(pipe->brother, shell);
 	}
 	else
@@ -124,13 +126,11 @@ int	execute_pipe(t_node *pipe, t_shell *shell)
 	else if (pid == 0)
 	{
 		redirect_output_to_pipe(pipe_fd);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
 		execute_child_process(pipe->child, shell);
 	}
 	else
-	{
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
 		return (execute_pipe_brother(pipe_fd, pipe, shell));
-	}
 	return (GENERIC_ERROR);
 }
