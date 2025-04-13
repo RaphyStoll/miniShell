@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "builtin.h"
 
-void builtin_export(t_env *env)
+int	builtin_export(t_env *env)
 {
 	t_env *dup_env;
 	t_env *current;
@@ -10,7 +10,7 @@ void builtin_export(t_env *env)
 	dup_env = env_dup(env);
 	current = dup_env;
 	if (!dup_env)
-		return ;
+		return (1);
 	while (current != NULL)
 	{
 		is_valid_identifier(current->type);
@@ -26,7 +26,7 @@ void builtin_export(t_env *env)
 	}
 	free_env(dup_env);
 	free_env(current);
-	return ;
+	return (0);
 }
 /*
  //! test

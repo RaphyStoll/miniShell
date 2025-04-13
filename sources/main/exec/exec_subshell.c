@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:15:50 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:26:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 17:08:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	execute_subshell(t_node *subshell, t_shell *shell)
 	}
 	else if (pid == 0)
 	{
-		status = execute_command(subshell, shell);
+		status = execute_command(subshell->child, shell);
 		return (status);
 	}
 	else

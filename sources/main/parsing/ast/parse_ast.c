@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/13 15:48:55 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 17:07:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_node	*parse_subshell(t_token **tokens)
 		return (NULL);
 	*tokens = (*tokens)->next;
 	node->child = parse_logical(tokens);
+	if (node->child)
 	if (!*tokens || (*tokens)->type != C_PARENTHESIS)
 		return (NULL);
 	*tokens = (*tokens)->next;

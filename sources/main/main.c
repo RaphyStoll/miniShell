@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/13 15:27:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 17:15:25 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	loop_shell(t_shell *shell)
 
 	while (1)
 	{
-		input = readline("minishell-0.6$ ");
+		input = readline("minishell-0.7$ ");
 		if (!input)
 		{
 			printf("exit\n");
