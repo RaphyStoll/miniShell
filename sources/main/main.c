@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/13 17:33:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:03:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "ast_struct.h"
 #include "ast.h"
 #include "exec.h"
+#include <errno.h>
 
 /**
  * @brief Global variable used to store the last caught signal number.
@@ -84,7 +85,10 @@ bool	process_input(char *input, t_shell *shell)
 	if (!shell->ast)
 		return (perror("AST Error "), false);
 	if (execute_ast(shell->ast, shell))
-		return (perror("Execution Error "), false);
+	{
+		if (errno != 0)
+			return (perror("Execution Error "), false);
+	}
 	return (true);
 }
 
