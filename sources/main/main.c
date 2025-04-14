@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/14 14:38:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 17:42:14 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_shell	*init_shell(char **envp)
 		return (NULL);
 	shell->env = init_env(envp);
 	 if (!shell->env)
-		shell->env = init_minimal_env(shell->env); 
+		shell->env = init_minimal_env(shell->env);
 	set_signals();
 	ignore_ctrl_display();
 	shell->prompt = strdup("minishell-0.8$ ");
@@ -84,7 +84,6 @@ bool	process_input(char *input, t_shell *shell)
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (perror("AST Error "), false);
-	print_ast_debug(shell->ast, 2, "chilld");
 	if (execute_ast(shell->ast, shell))
 	{
 		if (errno != 0)

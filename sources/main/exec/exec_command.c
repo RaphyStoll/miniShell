@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 17:14:34 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 18:07:33 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 
 	path_var = get_env_value(shell, "PATH");
 	if (!path_var)
-		return (NULL);
+		path_var = \
+		"/bin/:/usr/bin/:/usr/local/bin/:/sbin/:/usr/sbin/:/usr/local/sbin/";
 	if (access(cmd, X_OK) == 0
 		&& (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0
 			|| ft_strncmp(cmd, "../", 3) == 0))
