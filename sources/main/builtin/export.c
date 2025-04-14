@@ -2,19 +2,21 @@
 #include "utils.h"
 #include "builtin.h"
 
-int	builtin_export(t_env *env)
+int	builtin_export(t_env *env, char *arg)
 {
 	t_env *dup_env;
 	t_env *current;
 	
 	dup_env = env_dup(env);
-	printf("hello\n");
+	if (arg)
+		pars_arg(dup_env, arg);
 	current = dup_env;
 	if (!dup_env)
 		return (1);
 	while (current != NULL)
 	{
-		is_valid_identifier(current->type);
+		if (is_valid_identifier(current->type))
+			return NULL
 		current = current->next;
 	}
 	sort_env(&dup_env);
@@ -28,6 +30,25 @@ int	builtin_export(t_env *env)
 	free_env(current);
 	return (0);
 }
+
+void pars_arg(t_env *env, char *arg)
+{
+	t_env	*current;
+	t_env	*new_node;
+	int	 	f_add;
+	int		i;
+
+	f_add = 0
+	i = 0;
+	current = env;
+	while(arg[i])
+	{
+		if (arg[i] == '=' && arg[i + 1] == '+')
+				f_add = 1;
+	}
+	split(arg, =)
+}
+
 /*
  //! test
 t_env	*init_env(char **env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/13 18:03:16 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 11:13:40 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ bool	process_input(char *input, t_shell *shell)
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (perror("AST Error "), false);
+	print_ast_debug(shell->ast, 2, "chilld");
 	if (execute_ast(shell->ast, shell))
 	{
 		if (errno != 0)

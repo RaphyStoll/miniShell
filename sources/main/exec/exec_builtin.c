@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 17:09:33 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 11:30:59 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	execute_builtin(char **args, t_shell *shell)
 	if (ft_strcmp(args[0], "pwd") == 0)
 		return (builtin_pwd());
 	if (ft_strcmp(args[0], "export") == 0)
-		return (builtin_export(shell->env));
+		return (builtin_export(shell->env, argv[0]));
 	if (ft_strcmp(args[0], "unset") == 0)
 		return (builtin_unset(shell, args));
 	if (ft_strcmp(args[0], "env") == 0)
