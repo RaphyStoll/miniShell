@@ -6,7 +6,7 @@
 /*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/14 06:48:14 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/14 07:01:20 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ void	free_env(t_env *head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->type);
-		free(current->value);
-		free(current);
+		if (current->type)
+			free(current->type);
+		if (current->value)
+			free(current->value);
+		if (current)
+			free(current);
 		current = next;
 	}
 }

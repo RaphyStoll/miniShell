@@ -6,8 +6,9 @@ int	builtin_export(t_env *env)
 {
 	t_env *dup_env;
 	t_env *current;
-
+	
 	dup_env = env_dup(env);
+	printf("hello\n");
 	current = dup_env;
 	if (!dup_env)
 		return (1);
@@ -17,7 +18,6 @@ int	builtin_export(t_env *env)
 		current = current->next;
 	}
 	sort_env(&dup_env);
-
 	current = dup_env;
 	while (current != NULL)
 	{
