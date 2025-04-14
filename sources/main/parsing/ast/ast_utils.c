@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/08 09:07:04 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/14 13:35:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
