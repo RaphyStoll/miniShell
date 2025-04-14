@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 17:33:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 06:48:14 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,8 @@ void free_shell(t_shell *shell)
 		free_all_ast(shell->ast);
 	if (shell->env)
 		free_env(shell->env);
-	free(shell);
+	if (shell->prompt)
+		free(shell->prompt);
+	if (shell)
+		free(shell);
 }
