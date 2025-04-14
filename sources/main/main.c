@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/14 11:13:40 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:07:33 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_shell	*init_shell(char **envp)
 		return (free(shell), NULL);
 	set_signals();
 	ignore_ctrl_display();
-	shell->prompt = strdup("minishell-0.7$ ");
+	shell->prompt = strdup("minishell-0.8$ ");
 	if (!shell->prompt)
 		return (perror("strdup prompt failed "), free_shell(shell), NULL);
 	return (shell);
@@ -111,12 +111,6 @@ void	loop_shell(t_shell *shell)
 		{
 			printf("exit\n");
 			break ;
-		}
-		if (g_signal == SIGINT)
-		{
-			handle_signals();
-			free(input);
-			continue ;
 		}
 		if (*input)
 			add_history(input);

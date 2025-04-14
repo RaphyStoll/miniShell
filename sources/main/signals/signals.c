@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 19:08:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:01:33 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-/**
- * @brief Handles SIGINT after it has been captured.
- *
- * If the global signal variable is set to SIGINT, this function resets
- * the prompt line by writing a newline, clearing the current input, 
- * and redisplaying the prompt.
- * 
- * To be called after `readline()` returns.
- */
-void	handle_signals(void)
-{
-	if (g_signal == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		g_signal = 0;
-	}
-}
 
 /**
  * @brief Signal handler function for SIGINT (Ctrl+C).
@@ -53,7 +33,13 @@ void	handle_signals(void)
 void	sigint_handler(int signal)
 {
 	if (signal == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 		g_signal = signal;
+	}
 }
 
 /**
