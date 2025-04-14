@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/14 13:35:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 13:48:03 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 		return (GENERIC_ERROR);
 	new_quotes = ft_calloc(1, sizeof(t_quote) * (len + 1));
 	if (!new_quotes)
-	{
-		free(new_args);
-		return (GENERIC_ERROR);
-	}
+		return (free(new_args), GENERIC_ERROR);
 	i = 0;
 	while (i < len)
 	{
@@ -65,18 +62,10 @@ bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 	}
 	new_args[i] = ft_strdup(arg);
 	if (!new_args)
-	{
-		free(new_args);
-		free(new_quotes);
-		return (GENERIC_ERROR);
-	}
-	new_args[i + 1] = NULL;
-	new_quotes[i] = quote_type;
-	free(node->args);
-	free(node->arg_quotes);
-	node->args = new_args;
-	node->arg_quotes = new_quotes;
-	return (1);
+		return (free(new_args), free(new_quotes), GENERIC_ERROR);
+	return (new_args[i + 1] = NULL, new_quotes[i] = quote_type, free(node->args)
+	, free(node->arg_quotes), node->args = new_args,
+	node->arg_quotes = new_quotes, GENERIC_ERROR);
 }
 
 /**
