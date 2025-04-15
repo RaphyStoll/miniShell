@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 22:00:15 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:59:09 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ void	free_env(t_env *head)
 	while (current != NULL)
 	{
 		next = current->next;
-		free(current->type);
-		free(current->value);
-		free(current);
+		if (current->type)
+			free(current->type);
+		if (current->value)
+			free(current->value);
+		if (current)
+			free(current);
 		current = next;
 	}
 }
@@ -66,5 +69,8 @@ void free_shell(t_shell *shell)
 		free_all_ast(shell->ast);
 	if (shell->env)
 		free_env(shell->env);
-	free(shell);
+	if (shell->prompt)
+		free(shell->prompt);
+	if (shell)
+		free(shell);
 }

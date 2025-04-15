@@ -1,6 +1,6 @@
 #include "env_struct.h"
 #include "utils.h"
-#include "bultin.h"
+#include "builtin.h"
 
 bool is_valid_identifier(const char *str)
 {
@@ -24,7 +24,7 @@ bool is_valid_identifier(const char *str)
 	return (true);
 }
 
-t_env	*add_env_node(t_env **env_list, t_env *new_node)
+t_env	*add_env_node2(t_env **env_list, t_env *new_node)
 {
 	t_env	*tmp;
 

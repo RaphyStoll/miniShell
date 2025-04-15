@@ -1,28 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   debbug.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 16:22:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/14 17:35:04 by raphaelferr      ###   ########.fr       */
+/*   Created: 2025/04/13 14:51:53 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/13 14:51:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "utils.h"
-#include <stdio.h>
-
-
-void	builtin_exit(t_shell *shell, int error, char *arg)
-{
-	int r;
-
-	if (arg)
-		r = ft_atoi(arg);
-	else
-		r = error;
-	free_shell(shell);
-	exit(r);
-}

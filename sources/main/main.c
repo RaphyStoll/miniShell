@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/12 19:32:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:28:04 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "ast_struct.h"
 #include "ast.h"
 #include "exec.h"
+#include <errno.h>
 
 /**
  * @brief Global variable used to store the last caught signal number.
@@ -44,10 +45,13 @@ t_shell	*init_shell(char **envp)
 	if (!shell)
 		return (NULL);
 	shell->env = init_env(envp);
-	if (!shell->env)
-		return (free(shell), NULL);
+	 if (!shell->env)
+		shell->env = init_minimal_env(shell->env);
 	set_signals();
 	ignore_ctrl_display();
+	shell->prompt = strdup("minishell-0.8$ ");
+	if (!shell->prompt)
+		return (perror("strdup prompt failed "), free_shell(shell), NULL);
 	return (shell);
 }
 
@@ -77,13 +81,15 @@ bool	process_input(char *input, t_shell *shell)
 		return (false);
 	}
 	shell->ast = build_ast(tokens);
+	//print_ast(shell->ast, 1);
 	free_tokens(tokens);
 	if (!shell->ast)
-		return (perror("AST Error :"), false);
-	if (!expand_variables(shell->ast, shell))
-		return (perror("Expand Error :"), false);
-	if (!execute_ast(shell->ast, shell))
-		return (perror("Execution Error :"), false);
+		return (perror("AST Error "), false);
+	if (execute_ast(shell->ast, shell))
+	{
+		if (errno != 0)
+			return (perror("Execution Error "), false);
+	}
 	return (true);
 }
 
@@ -100,17 +106,11 @@ void	loop_shell(t_shell *shell)
 
 	while (1)
 	{
-		input = readline("minishell-0.2$ ");
+		input = readline(shell->prompt);
 		if (!input)
 		{
 			printf("exit\n");
 			break ;
-		}
-		if (g_signal == SIGINT)
-		{
-			handle_signals();
-			free(input);
-			continue ;
 		}
 		if (*input)
 			add_history(input);

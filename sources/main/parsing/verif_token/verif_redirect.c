@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:30:11 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/06 11:34:07 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/14 16:02:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ bool	valid_type_redirect_out(t_token *cur)
 		if (cur->prev->type == O_PARENTHESIS
 			|| cur->next->type == C_PARENTHESIS)
 			return (false);
-		printf(MAGENTA BOLD"REDIRECT OUT is valid\n"NC);
 	}
 	return (true);
 }

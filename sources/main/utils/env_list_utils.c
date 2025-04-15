@@ -1,5 +1,8 @@
 #include "env_struct.h"
-#include "env.h"
+#include "../../../lib/libft/header/libft.h"
+#include "error_code.h"
+#include "utils.h"
+
 
 /**
  * @brief Permet de doubliquer la liste chainer t_env
@@ -12,23 +15,28 @@ t_env	*env_dup(t_env *src)
 	t_env	*copy = NULL;
 	t_env	*last = NULL;
 	t_env	*new_node;
-
 	while (src)
 	{
 		new_node = ft_calloc(1, sizeof(t_env));
 		if (!new_node)
-			return (NULL);
+		return (NULL);
 		new_node->type = ft_strdup(src->type);
+		if (!new_node->type)
+			return(free_env(new_node), NULL);
 		new_node->value = ft_strdup(src->value);
+		if (!new_node->value)
+			return(free_env(new_node), NULL);
 		new_node->next = NULL;
 		if (!copy)
 			copy = new_node;
 		else
 			last->next = new_node;
+		last = new_node;
 		src = src->next;
 	}
+	printf("pas cool\n");
 	return (copy);
-
+	
 }
 
 t_env *sorted_merge(t_env *a, t_env *b)
