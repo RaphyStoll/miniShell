@@ -6,7 +6,7 @@
 /*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/15 15:28:04 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:47:07 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ bool	process_input(char *input, t_shell *shell)
 	tokens = lexer(input);
 	if (!tokens)
 	{
-		write(2, "Lexing Error\n", 14);
 		return (false);
 	}
 	if (!init_parsing(tokens))
 	{
-		write(2, "Parsing Error\n", 15);
 		free_tokens(tokens);
 		return (false);
 	}
@@ -84,11 +82,11 @@ bool	process_input(char *input, t_shell *shell)
 	//print_ast(shell->ast, 1);
 	free_tokens(tokens);
 	if (!shell->ast)
-		return (perror("AST Error "), false);
+		return (false);
 	if (execute_ast(shell->ast, shell))
 	{
 		if (errno != 0)
-			return (perror("Execution Error "), false);
+			return (false);
 	}
 	return (true);
 }
