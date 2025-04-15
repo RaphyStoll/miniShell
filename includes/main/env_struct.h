@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 17:14:21 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:52:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdbool.h>
+
 
 typedef struct s_shell t_shell;
 
@@ -33,5 +34,6 @@ void	unset_env(t_env **env, char *type);
 void	env_delone(t_env *node);
 bool	set_env_value(t_env **env_list, char *type, char *value);
 t_env	*create_env_node(char *type, char *value);
+t_env	*init_minimal_env(t_env *env);
 
 #endif

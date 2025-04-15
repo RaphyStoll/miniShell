@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/14 16:52:23 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/15 11:22:41 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_shell	*init_shell(char **envp)
 	if (!shell)
 		return (NULL);
 	shell->env = init_env(envp);
-	if (!shell->env)
-		return (free(shell), NULL);
+	 if (!shell->env)
+		shell->env = init_minimal_env(shell->env);
 	set_signals();
 	ignore_ctrl_display();
 	shell->prompt = strdup("minishell-0.8$ ");
