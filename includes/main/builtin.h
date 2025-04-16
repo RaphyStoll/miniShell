@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/15 18:17:56 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 18:40:37 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		builtin_unset(t_shell *shell, char **args);
 int		builtin_echo(char **args);
 int		builtin_env(t_env *env);
 void	builtin_exit(t_shell *shell, int error, char *arg);
-int		builtin_export(t_env *env, char *arg);
-void	pars_arg(t_env *env, char *arg);
+bool	builtin_export(t_env **env, char *arg);
+bool	pars_arg(t_env *env, char *arg);
 
 bool	is_valid_identifier(const char *str);
 t_env	*add_env_node2(t_env **env_list, t_env *new_node);

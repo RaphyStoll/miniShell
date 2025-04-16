@@ -34,7 +34,6 @@ t_env	*env_dup(t_env *src)
 		last = new_node;
 		src = src->next;
 	}
-	printf("pas cool\n");
 	return (copy);
 	
 }
@@ -73,7 +72,7 @@ void split_list(t_env *source, t_env **front, t_env **back)
 	}
 	*front = source;
 	*back = slow->next;
-	slow->next = NULL; // coupe la liste
+	slow->next = NULL;
 }
 
 /*
