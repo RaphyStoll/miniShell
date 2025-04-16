@@ -6,11 +6,10 @@ int	builtin_export(t_env *env, char *arg)
 {
 	t_env *dup_env;
 	t_env *current;
-	(void)arg;
 	
 	dup_env = env_dup(env);
-	//if (arg)
-	//	pars_arg(dup_env, arg);
+	if (arg)
+		return (pars_arg(dup_env, arg));
 	current = dup_env;
 	if (!dup_env)
 		return (1);
@@ -31,24 +30,65 @@ int	builtin_export(t_env *env, char *arg)
 	free_env(current);
 	return (0);
 }
-/*
-void pars_arg(t_env *env, char *arg)
-{
-	t_env	*current;
-	t_env	*new_node;
-	int	 	f_add;
-	int		i;
 
-	f_add = 0;
-	i = 0;
-	current = env;
-	while(arg[i])
+static void	join_value(t_env *existing, char *var_value, int plus_concat)
+{
+	char	*tmp;
+
+	if (plus_concat)
 	{
-		if (arg[i] == '=' && arg[i + 1] == '+')
-				f_add = 1;
+		tmp = ft_strjoin(existing->value, var_value);
+		free(existing->value);
+		existing->value = tmp;
+	}
+	else
+	{
+		free(existing->value);
+		existing->value = ft_strdup(var_value);
 	}
 }
-*/
+
+static void	create_new_env(t_env *env, char *var_name, char *var_value)
+{
+	t_env	*new_env;
+
+	new_env = create_env_node(var_name, var_value);
+	add_env_node(&env, new_env);
+}
+
+bool	pars_arg(t_env *env, char *arg)
+{
+	char	*equal_pos;
+	char	*var_name;
+	char	*var_value;
+	t_env	*existing;
+	bool	plus_concat;
+
+	if (!arg)
+		return (false);
+	equal_pos = ft_strchr(arg, '=');
+	if (!equal_pos)
+		return (false);
+	plus_concat = false;
+	if (equal_pos != arg && *(equal_pos - 1) == '+')
+		plus_concat = true;
+	if (plus_concat)
+		var_name = ft_substr(arg, 0, (equal_pos - arg) - 1);
+	else
+		var_name = ft_substr(arg, 0, (equal_pos - arg));
+	if (!var_name)
+		return (false);
+	var_value = ft_strdup(equal_pos + 1);
+	if (!var_value)
+		return (free(var_name), false);
+	existing = find_env(env, var_name);
+	if (!existing)
+		create_new_env(env, var_name, var_value);
+	else
+		join_value(existing, var_value, plus_concat);
+	return (free(var_name), free(var_value), true);
+}
+
 /*
  //! test
 t_env	*init_env(char **env)

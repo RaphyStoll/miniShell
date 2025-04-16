@@ -1,6 +1,7 @@
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
+#include "../../../lib/libft/header/libft.h"
 
 bool is_valid_identifier(const char *str)
 {
@@ -38,4 +39,15 @@ t_env	*add_env_node2(t_env **env_list, t_env *new_node)
 		tmp->next = new_node;
 	}
 	return (*env_list);
+}
+
+t_env	*find_env(t_env *env, char *var_name)
+{
+	while (env)
+	{
+		if (ft_strcmp(env->type, var_name) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
 }
