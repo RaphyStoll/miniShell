@@ -100,14 +100,11 @@ endif
 # ------------------------------------------------------------------------------
 $(NAME): $(ALL_OBJS) | $(OUTPUT_DIR)
 	@set -e; \
-	# — Choix d’une couleur ANSI aléatoire entre 30 et 97 —; \
 	colors="30 31 32 33 34 35 36 37 90 91 92 93 94 95 96 97"; \
 	color=$$(echo $$colors | tr ' ' '\n' | shuf -n1); \
-	# — Linking —; \
 	printf "\033[2K\r$(CYAN)→ Linking objects...$(RESET)"; \
 	$(CC) $(CFLAGS) $(ALL_OBJS) $(ALL_LIBS) -o $(NAME) $(LDFLAGS); \
 	printf "\033[2K\r$(BOLD)$(GREEN)✔ Finished building $(NAME)$(RESET)\n"; \
-	# — Nettoyage de l’écran et ASCII art en couleur aléatoire —; \
 	clear; \
 	printf "\033[1;$$color""m%b$(RESET)\n" "\
 ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     \n\
@@ -116,9 +113,7 @@ $(NAME): $(ALL_OBJS) | $(OUTPUT_DIR)
 ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     \n\
 ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗\n\
 ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝"; \
-	# — Message de succès —; \
 	printf "\033[0;92m✨ Minishell built successfully!$(RESET)\n"; \
-	# — Résumé —; \
 	count=$$(find $(OBJ_DIR) -name '*.o' | wc -l); \
 	libcount=$$(echo "$(ALL_LIBS)" | wc -w); \
 	build_date=$$(date +"%Y-%m-%d %H:%M:%S"); \
