@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/16 15:51:38 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/16 23:20:39 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_shell	*init_shell(char **envp)
 	if (!shell)
 		return (NULL);
 	shell->env = init_env(envp);
-	 if (!shell->env)
+	if (!shell->env)
 		shell->env = init_minimal_env(shell->env);
 	set_signals();
 	ignore_ctrl_display();
@@ -79,7 +79,6 @@ bool	process_input(char *input, t_shell *shell)
 		return (false);
 	}
 	shell->ast = build_ast(tokens);
-	//print_ast(shell->ast, 1);
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (false);

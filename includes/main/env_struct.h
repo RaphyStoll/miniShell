@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/14 14:52:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:01:41 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ void	env_delone(t_env *node);
 bool	set_env_value(t_env **env_list, char *type, char *value);
 t_env	*create_env_node(char *type, char *value);
 t_env	*init_minimal_env(t_env *env);
+t_env	*get_last_node(t_env *dup_env);
+void	append_node(t_env **env, t_env *new_node);
+void	remplace_node(t_env **env, t_env *old_node, t_env *new_node);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   access_env.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/16 23:08:31 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env_struct.h"
 #include "minishell.h"
 #include "utils.h"
@@ -76,25 +88,25 @@ t_env	*get_last_node(t_env *dup_env)
 	return (dup_env);
 }
 
-void append_node(t_env **env, t_env *new_node)
+void	append_node(t_env **env, t_env *new_node)
 {
-	t_env *current;
+	t_env	*current;
 
 	if (*env == NULL)
 		*env = new_node;
 	else
-		{
-			current = *env;
-			while (current->next)
-				current = current->next;
-			current->next = new_node;
-		}
+	{
+		current = *env;
+		while (current->next)
+			current = current->next;
+		current->next = new_node;
+	}
 }
 
 void	remplace_node(t_env **env, t_env *old_node, t_env *new_node)
 {
-	t_env *prev;
-	t_env *current;
+	t_env	*prev;
+	t_env	*current;
 
 	prev = NULL;
 	current = *env;

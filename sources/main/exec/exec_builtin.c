@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 22:07:32 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:09:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ bool	is_builtin(char *cmd)
 		return (true);
 	return (false);
 }
-
 
 /**
  * @brief Executes a shell builtin command. Calls the corresponding builtin 

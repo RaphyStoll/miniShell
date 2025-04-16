@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 23:04:08 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/16 23:05:34 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
 
 bool	builtin_export(t_env **env, char *arg)
 {
-	t_env *dup_env;
-	t_env *new_node;
+	t_env	*dup_env;
+	t_env	*new_node;
+	t_env	*clone;
 
 	dup_env = env_dup(*env);
 	if (!dup_env)
@@ -17,7 +30,7 @@ bool	builtin_export(t_env **env, char *arg)
 		new_node = get_last_node(dup_env);
 		if (!new_node)
 			return (free_env(dup_env), false);
-		t_env *clone = create_env_node(new_node->type, new_node->value);
+		clone = create_env_node(new_node->type, new_node->value);
 		if (!clone)
 			return (free_env(dup_env), false);
 		if (!env_update(env, clone))
@@ -31,7 +44,7 @@ bool	builtin_export(t_env **env, char *arg)
 
 bool	env_update(t_env **env, t_env *new_node)
 {
-    t_env *exist;
+	t_env	*exist;
 
 	if (!env || !new_node)
 		return (false);
@@ -41,28 +54,17 @@ bool	env_update(t_env **env, t_env *new_node)
 	else
 		append_node(env, new_node);
 	return (true);
-	
 }
 
 bool	pars_arg(t_env **env, char *arg)
 {
-	char	*equal_sign;
-	t_env	*new_node;
 	char	*key;
 	char	*value;
-	bool	append = false;
+	bool	append;
+	t_env	*new_node;
 
-	equal_sign = ft_strchr(arg, '=');
-	if (!equal_sign)
+	if (!parse_key_value(arg, &key, &value, &append))
 		return (false);
-	if (equal_sign > arg && *(equal_sign - 1) == '+')
-		append = true;
-	key = ft_substr(arg, 0, equal_sign - arg - (append ? 1 : 0));
-	if (!is_valid_identifier(key))
-		return (free(key), false);
-	value = ft_strdup(equal_sign + 1);
-	if (!value)
-		return (free(key), false);
 	new_node = create_env_node(key, value);
 	free(key);
 	free(value);
@@ -74,13 +76,14 @@ bool	pars_arg(t_env **env, char *arg)
 bool	handle_assignment(t_env **env, t_env *new_node, bool append)
 {
 	t_env	*existing;
+	char	*joined;
 
 	existing = find_node(*env, new_node->type);
 	if (existing)
 	{
 		if (append && existing->value && new_node->value)
 		{
-			char *joined = ft_strjoin(existing->value, new_node->value);
+			joined = ft_strjoin(existing->value, new_node->value);
 			if (!joined)
 				return (free_env(new_node), false);
 			free(existing->value);
@@ -102,7 +105,7 @@ void	display_export(t_env *env)
 
 	sorted = env_dup(env);
 	if (!sorted)
-		return;
+		return ;
 	sort_env(&sorted);
 	cur = sorted;
 	while (cur)

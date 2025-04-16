@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:43:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:09:42 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
  */
 bool	apply_redirections(t_redirection *redir, t_shell *shell)
 {
-
 	while (redir)
 	{
 		if (!single_redirection(redir, shell))

@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 21:59:32 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:09:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	env_delone(t_env *node)
 		free(node->type);
 	if (!node->value)
 		free(node->value);
-	if (!node)	
+	if (!node)
 		free(node);
 }
 
