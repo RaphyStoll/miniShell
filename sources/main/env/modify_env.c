@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 16:41:54 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:59:32 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_env	*create_env_node(char *type, char *value)
 	t_env	*node;
 
 	node = malloc(sizeof(t_env));
-	if (!node)
-		return (false);
+	if (!node || !type || !value)
+		return (NULL);
 	node->type = ft_strdup(type);
 	node->value = ft_strdup(value);
 	node->next = NULL;
