@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:22:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/16 23:02:19 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/17 12:05:42 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
