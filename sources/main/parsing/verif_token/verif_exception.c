@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_exception.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 22:33:22 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:48:40 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ static bool	handle_redirect_out(t_token *token)
 
 static bool	handle_heredoc(t_token *token)
 {
-	char	*line;
-	char	*delimiter;
+	char				*line;
+	char				*delimiter;
+	struct sigaction	old_sa;
 
+	set_heredoc_signals(&old_sa);
 	if (!token->next || token->next->type != WORD)
 	{
 		perror("minishell");
+		restore_signals(&old_sa);
 		return (false);
 	}
 	delimiter = token->next->str;
@@ -79,6 +82,7 @@ static bool	handle_heredoc(t_token *token)
 		}
 		free(line);
 	}
+	restore_signals(&old_sa);
 	return (true);
 }
 
