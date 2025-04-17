@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:43:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:49:31 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	struct sigaction	old_sa;
 
 	set_heredoc_signals(&old_sa);
+	printf("je suis dans handle_heredoc");
 	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
@@ -76,7 +77,7 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	{
 		close(fd);
 		restore_signals(&old_sa);
-		return (-1);
+		return (-2);
 	}
 	close(fd);
 	restore_signals(&old_sa);
@@ -135,11 +136,10 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
 	else if (type == REDIRECTION_OUT || type == REDIRECTION_APPEND)
 		target_fd = STDOUT_FILENO;
 	fd = open_redirection_file(redir, shell);
-	if (fd == -1)
-	{
-		perror(redir->target);
+	if (fd == -2)
 		return (false);
-	}
+	if (fd == -1)
+		return (perror(redir->target), false);
 	if (dup2(fd, target_fd) == -1)
 	{
 		perror("dup2");
@@ -161,7 +161,6 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
  */
 bool	apply_redirections(t_redirection *redir, t_shell *shell)
 {
-
 	while (redir)
 	{
 		if (!single_redirection(redir, shell))

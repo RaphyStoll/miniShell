@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:20:08 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:37:11 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:24:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
+	printf("signal recu");
 	write(1, "\n", 1);
 	exit(130);
 }
@@ -53,7 +54,7 @@ void	set_heredoc_signals(struct sigaction *old)
 	struct sigaction	new;
 
 	new.sa_handler = heredoc_sigint_handler;
-	new.sa_flags = SA_RESTART;
+	new.sa_flags = 0;
 	sigemptyset(&new.sa_mask);
 	sigaction(SIGINT, &new, old);
 }
