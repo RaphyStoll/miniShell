@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/17 15:21:11 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:52:41 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,30 @@ static bool	handle_heredoc(t_token *token)
 {
 	char				*line;
 	char				*delimiter;
-	struct sigaction	old_sa;
 
-	set_exception_signals(&old_sa);
 	if (!token->next || token->next->type != WORD)
 	{
 		perror("minishell");
-		restore_signals(&old_sa);
 		return (false);
 	}
-
 	delimiter = token->next->str;
+	signal(SIGINT, exception_sigint_handler);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0 || g_signal == 2)
+		if (!line || ft_strcmp(line, delimiter) == 0 || g_signal == SIGINT)
 		{
-			printf("break not");
 			free(line);
 			break ;
 		}
 		free(line);
 	}
-	restore_signals(&old_sa);
+	signal(SIGINT, sigint_handler);
+	if (g_signal == SIGINT)
+	{
+		g_signal = 0;
+		return (false);
+	}
 	return (true);
 }
 
