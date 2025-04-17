@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 13:51:49 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:17:27 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	sigint_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		printf("je suis la");
 		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();

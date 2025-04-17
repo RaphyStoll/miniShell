@@ -6,12 +6,13 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/17 13:48:40 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:21:11 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "lexing_struct.h"
+#include "signals.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,19 +65,21 @@ static bool	handle_heredoc(t_token *token)
 	char				*delimiter;
 	struct sigaction	old_sa;
 
-	set_heredoc_signals(&old_sa);
+	set_exception_signals(&old_sa);
 	if (!token->next || token->next->type != WORD)
 	{
 		perror("minishell");
 		restore_signals(&old_sa);
 		return (false);
 	}
+
 	delimiter = token->next->str;
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		if (!line || ft_strcmp(line, delimiter) == 0 || g_signal == 2)
 		{
+			printf("break not");
 			free(line);
 			break ;
 		}

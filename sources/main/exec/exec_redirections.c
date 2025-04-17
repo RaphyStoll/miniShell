@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 13:51:11 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:12:15 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 
 	while (1)
 	{
-		input = readline("> ");
+		input = readline("heredoc> ");
 		if (!input || ft_strcmp(input, redir->target) == 0)
 		{
 			free(input);
@@ -65,7 +65,6 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	struct sigaction	old_sa;
 
 	set_heredoc_signals(&old_sa);
-	printf("je suis dans handle_heredoc");
 	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{

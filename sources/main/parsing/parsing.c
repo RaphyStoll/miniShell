@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 22:17:41 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/17 14:31:32 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	init_parsing(t_token *tokens)
 	if (!valid_content(tokens))
 		return (false);
 	if ((handle_redirection_exceptions(tokens)))
-		return (true);
+		return (false);
 	if (!if_valide_token_prev(tokens))
 		return (false);
 	if (!if_valide_token_next(tokens))
