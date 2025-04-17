@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/15 15:28:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/17 12:09:30 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		execute_logical(t_node *logic, t_shell *shell);
 
 /*execute subshell*/
 int		execute_subshell(t_node *subshell, t_shell *shell);
-bool	modify_shell_level(t_shell *shell, bool increase);
 
 /*handle redirection in execution*/
 bool	apply_redirections(t_redirection *redir, t_shell *shell);
