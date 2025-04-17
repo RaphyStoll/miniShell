@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/14 16:59:40 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:09:48 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	is_builtin(char *cmd)
 	return (false);
 }
 
-
 /**
  * @brief Executes a shell builtin command. Calls the corresponding builtin 
  * function based on the command.
@@ -52,7 +51,7 @@ int	execute_builtin(char **args, t_shell *shell)
 	if (ft_strcmp(args[0], "pwd") == 0)
 		return (builtin_pwd());
 	if (ft_strcmp(args[0], "export") == 0)
-		return (builtin_export(shell->env, args[1]));
+		return (builtin_export(&shell->env, args[1]));
 	if (ft_strcmp(args[0], "unset") == 0)
 		return (builtin_unset(shell, args));
 	if (ft_strcmp(args[0], "env") == 0)

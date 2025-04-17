@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/15 15:27:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/17 12:02:58 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ t_shell	*init_shell(char **envp)
 	if (!shell)
 		return (NULL);
 	shell->env = init_env(envp);
-	 if (!shell->env)
+	if (!shell->env)
 		shell->env = init_minimal_env(shell->env);
-	shell->shell_level = 1;
+	shell->shell_level = ft_atoi(get_env_value(shell, "SHLVL"));
+	shell->shell_level++;
+	set_env_value(&shell->env,"SHLVL", ft_itoa(shell->shell_level));
 	set_signals();
 	ignore_ctrl_display();
 	shell->prompt = strdup("minishell-0.8$ ");
@@ -72,23 +74,21 @@ bool	process_input(char *input, t_shell *shell)
 	tokens = lexer(input);
 	if (!tokens)
 	{
-		write(2, "Lexing Error\n", 14);
 		return (false);
 	}
 	if (!init_parsing(tokens))
 	{
-		write(2, "Parsing Error\n", 15);
 		free_tokens(tokens);
 		return (false);
 	}
 	shell->ast = build_ast(tokens);
 	free_tokens(tokens);
 	if (!shell->ast)
-		return (perror("AST Error "), false);
+		return (false);
 	if (execute_ast(shell->ast, shell))
 	{
 		if (errno != 0)
-			return (perror("Execution Error "), false);
+			return (false);
 	}
 	return (true);
 }

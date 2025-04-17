@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/15 16:38:11 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:51:49 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include <termios.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
 
 /**
  * @brief Signal handler function for SIGINT (Ctrl+C).

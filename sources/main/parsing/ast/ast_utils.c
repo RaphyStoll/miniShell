@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/14 13:48:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:13:37 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 	if (!new_args)
 		return (free(new_args), free(new_quotes), GENERIC_ERROR);
 	return (new_args[i + 1] = NULL, new_quotes[i] = quote_type, free(node->args)
-	, free(node->arg_quotes), node->args = new_args,
-	node->arg_quotes = new_quotes, GENERIC_ERROR);
+		, free(node->arg_quotes), node->args = new_args,
+		node->arg_quotes = new_quotes, GENERIC_ERROR);
 }
 
 /**
@@ -77,8 +77,8 @@ bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 int	add_arg_to_node(t_node *node, char *arg, t_quote quote_type)
 {
 	int	len;
-	(void) quote_type;
 
+	(void) quote_type;
 	if (!node || !arg)
 		return (0);
 	len = 0;

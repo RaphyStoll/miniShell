@@ -1,8 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_list_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 23:14:38 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/16 23:19:38 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env_struct.h"
 #include "../../../lib/libft/header/libft.h"
 #include "error_code.h"
 #include "utils.h"
 
+static void	one_more_line(t_env **copy, t_env **last)
+{
+	*copy = NULL;
+	*last = NULL;
+}
 
 /**
  * @brief Permet de doubliquer la liste chainer t_env
@@ -12,20 +29,22 @@
  */
 t_env	*env_dup(t_env *src)
 {
-	t_env	*copy = NULL;
-	t_env	*last = NULL;
+	t_env	*copy;
+	t_env	*last;
 	t_env	*new_node;
+
+	one_more_line(&copy, &last);
 	while (src)
 	{
 		new_node = ft_calloc(1, sizeof(t_env));
 		if (!new_node)
-		return (NULL);
+			return (NULL);
 		new_node->type = ft_strdup(src->type);
 		if (!new_node->type)
-			return(free_env(new_node), NULL);
+			return (free_env(new_node), NULL);
 		new_node->value = ft_strdup(src->value);
 		if (!new_node->value)
-			return(free_env(new_node), NULL);
+			return (free_env(new_node), NULL);
 		new_node->next = NULL;
 		if (!copy)
 			copy = new_node;
@@ -34,20 +53,18 @@ t_env	*env_dup(t_env *src)
 		last = new_node;
 		src = src->next;
 	}
-	printf("pas cool\n");
 	return (copy);
-	
 }
 
-t_env *sorted_merge(t_env *a, t_env *b)
+t_env	*sorted_merge(t_env *a, t_env *b)
 {
-	t_env *result = NULL;
+	t_env	*result;
 
+	result = NULL;
 	if (!a)
 		return (b);
 	if (!b)
 		return (a);
-
 	if (ft_strcmp(a->type, b->type) <= 0)
 	{
 		result = a;
@@ -61,11 +78,13 @@ t_env *sorted_merge(t_env *a, t_env *b)
 	return (result);
 }
 
-void split_list(t_env *source, t_env **front, t_env **back)
+void	split_list(t_env *source, t_env **front, t_env **back)
 {
-	t_env *slow = source;
-	t_env *fast = source->next;
+	t_env	*slow;
+	t_env	*fast;
 
+	slow = source;
+	fast = source->next;
 	while (fast && fast->next)
 	{
 		slow = slow->next;
@@ -73,7 +92,7 @@ void split_list(t_env *source, t_env **front, t_env **back)
 	}
 	*front = source;
 	*back = slow->next;
-	slow->next = NULL; // coupe la liste
+	slow->next = NULL;
 }
 
 /*
@@ -84,11 +103,11 @@ void split_list(t_env *source, t_env **front, t_env **back)
 	•	Elle les fusionne et remet le résultat dans *head_ref
 */
 
-void sort_env(t_env **head_ref)
+void	sort_env(t_env **head_ref)
 {
-	t_env *head;
-	t_env *a;
-	t_env *b;
+	t_env	*head;
+	t_env	*a;
+	t_env	*b;
 
 	head = *head_ref;
 	if (!head || head->next == NULL)

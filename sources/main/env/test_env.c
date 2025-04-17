@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:56:07 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 14:57:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:06:53 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char **argv, char **envp)
 		printf("Valeur de SHELL = %s\n", val);
 	else
 		printf("SHELL non trouvée\n");
-
-	// Tu peux ajouter ici un free_env(env_list) si tu l’as
+	free_env(env_list);
 	return (0);
 }

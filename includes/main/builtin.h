@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/14 17:33:55 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:01:43 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ int		builtin_unset(t_shell *shell, char **args);
 int		builtin_echo(char **args);
 int		builtin_env(t_env *env);
 void	builtin_exit(t_shell *shell, int error, char *arg);
-int		builtin_export(t_env *env, char *arg);
+
+//! export
+bool	builtin_export(t_env **env, char *arg);
+bool	env_update(t_env **env, t_env *new_node);
+bool	pars_arg(t_env **env, char *arg);
+bool	handle_assignment(t_env **env, t_env *new_node, bool append);
+void	display_export(t_env *env);
+
+//! export utils
 bool	is_valid_identifier(const char *str);
+t_env	*find_node(t_env *env, char *var_name);
+bool	parse_key_value(char *arg, char **key, char **value, bool *append);
 
 #endif

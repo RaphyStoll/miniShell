@@ -16,3 +16,7 @@ test_parsing
 test_ast
 test_env
 *.gch
+$HOME
+$HOM"E"
+$USER
+$USER'$USER'

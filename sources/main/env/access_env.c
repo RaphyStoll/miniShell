@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 11:16:33 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/14 14:20:11 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/16 23:08:31 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
 #include "minishell.h"
+#include "utils.h"
 
 /**
  * @brief Get the value of a variable from the environment list.
@@ -76,4 +77,49 @@ char	**get_envp(t_env *env)
 	}
 	envp[count] = NULL;
 	return (envp);
+}
+
+t_env	*get_last_node(t_env *dup_env)
+{
+	if (!dup_env)
+		return (NULL);
+	while (dup_env->next)
+		dup_env = dup_env->next;
+	return (dup_env);
+}
+
+void	append_node(t_env **env, t_env *new_node)
+{
+	t_env	*current;
+
+	if (*env == NULL)
+		*env = new_node;
+	else
+	{
+		current = *env;
+		while (current->next)
+			current = current->next;
+		current->next = new_node;
+	}
+}
+
+void	remplace_node(t_env **env, t_env *old_node, t_env *new_node)
+{
+	t_env	*prev;
+	t_env	*current;
+
+	prev = NULL;
+	current = *env;
+	while (current && current != old_node)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (prev)
+		prev->next = new_node;
+	else
+		*env = new_node;
+	free(old_node->type);
+	free(old_node->value);
+	free(old_node);
 }

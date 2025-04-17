@@ -1,101 +1,120 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 23:04:08 by raphaelferr       #+#    #+#             */
+/*   Updated: 2025/04/16 23:05:34 by raphaelferr      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
 
-int	builtin_export(t_env *env, char *arg)
+bool	builtin_export(t_env **env, char *arg)
 {
-	t_env *dup_env;
-	t_env *current;
-	(void)arg;
-	
-	dup_env = env_dup(env);
-	//if (arg)
-	//	pars_arg(dup_env, arg);
-	current = dup_env;
-	if (!dup_env)
-		return (1);
-	while (current != NULL)
-	{
-		if (is_valid_identifier(current->type))
-			return (false);
-		current = current->next;
-	}
-	sort_env(&dup_env);
-	current = dup_env;
-	while (current != NULL)
-	{
-		printf("declare -x %s=%s\n", current->type, current->value);
-		current = current->next;
-	}
-	free_env(dup_env);
-	free_env(current);
-	return (0);
-}
-/*
-void pars_arg(t_env *env, char *arg)
-{
-	t_env	*current;
+	t_env	*dup_env;
 	t_env	*new_node;
-	int	 	f_add;
-	int		i;
+	t_env	*clone;
 
-	f_add = 0;
-	i = 0;
-	current = env;
-	while(arg[i])
+	dup_env = env_dup(*env);
+	if (!dup_env)
+		return (false);
+	if (arg)
 	{
-		if (arg[i] == '=' && arg[i + 1] == '+')
-				f_add = 1;
+		if (!pars_arg(&dup_env, arg))
+			return (free_env(dup_env), false);
+		new_node = get_last_node(dup_env);
+		if (!new_node)
+			return (free_env(dup_env), false);
+		clone = create_env_node(new_node->type, new_node->value);
+		if (!clone)
+			return (free_env(dup_env), false);
+		if (!env_update(env, clone))
+			return (free_env(dup_env), free_env(clone), false);
 	}
+	else
+		display_export(dup_env);
+	free_env(dup_env);
+	return (true);
 }
-*/
-/*
- //! test
-t_env	*init_env(char **env)
-{
-	t_env	*env_list;
-	t_env	*new;
-	int		i;
-	int		j;
 
-	env_list = NULL;
-	i = 0;
-	if (!env)
-		return NULL;
-	while (env[i])
+bool	env_update(t_env **env, t_env *new_node)
+{
+	t_env	*exist;
+
+	if (!env || !new_node)
+		return (false);
+	exist = find_node(*env, new_node->type);
+	if (exist)
+		remplace_node(env, exist, new_node);
+	else
+		append_node(env, new_node);
+	return (true);
+}
+
+bool	pars_arg(t_env **env, char *arg)
+{
+	char	*key;
+	char	*value;
+	bool	append;
+	t_env	*new_node;
+
+	if (!parse_key_value(arg, &key, &value, &append))
+		return (false);
+	new_node = create_env_node(key, value);
+	free(key);
+	free(value);
+	if (!new_node)
+		return (false);
+	return (handle_assignment(env, new_node, append));
+}
+
+bool	handle_assignment(t_env **env, t_env *new_node, bool append)
+{
+	t_env	*existing;
+	char	*joined;
+
+	existing = find_node(*env, new_node->type);
+	if (existing)
 	{
-		j = 0;
-		while (env[i][j] != '=' && env[i][j])
-			j++;
-		if (env[i][j] == '=')
+		if (append && existing->value && new_node->value)
 		{
-			new = malloc(sizeof(t_env));
-			if (!new)
-				return (free_env(env_list), NULL);
-			new->type = ft_substr(env[i], 0, j);
-			if (!new->type)
-				return (free_env(env_list), free(new), NULL);
-			new->value = ft_strdup(&env[i][j + 1]);
-			if (!new->value)
-				return (free_env(env_list), free(new->type), free(new), NULL);
-			new->next = NULL;
-			add_env_node(&env_list, new);
-			if (!env_list)
-				return (free_env(env_list), free(new->type), free(new->value), free(new), NULL);
+			joined = ft_strjoin(existing->value, new_node->value);
+			if (!joined)
+				return (free_env(new_node), false);
+			free(existing->value);
+			existing->value = joined;
+			free_env(new_node);
 		}
-		i++;
+		else
+			remplace_node(env, existing, new_node);
 	}
-	return (env_list);
+	else
+		append_node(env, new_node);
+	return (true);
 }
 
-int main (int ac, char **av, char **envp)
+void	display_export(t_env *env)
 {
-	(void)ac;
-	(void)av;
-	t_env *env = init_env(envp);
-	if (!env)
-		return 1;
-	builtin_export(env);
-	return 0;
+	t_env	*sorted;
+	t_env	*cur;
+
+	sorted = env_dup(env);
+	if (!sorted)
+		return ;
+	sort_env(&sorted);
+	cur = sorted;
+	while (cur)
+	{
+		if (cur->value)
+			printf("declare -x %s=\"%s\"\n", cur->type, cur->value);
+		else
+			printf("declare -x %s\n", cur->type);
+		cur = cur->next;
+	}
+	free_env(sorted);
 }
-*/
