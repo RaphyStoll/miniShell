@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/16 23:20:39 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/17 11:14:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_shell	*init_shell(char **envp)
 	shell->env = init_env(envp);
 	if (!shell->env)
 		shell->env = init_minimal_env(shell->env);
+	shell->shell_level = 1;
 	set_signals();
 	ignore_ctrl_display();
 	shell->prompt = strdup("minishell-0.8$ ");
