@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_exception.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 22:33:22 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/19 10:04:10 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static bool	handle_redirect_in(t_token *token)
 	}
 	if (access(token->next->str, F_OK) != 0)
 	{
+		write(2, "minishell: ", 12);
 		perror(token->next->str);
 		return (false);
 	}
