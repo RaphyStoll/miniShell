@@ -20,3 +20,5 @@ $HOME
 $HOM"E"
 $USER
 $USER'$USER'
+*.log
+mstest*
