@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/19 11:06:15 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/19 11:11:51 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ static bool	run_pipe(t_token *token)
 
 	pid = fork();
 	if (pid == -1)
-		return (perror("fork"), GENERIC_ERROR);
+		return (free_tokens(token), perror("fork"), GENERIC_ERROR);
 	if (pid == 0)
 		handle_heredoc(token);
 	if (waitpid(pid, &status, 0) == 0)
 	{
 		perror("waitpid");
-		return (GENERIC_ERROR);
+		return (free_tokens(token), GENERIC_ERROR);
 	}
-	return (status);
+	return (free_tokens(token), status);
 }
 
 bool	handle_redirection_exceptions(t_token *token)
