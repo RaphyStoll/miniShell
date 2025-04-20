@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_exception.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/19 11:11:51 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/20 10:18:48 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static bool	handle_redirect_out(t_token *token)
 
 static bool	handle_heredoc(t_token *token)
 {
-	char	*line;
-	char	*delimiter;
+	char				*line;
+	char				*delimiter;
 
 	if (!token->next || token->next->type != WORD)
 	{
@@ -69,15 +69,22 @@ static bool	handle_heredoc(t_token *token)
 		return (false);
 	}
 	delimiter = token->next->str;
+	signal(SIGINT, exception_sigint_handler);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		if (!line || ft_strcmp(line, delimiter) == 0 || g_signal == SIGINT)
 		{
 			free(line);
 			break ;
 		}
 		free(line);
+	}
+	signal(SIGINT, sigint_handler);
+	if (g_signal == SIGINT)
+	{
+		g_signal = 0;
+		return (false);
 	}
 	return (true);
 }

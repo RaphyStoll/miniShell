@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:35:18 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/17 15:10:06 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	ignore_ctrl_display(void);
 void	set_heredoc_signals(struct sigaction *old);
 void	restore_signals(struct sigaction *old);
 void	heredoc_sigint_handler(int sig);
+
+// exception
+void	set_exception_signals(struct sigaction *old);
+void	exception_sigint_handler(int sig);
 
 #endif

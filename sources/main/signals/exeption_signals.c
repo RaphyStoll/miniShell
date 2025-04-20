@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*   exeption_signals.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:20:08 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 15:01:26 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/17 16:58:52 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,11 @@
  *
  * @param sig The signal number (unused).
  */
-void	heredoc_sigint_handler(int sig)
+void	exception_sigint_handler(int sig)
 {
 	(void)sig;
 	write(1, "\n", 1);
-	exit(130);
-}
-
-/**
- * @brief Restores the previous signal handler for SIGINT.
- *
- * Used after heredoc input to reset the signal behavior back
- * to the default shell handler.
- *
- * @param old Pointer to the previous sigaction structure to restore.
- */
-void	restore_signals(struct sigaction *old)
-{
-	sigaction(SIGINT, old, NULL);
+	g_signal = SIGINT;
 }
 
 /**
@@ -48,12 +35,12 @@ void	restore_signals(struct sigaction *old)
  *
  * @param old Pointer to store the previous sigaction structure.
  */
-void	set_heredoc_signals(struct sigaction *old)
+void	set_exception_signals(struct sigaction *old)
 {
-	struct sigaction	new;
+	struct sigaction	new_e;
 
-	new.sa_handler = heredoc_sigint_handler;
-	new.sa_flags = 0;
-	sigemptyset(&new.sa_mask);
-	sigaction(SIGINT, &new, old);
+	new_e.sa_handler = exception_sigint_handler;
+	new_e.sa_flags = 0;
+	sigemptyset(&new_e.sa_mask);
+	sigaction(SIGINT, &new_e, old);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:09:42 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/17 14:12:15 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 
 	while (1)
 	{
-		input = readline("> ");
+		input = readline("heredoc> ");
 		if (!input || ft_strcmp(input, redir->target) == 0)
 		{
 			free(input);
@@ -76,7 +76,7 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	{
 		close(fd);
 		restore_signals(&old_sa);
-		return (-1);
+		return (-2);
 	}
 	close(fd);
 	restore_signals(&old_sa);
@@ -135,11 +135,10 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
 	else if (type == REDIRECTION_OUT || type == REDIRECTION_APPEND)
 		target_fd = STDOUT_FILENO;
 	fd = open_redirection_file(redir, shell);
-	if (fd == -1)
-	{
-		perror(redir->target);
+	if (fd == -2)
 		return (false);
-	}
+	if (fd == -1)
+		return (perror(redir->target), false);
 	if (dup2(fd, target_fd) == -1)
 	{
 		perror("dup2");

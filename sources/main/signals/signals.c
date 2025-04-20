@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:53:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 11:15:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/17 14:17:27 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	set_signals(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
-	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
@@ -74,31 +73,3 @@ void	ignore_ctrl_display(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-// int	main(void)
-// {
-// 	char *input;
-
-// 	set_signals();
-// 	ignore_ctrl_display();
-// 	rl_catch_signals = 0;
-// 	while (1)
-// 	{
-// 		input = readline("test$ ");
-// 		if (!input)
-// 		{
-// 			if (g_signal == SIGINT)
-// 			{
-// 				handle_signals(); // réaffiche proprement le prompt
-// 				continue;
-// 			}
-// 			printf("exit\n");
-// 			break;
-// 		}
-// 		handle_signals(); // au cas où SIGINT est arrivé après readline
-// 		if (*input)
-// 			add_history(input);
-// 		free(input);
-// 	}
-// 	rl_clear_history();
-// 	return (0);
-// }
