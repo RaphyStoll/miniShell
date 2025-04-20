@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:51:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 15:45:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 00:38:17 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include "env_struct.h"
 # include "ast_struct.h"
 # include "stdlib.h"

@@ -6,13 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/20 23:04:39 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:38:35 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include <string.h>
 # include <unistd.h>
 # include "colors.h"

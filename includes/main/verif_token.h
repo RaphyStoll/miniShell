@@ -6,12 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:14 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/20 23:58:54 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:38:40 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VERIF_TOKEN_H
 # define VERIF_TOKEN_H
+
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include "lexing_struct.h"
 
 //!token verif

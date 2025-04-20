@@ -6,13 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:01:41 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:38:09 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_STRUCT_H
 # define ENV_STRUCT_H
 
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include <stdio.h>
 # include <stdbool.h>
 

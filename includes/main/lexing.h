@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/20 19:02:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 00:38:22 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXING_H
 # define LEXING_H
 
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include "lexing_struct.h"
 # include "utils.h"
 # include "minishell.h"
