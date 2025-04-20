@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/20 17:17:09 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/20 23:36:39 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	process_input(char *input, t_shell *shell)
 	{
 		return (false);
 	}
-	if (!init_parsing(tokens, &flag) || flag != 1)
+	if (!init_parsing(tokens, &flag) || flag == 1)
 	{
 		free_tokens(tokens);
 		return (false);

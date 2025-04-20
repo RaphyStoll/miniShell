@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:57:36 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/20 20:41:14 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ bool	valid_type_or_prev(t_token *cur)
 
 bool	valid_type_or_next(t_token *cur)
 {
+	printf("adshias\n");
 	if (cur->type == OR)
 	{
+		printf("hello\n");
+		print_current_token(cur);
 		if (cur->next == NULL)
 			return (false);
 		if (!(cur->next->type == WORD || cur->next->type == O_PARENTHESIS))

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/14 13:34:44 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/20 23:10:14 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "minishell.h"
 
 void	print_error_message(t_error_code code, char *error_token)
 {
@@ -46,4 +47,12 @@ t_token	*ft_exit_error(t_token *tokens, t_error_code code, char *error_token)
 	if (tokens)
 		free_all(tokens);
 	return (NULL);
+}
+
+void	print_syntax_error(char *token)
+{
+	ft_putstr_fd(SHELL_NAME, STDERR_FILENO);
+	ft_putstr_fd(": syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd(token, STDERR_FILENO);
+	ft_putendl_fd("`", STDERR_FILENO);
 }

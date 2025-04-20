@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debbug.c                                           :+:      :+:    :+:   */
+/*   debbug_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/20 14:34:13 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/20 20:37:07 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/main/error_code.h"
-#include "../../../includes/main/lexing.h"
-#include "../../../includes/main/parsing.h"
+#include "error_code.h"
+#include "lexing.h"
+#include "parsing.h"
 
 
 // Fonction pour afficher la liste de tokens (utile pour débugger)
