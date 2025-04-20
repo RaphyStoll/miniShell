@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/20 23:36:39 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:43:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_shell	*init_shell(char **envp)
 		shell->env = init_minimal_env(shell->env);
 	shell->shell_level = ft_atoi(get_env_value(shell, "SHLVL"));
 	shell->shell_level++;
-	set_env_value(&shell->env,"SHLVL", ft_itoa(shell->shell_level));
+	set_env_value(&shell->env, "SHLVL", ft_itoa(shell->shell_level));
 	set_signals();
 	ignore_ctrl_display();
 	shell->prompt = strdup("minishell-0.8$ ");
@@ -70,8 +70,7 @@ t_shell	*init_shell(char **envp)
 bool	process_input(char *input, t_shell *shell)
 {
 	t_token	*tokens;
-
-	int flag;
+	int		flag;
 
 	flag = 0;
 	tokens = lexer(input);

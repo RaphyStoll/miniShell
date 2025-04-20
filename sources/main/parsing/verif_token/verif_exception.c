@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 00:25:28 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:41:10 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-# include <sys/wait.h>
+#include <sys/wait.h>
 #include <readline/readline.h>
 
 static bool	handle_redirect_in(t_token *token)
@@ -104,7 +104,7 @@ static int	run_pipe(t_token *token)
 		return (GENERIC_ERROR);
 	}
 	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
+		return (WEXITSTATUS(status));
 	return (status);
 }
 
@@ -114,11 +114,11 @@ bool	handle_redirection_exceptions(t_token *token, int *flag)
 		return (true);
 	if (token->type != REDIRECT_IN && token->type != REDIRECT_OUT
 		&& token->type != APPEND && token->type != HEREDOC)
-			return (true);
+		return (true);
 	if (!token->next || token->next->type != WORD)
-		return true;
+		return (true);
 	if (token->next->next != NULL)
-        return true;
+		return (true);
 	*flag = 1;
 	if (!token)
 		return (true);
