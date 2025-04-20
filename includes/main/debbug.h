@@ -3,10 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   debbug.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:51:53 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 14:51:54 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 00:48:29 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# ifndef DEBBUG_H
+# define DEBBUG_H
+
+# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
+
+#endif
