@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/12 19:04:31 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:59:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ char	*get_unquoted_word(const char **input)
 
 	len = 0;
 	start = *input;
-	while ((*input)[len] && (*input)[len] != ' ' && !is_symbol((*input)[len]))
+	while ((*input)[len]
+		&& (*input)[len] != ' '
+		&& !is_symbol((*input)[len])
+		&& !is_quote((*input)[len]))
 		len++;
 	word = ft_strndup(start, len);
 	*input += len;
@@ -61,6 +64,7 @@ char	*handle_word(const char **input, t_quote *quote_type)
 	char	*unquoted;
 	char	*word;
 
+	word = ft_strdup("");
 	*quote_type = QUOTE_NONE;
 	quoted = get_quoted_word(input, quote_type);
 	unquoted = get_unquoted_word(input);

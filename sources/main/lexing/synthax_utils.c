@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 21:48:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/20 19:02:22 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
+
+bool is_quote(char c)
+{
+    return (c == '"' || c == '\'');
+}
 
 bool	is_parenthesis(char c)
 {
