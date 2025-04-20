@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_exception.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:25:26 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/20 10:18:48 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/20 17:14:07 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,25 +89,25 @@ static bool	handle_heredoc(t_token *token)
 	return (true);
 }
 
-static bool	run_pipe(t_token *token)
+static int	run_pipe(t_token *token)
 {
 	pid_t	pid;
 	int		status;
 
 	pid = fork();
 	if (pid == -1)
-		return (free_tokens(token), perror("fork"), GENERIC_ERROR);
+		return (perror("fork"), GENERIC_ERROR);
 	if (pid == 0)
 		handle_heredoc(token);
 	if (waitpid(pid, &status, 0) == 0)
 	{
 		perror("waitpid");
-		return (free_tokens(token), GENERIC_ERROR);
+		return (GENERIC_ERROR);
 	}
-	return (free_tokens(token), status);
+	return (status);
 }
 
-bool	handle_redirection_exceptions(t_token *token)
+bool	handle_redirection_exceptions(t_token *token, int *flag)
 {
 	if (!token)
 		return (true);
@@ -117,5 +117,6 @@ bool	handle_redirection_exceptions(t_token *token)
 		return (handle_redirect_out(token));
 	else if (token->type == HEREDOC)
 		return (run_pipe(token));
+	*flag = 1;
 	return (true);
 }

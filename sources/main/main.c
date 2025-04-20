@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/17 12:02:58 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:17:09 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ bool	process_input(char *input, t_shell *shell)
 {
 	t_token	*tokens;
 
+	int flag;
+
+	flag = 0;
 	tokens = lexer(input);
 	if (!tokens)
 	{
 		return (false);
 	}
-	if (!init_parsing(tokens))
+	if (!init_parsing(tokens, &flag) || flag != 1)
 	{
 		free_tokens(tokens);
 		return (false);
