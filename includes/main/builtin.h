@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 00:38:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:44:35 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>

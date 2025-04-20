@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 00:38:35 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:49:04 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include <string.h>
 # include <unistd.h>
 # include "colors.h"
@@ -33,9 +32,9 @@ void	free_env(t_env *head);
 
 //!env list utils
 t_env	*env_dup(t_env *src);
-t_env *sorted_merge(t_env *a, t_env *b);
-void split_list(t_env *source, t_env **front, t_env **back);
-void sort_env(t_env **head_ref);
+t_env	*sorted_merge(t_env *a, t_env *b);
+void	split_list(t_env *source, t_env **front, t_env **back);
+void	sort_env(t_env **head_ref);
 
 //! free ast
 

@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 00:33:01 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:44:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include "lexing.h"
 # include "error_code.h"
 # include "colors.h"
@@ -65,9 +64,6 @@ bool	valid_type_append_next(t_token *cur);
 
 //! verif exception
 bool	handle_redirection_exceptions(t_token *token, int *flag);
-
-//! verif_utils
-bool	is_simple_redirection(t_token *token);
 
 //!free
 void	free_tokens(t_token *head);

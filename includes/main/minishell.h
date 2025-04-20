@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/21 00:38:25 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:44:53 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # define SHELL_NAME "Minishell"
 # include <stdlib.h>
 # include <stdio.h>

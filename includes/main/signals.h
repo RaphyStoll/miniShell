@@ -6,14 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 00:38:31 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:45:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
-# define PL() printf("→ %s:%d\n", __FILE__, __LINE__)
 # include <stdio.h>
 # include <signal.h>
 # include <termios.h>
