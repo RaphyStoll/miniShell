@@ -6,12 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 00:43:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 10:22:03 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "minishell.h"
+#include "debbug.h"
 
 void	print_error_message(t_error_code code, char *error_token)
 {
@@ -29,7 +30,7 @@ void	print_error_message(t_error_code code, char *error_token)
 	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
 	{
 		write(2, "syntax error near unexpected token\n", 35);
-		write(2, error_token, 1);
+		write(2, error_token, ft_strlen(error_token));
 		write(2, "'\n", 2);
 	}
 	else if (code == MEMORY_ERROR)
@@ -47,12 +48,4 @@ t_token	*ft_exit_error(t_token *tokens, t_error_code code, char *error_token)
 	if (tokens)
 		free_all(tokens);
 	return (NULL);
-}
-
-void	print_syntax_error(char *token)
-{
-	ft_putstr_fd(SHELL_NAME, STDERR_FILENO);
-	ft_putstr_fd(": syntax error near unexpected token `", STDERR_FILENO);
-	ft_putstr_fd(token, STDERR_FILENO);
-	ft_putendl_fd("`", STDERR_FILENO);
 }
