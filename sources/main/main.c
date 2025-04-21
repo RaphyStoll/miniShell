@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/21 14:21:57 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:33:26 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	loop_non_interactive(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
+	int status;
 
 	(void) argc;
 	(void) argv;
@@ -164,7 +165,8 @@ int	main(int argc, char **argv, char **envp)
 		loop_shell(shell);
 	else
 		loop_non_interactive(shell);
+	status = shell->last_exit_status;
 	free_shell(shell);
 	rl_clear_history();
-	return (shell->last_exit_status);
+	return (status);
 }
