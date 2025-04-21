@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/16 23:08:31 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 17:04:16 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_env_value(t_shell *shell, char	*type)
 		{
 			value = ft_strdup(env->value);
 			if (!value)
-				return (NULL);
+				return (free_env(env), NULL);
 			return (value);
 		}
 		env = env->next;

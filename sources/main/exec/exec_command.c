@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 16:10:37 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:58:11 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 		perror(cmd->args[0]);
 		exit (PERMISSION_ERROR);
 	}
+	free(cmd_path);
+	free_array(envp);
 }
 
 /**
