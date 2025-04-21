@@ -6,12 +6,13 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 11:24:51 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:10:37 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "debbug.h"
 
 /**
  * @brief Searches for an executable command in a list of paths.
@@ -74,7 +75,8 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 		return (NULL);
 	cmd_path = check_all_paths(paths, cmd);
 	if (!cmd_path)
-		free_array(paths);
+		return (ft_putstr_fd(cmd, 2), ft_putstr_fd(": command not found\n", 2),
+			free_array(paths), NULL);
 	return (cmd_path);
 }
 

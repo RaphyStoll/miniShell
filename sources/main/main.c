@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/21 14:33:26 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:42:52 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	loop_shell(t_shell *shell)
 	while (1)
 	{
 		input = readline(shell->prompt);
-		PL();
 		if (!input)
 		{
 			printf("exit\n");
@@ -134,7 +133,6 @@ void	loop_non_interactive(t_shell *shell)
 
 	while (1)
 	{
-		PL();
 		input = readline(NULL);
 		if (!input)
 			break ;

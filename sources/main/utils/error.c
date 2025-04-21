@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 10:54:45 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 15:34:03 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_error_message(t_error_code code, char *error_token)
 {
 	if (!error_token)
 		error_token = "newline";
-	write (2, SHELL_NAME, ft_strlen(SHELL_NAME));
+	//write (2, SHELL_NAME, ft_strlen(SHELL_NAME));
 	if (code == UNCLOSED_QUOTE)
 	{
 		write(2,
@@ -29,7 +29,7 @@ void	print_error_message(t_error_code code, char *error_token)
 	}
 	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
 	{
-		write(2, "syntax error near unexpected token\n", 35);
+		write(2, "syntax error near unexpected token `", 36);
 		write(2, error_token, ft_strlen(error_token));
 		write(2, "'\n", 2);
 	}

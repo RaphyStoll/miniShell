@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/21 00:44:53 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 15:31:31 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SHELL_NAME "Minishell"
+# define SHELL_NAME "Minishell : "
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
