@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 10:22:03 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 10:54:45 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	print_error_message(t_error_code code, char *error_token)
 {
 	if (!error_token)
 		error_token = "newline";
-	write (2, "minishell: ", 11);
+	write (2, SHELL_NAME, ft_strlen(SHELL_NAME));
 	if (code == UNCLOSED_QUOTE)
 	{
 		write(2,
 			"syntax error near unexpected EOF while looking for matching\n",
 			60);
-		write(2, error_token, 1);
+		write(2, error_token, ft_strlen(error_token));
 		write(2, "'\n", 2);
 	}
 	else if (code == UNCLOSED_PARENTHESIS || code == SYNTAX_ERROR)
