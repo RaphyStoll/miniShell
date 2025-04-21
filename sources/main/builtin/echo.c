@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 15:56:26 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 21:04:20 by raphael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "error_code.h"
 #include "builtin_struct.h"
 #include "../../../lib/libft/header/libft.h"
+#include "debbug.h"
 
 /**
  * @brief Activates an option in the structure.
@@ -112,9 +113,9 @@ int	builtin_echo(char **args)
 	parse_echo(args, &options, &i);
 	if (!args[i])
 	{
-		errno = 22;
-		perror("echo");
-		return (GENERIC_ERROR);
+		if (!options.n)
+			printf("\n");
+		return (SUCCESS);
 	}
 	while (args[i])
 	{
