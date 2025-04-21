@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/14 18:07:33 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 11:24:51 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,18 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 	char	*path_var;
 	char	*cmd_path;
 
+	if (cmd[0] == '/')
+	{
+		if (access(cmd, F_OK) != 0)
+			return (perror(cmd), NULL);
+		if (access(cmd, X_OK) != 0)
+			return (perror(cmd), NULL);
+		return (ft_strdup(cmd));
+	}
 	path_var = get_env_value(shell, "PATH");
 	if (!path_var)
 		path_var = \
 		"/bin/:/usr/bin/:/usr/local/bin/:/sbin/:/usr/sbin/:/usr/local/sbin/";
-	if (access(cmd, X_OK) == 0
-		&& (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0
-			|| ft_strncmp(cmd, "../", 3) == 0))
-		return (ft_strdup(cmd));
 	paths = ft_split(path_var, ':');
 	if (!paths)
 		return (NULL);
@@ -95,8 +99,6 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	if (!cmd_path)
 	{
 		free_array(envp);
-		write(2, cmd->args[0], ft_strlen(cmd->args[0]));
-		write(2, ": command not found\n", 20);
 		exit (COMMAND_NOT_FOUND);
 	}
 	if (execve(cmd_path, cmd->args, envp) == -1)

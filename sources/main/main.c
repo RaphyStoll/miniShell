@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/21 00:43:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 13:26:18 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "ast.h"
 #include "exec.h"
 #include <errno.h>
+#include "debbug.h"
 
 /**
  * @brief Global variable used to store the last caught signal number.
@@ -109,6 +110,7 @@ void	loop_shell(t_shell *shell)
 	while (1)
 	{
 		input = readline(shell->prompt);
+		PL();
 		if (!input)
 		{
 			printf("exit\n");
@@ -122,6 +124,30 @@ void	loop_shell(t_shell *shell)
 			shell->ast = NULL;
 		}
 		free(input);
+		g_signal = 0;
+	}
+}
+
+void	loop_non_interactive(t_shell *shell)
+{
+	char	*input;
+
+	while (1)
+	{
+		PL();
+		input = readline(NULL);
+		if (!input)
+			break ;
+		if (*input)
+		{
+			if (process_input(input, shell))
+			{
+				free_all_ast(shell->ast);
+				shell->ast = NULL;
+			}
+			free(input);
+			g_signal = 0;
+		}
 	}
 }
 
@@ -134,8 +160,11 @@ int	main(int argc, char **argv, char **envp)
 	shell = init_shell(envp);
 	if (!shell)
 		return (EXIT_FAILURE);
-	loop_shell(shell);
+	if (isatty(STDIN_FILENO))
+		loop_shell(shell);
+	else
+		loop_non_interactive(shell);
 	free_shell(shell);
 	rl_clear_history();
-	return (EXIT_SUCCESS);
+	return (shell->last_exit_status);
 }
