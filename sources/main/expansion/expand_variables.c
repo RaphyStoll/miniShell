@@ -6,13 +6,21 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 15:46:06 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/20 20:46:18 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
 
+bool	expand_wildcard(t_node *node, t_shell *shell)
+{
+	int		i;
+	int		files_count;
+	char	**new;
+
+	
+}
 /**
  * @brief Expands variables in redirection targets.
  *
@@ -91,6 +99,11 @@ bool	expand_all(t_node *node, t_shell *shell)
 	if (!expand_redirections(node, shell))
 	{
 		perror("Error rexpanding redirections");
+		return (false);
+	}
+	if (!expand_wildcard(node, shell))
+	{
+		perror("Error expanding wildcard *");
 		return (false);
 	}
 	return (true);
