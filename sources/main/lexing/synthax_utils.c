@@ -6,12 +6,17 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 21:48:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:39:53 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
+
+bool	is_quote(char c)
+{
+	return (c == '"' || c == '\'');
+}
 
 bool	is_parenthesis(char c)
 {

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:24:42 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:09:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "minishell.h"
 
 /**
  * @brief Allocates and initializes a new t_env node.
@@ -24,8 +25,8 @@ t_env	*create_env_node(char *type, char *value)
 	t_env	*node;
 
 	node = malloc(sizeof(t_env));
-	if (!node)
-		return (false);
+	if (!node || !type || !value)
+		return (NULL);
 	node->type = ft_strdup(type);
 	node->value = ft_strdup(value);
 	node->next = NULL;
@@ -44,6 +45,7 @@ bool	set_env_value(t_env **env_list, char *type, char *value)
 {
 	t_env	*tmp;
 	t_env	*new;
+	char	*new_value;
 
 	if (!env_list || !type || !*type)
 		return (false);
@@ -52,12 +54,13 @@ bool	set_env_value(t_env **env_list, char *type, char *value)
 	{
 		if (ft_strcmp(tmp->type, type) == 0)
 		{
+			new_value = ft_strdup(value);
+			if (!new_value)
+				return (false);
 			free(tmp->value);
-			tmp->value = ft_strdup(value);
+			tmp->value = new_value;
 			return (true);
 		}
-		if (!tmp->next)
-			break ;
 		tmp = tmp->next;
 	}
 	new = create_env_node(type, value);
@@ -76,9 +79,12 @@ void	env_delone(t_env *node)
 {
 	if (!node)
 		return ;
-	free(node->type);
-	free(node->value);
-	free(node);
+	if (!node->type)
+		free(node->type);
+	if (!node->value)
+		free(node->value);
+	if (!node)
+		free(node);
 }
 
 /**
@@ -91,6 +97,8 @@ void	unset_env(t_env **env, char *type)
 {
 	t_env	*delete_node;
 
+	if (!env || !*env)
+		return ;
 	while (env && *env)
 	{
 		if (strcmp((*env)->type, type) == 0)

@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 19:47:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 10:59:10 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 # include "lexing.h"
 # include "error_code.h"
 # include "colors.h"
-# include "ast.h"
 # include "utils.h"
 # include "../../lib/libft/header/libft.h"
 # include "../../lib/libft/header/libft_bonus.h"
 
 //!parsing
-bool	init_parsing(t_token *tokens);
+bool	init_parsing(t_shell *shell, t_token *tokens, int *flag);
 
 //! debbug
 void	print_tokens(t_token *head);
@@ -64,7 +63,7 @@ bool	valid_type_append_prev(t_token *cur);
 bool	valid_type_append_next(t_token *cur);
 
 //! verif exception
-bool	handle_redirection_exceptions(t_token *token_list);
+bool	handle_redirection_exceptions(t_token *token, int *flag);
 
 //!free
 void	free_tokens(t_token *head);

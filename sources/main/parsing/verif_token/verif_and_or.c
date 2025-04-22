@@ -6,12 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:57:36 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 10:12:55 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "lexing_struct.h"
+#include "debbug.h"
 
 bool	valid_type_and_prev(t_token *cur)
 {
@@ -77,6 +78,7 @@ bool	valid_type_or_next(t_token *cur)
 {
 	if (cur->type == OR)
 	{
+		print_current_token(cur);
 		if (cur->next == NULL)
 			return (false);
 		if (!(cur->next->type == WORD || cur->next->type == O_PARENTHESIS))

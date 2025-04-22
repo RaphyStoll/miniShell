@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/25 22:11:28 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/16 23:19:57 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,37 @@ void	free_tokens(t_token *head)
 		free(current);
 		current = next;
 	}
+}
+
+void	free_env(t_env *head)
+{
+	t_env	*current;
+	t_env	*next;
+
+	current = head;
+	while (current != NULL)
+	{
+		next = current->next;
+		if (current->type)
+			free(current->type);
+		if (current->value)
+			free(current->value);
+		if (current)
+			free(current);
+		current = next;
+	}
+}
+
+void	free_shell(t_shell *shell)
+{
+	if (!shell)
+		return ;
+	if (shell->ast)
+		free_all_ast(shell->ast);
+	if (shell->env)
+		free_env(shell->env);
+	if (shell->prompt)
+		free(shell->prompt);
+	if (shell)
+		free(shell);
 }

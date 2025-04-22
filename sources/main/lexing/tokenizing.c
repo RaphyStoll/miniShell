@@ -6,12 +6,13 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/01 12:34:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/20 18:59:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
+#include "quote_type.h"
 
 char	*get_quoted_word(const char **input, t_quote *quote_type)
 {
@@ -25,9 +26,9 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
 		return (NULL);
 	quote = **input;
 	if (quote == '"')
-		*quote_type = DOUBLE_QUOTE;
+		*quote_type = QUOTE_DOUBLE;
 	else
-		*quote_type = SINGLE_QUOTE;
+		*quote_type = QUOTE_SINGLE;
 	(*input)++;
 	start = *input;
 	while ((*input)[len] && (*input)[len] != quote)
@@ -47,7 +48,10 @@ char	*get_unquoted_word(const char **input)
 
 	len = 0;
 	start = *input;
-	while ((*input)[len] && (*input)[len] != ' ' && !is_symbol((*input)[len]))
+	while ((*input)[len]
+		&& (*input)[len] != ' '
+		&& !is_symbol((*input)[len])
+		&& !is_quote((*input)[len]))
 		len++;
 	word = ft_strndup(start, len);
 	*input += len;
@@ -60,7 +64,8 @@ char	*handle_word(const char **input, t_quote *quote_type)
 	char	*unquoted;
 	char	*word;
 
-	*quote_type = NO_QUOTE;
+	word = ft_strdup("");
+	*quote_type = QUOTE_NONE;
 	quoted = get_quoted_word(input, quote_type);
 	unquoted = get_unquoted_word(input);
 	if (quoted || unquoted)
@@ -99,6 +104,7 @@ t_token	*tokenizing(const char *input)
 		if (!word)
 			return (ft_exit_error(token_list, MEMORY_ERROR, "word"));
 		add_token(&token_list, word, WORD, quote_type);
+		free(word);
 	}
 	return (token_list);
 }

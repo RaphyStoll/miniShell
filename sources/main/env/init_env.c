@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/03/31 15:25:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:07:09 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
+#include "../../../lib/libft/header/libft.h"
+#include "utils.h"
 
 /**
  * @brief Adds a new t_env node at the end of the environment list.
@@ -23,6 +25,8 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 {
 	t_env	*tmp;
 
+	if (!env_list)
+		return (NULL);
 	if (*env_list == NULL)
 		*env_list = new;
 	else
@@ -33,6 +37,35 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 		tmp->next = new;
 	}
 	return (*env_list);
+}
+
+t_env	*init_minimal_env(t_env *env)
+{
+	t_env	*new_env;
+
+	new_env = malloc(sizeof(t_env));
+	if (!new_env)
+		return (NULL);
+	new_env->type = "PWD";
+	new_env->value = getcwd(NULL, 0);
+	if (!new_env->value)
+		return (free_env(new_env), NULL);
+	new_env->next = NULL;
+	add_env_node(&env, new_env);
+	new_env = new_env->next;
+	new_env = malloc(sizeof(t_env));
+	if (!new_env)
+		return (NULL);
+	new_env->type = "SHLVL";
+	new_env->value = "1";
+	new_env->next = NULL;
+	add_env_node(&env, new_env);
+	new_env = new_env->next;
+	new_env = malloc(sizeof(t_env));
+	if (!new_env)
+		return (NULL);
+	return (new_env->type = "_", new_env->value = "/bin/",
+		new_env->next = NULL, add_env_node(&env, new_env), env);
 }
 
 /**

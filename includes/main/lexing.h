@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/01 12:33:34 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/21 00:45:16 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type);
 bool	add_token(t_token **head, char *str, t_type op, t_quote quote_type);
 
 // Synthax utils
+bool	is_quote(char c);
 t_type	is_operator(const char *input);
 bool	is_symbol(char c);
 bool	is_parenthesis(char c);
