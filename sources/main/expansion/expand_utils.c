@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/22 15:33:18 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:42:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	handle_exit_status(char **result, t_shell *shell)
  * @param env Environment variable list
  * @return 1 on success, 0 on failure.
  */
-int	handle_variable(char **result, char *arg, int *i, t_shell *shell)
+bool	handle_variable(char **result, char *arg, int *i, t_shell *shell)
 {
 	char	*type;
 	char	*value;

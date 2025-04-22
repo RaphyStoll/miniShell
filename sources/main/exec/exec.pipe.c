@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 16:11:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:51:26 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
 		close(pipe_fd[1]);
 		handle_parent_process(pid, shell);
 	}
-	return (0);
+	return (shell->last_exit_status);
 }
 
 /**
