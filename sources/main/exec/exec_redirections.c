@@ -6,12 +6,13 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 14:12:15 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:11:23 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "debbug.h"
 
 /**
  * @brief Reads heredoc input and writes it to a file.

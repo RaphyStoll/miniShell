@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 15:48:52 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:29:59 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 			shell->last_exit_status = GENERIC_ERROR;
 			return (shell->last_exit_status);
 		}
-
 		status = execute_command(ast_node, shell);
 	}
 	else if (ast_node->type == AST_PIPE)
