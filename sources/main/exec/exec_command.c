@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 16:58:11 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:08:28 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ int	execute_command(t_node *cmd, t_shell *shell)
 {
 	pid_t	pid;
 
-	if (!cmd || !cmd->args || !cmd->args[0] || !cmd->args[0][0])
-		return (1);
+	if (!cmd || !cmd->args || !cmd->args[0])
+		return (0);
 	if (is_builtin(cmd->args[0]))
 	{
 		shell->last_exit_status = execute_builtin(cmd->args, shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/22 13:36:54 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:33:18 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@
  * @param result Pointer to the result string to update.
  * @return 1 on success, 0 on failure.
  */
-int	handle_exit_status(char **result, t_shell *shell)
+bool	handle_exit_status(char **result, t_shell *shell)
 {
 	char	*value;
 	char	*tmp;
 
 	value = ft_itoa(shell->last_exit_status);
 	if (!value)
-		return (0);
+		return (false);
 	tmp = *result;
 	*result = ft_strjoin(*result, value);
 	free(tmp);
 	free(value);
 	if (!*result)
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
 /**
@@ -64,7 +64,7 @@ int	handle_variable(char **result, char *arg, int *i, t_shell *shell)
 		(*i)++;
 	type = ft_strndup(&arg[start], *i - start);
 	if (!type)
-		return (0);
+		return (false);
 	value = get_env_value(shell, type);
 	tmp = *result;
 	if (value)
@@ -74,8 +74,8 @@ int	handle_variable(char **result, char *arg, int *i, t_shell *shell)
 	free(tmp);
 	free(type);
 	if (!*result)
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
 /**
@@ -87,19 +87,19 @@ int	handle_variable(char **result, char *arg, int *i, t_shell *shell)
  * @param c Character to append.
  * @return 1 on success, 0 on failure.
  */
-int	handle_regular_char(char **result, char c)
+bool	handle_regular_char(char **result, char c)
 {
 	char	*tmp;
 	char	*one_char;
 
 	one_char = ft_strndup(&c, 1);
 	if (!one_char)
-		return (0);
+		return (false);
 	tmp = *result;
 	*result = ft_strjoin(*result, one_char);
 	free(tmp);
 	free(one_char);
 	if (!*result)
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
