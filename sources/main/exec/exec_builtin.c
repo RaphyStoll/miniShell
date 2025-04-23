@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:09:48 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/23 12:35:13 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,36 @@ int	execute_builtin(char **args, t_shell *shell)
 		return (shell->last_exit_status);
 	}
 	return (1);
+}
+
+/**
+ * @brief Execute a shell builtin command with its redirections.
+ *
+ * Saves and restores STDIN/STDOUT around the builtin execution.
+ * 
+ * @param cmd    AST node for the command, including arguments and redirections.
+ * @param shell  Shell context containing environment and state.
+ * @return       Exit status of the builtin, or GENERIC_ERROR on failure.
+ */
+int	execute_builtin_redir(t_node *cmd, t_shell *shell)
+{
+	int	saved_stdin;
+	int	saved_stdout;
+
+	saved_stdin = dup(STDIN_FILENO);
+	saved_stdout = dup(STDOUT_FILENO);
+	if (saved_stdin < 0 || saved_stdout < 0)
+		perror("dup");
+	if (!apply_redirections(cmd->redirections, shell))
+	{
+		dup2(saved_stdin, STDIN_FILENO);
+		dup2(saved_stdout, STDOUT_FILENO);
+		return (close(saved_stdin), close(saved_stdout), GENERIC_ERROR);
+	}
+	shell->last_exit_status = execute_builtin(cmd->args, shell);
+	dup2(saved_stdin, STDIN_FILENO);
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdin);
+	close(saved_stdout);
+	return (shell->last_exit_status);
 }

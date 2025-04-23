@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 00:44:24 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/23 12:27:49 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*find_cmd_path(char *cmd, t_shell *shell);
 char	*check_all_paths(char **paths, char *cmd);
 
 /*execute builtin*/
+int		execute_builtin_redir(t_node *cmd, t_shell *shell);
 int		execute_builtin(char **args, t_shell *shell);
 bool	is_builtin(char *cmd);
 

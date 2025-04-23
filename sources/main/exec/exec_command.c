@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/22 15:51:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/23 12:21:06 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int	execute_command(t_node *cmd, t_shell *shell)
 		return (0);
 	if (is_builtin(cmd->args[0]))
 	{
-		shell->last_exit_status = execute_builtin(cmd->args, shell);
+		shell->last_exit_status = execute_builtin_redir(cmd, shell);
 		return (shell->last_exit_status);
 	}
 	pid = fork();
