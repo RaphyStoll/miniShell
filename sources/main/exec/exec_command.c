@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/23 12:21:06 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:00:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 	char	*path_var;
 	char	*cmd_path;
 
-	if (cmd[0] == '/')
+	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) != 0)
 			return (perror(cmd), NULL);
