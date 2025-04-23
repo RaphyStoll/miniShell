@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/23 17:00:30 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:24:47 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,8 @@ int	execute_command(t_node *cmd, t_shell *shell)
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (0);
+	if (cmd->args[0][0] == '\0')
+		return (ft_putstr_fd(": command not found\n", 2), COMMAND_NOT_FOUND);
 	if (is_builtin(cmd->args[0]))
 	{
 		shell->last_exit_status = execute_builtin_redir(cmd, shell);
