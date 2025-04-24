@@ -6,14 +6,15 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:02:51 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/16 23:03:53 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 19:24:20 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../lib/libft/header/libft.h"
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
-#include "../../../lib/libft/header/libft.h"
+#include "debbug.h"
 
 bool	is_valid_identifier(const char *str)
 {

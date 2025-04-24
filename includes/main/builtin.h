@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:56:20 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 00:44:35 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 16:37:26 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		builtin_cd(t_shell *shell, char **args);
 int		builtin_unset(t_shell *shell, char **args);
 int		builtin_echo(char **args);
 int		builtin_env(t_env *env);
-void	builtin_exit(t_shell *shell, int error, char *arg);
+int		builtin_exit(t_shell *shell, char **args);
 
 //! export
 bool	builtin_export(t_env **env, char *arg);
