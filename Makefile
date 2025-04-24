@@ -186,6 +186,9 @@ endif
 
 re: fclean all
 
+valgrind: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=output/readline.supp --log-file="output/leaks.log" ./output/minishell
+
 # ------------------------------------------------------------------------------
 # Cibles phony
 # ------------------------------------------------------------------------------
