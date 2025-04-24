@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/23 12:27:49 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:11:27 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "../../lib/libft/header/libft.h"
+
+# define NO_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 int		execute_ast(t_node *ast_node, t_shell *shell);
 

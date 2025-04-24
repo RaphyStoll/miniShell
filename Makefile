@@ -12,7 +12,7 @@ NAME        = output/minishell
 NAME_BONUS  = output/minishell_bonus
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror -g
 
 UNAME_S := $(shell uname -s)
 

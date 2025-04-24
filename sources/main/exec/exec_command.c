@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/23 17:24:47 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:13:19 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,16 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, F_OK) != 0)
-			return (perror(cmd), NULL);
-		if (access(cmd, X_OK) != 0)
+		if (access(cmd, F_OK) != 0 || access(cmd, X_OK))
 			return (perror(cmd), NULL);
 		return (ft_strdup(cmd));
 	}
 	path_var = get_env_value(shell, "PATH");
 	if (!path_var)
-		path_var = \
-		"/bin/:/usr/bin/:/usr/local/bin/:/sbin/:/usr/sbin/:/usr/local/sbin/";
+		path_var = NO_PATH;
 	paths = ft_split(path_var, ':');
+	if (get_env_value(shell, "PATH"))
+		free(path_var);
 	if (!paths)
 		return (NULL);
 	cmd_path = check_all_paths(paths, cmd);
