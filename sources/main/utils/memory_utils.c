@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:07:41 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:19:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 15:34:44 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ void	free_tokens(t_token *head)
 		free(current);
 		current = next;
 	}
+}
+
+void	free_env_node(t_env *node)
+{
+	if (!node)
+		return ;
+	free(node->type);
+	free(node->value);
+	free(node);
 }
 
 void	free_env(t_env *head)

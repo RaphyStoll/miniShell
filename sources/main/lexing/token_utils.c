@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/01 12:34:26 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:21:51 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
 	{
 		operator = ft_strndup(*input, 2);
+		if (!operator)
+			return (free_all(*token_list), free(input), false);
 		*input += 2;
 	}
 	else
 	{
 		operator = ft_strndup(*input, 1);
+		if (!operator)
+			return (free_all(*token_list), free(input), false);
 		*input += 1;
 	}
 	if (!operator)
@@ -78,6 +82,7 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 		free(operator);
 		ft_exit_error(*token_list, MEMORY_ERROR, "token");
 	}
+	free (operator);
 	return (true);
 }
 

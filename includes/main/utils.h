@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 10:20:43 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 15:34:55 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	print_error_message(t_error_code code, char *error_token);
 //! Memory utils
 void	free_all(t_token *token);
 void	free_tokens(t_token *head);
+void	free_env_node(t_env *node);
 void	free_env(t_env *head);
 
 //!env list utils
