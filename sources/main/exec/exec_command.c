@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 15:13:19 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:07:51 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 	char	**paths;
 	char	*path_var;
 	char	*cmd_path;
+	bool	path_allocated;
 
 	if (ft_strchr(cmd, '/'))
 	{
@@ -65,10 +66,11 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 		return (ft_strdup(cmd));
 	}
 	path_var = get_env_value(shell, "PATH");
+	path_allocated = (path_var != NULL);
 	if (!path_var)
 		path_var = NO_PATH;
 	paths = ft_split(path_var, ':');
-	if (get_env_value(shell, "PATH"))
+	if (path_allocated)
 		free(path_var);
 	if (!paths)
 		return (NULL);
