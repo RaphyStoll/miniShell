@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphael <raphael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:20:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 21:03:21 by raphael          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:48:53 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 #include "error_code.h"
 #include "debbug.h"
 
-char	*cd_exception(t_shell *shell, char *ag)
+char	*cd_exception(t_shell *shell, char **ag)
 {
 	char *target;
-
-	if (ft_strcmp(ag, "~") == 0)
+	if (!ag[1])
+	{
+		target = get_env_value(shell, "HOME");
+		if (!target)
+			return (ft_putstr_fd("cd: HOME not set", 2), target);
+		else
+			return (target);
+	}
+	if (ft_strcmp(ag[1], "~") == 0)
 	{
 		target = get_env_value(shell, "HOME");
 		if (!target)
 			return (ft_putstr_fd("cd: HOME not set", 2), target);
 	}
-	if (ft_strcmp(ag, "-") == 0)
+	if (ft_strcmp(ag[1], "-") == 0)
 	{
 		target = get_env_value(shell, "OLDPWD");
 		if (!target)
@@ -41,8 +48,9 @@ int	builtin_cd(t_shell *shell, char **ag)
 	char	*oldpwd;
 	char	*newpwd;
 
+
 	if (!ag[1] || ft_strcmp(ag[1], "~") == 0 || ft_strcmp(ag[1], "-") == 0)
-		target = cd_exception(shell, ag[1]);
+		target = cd_exception(shell, ag);
 	else
 		target = ag[1];
 	oldpwd = getcwd(NULL, 0);
