@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:25 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 10:12:55 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/25 16:42:11 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ bool	valid_type_or_next(t_token *cur)
 {
 	if (cur->type == OR)
 	{
-		print_current_token(cur);
 		if (cur->next == NULL)
 			return (false);
 		if (!(cur->next->type == WORD || cur->next->type == O_PARENTHESIS))
