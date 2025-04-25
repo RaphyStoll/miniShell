@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 15:24:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:51:15 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		open_redirection_file(t_redirection *redir);
 
 /*handle heredoc type of redirections*/
 bool	prepare_heredocs(t_redirection *redir, t_shell *shell);
+bool	prepare_heredocs_ast(t_node *node, t_shell *shell);
 int		handle_heredoc(t_redirection *redir, t_shell *shell);
 bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell);
 

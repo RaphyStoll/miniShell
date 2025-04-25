@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 15:09:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:21:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ int	execute_pipe(t_node *pipe, t_shell *shell)
 	int		pipe_fd[2];
 	int		status;
 
-	if (!prepare_heredocs(pipe->child->redirections, shell) || !prepare_heredocs(pipe->brother->redirections, shell))
-		return (GENERIC_ERROR);
 	if (create_pipe(pipe_fd, shell) != 0)
 		return (1);
 	pid1 = fork();

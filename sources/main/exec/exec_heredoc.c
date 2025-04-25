@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 15:22:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:55:24 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,19 @@ bool	prepare_heredocs(t_redirection *redir, t_shell *shell)
 		}
 		redir = redir->next;
 	}
+	return (true);
+}
+
+bool	prepare_heredocs_ast(t_node *node, t_shell *shell)
+{
+	if (!node)
+		return (true);
+	if (node->type == AST_COMMAND)
+		prepare_heredocs(node->redirections, shell);
+	if (node->type == AST_PIPE || node->type == AST_LOGICAL)
+		return (prepare_heredocs_ast(node->child, shell)
+			&& prepare_heredocs_ast(node->brother, shell));
+	if (node->type == AST_SUBSHELL)
+		return (prepare_heredocs_ast(node->child, shell));
 	return (true);
 }

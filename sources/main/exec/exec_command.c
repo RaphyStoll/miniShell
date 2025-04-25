@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 15:24:30 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:51:28 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,6 @@ int	execute_command(t_node *cmd, t_shell *shell)
 		shell->last_exit_status = execute_builtin_redir(cmd, shell);
 		return (shell->last_exit_status);
 	}
-	if (!prepare_heredocs(cmd->redirections, shell))
-		return (GENERIC_ERROR);
 	pid = fork();
 	if (pid < 0)
 	{

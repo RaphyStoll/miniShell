@@ -6,13 +6,35 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 15:24:01 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/25 17:32:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
 #include "debbug.h"
+
+void	cleanup_redir_args(char **args)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (args[i])
+	{
+		if (ft_strcmp(args[i], "<") == 0
+			|| ft_strcmp(args[i], ">") == 0
+			|| ft_strcmp(args[i], "<<") == 0
+			|| ft_strcmp(args[i], ">>") == 0)
+		{
+			i += 2;
+			continue ;
+		}
+		args[j++] = args[i++];
+	}
+	args[j] = NULL;
+}
 
 /**
  * @brief Opens the file for a redirection.
