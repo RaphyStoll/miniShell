@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 15:11:27 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:24:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ int		execute_logical(t_node *logic, t_shell *shell);
 int		execute_subshell(t_node *subshell, t_shell *shell);
 
 /*handle redirection in execution*/
-bool	apply_redirections(t_redirection *redir, t_shell *shell);
-bool	single_redirection(t_redirection *redir, t_shell *shell);
-int		open_redirection_file(t_redirection *redir, t_shell *shell);
+bool	apply_redirections(t_redirection *redir);
+bool	single_redirection(t_redirection *redir);
+int		open_redirection_file(t_redirection *redir);
+
+/*handle heredoc type of redirections*/
+bool	prepare_heredocs(t_redirection *redir, t_shell *shell);
 int		handle_heredoc(t_redirection *redir, t_shell *shell);
 bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell);
 

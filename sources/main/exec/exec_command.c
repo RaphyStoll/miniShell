@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 16:07:51 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:24:30 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	execute_child_process(t_node *cmd, t_shell *shell)
 	char	*cmd_path;
 	char	**envp;
 
-	if (!apply_redirections(cmd->redirections, shell))
+	if (!apply_redirections(cmd->redirections))
 		exit (GENERIC_ERROR);
 	envp = get_envp(shell->env);
 	cmd_path = find_cmd_path(cmd->args[0], shell);
@@ -170,6 +170,8 @@ int	execute_command(t_node *cmd, t_shell *shell)
 		shell->last_exit_status = execute_builtin_redir(cmd, shell);
 		return (shell->last_exit_status);
 	}
+	if (!prepare_heredocs(cmd->redirections, shell))
+		return (GENERIC_ERROR);
 	pid = fork();
 	if (pid < 0)
 	{
