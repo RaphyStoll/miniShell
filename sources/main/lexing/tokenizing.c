@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 14:47:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:51:22 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "lexing_struct.h"
 #include "quote_type.h"
 
+/**
+ * @brief Appends a segment to an existing word, handling memory reallocation.
+ *
+ * @param word Existing word to append to.
+ * @param seg Segment to append.
+ * @return Newly allocated string or NULL on failure.
+ */
 char	*append_segment(char *word, char *seg)
 {
 	char	*tmp;
@@ -34,6 +41,13 @@ char	*append_segment(char *word, char *seg)
 	return (tmp);
 }
 
+/**
+ * @brief Extracts a quoted word from the input, updating the quote type.
+ *
+ * @param input Pointer to the input string.
+ * @param quote_type Pointer to store the detected quote type.
+ * @return Newly allocated quoted word or NULL on failure.
+ */
 char	*get_quoted_word(const char **input, t_quote *quote_type)
 {
 	int			len;
@@ -60,6 +74,12 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
 	return (word);
 }
 
+/**
+ * @brief Extracts an unquoted word from the input.
+ *
+ * @param input Pointer to the input string.
+ * @return Newly allocated unquoted word or NULL on failure.
+ */
 char	*get_unquoted_word(const char **input)
 {
 	int			len;
@@ -78,6 +98,13 @@ char	*get_unquoted_word(const char **input)
 	return (word);
 }
 
+/**
+ * @brief Handles parsing a full word, combining quoted and unquoted segments.
+ *
+ * @param input Pointer to the input string.
+ * @param quote_type Pointer to store the global quote type detected.
+ * @return Newly allocated full word or NULL on failure.
+ */
 char	*handle_word(const char **input, t_quote *quote_type)
 {
 	char	*word;
@@ -106,6 +133,12 @@ char	*handle_word(const char **input, t_quote *quote_type)
 	return (word);
 }
 
+/**
+ * @brief Converts the input line into a list of tokens.
+ *
+ * @param input Input string to tokenize.
+ * @return Head of the token list or NULL on error.
+ */
 t_token	*tokenizing(const char *input)
 {
 	t_token			*token_list;

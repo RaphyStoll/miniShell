@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 16:21:51 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:53:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
 
+/**
+ * @brief Creates a new token node.
+ *
+ * @param head Current token list head.
+ * @param str String to store in the token.
+ * @param op Token type (e.g., WORD, PIPE, etc.).
+ * @param quote_type Quote type associated with the token.
+ * @return Pointer to the new token or exits on memory allocation failure.
+ */
 t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type)
 {
 	t_token	*new_token;
@@ -33,6 +42,15 @@ t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type)
 	return (new_token);
 }
 
+/**
+ * @brief Adds a new token to the end of the token list.
+ *
+ * @param head Pointer to the token list head.
+ * @param str String to store in the token.
+ * @param op Token type (e.g., WORD, PIPE, etc.).
+ * @param quote_type Quote type associated with the token.
+ * @return true on success, exits on memory allocation failure.
+ */
 bool	add_token(t_token **head, char *str, t_type op, t_quote quote_type)
 {
 	t_token	*new_token;
@@ -57,6 +75,14 @@ bool	add_token(t_token **head, char *str, t_type op, t_quote quote_type)
 	return (true);
 }
 
+/**
+ * @brief Adds an operator token to the token list based on the current input.
+ *
+ * @param token_list Pointer to the token list head.
+ * @param input Pointer to the input string.
+ * @param op Operator type to add.
+ * @return true on success, false on memory allocation failure.
+ */
 bool	add_operator(t_token **token_list, const char **input, t_type op)
 {
 	char	*operator;
@@ -86,6 +112,13 @@ bool	add_operator(t_token **token_list, const char **input, t_type op)
 	return (true);
 }
 
+/**
+ * @brief Handles parsing an operator or parenthesis from the input.
+ *
+ * @param token_list Pointer to the token list head.
+ * @param input Pointer to the input string.
+ * @return true if an operator was found and added, false otherwise.
+ */
 bool	handle_operator(t_token **token_list, const char **input)
 {
 	t_type	op;
