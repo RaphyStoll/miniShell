@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/25 17:12:39 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/26 20:10:38 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	process_input(char *input, t_shell *shell)
 	int		flag;
 
 	flag = 0;
-	tokens = lexer(input);
+	tokens = lexer(input, shell);
 	if (!tokens)
 		return (false);
 	print_tokens(tokens);

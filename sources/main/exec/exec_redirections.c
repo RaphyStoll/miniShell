@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/22 13:11:23 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:32:37 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,78 +14,26 @@
 #include "minishell.h"
 #include "debbug.h"
 
-/**
- * @brief Reads heredoc input and writes it to a file.
- *
- * Expands variables if not quoted. Stops at the delimiter.
- *
- * @param fd File descriptor to write to.
- * @param redir Heredoc info (target, quote).
- * @param env Environment list.
- * @return true on success, false on malloc error.
- */
-bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
+void	cleanup_redir_args(char **args)
 {
-	char	*input;
-	char	*line;
+	int	i;
+	int	j;
 
-	while (1)
+	i = 0;
+	j = 0;
+	while (args[i])
 	{
-		input = readline("heredoc> ");
-		if (!input || ft_strcmp(input, redir->target) == 0)
+		if (ft_strcmp(args[i], "<") == 0
+			|| ft_strcmp(args[i], ">") == 0
+			|| ft_strcmp(args[i], "<<") == 0
+			|| ft_strcmp(args[i], ">>") == 0)
 		{
-			free(input);
-			break ;
+			i += 2;
+			continue ;
 		}
-		if (redir->quote_type == QUOTE_NONE)
-			line = expand_one_arg(input, shell);
-		else
-			line = ft_strdup(input);
-		free(input);
-		if (!line)
-			return (false);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
+		args[j++] = args[i++];
 	}
-	return (true);
-}
-
-/**
- * @brief Handles heredoc input and returns a read fd.
- *
- * Writes to a temp file, then reopens it for reading.
- *
- * @param redir Heredoc info.
- * @param env Environment list.
- * @return Read fd or -1 on error.
- */
-int	handle_heredoc(t_redirection *redir, t_shell *shell)
-{
-	int					fd;
-	struct sigaction	old_sa;
-
-	set_heredoc_signals(&old_sa);
-	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("heredoc");
-		restore_signals(&old_sa);
-		return (-1);
-	}
-	if (!write_heredoc_lines(fd, redir, shell))
-	{
-		close(fd);
-		restore_signals(&old_sa);
-		return (-2);
-	}
-	close(fd);
-	restore_signals(&old_sa);
-	fd = open(".heredoc_tmp", O_RDONLY);
-	if (fd == -1)
-		perror("heredoc reopen");
-	unlink(".heredoc_tmp");
-	return (fd);
+	args[j] = NULL;
 }
 
 /**
@@ -97,7 +45,7 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
  * @param env Environment list (for heredoc).
  * @return File descriptor or -1 on error.
  */
-int	open_redirection_file(t_redirection *redir, t_shell *shell)
+int	open_redirection_file(t_redirection *redir)
 {
 	int	fd;
 
@@ -110,8 +58,6 @@ int	open_redirection_file(t_redirection *redir, t_shell *shell)
 		fd = open(redir->target, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (redir->type == REDIRECTION_APPEND)
 		fd = open(redir->target, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if (redir->type == REDIRECTION_HEREDOC)
-		fd = handle_heredoc(redir, shell);
 	return (fd);
 }
 
@@ -124,7 +70,7 @@ int	open_redirection_file(t_redirection *redir, t_shell *shell)
  * @param env Environment list.
  * @return true on success, false on error.
  */
-bool	single_redirection(t_redirection *redir, t_shell *shell)
+bool	single_redirection(t_redirection *redir)
 {
 	int	fd;
 	int	target_fd;
@@ -135,7 +81,7 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
 		target_fd = STDIN_FILENO;
 	else if (type == REDIRECTION_OUT || type == REDIRECTION_APPEND)
 		target_fd = STDOUT_FILENO;
-	fd = open_redirection_file(redir, shell);
+	fd = open_redirection_file(redir);
 	if (fd == -2)
 		return (false);
 	if (fd == -1)
@@ -159,11 +105,11 @@ bool	single_redirection(t_redirection *redir, t_shell *shell)
  * @param env Environment list.
  * @return true on success, false otherwise.
  */
-bool	apply_redirections(t_redirection *redir, t_shell *shell)
+bool	apply_redirections(t_redirection *redir)
 {
 	while (redir)
 	{
-		if (!single_redirection(redir, shell))
+		if (!single_redirection(redir))
 			return (false);
 		redir = redir->next;
 	}
