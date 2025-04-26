@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/26 22:24:15 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 22:29:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
 		redirect_input_from_pipe(pipe_fd);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		execute_ast(pipe->brother, shell);
-		exit(shell->last_exit_status);
+		exit(execute_ast(pipe->brother, shell));
 	}
 	else
 	{
@@ -130,8 +129,7 @@ int	execute_pipe(t_node *pipe, t_shell *shell)
 		redirect_output_to_pipe(pipe_fd);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		execute_ast(pipe->child, shell);
-		exit(shell->last_exit_status);
+		exit(execute_ast(pipe->child, shell));
 	}
 	status = execute_pipe_brother(pipe_fd, pipe, shell);
 	waitpid(pid1, NULL, 0);
