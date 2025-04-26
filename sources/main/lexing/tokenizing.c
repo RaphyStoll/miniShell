@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 15:18:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 15:26:34 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ char	*handle_word(const char **input, t_quote *quote_type)
 			free(seg);
 			break ;
 		}
-		if (seg_quote == QUOTE_DOUBLE)
-			*quote_type = QUOTE_DOUBLE;
+		if (seg_quote != QUOTE_NONE)
+			*quote_type = seg_quote;
 		word = append_segment(word, seg);
 		free(seg);
 		if (!word)
