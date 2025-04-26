@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/22 15:34:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 16:15:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ bool	expand_variables(t_node *node, t_shell *shell)
 
 bool	expand_all(t_node *node, t_shell *shell)
 {
-	if (!expand_variables(node, shell))
-	{
-		perror("Error expanding variables");
-		return (false);
-	}
+	// if (!expand_variables(node, shell))
+	// {
+	// 	perror("Error expanding variables");
+	// 	return (false);
+	// }
 	if (!remove_empty_args(node))
 		return (perror("error removing expansion"), false);
 	if (!expand_redirections(node, shell))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 00:39:53 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/26 14:53:59 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

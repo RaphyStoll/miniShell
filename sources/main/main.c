@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/24 12:14:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 16:14:09 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	process_input(char *input, t_shell *shell)
 	int		flag;
 
 	flag = 0;
-	tokens = lexer(input);
+	tokens = lexer(input, shell);
 	if (!tokens)
 		return (false);
 	if (!init_parsing(shell, tokens, &flag) || flag == 1)
