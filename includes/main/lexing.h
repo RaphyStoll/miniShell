@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:25:29 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/21 00:45:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/26 14:46:47 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_token	*tokenizing(const char *input);
 char	*handle_word(const char **input, t_quote *quote_type);
 char	*get_quoted_word(const char **input, t_quote *quote_type);
 char	*get_unquoted_word(const char **input);
+char	*append_segment(char *word, char *seg);
 bool	handle_operator(t_token **token_list, const char **input);
 bool	add_operator(t_token **token_list, const char **input, t_type op);
 t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type);

@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/24 16:31:36 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:47:09 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
 #include "quote_type.h"
+
+char	*append_segment(char *word, char *seg)
+{
+	char	*tmp;
+
+	if (!word)
+	{
+		tmp = ft_strdup(seg);
+		if (!tmp)
+			return (NULL);
+	}
+	else
+	{
+		tmp = ft_strjoin(word, seg);
+		if (!tmp)
+			return (free(word), NULL);
+		free(word);
+	}
+	return (tmp);
+}
 
 char	*get_quoted_word(const char **input, t_quote *quote_type)
 {
@@ -60,25 +80,30 @@ char	*get_unquoted_word(const char **input)
 
 char	*handle_word(const char **input, t_quote *quote_type)
 {
-	char	*quoted;
-	char	*unquoted;
 	char	*word;
+	char	*seg;
+	t_quote	seg_quote;
 
+	word = NULL;
 	*quote_type = QUOTE_NONE;
-	quoted = get_quoted_word(input, quote_type);
-	unquoted = get_unquoted_word(input);
-	if (quoted || unquoted)
+	while (1)
 	{
-		if (!quoted)
-			return (unquoted);
-		if (!unquoted)
-			return (quoted);
-		word = ft_strjoin(quoted, unquoted);
-		free(quoted);
-		free(unquoted);
-		return (word);
+		seg = get_quoted_word(input, &seg_quote);
+		if (!seg)
+			seg = get_unquoted_word(input);
+		if (!seg || !*seg)
+		{
+			free(seg);
+			break ;
+		}
+		if (seg_quote == QUOTE_DOUBLE)
+			*quote_type = QUOTE_DOUBLE;
+		word = append_segment(word, seg);
+		free(seg);
+		if (!word)
+			return (NULL);
 	}
-	return (NULL);
+	return (word);
 }
 
 t_token	*tokenizing(const char *input)
