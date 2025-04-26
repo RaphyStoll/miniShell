@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 14:51:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 15:18:58 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,11 @@ char	*handle_word(const char **input, t_quote *quote_type)
 	*quote_type = QUOTE_NONE;
 	while (1)
 	{
+		seg_quote = QUOTE_NONE;
 		seg = get_quoted_word(input, &seg_quote);
 		if (!seg)
 			seg = get_unquoted_word(input);
-		if (!seg || !*seg)
+		if (!seg || (seg_quote == QUOTE_NONE && !*seg))
 		{
 			free(seg);
 			break ;
