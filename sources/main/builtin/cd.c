@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:20:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/25 16:48:53 by raphalme         ###   ########.fr       */
+/*   Updated: 2025/04/26 21:29:37 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	builtin_cd(t_shell *shell, char **ag)
 	char	*oldpwd;
 	char	*newpwd;
 
-
+	if (ag[2])
+	return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	if (!ag[1] || ft_strcmp(ag[1], "~") == 0 || ft_strcmp(ag[1], "-") == 0)
 		target = cd_exception(shell, ag);
 	else
@@ -57,7 +58,7 @@ int	builtin_cd(t_shell *shell, char **ag)
 	if (!oldpwd)
 		return (perror("cd: getcwd:"), GENERIC_ERROR);
 	if (chdir(target) < 0)
-		return (perror("cd:"), free(oldpwd), GENERIC_ERROR);
+		return (perror("cd"), free(oldpwd), GENERIC_ERROR);
 	newpwd = getcwd(NULL, 0);
 	if (!newpwd)
 		return (perror("cd: getcwd:"), free(oldpwd), 1);
