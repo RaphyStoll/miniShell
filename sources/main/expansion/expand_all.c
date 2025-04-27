@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_variables.c                                 :+:      :+:    :+:   */
+/*   expand_all.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 16:02:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:44:57 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,19 @@ bool	remove_empty_args(t_node *node)
 bool	expand_wildcard(t_node *node, t_shell *shell)
 {
 	int		i;
-	int		files_count;
-	char	**new;
 
-	
+	i = 0;
+	while (node->args[i])
+	{
+		if (contains_wildcard(node->args[i]))
+		{
+			if (!expand_single_wildcard_arg(node, &i, shell))
+				return (false);
+		}
+		else
+			i++;
+	}
+	return (true);
 }
 /**
  * @brief Expands variables in redirection targets.
