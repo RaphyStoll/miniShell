@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:40:39 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 17:06:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 19:03:22 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,57 @@
 #include "minishell.h"
 #include "debbug.h"
 
+int	fill_matches(DIR *dir, char **matches, int *ptr_j, char *arg)
+{
+	struct dirent	*entry;
+	int				j;
+	char			*name;
 
+	entry = readdir(dir);
+	name = entry->d_name;
+	while (entry)
+	{
+		if ((name[0] != '.' || arg[0] == '.') && wildcard_match(arg, name))
+		{
+			matches[j] = ft_strdup(name);
+			if (!matches[j])
+			{
+				*ptr_j = j;
+				return (false);
+			}
+			j++;
+		}
+		entry = readdir(dir);
+	}
+	*ptr_j = j;
+	return (true);
+}
 
 char	**collect_matches(char *arg, int count)
 {
+	DIR				*dir;
+	int				j;
+	char			*matches;
+
+	matches = malloc(sizeof(char *) * (count + 1));
+	if (!matches)
+		return (NULL);
+	dir = opendir(".");
+	if (!dir)
+		return (free(matches), NULL);
+	if (!fill_matches(dir, matches, &j, arg))
+	{
+		while (j > 0)
+		{
+			j--;
+			free(matches[j]);
+		}
+		closedir(dir);
+		return (free(matches), NULL);
+	}
+	closedir(dir);
+	matches[j] = NULL;
+	return (matches);
 }
 
 int	count_matches(char *arg)
@@ -31,6 +78,16 @@ int	count_matches(char *arg)
 	if (!dir)
 		return (-1);
 	count = 0;
+	entry = readdir(dir);
+	while (entry)
+	{
+		name = entry->d_name;
+		if ((name[0] != '.' || arg[0] == '.') && wildcard_match(arg, name))
+			count++;
+		entry = readdir(dir);
+	}
+	closedir(dir);
+	return (count);
 }
 
 bool	expand_single_wildcard_arg(t_node *node, int *index, t_shell *shell)
