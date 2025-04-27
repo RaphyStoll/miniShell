@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:09:01 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 15:51:04 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ t_env	*create_env_node(char *type, char *value)
 	if (!node || !type || !value)
 		return (NULL);
 	node->type = ft_strdup(type);
+	if (!node->type)
+		return (free(node), NULL);
 	node->value = ft_strdup(value);
+	if (!node->value)
+		return (free(node->type), free(node), NULL);
 	node->next = NULL;
 	return (node);
 }

@@ -6,13 +6,14 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 15:43:43 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/15 15:27:52 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/24 12:13:59 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define SHELL_NAME "Minishell : "
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -35,5 +36,6 @@ typedef struct s_shell
 }	t_shell;
 
 //int	main(int argc, char **argv, char **envp);
+bool	init_shell_level(t_shell *shell);
 
 #endif

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 14:09:40 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:52:41 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
+#include "debbug.h"
 
 /**
  * @brief Executes an AST node.
@@ -30,6 +31,11 @@ int	execute_ast(t_node *ast_node, t_shell *shell)
 	if (!shell->ast)
 		return (1);
 	status = 0;
+	if (!prepare_heredocs_ast(ast_node, shell))
+	{
+    	shell->last_exit_status = GENERIC_ERROR;
+    	return GENERIC_ERROR;
+	}
 	if (ast_node->type == AST_COMMAND)
 	{
 		if (!expand_all(ast_node, shell))

@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/03/25 21:46:25 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/26 14:55:40 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexing.h"
 #include "lexing_struct.h"
 
+/**
+ * @brief Checks if there are any unclosed quotes in the input string.
+ *
+ * @param input Input string to check.
+ * @return true if quotes are properly closed, false otherwise
+ */
 bool	check_unclosed_quotes(const char *input)
 {
 	char	quote;
@@ -42,6 +48,12 @@ bool	check_unclosed_quotes(const char *input)
 	return (true);
 }
 
+/**
+ * @brief Checks if there are any unclosed or unmatched parentheses
+ *
+ * @param input Input string to check.
+ * @return true if all parentheses are properly closed, false otherwise.
+ */
 bool	check_unclosed_parentheses(const char *input)
 {
 	int	count;

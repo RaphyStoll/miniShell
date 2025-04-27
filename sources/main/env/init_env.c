@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:07:09 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 16:01:13 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,49 @@ t_env	*add_env_node(t_env **env_list, t_env *new)
 t_env	*init_minimal_env(t_env *env)
 {
 	t_env	*new_env;
+	char	*cwd;
 
-	new_env = malloc(sizeof(t_env));
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (NULL);
+	new_env = create_env_node("PWD", cwd);
+	free (cwd);
 	if (!new_env)
 		return (NULL);
-	new_env->type = "PWD";
-	new_env->value = getcwd(NULL, 0);
-	if (!new_env->value)
-		return (free_env(new_env), NULL);
-	new_env->next = NULL;
 	add_env_node(&env, new_env);
-	new_env = new_env->next;
-	new_env = malloc(sizeof(t_env));
+	new_env = create_env_node("SHLVL", "1");
 	if (!new_env)
-		return (NULL);
-	new_env->type = "SHLVL";
-	new_env->value = "1";
-	new_env->next = NULL;
+		return (free_env(env), NULL);
 	add_env_node(&env, new_env);
-	new_env = new_env->next;
-	new_env = malloc(sizeof(t_env));
+	new_env = create_env_node("_", "/bin/");
 	if (!new_env)
-		return (NULL);
-	return (new_env->type = "_", new_env->value = "/bin/",
-		new_env->next = NULL, add_env_node(&env, new_env), env);
+		return (free_env(env), NULL);
+	add_env_node(&env, new_env);
+	return (env);
+}
+
+bool	add_env_from_string(t_env **env_list, char *env)
+{
+	t_env	*new;
+	int		j;
+
+	j = 0;
+	while (env[j] != '=' && env[j])
+		j++;
+	if (env[j] == '=')
+	{
+		new = malloc(sizeof(t_env));
+		if (!new)
+			return (false);
+		new->type = ft_substr(env, 0, j);
+		new->value = ft_strdup(&env[j + 1]);
+		if (!new->type || !new->value)
+			return (free_env_node(new), false);
+		new->next = NULL;
+		add_env_node(env_list, new);
+		return (true);
+	}
+	return (true);
 }
 
 /**
@@ -77,27 +96,14 @@ t_env	*init_minimal_env(t_env *env)
 t_env	*init_env(char **env)
 {
 	t_env	*env_list;
-	t_env	*new;
 	int		i;
-	int		j;
 
 	env_list = NULL;
 	i = 0;
 	while (env[i])
 	{
-		j = 0;
-		while (env[i][j] != '=' && env[i][j])
-			j++;
-		if (env[i][j] == '=')
-		{
-			new = malloc(sizeof(t_env));
-			if (!new)
-				return (NULL);
-			new->type = ft_substr(env[i], 0, j);
-			new->value = ft_strdup(&env[i][j + 1]);
-			new->next = NULL;
-			add_env_node(&env_list, new);
-		}
+		if (!add_env_from_string(&env_list, env[i]))
+			return (free_env(env_list), NULL);
 		i++;
 	}
 	return (env_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:45:28 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/16 23:01:41 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 15:43:42 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 typedef struct s_env
 {
@@ -28,6 +27,7 @@ typedef struct s_env
 
 t_env	*add_env_node(t_env **env_list, t_env *new);
 t_env	*init_env(char **env);
+bool	add_env_from_string(t_env **env_list, char *env);
 char	**get_envp(t_env *env);
 char	*get_env_value(t_shell *shell, char	*type);
 void	unset_env(t_env **env, char *type);

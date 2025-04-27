@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:55 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/16 23:12:16 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/24 16:43:22 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,31 @@ t_node	*parse_logical(t_token **tokens)
  * @param tokens token list for parsing.
  * @return head of the AST.
  */
-t_node	*parse_command(t_token **tokens)
+t_node	*parse_command(t_token **token)
 {
 	t_node	*node;
 
-	if (!tokens || !*tokens)
+	if (!token || !*token)
 		return (NULL);
 	node = malloc_node(AST_COMMAND);
-	while (*tokens && (*tokens)->type != PIPE && (*tokens)->type != AND
-		&& (*tokens)->type != OR && (*tokens)->type != C_PARENTHESIS)
+	if (!node)
+		return (NULL);
+	while (*token && (*token)->type != PIPE && (*token)->type != AND
+		&& (*token)->type != OR && (*token)->type != C_PARENTHESIS)
 	{
-		if ((*tokens)->type == WORD)
+		if ((*token)->type == WORD)
 		{
-			if (!add_arg_to_node(node, (*tokens)->str, (*tokens)->quote_type))
+			if (!add_arg_to_node(node, (*token)->str, (*token)->quote_type))
 				return (free_all_ast(node), NULL);
 		}
-		else if ((*tokens)->type == REDIRECT_IN
-			|| (*tokens)->type == REDIRECT_OUT || (*tokens)->type == APPEND
-			|| (*tokens)->type == HEREDOC)
+		else if ((*token)->type == REDIRECT_IN || (*token)->type == REDIRECT_OUT
+			|| (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
-			if (!handle_redirection(tokens, node))
+			if (!handle_redirection(token, node))
 				return (NULL);
 			continue ;
 		}
-		*tokens = (*tokens)->next;
+		*token = (*token)->next;
 	}
 	return (node);
 }

@@ -12,7 +12,7 @@ NAME        = output/minishell
 NAME_BONUS  = output/minishell_bonus
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror -g
 
 UNAME_S := $(shell uname -s)
 
@@ -185,6 +185,9 @@ ifeq ($(USE_LIBFT), yes)
 endif
 
 re: fclean all
+
+valgrind: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=output/readline.supp --log-file="output/leaks.log" ./output/minishell
 
 # ------------------------------------------------------------------------------
 # Cibles phony

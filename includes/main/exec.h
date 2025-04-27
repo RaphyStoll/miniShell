@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:16:23 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 12:09:30 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:51:15 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
 # include "ast_struct.h"
 # include "env_struct.h"
 # include "signals.h"
@@ -20,6 +21,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "../../lib/libft/header/libft.h"
+
+# define NO_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 int		execute_ast(t_node *ast_node, t_shell *shell);
 
@@ -31,6 +34,7 @@ char	*find_cmd_path(char *cmd, t_shell *shell);
 char	*check_all_paths(char **paths, char *cmd);
 
 /*execute builtin*/
+int		execute_builtin_redir(t_node *cmd, t_shell *shell);
 int		execute_builtin(char **args, t_shell *shell);
 bool	is_builtin(char *cmd);
 
@@ -48,9 +52,13 @@ int		execute_logical(t_node *logic, t_shell *shell);
 int		execute_subshell(t_node *subshell, t_shell *shell);
 
 /*handle redirection in execution*/
-bool	apply_redirections(t_redirection *redir, t_shell *shell);
-bool	single_redirection(t_redirection *redir, t_shell *shell);
-int		open_redirection_file(t_redirection *redir, t_shell *shell);
+bool	apply_redirections(t_redirection *redir);
+bool	single_redirection(t_redirection *redir);
+int		open_redirection_file(t_redirection *redir);
+
+/*handle heredoc type of redirections*/
+bool	prepare_heredocs(t_redirection *redir, t_shell *shell);
+bool	prepare_heredocs_ast(t_node *node, t_shell *shell);
 int		handle_heredoc(t_redirection *redir, t_shell *shell);
 bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell);
 

@@ -6,13 +6,14 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:44:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 17:06:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:48:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
 #include "../../../lib/libft/header/libft.h"
+#include "debbug.h"
 
 /**
  * @brief Expands all variables inside a single argument.

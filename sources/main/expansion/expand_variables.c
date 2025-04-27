@@ -6,12 +6,47 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/20 20:46:18 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:02:24 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
+#include "debbug.h"
+
+/**
+ * @brief Remove empty, unquoted arguments from a node.
+ *
+ * Compacts node->args and node->arg_quotes by discarding entries
+ * where QUOTE_NONE and args[i] is "".
+ *
+ * @param node AST node with args and arg_quotes arrays.
+ * @return true on success or no-op; false if inputs are NULL.
+ */
+bool	remove_empty_args(t_node *node)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j= 0;
+
+	if (!node || !node->args || !node->arg_quotes)
+		return (true);
+	while (node->args[i])
+	{
+		if (!(node->arg_quotes[i] == QUOTE_NONE && node->args[i][0] == '\0'))
+		{
+			node->args[j] = node->args[i];
+			node->arg_quotes[j] = node->arg_quotes[i];
+			j++;
+		}
+		i++;
+	}
+	node->args[j] = NULL;
+	node->arg_quotes[j] = 0;
+	return (true);
+}
 
 bool	expand_wildcard(t_node *node, t_shell *shell)
 {
@@ -91,11 +126,13 @@ bool	expand_variables(t_node *node, t_shell *shell)
 
 bool	expand_all(t_node *node, t_shell *shell)
 {
-	if (!expand_variables(node, shell))
-	{
-		perror("Error expanding variables");
-		return (false);
-	}
+	// if (!expand_variables(node, shell))
+	// {
+	// 	perror("Error expanding variables");
+	// 	return (false);
+	// }
+	if (!remove_empty_args(node))
+		return (perror("error removing expansion"), false);
 	if (!expand_redirections(node, shell))
 	{
 		perror("Error rexpanding redirections");

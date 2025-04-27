@@ -22,3 +22,11 @@ $USER
 $USER'$USER'
 *.log
 mstest*
+echo
+out2.txtcat
+out2.txt$
+tmp_err_bash
+tmp_err_minishell
+tmp_out_minishell
+tmp_out_minishell
+tmp_out_bash

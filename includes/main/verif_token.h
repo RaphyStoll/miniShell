@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:14 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 19:48:06 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/20 23:58:54 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ bool	valid_type_append_prev(t_token *cur);
 bool	valid_type_append_next(t_token *cur);
 
 //! verif exception
-bool	handle_redirection_exceptions(t_token *token_list);
+bool	handle_redirection_exceptions(t_token *token, int *flag);
+
+//! verif_utils
+bool	is_simple_redirection(t_token *token);
 
 #endif

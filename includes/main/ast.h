@@ -6,12 +6,13 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:47:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/06 15:13:27 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/21 00:46:22 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
+
 # include "colors.h"
 # include "lexing_struct.h"
 # include <stdlib.h>
@@ -22,7 +23,7 @@
 t_node	*build_ast(t_token *tokens);
 
 //! utils
-bool		realloc_arg(t_node *node, char *arg, t_quote quote_type, int len);
+bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len);
 int		add_arg_to_node(t_node *node, char *arg, t_quote quote_type);
 t_node	*malloc_node(t_ast_type type);
 int		handle_redirection(t_token **tokens, t_node *node);

@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:16:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/13 16:11:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/26 22:29:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@
  */
 int	execute_pipe_brother(int pipe_fd[2], t_node *pipe, t_shell *shell)
 {
-	pid_t	pid;
+	pid_t	pid2;
 
-	pid = fork();
-	if (pid < 0)
+	pid2 = fork();
+	if (pid2 < 0)
 	{
 		perror("fork after pipe");
 		return (GENERIC_ERROR);
 	}
-	else if (pid == 0)
+	else if (pid2 == 0)
 	{
 		redirect_input_from_pipe(pipe_fd);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		execute_child_process(pipe->brother, shell);
+		exit(execute_ast(pipe->brother, shell));
 	}
 	else
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		handle_parent_process(pid, shell);
+		handle_parent_process(pid2, shell);
 	}
-	return (0);
+	return (shell->last_exit_status);
 }
 
 /**
@@ -112,25 +112,26 @@ int	create_pipe(int pipe_fd[2], t_shell *shell)
  */
 int	execute_pipe(t_node *pipe, t_shell *shell)
 {
-	pid_t	pid;
+	pid_t	pid1;
 	int		pipe_fd[2];
+	int		status;
 
 	if (create_pipe(pipe_fd, shell) != 0)
 		return (1);
-	pid = fork();
-	if (pid < 0)
+	pid1 = fork();
+	if (pid1 < 0)
 	{
 		perror("fork failed");
 		return (GENERIC_ERROR);
 	}
-	else if (pid == 0)
+	else if (pid1 == 0)
 	{
 		redirect_output_to_pipe(pipe_fd);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		execute_child_process(pipe->child, shell);
+		exit(execute_ast(pipe->child, shell));
 	}
-	else
-		return (execute_pipe_brother(pipe_fd, pipe, shell));
-	return (GENERIC_ERROR);
+	status = execute_pipe_brother(pipe_fd, pipe, shell);
+	waitpid(pid1, NULL, 0);
+	return (status);
 }
