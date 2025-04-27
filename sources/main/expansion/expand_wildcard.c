@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:40:39 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 19:03:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 19:36:48 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ bool	expand_single_wildcard_arg(t_node *node, int *index, t_shell *shell)
 	if (!matches)
 		return (false);
 	sort_args_lexico(matches, count);
-	replace_args_in_list(node, i, matches, count);
+	replace_args_in_list(node, i, nb_args, matches, count);
 	*index = i + count;
 	return (true);
 }
