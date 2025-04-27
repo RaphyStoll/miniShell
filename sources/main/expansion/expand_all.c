@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 16:44:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 20:21:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	expand_wildcard(t_node *node, t_shell *shell)
 	{
 		if (contains_wildcard(node->args[i]))
 		{
-			if (!expand_single_wildcard_arg(node, &i, shell))
+			if (!expand_single_wildcard_arg(node, &i))
 				return (false);
 		}
 		else
