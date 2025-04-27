@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/23 17:44:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 13:34:57 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	handle_variable(char **result, char *arg, int *i, t_shell *shell)
 	int		start;
 
 	start = *i;
-	if (arg[*i] == '\0')
+	if (arg[*i] == '\0' || arg[*i] == ' ')
 		return (handle_regular_char(result, '$'));
 	while (arg[*i] && (ft_isalnum(arg[*i]) || arg[*i] == '_'))
 		(*i)++;
