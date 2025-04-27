@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 10:58:53 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/27 14:35:54 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

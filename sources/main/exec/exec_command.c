@@ -6,11 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 17:51:28 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 14:58:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "errno.h"
 #include "minishell.h"
 #include "debbug.h"
 
@@ -129,8 +130,10 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 {
 	int	status;
 
-	if (waitpid(pid, &status, 0) == -1)
+	while (waitpid(pid, &status, 0) == -1)
 	{
+		if (errno == EINTR)
+			continue ;
 		perror("waitpid");
 		return (GENERIC_ERROR);
 	}

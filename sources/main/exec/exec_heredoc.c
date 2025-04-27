@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 17:55:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:56:43 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 	return (true);
 }
 
+void	heredoc_child(t_redirection *redir, t_shell *shell)
+{
+	int					fd;
+	struct sigaction	old;
+
+	set_heredoc_signals(&old);
+	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		perror("heredoc");
+		exit (1);
+	}
+	if (!write_heredoc_lines(fd, redir, shell))
+		exit(1);
+	restore_signals(&old);
+	close(fd);
+	exit(0);
+}
+
 /**
  * @brief Handles heredoc input and returns a read fd.
  *
@@ -61,27 +80,19 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
  */
 int	handle_heredoc(t_redirection *redir, t_shell *shell)
 {
-	int					fd;
-	struct sigaction	old_sa;
+	pid_t	pid;
+	int		fd;
 
-	set_heredoc_signals(&old_sa);
-	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("heredoc");
-		restore_signals(&old_sa);
+	pid = fork();
+	if (pid < 0)
+		return (perror("fork"), -1);
+	if (pid == 0)
+		heredoc_child(redir, shell);
+	shell->last_exit_status = handle_parent_process(pid, shell);
+	if (g_signal == SIGINT)
 		return (-1);
-	}
-	if (!write_heredoc_lines(fd, redir, shell))
-	{
-		close(fd);
-		restore_signals(&old_sa);
-		return (-2);
-	}
-	close(fd);
-	restore_signals(&old_sa);
 	fd = open(".heredoc_tmp", O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 		perror("heredoc reopen");
 	return (fd);
 }
