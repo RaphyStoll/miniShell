@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 15:56:43 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:12:40 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 		heredoc_child(redir, shell);
 	shell->last_exit_status = handle_parent_process(pid, shell);
 	if (g_signal == SIGINT)
+	{
+		unlink(".heredoc_tmp");
 		return (-1);
+	}
 	fd = open(".heredoc_tmp", O_RDONLY);
 	if (fd < 0)
 		perror("heredoc reopen");
