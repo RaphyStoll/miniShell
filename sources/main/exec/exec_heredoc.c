@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 14:04:25 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:09:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 	return (true);
 }
 
+/**
+ * @brief Child process to read a here-doc into a temp file.
+ *
+ * Opens the temp file, calls write_heredoc_lines(),
+ * then exits with 0 or 1 on error.
+ * 
+ * @param redir   Redirection info containing the delimiter.
+ * @param shell   Shell context for variable expansion.
+ */
 void	heredoc_child(t_redirection *redir, t_shell *shell)
 {
 	int					fd;
@@ -105,6 +114,16 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	return (fd);
 }
 
+/**
+ * @brief Prepare here-docs in a redirection list.
+ * 
+ * Reads each here-doc, writes it to a temp file,
+ * then rewrites the redirection to that file.
+ *
+ * @param redir   List of redirections to process.
+ * @param shell   Shell context (status, env, etc.).
+ * @return true on success, false on error.
+ */
 bool	prepare_heredocs(t_redirection *redir, t_shell *shell)
 {
 	int	fd;
@@ -128,6 +147,16 @@ bool	prepare_heredocs(t_redirection *redir, t_shell *shell)
 	return (true);
 }
 
+/**
+ * @brief Recursively prepare here-docs in an AST.
+ *
+ * Traverses commands, pipes, logical ops and subshells,
+ * calling prepare_heredocs on each command’s redirs.
+ * 
+ * @param node    Root of the AST (or subtree).
+ * @param shell   Shell context passed to prepare_heredocs.
+ * @return true if all here-docs succeeded, false otherwise.
+ */
 bool	prepare_heredocs_ast(t_node *node, t_shell *shell)
 {
 	if (!node)
