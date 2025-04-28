@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:00 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 16:13:58 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 19:21:35 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_token	*lexer(const char *input, t_shell *shell)
 	t_token	*token_list;
 
 	if (!check_unclosed_quotes(input) || !check_unclosed_parentheses(input))
+	{
+		shell->last_exit_status = 2;
 		return (NULL);
+	}
 	token_list = tokenizing(input, shell);
 	if (!token_list)
 		return (NULL);
