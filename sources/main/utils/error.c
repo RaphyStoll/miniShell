@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 18:16:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:43:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ t_token	*ft_exit_error(t_shell *shell, t_error_code code, char *error_token)
 	else
 		shell->last_exit_status = 1;
 	if (shell->tokens)
+	{
 		free_all(shell->tokens);
+		shell->tokens = NULL;
+	}
 	return (NULL);
 }

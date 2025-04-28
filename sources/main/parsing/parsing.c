@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/28 18:17:22 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:33:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ bool	init_parsing(t_shell *shell, int *flag)
 	{
 		if (!valid_content(tokens))
 			return (shell->last_exit_status = 2, false);
-		if (!if_valide_token_prev(tokens))
+		if (!if_valide_token_prev(shell))
 			return (false);
-		if (!if_valide_token_next(tokens))
+		if (!if_valide_token_next(shell))
 			return (false);
 	}
 	return (true);
