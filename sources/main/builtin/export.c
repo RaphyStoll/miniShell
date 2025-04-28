@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:04:08 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/24 20:40:51 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/28 09:57:43 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,30 @@
 #include "builtin.h"
 #include "debbug.h"
 
-bool	builtin_export(t_env **env, char *arg)
+bool	builtin_export(t_env **env, char **args)
 {
 	t_env	*dup_env;
-	t_env	*new_node;
-	t_env	*clone;
+	int		i;
+	bool	all_valid;
 
 	dup_env = env_dup(*env);
 	if (!dup_env)
 		return (GENERIC_ERROR);
-	if (arg)
+	all_valid = true;
+	if (args[1])
 	{
-		if (!pars_arg(&dup_env, arg))
-			return (free_env(dup_env), ft_putstr_fd("minishell: export: ", 2),
-				ft_putstr_fd(arg, 2)
-				, ft_putstr_fd(": not a valid identifier\n", 2) , USAGE_ERROR);
-		new_node = get_last_node(dup_env);
-		if (!new_node)
-			return (free_env(dup_env), GENERIC_ERROR);
-		clone = create_env_node(new_node->type, new_node->value);
-		if (!clone)
-			return (free_env(dup_env), GENERIC_ERROR);
-		if (!env_update(env, clone))
-			return (free_env(dup_env), free_env(clone), GENERIC_ERROR);
+		i = 1;
+		while (args[i])
+		{
+			if (!process_export_arg(env, args[i]))
+				all_valid = false;
+			i++;
+		}
 	}
 	else
 		display_export(dup_env);
-	return (free_env(dup_env), SUCCESS);
+	free_env(dup_env);
+	return (all_valid ? SUCCESS : USAGE_ERROR);
 }
 
 bool	env_update(t_env **env, t_env *new_node)

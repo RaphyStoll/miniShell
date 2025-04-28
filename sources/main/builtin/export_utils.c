@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:02:51 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/24 19:24:20 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/27 13:24:29 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,39 @@ bool	parse_key_value(char *arg, char **key, char **value, bool *append)
 	if (!*value)
 		return (free(*key), false);
 	return (true);
+}
+
+bool	process_export_arg(t_env **env, char *arg)
+{
+	char	*key;
+	char	*value;
+	bool	append;
+	t_env	*new_node;
+
+	if (ft_strchr(arg, '='))
+	{
+		if (!parse_key_value(arg, &key, &value, &append))
+			return (ft_putstr_fd("minishell: export: ", 2), ft_putstr_fd(arg, 2)
+				, ft_putstr_fd(": not a valid identifier\n", 2), false);
+		new_node = create_env_node(key, value);
+		multi_free(key, value);
+		if (!new_node || !handle_assignment(env, new_node, append))
+			return (false);
+	}
+	else if (is_valid_identifier(arg))
+	{
+		new_node = create_env_node(arg, NULL);
+		if (!new_node || !handle_assignment(env, new_node, false))
+			return (false);
+	}
+	else
+		return (ft_putstr_fd("minishell: export: ", 2), ft_putstr_fd(arg, 2)
+			, ft_putstr_fd(": not a valid identifier\n", 2), false);
+	return (true);
+}
+
+void	multi_free(char *key, char *value)
+{
+	free(key);
+	free(value);
 }
