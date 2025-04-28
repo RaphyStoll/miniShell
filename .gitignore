@@ -30,3 +30,6 @@ tmp_err_minishell
 tmp_out_minishell
 tmp_out_minishell
 tmp_out_bash
+.heredoc_tmp
+out2.txt$
+out2.txtcat

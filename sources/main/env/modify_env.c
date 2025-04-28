@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 15:51:04 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/28 23:03:23 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,20 @@ t_env	*create_env_node(char *type, char *value)
 	t_env	*node;
 
 	node = malloc(sizeof(t_env));
-	if (!node || !type || !value)
+	if (!node || !type)
 		return (NULL);
 	node->type = ft_strdup(type);
 	if (!node->type)
 		return (free(node), NULL);
-	node->value = ft_strdup(value);
-	if (!node->value)
-		return (free(node->type), free(node), NULL);
+	printf("value = %s\n", value);
+	if (value)
+	{
+		node->value = ft_strdup(value);
+		if (!node->value)
+			return (free(node->type), free(node), NULL);
+	}
+	else
+		node->value = NULL;
 	node->next = NULL;
 	return (node);
 }

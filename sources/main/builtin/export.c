@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:04:08 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 09:57:43 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/28 23:03:59 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ bool	builtin_export(t_env **env, char **args)
 	else
 		display_export(dup_env);
 	free_env(dup_env);
-	return (all_valid ? SUCCESS : USAGE_ERROR);
+	if (all_valid)
+		return (SUCCESS);
+	else
+		return (USAGE_ERROR);
 }
 
 bool	env_update(t_env **env, t_env *new_node)
