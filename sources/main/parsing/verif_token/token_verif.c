@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 21:19:28 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 18:37:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 19:04:12 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,24 @@
 #include "utils.h"
 #include "debbug.h"
 
-bool	if_valide_token_prev(t_shell *shell)
+bool	if_valide_token_prev(t_token *current)
 {
-	t_token	*current;
-
-	current = shell->tokens;
 	while (current != NULL)
 	{
 		if (!valid_type_pipe_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "|"), false);
+			return (print_error_message(SYNTAX_ERROR, "|"), false);
 		if (!valid_type_redirect_in_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "<"), false);
+			return (print_error_message(SYNTAX_ERROR, "<"), false);
 		if (!valid_type_redirect_out_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, ">"), false);
+			return (print_error_message(SYNTAX_ERROR, ">"), false);
 		if (!valid_type_heredoc_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "<<"), false);
+			return (print_error_message(SYNTAX_ERROR, "<<"), false);
 		if (!valid_type_append_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, ">>"), false);
+			return (print_error_message(SYNTAX_ERROR, ">>"), false);
 		if (!valid_type_and_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "&&"), false);
+			return (print_error_message(SYNTAX_ERROR, "&&"), false);
 		if (!valid_type_or_prev(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "||"), false);
+			return (print_error_message(SYNTAX_ERROR, "||"), false);
 		if (!valid_type_word_prev(current))
 			return (false);
 		current = current->next;
@@ -44,27 +41,24 @@ bool	if_valide_token_prev(t_shell *shell)
 	return (true);
 }
 
-bool	if_valide_token_next(t_shell *shell)
+bool	if_valide_token_next(t_token *current)
 {
-	t_token	*current;
-
-	current = shell->tokens;
 	while (current != NULL)
 	{
 		if (!valid_type_pipe_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "|"), false);
+			return (print_error_message(SYNTAX_ERROR, "|"), false);
 		if (!valid_type_redirect_in_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "<"), false);
+			return (print_error_message(SYNTAX_ERROR, "<"), false);
 		if (!valid_type_redirect_out_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, ">"), false);
+			return (print_error_message(SYNTAX_ERROR, ">"), false);
 		if (!valid_type_heredoc_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "<<"), false);
+			return (print_error_message(SYNTAX_ERROR, "<<"), false);
 		if (!valid_type_append_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, ">>"), false);
+			return (print_error_message(SYNTAX_ERROR, ">>"), false);
 		if (!valid_type_and_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "&&"), false);
+			return (print_error_message(SYNTAX_ERROR, "&&"), false);
 		if (!valid_type_or_next(current))
-			return (ft_exit_error(shell, SYNTAX_ERROR, "||"), false);
+			return (print_error_message(SYNTAX_ERROR, "||"), false);
 		if (!valid_type_word_next(current))
 			return (false);
 		current = current->next;

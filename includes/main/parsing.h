@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 18:44:32 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 19:06:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	print_ast(t_node *node, int indent);
 void	print_redirections(t_redirection *redir, int indent);
 
 //!token verif
-bool	if_valide_token_prev(t_shell *shell);
-bool	if_valide_token_next(t_shell *shell);
+bool	if_valide_token_prev(t_token *current);
+bool	if_valide_token_next(t_token *current);
 bool	valid_content(t_token *current);
 
 //! verif pipe and word
