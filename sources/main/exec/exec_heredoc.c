@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 13:27:18 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:04:25 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,23 @@ bool	prepare_heredocs_ast(t_node *node, t_shell *shell)
 		return (true);
 	if (node->type == AST_COMMAND)
 	{
-		if (!prepare_heredocs(node->redirections, shell))
+		if (node->redirections)
+		{
+			if (!prepare_heredocs(node->redirections, shell))
+				return (false);
+		}
+	}
+	else if (node->type == AST_PIPE || node->type == AST_LOGICAL)
+	{
+		if (!prepare_heredocs_ast(node->child, shell))
+			return (false);
+		if (!prepare_heredocs_ast(node->brother, shell))
 			return (false);
 	}
-	if (node->type == AST_PIPE || node->type == AST_LOGICAL)
-		return (prepare_heredocs_ast(node->child, shell)
-			&& prepare_heredocs_ast(node->brother, shell));
-	if (node->type == AST_SUBSHELL)
-		return (prepare_heredocs_ast(node->child, shell));
+	else if (node->type == AST_SUBSHELL)
+	{
+		if (!prepare_heredocs_ast(node->child, shell))
+			return (false);
+	}
 	return (true);
 }
