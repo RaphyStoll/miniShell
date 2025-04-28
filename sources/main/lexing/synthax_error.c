@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 14:55:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:23:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param input Input string to check.
  * @return true if quotes are properly closed, false otherwise
  */
-bool	check_unclosed_quotes(const char *input)
+bool	check_unclosed_quotes(t_shell *shell, const char *input)
 {
 	char	quote;
 	char	error_token[2];
@@ -42,7 +42,7 @@ bool	check_unclosed_quotes(const char *input)
 	}
 	if (quote)
 	{
-		ft_exit_error(NULL, UNCLOSED_QUOTE, error_token);
+		ft_exit_error(shell, UNCLOSED_QUOTE, error_token);
 		return (false);
 	}
 	return (true);
@@ -54,7 +54,7 @@ bool	check_unclosed_quotes(const char *input)
  * @param input Input string to check.
  * @return true if all parentheses are properly closed, false otherwise.
  */
-bool	check_unclosed_parentheses(const char *input)
+bool	check_unclosed_parentheses(t_shell *shell, const char *input)
 {
 	int	count;
 
@@ -67,7 +67,7 @@ bool	check_unclosed_parentheses(const char *input)
 		{
 			if (count == 0)
 			{
-				ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")");
+				ft_exit_error(shell, UNCLOSED_PARENTHESIS, ")");
 				return (false);
 			}
 			count--;
@@ -76,7 +76,7 @@ bool	check_unclosed_parentheses(const char *input)
 	}
 	if (count > 0)
 	{
-		ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "(");
+		ft_exit_error(shell, UNCLOSED_PARENTHESIS, "(");
 		return (false);
 	}
 	return (true);

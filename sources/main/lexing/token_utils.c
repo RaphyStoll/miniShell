@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/26 16:43:15 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:09:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
  * @param quote_type Quote type associated with the token.
  * @return Pointer to the new token or exits on memory allocation failure.
  */
-t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type)
+t_token	*init_token(t_shell *shell, char *str, t_type op, t_quote quote_type)
 {
 	t_token	*new_token;
 
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
-		ft_exit_error(head, MEMORY_ERROR, "memory");
+		ft_exit_error(shell, MEMORY_ERROR, "memory");
 	new_token->str = strdup(str);
 	if (!new_token->str)
 	{
 		free(new_token);
-		ft_exit_error(head, MEMORY_ERROR, "memory");
+		ft_exit_error(shell, MEMORY_ERROR, "memory");
 	}
 	new_token->type = op;
 	new_token->quote_type = quote_type;
@@ -50,30 +50,26 @@ t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type)
  * @param op Operator type to add.
  * @return true on success, false on memory allocation failure.
  */
-bool	add_operator(t_token **token_list, const char **input, t_type op)
+bool	add_operator(t_shell *shell, const char **input, t_type op)
 {
 	char	*operator;
 
 	if (op == HEREDOC || op == APPEND || op == AND || op == OR)
 	{
 		operator = ft_strndup(*input, 2);
-		if (!operator)
-			return (free_all(*token_list), free(input), false);
 		*input += 2;
 	}
 	else
 	{
 		operator = ft_strndup(*input, 1);
-		if (!operator)
-			return (free_all(*token_list), free(input), false);
 		*input += 1;
 	}
 	if (!operator)
-		ft_exit_error(*token_list, MEMORY_ERROR, "memory");
-	if (!(add_token(token_list, operator, op, false)))
+		ft_exit_error(shell, MEMORY_ERROR, "memory");
+	if (!(add_token(shell, operator, op, QUOTE_NONE)))
 	{
 		free(operator);
-		ft_exit_error(*token_list, MEMORY_ERROR, "token");
+		ft_exit_error(shell, MEMORY_ERROR, "token");
 	}
 	free (operator);
 	return (true);

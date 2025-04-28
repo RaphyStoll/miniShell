@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:57:57 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 15:34:55 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:21:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 # include "minishell.h"
 
 //! Error handling
-void	nbr_error(t_error error_code, char *message);
-t_token	*ft_exit_error(t_token *tokens, t_error_code code, char *error_token);
+t_token	*ft_exit_error(t_shell *shell, t_error_code code, char *error_token);
 void	print_error_message(t_error_code code, char *error_token);
 
 //! Memory utils

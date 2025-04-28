@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 15:34:03 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:16:03 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,15 @@ void	print_error_message(t_error_code code, char *error_token)
 		write(2, "unknown error\n", 14);
 }
 
-t_token	*ft_exit_error(t_token *tokens, t_error_code code, char *error_token)
+t_token	*ft_exit_error(t_shell *shell, t_error_code code, char *error_token)
 {
 	print_error_message(code, error_token);
-	if (tokens)
-		free_all(tokens);
+	if (code == UNCLOSED_PARENTHESIS || code == UNCLOSED_QUOTE
+		|| code == SYNTAX_ERROR)
+		shell->last_exit_status = 2;
+	else
+		shell->last_exit_status = 1;
+	if (shell->tokens)
+		free_all(shell->tokens);
 	return (NULL);
 }

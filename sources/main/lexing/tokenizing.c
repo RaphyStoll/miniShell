@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 16:43:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 18:20:32 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@
  * @param quote_type Quote type associated with the token.
  * @return true on success, exits on memory allocation failure.
  */
-bool	add_token(t_token **head, char *str, t_type op, t_quote quote_type)
+bool	add_token(t_shell *shell, char *str, t_type op, t_quote quote_type)
 {
 	t_token	*new_token;
 	t_token	*token;
 
-	new_token = init_token(*head, str, op, quote_type);
+	new_token = init_token(shell, str, op, quote_type);
 	if (!new_token)
 	{
 		free(new_token);
-		ft_exit_error(*head, MEMORY_ERROR, "memory");
+		ft_exit_error(shell, MEMORY_ERROR, "memory");
 	}
-	if (!*head)
+	if (!shell->tokens)
 	{
-		*head = new_token;
+		shell->tokens = new_token;
 		return (true);
 	}
-	token = *head;
+	token = shell->tokens;
 	while (token->next)
 		token = token->next;
 	token->next = new_token;
@@ -82,7 +82,7 @@ char	*get_next_segment(const char **input, t_shell *shell, t_quote *quote)
  * @param quote_type Pointer to store the global quote type detected.
  * @return Newly allocated full word or NULL on failure.
  */
-char	*handle_word(const char **input, t_quote *quote_type, t_shell *shell)
+char	*handle_word(t_shell *shell, const char **input, t_quote *quote_type)
 {
 	char	*word;
 	char	*seg;
@@ -108,20 +108,20 @@ char	*handle_word(const char **input, t_quote *quote_type, t_shell *shell)
  * @return true if an operator was found and added, false otherwise.
  */
 
-bool	handle_operator(t_token **token_list, const char **input)
+bool	handle_operator(t_shell *shell, const char **input)
 {
 	t_type	op;
 
 	op = is_operator(*input);
 	if (op != WORD)
-		return (add_operator(token_list, input, op));
+		return (add_operator(shell, input, op));
 	if (is_parenthesis(**input))
 	{
 		if (**input == '(')
 			op = O_PARENTHESIS;
 		else
 			op = C_PARENTHESIS;
-		return (add_operator(token_list, input, op));
+		return (add_operator(shell, input, op));
 	}
 	return (false);
 }
@@ -132,13 +132,12 @@ bool	handle_operator(t_token **token_list, const char **input)
  * @param input Input string to tokenize.
  * @return Head of the token list or NULL on error.
  */
-t_token	*tokenizing(const char *input, t_shell *shell)
+t_token	*tokenizing(t_shell *shell, const char *input)
 {
-	t_token			*token_list;
 	t_quote			quote_type;
 	char			*word;
 
-	token_list = NULL;
+	shell->tokens = NULL;
 	while (*input)
 	{
 		if (*input == ' ')
@@ -146,15 +145,15 @@ t_token	*tokenizing(const char *input, t_shell *shell)
 			input++;
 			continue ;
 		}
-		if (handle_operator(&token_list, &input))
+		if (handle_operator(shell, &input))
 			continue ;
 		if (is_forbidden_char(*input))
-			return (ft_exit_error(token_list, SYNTAX_ERROR, (char *)input));
-		word = handle_word(&input, &quote_type, shell);
+			return (ft_exit_error(shell, SYNTAX_ERROR, (char *)input));
+		word = handle_word(shell, &input, &quote_type);
 		if (!word)
-			return (ft_exit_error(token_list, MEMORY_ERROR, "word"));
-		add_token(&token_list, word, WORD, quote_type);
+			return (ft_exit_error(shell, MEMORY_ERROR, "word"));
+		add_token(shell, word, WORD, quote_type);
 		free(word);
 	}
-	return (token_list);
+	return (shell->tokens);
 }
