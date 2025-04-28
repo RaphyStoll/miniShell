@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:30:03 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/12 18:51:20 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 23:26:25 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	builtin_env(t_env *env)
 	cur = env;
 	while (cur != NULL)
 	{
-		printf("%s=%s\n", cur->type, cur->value);
+		if (cur->value)
+			printf("%s=%s\n", cur->type, cur->value);
 		cur = cur->next;
 	}
-	return (0);
+	return (SUCCESS);
 }

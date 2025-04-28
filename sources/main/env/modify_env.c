@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 23:03:23 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/28 23:17:11 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_env	*create_env_node(char *type, char *value)
 	node->type = ft_strdup(type);
 	if (!node->type)
 		return (free(node), NULL);
-	printf("value = %s\n", value);
 	if (value)
 	{
 		node->value = ft_strdup(value);
