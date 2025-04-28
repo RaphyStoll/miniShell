@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_variables.c                                 :+:      :+:    :+:   */
+/*   expand_all.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/26 16:15:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:55:14 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ bool	remove_empty_args(t_node *node)
 	return (true);
 }
 
+bool	expand_wildcard(t_node *node)
+{
+	int		i;
+
+	i = 0;
+	while (node->args[i])
+	{
+		if (contains_wildcard(node->args[i]))
+		{
+			if (!expand_single_wildcard_arg(node, &i))
+				return (false);
+		}
+		else
+			i++;
+	}
+	return (true);
+}
 /**
  * @brief Expands variables in redirection targets.
  *
@@ -128,6 +145,11 @@ bool	expand_all(t_node *node, t_shell *shell)
 	if (!expand_redirections(node, shell))
 	{
 		perror("Error rexpanding redirections");
+		return (false);
+	}
+	if (!expand_wildcard(node))
+	{
+		perror("Error expanding wildcard *");
 		return (false);
 	}
 	return (true);

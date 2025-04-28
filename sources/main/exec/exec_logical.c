@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:15:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/12 18:06:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:40:47 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	execute_logical(t_node *logic, t_shell *shell)
 {
 	if (logic->logic_type == LOGICAL_AND)
 	{
-		if (execute_command(logic->child, shell) == 0)
-			execute_command(logic->brother, shell);
+		if (execute_ast(logic->child, shell) == 0)
+			execute_ast(logic->brother, shell);
 	}
 	else if (logic->logic_type == LOGICAL_OR)
 	{
-		if (execute_command(logic->child, shell) != 0)
-			execute_command(logic->brother, shell);
+		if (execute_ast(logic->child, shell) != 0)
+			execute_ast(logic->brother, shell);
 	}
 	else
 	{
