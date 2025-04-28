@@ -6,12 +6,11 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 14:58:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 13:34:49 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "errno.h"
 #include "minishell.h"
 #include "debbug.h"
 
@@ -130,17 +129,18 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 {
 	int	status;
 
-	while (waitpid(pid, &status, 0) == -1)
+	if (waitpid(pid, &status, 0) == -1)
 	{
-		if (errno == EINTR)
-			continue ;
 		perror("waitpid");
 		return (GENERIC_ERROR);
 	}
 	if (WIFEXITED(status))
 	{
 		shell->last_exit_status = WEXITSTATUS(status);
-		g_signal = 0;
+		if (shell->last_exit_status == 130)
+			g_signal = SIGINT;
+		else
+			g_signal = 0;
 	}
 	else if (WIFSIGNALED(status))
 	{

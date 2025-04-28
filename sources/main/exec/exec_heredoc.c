@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 16:12:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 13:27:18 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 	while (1)
 	{
 		input = readline("heredoc> ");
-		if (!input || ft_strcmp(input, redir->target) == 0)
+		if (!input)
+			return (false);
+		if (ft_strcmp(input, redir->target) == 0)
 		{
 			free(input);
 			break ;
@@ -53,9 +55,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
 void	heredoc_child(t_redirection *redir, t_shell *shell)
 {
 	int					fd;
-	struct sigaction	old;
 
-	set_heredoc_signals(&old);
 	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -64,7 +64,6 @@ void	heredoc_child(t_redirection *redir, t_shell *shell)
 	}
 	if (!write_heredoc_lines(fd, redir, shell))
 		exit(1);
-	restore_signals(&old);
 	close(fd);
 	exit(0);
 }
@@ -80,15 +79,21 @@ void	heredoc_child(t_redirection *redir, t_shell *shell)
  */
 int	handle_heredoc(t_redirection *redir, t_shell *shell)
 {
-	pid_t	pid;
-	int		fd;
+	pid_t				pid;
+	int					fd;
+	struct sigaction	old;
 
+	ignore_heredoc_signals(&old);
 	pid = fork();
 	if (pid < 0)
 		return (perror("fork"), -1);
 	if (pid == 0)
+	{
+		set_heredoc_signals(&old);
 		heredoc_child(redir, shell);
+	}
 	shell->last_exit_status = handle_parent_process(pid, shell);
+	restore_signals(&old);
 	if (g_signal == SIGINT)
 	{
 		unlink(".heredoc_tmp");
@@ -128,7 +133,10 @@ bool	prepare_heredocs_ast(t_node *node, t_shell *shell)
 	if (!node)
 		return (true);
 	if (node->type == AST_COMMAND)
-		prepare_heredocs(node->redirections, shell);
+	{
+		if (!prepare_heredocs(node->redirections, shell))
+			return (false);
+	}
 	if (node->type == AST_PIPE || node->type == AST_LOGICAL)
 		return (prepare_heredocs_ast(node->child, shell)
 			&& prepare_heredocs_ast(node->brother, shell));
