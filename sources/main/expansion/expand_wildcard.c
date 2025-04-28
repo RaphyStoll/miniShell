@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:40:39 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 20:20:53 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:25:24 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	fill_matches(DIR *dir, char **matches, int *ptr_j, char *arg)
 	int				j;
 	char			*name;
 
+	j = 0;
 	entry = readdir(dir);
-	name = entry->d_name;
-	while (entry)
+	while (entry != NULL)
 	{
+		name = entry->d_name;
 		if ((name[0] != '.' || arg[0] == '.') && wildcard_match(arg, name))
 		{
 			matches[j] = ft_strdup(name);
@@ -44,7 +45,7 @@ char	**collect_matches(char *arg, int count)
 {
 	DIR				*dir;
 	int				j;
-	char			*matches;
+	char			**matches;
 
 	matches = malloc(sizeof(char *) * (count + 1));
 	if (!matches)
@@ -94,7 +95,7 @@ bool	expand_single_wildcard_arg(t_node *node, int *index)
 {
 	int		count;
 	int		i;
-	char	*matches;
+	char	**matches;
 
 	i = *index;
 	count = count_matches(node->args[i]);

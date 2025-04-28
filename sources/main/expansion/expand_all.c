@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 20:21:02 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 14:55:14 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	remove_empty_args(t_node *node)
 	return (true);
 }
 
-bool	expand_wildcard(t_node *node, t_shell *shell)
+bool	expand_wildcard(t_node *node)
 {
 	int		i;
 
@@ -147,7 +147,7 @@ bool	expand_all(t_node *node, t_shell *shell)
 		perror("Error rexpanding redirections");
 		return (false);
 	}
-	if (!expand_wildcard(node, shell))
+	if (!expand_wildcard(node))
 	{
 		perror("Error expanding wildcard *");
 		return (false);

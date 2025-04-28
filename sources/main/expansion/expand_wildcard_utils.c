@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:01:43 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 20:20:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:34:12 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	wildcard_match(char *arg, char *name)
 	name_idx = -1;
 	while (name[j])
 	{
-		if (arg[i] == name[j] && i++ && j++)
+		if (arg[i] == name[j] && ++i && ++j)
 			continue ;
 		else if (arg[i] == '*')
 			handle_star(&i, &j, &star_idx, &name_idx);
@@ -55,7 +55,7 @@ bool	wildcard_match(char *arg, char *name)
 	return (arg[i] == '\0');
 }
 
-void	sort_arg_lexico(char **array, int count)
+void	sort_args_lexico(char **array, int count)
 {
 	bool	swap;
 	int		i;
@@ -68,7 +68,7 @@ void	sort_arg_lexico(char **array, int count)
 		i = 0;
 		while (i < count - 1)
 		{
-			if (ft_strcmp(array[i], array[i + 1] > 0))
+			if (ft_strcmp(array[i], array[i + 1]) > 0)
 			{
 				tmp = array[i];
 				array[i] = array[i + 1];
@@ -80,7 +80,7 @@ void	sort_arg_lexico(char **array, int count)
 	}
 }
 
-void	replace_args_in_list(t_node *node, int i, char *matches, int count)
+void	replace_args_in_list(t_node *node, int i, char **matches, int count)
 {
 	int		nb_args;
 	char	**new_args;
@@ -93,7 +93,10 @@ void	replace_args_in_list(t_node *node, int i, char *matches, int count)
 		nb_args++;
 	new_args = malloc(sizeof(char *) * (nb_args + count));
 	if (!new_args)
-		return (NULL);
+	{
+		perror("malloc new args failed");
+		return ;
+	}
 	src = 0;
 	dst = 0;
 	while (src < i)
@@ -103,7 +106,10 @@ void	replace_args_in_list(t_node *node, int i, char *matches, int count)
 		new_args[dst++] = matches[j++];
 	src = i + 1;
 	while (src < nb_args)
-		new_args[src++] = node->args[src++];
+	{
+		new_args[src] = node->args[src];
+		i++;
+	}
 	new_args[dst] = NULL;
 	free(node->args);
 	node->args = new_args;
