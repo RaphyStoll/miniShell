@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/26 16:43:15 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/29 09:03:00 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ char	*get_unquoted_word(const char **input)
 	start = *input;
 	while ((*input)[len]
 		&& (*input)[len] != ' '
+		&& (*input)[len] != '\t'
 		&& !is_symbol((*input)[len])
 		&& !is_quote((*input)[len]))
 		len++;
