@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 17:51:28 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/28 13:34:49 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,10 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 	if (WIFEXITED(status))
 	{
 		shell->last_exit_status = WEXITSTATUS(status);
-		g_signal = 0;
+		if (shell->last_exit_status == 130)
+			g_signal = SIGINT;
+		else
+			g_signal = 0;
 	}
 	else if (WIFSIGNALED(status))
 	{

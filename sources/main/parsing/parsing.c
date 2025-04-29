@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 15:32:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 10:58:53 by raphaelferr      ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/04/28 16:06:47 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parsing.h"
 #include "minishell.h"

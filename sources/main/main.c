@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/26 20:10:38 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/28 16:06:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ bool	process_input(char *input, t_shell *shell)
 	tokens = lexer(input, shell);
 	if (!tokens)
 		return (false);
-	print_tokens(tokens);
+	//print_tokens(tokens);
 	if (!init_parsing(shell, tokens, &flag) || flag == 1)
 		return (free_tokens(tokens), false);
 	shell->ast = build_ast(tokens);
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (false);
-	print_ast_debug(shell->ast, 3, "child");
+	//print_ast_debug(shell->ast, 3, "child");
 	if (execute_ast(shell->ast, shell))
 		if (errno != 0)
 			return (false);

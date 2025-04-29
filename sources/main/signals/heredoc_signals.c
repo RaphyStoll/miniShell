@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 16:20:08 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/17 15:01:26 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/28 13:28:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	heredoc_sigint_handler(int sig)
 void	restore_signals(struct sigaction *old)
 {
 	sigaction(SIGINT, old, NULL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 /**
@@ -56,4 +57,16 @@ void	set_heredoc_signals(struct sigaction *old)
 	new.sa_flags = 0;
 	sigemptyset(&new.sa_mask);
 	sigaction(SIGINT, &new, old);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	ignore_heredoc_signals(struct sigaction *old)
+{
+	struct sigaction	ignore;
+
+	ignore.sa_handler = SIG_IGN;
+	ignore.sa_flags = 0;
+	sigemptyset(&ignore.sa_mask);
+	sigaction(SIGINT, &ignore, old);
+	signal(SIGQUIT, SIG_IGN);
 }
