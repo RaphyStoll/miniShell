@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:18:02 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/21 10:59:10 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/29 18:16:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ bool	valid_type_append_prev(t_token *cur);
 bool	valid_type_append_next(t_token *cur);
 
 //! verif exception
-bool	handle_redirection_exceptions(t_token *token, int *flag);
+bool	heredoc_child_exception(t_token *token);
+int		handle_heredoc_exception(t_shell *shell, t_token *token);
+bool	handle_redir_exceptions(t_shell *shell, t_token *token, int *flag);
 
 //!free
 void	free_tokens(t_token *head);

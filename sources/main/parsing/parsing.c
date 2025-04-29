@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/28 16:06:47 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/29 18:17:52 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  */
 bool	init_parsing(t_shell *shell, t_token *tokens, int *flag)
 {
-	if (!handle_redirection_exceptions(tokens, flag))
+	if (!handle_redir_exceptions(shell, tokens, flag))
 		return (SUCCESS);
 	if (*flag == 0)
 	{
