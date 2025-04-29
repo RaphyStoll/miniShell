@@ -6,14 +6,14 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/29 00:20:07 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/29 22:44:13 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "error_code.h"
-#include "builtin_struct.h"
 #include "../../../lib/libft/header/libft.h"
+#include "builtin_struct.h"
+#include "error_code.h"
+#include "builtin.h"
 #include "debbug.h"
 
 /**
@@ -57,6 +57,8 @@ static void	parse_echo(char **args, t_echo_opts *options, int *i)
 	bool	valid;
 
 	*i = 1;
+	if (!args[*i])
+		return ;
 	if (args[*i][0] == '-' && !args[*i][1])
 		printf("-");
 	while (args[*i] && args[*i][0] == '-')
