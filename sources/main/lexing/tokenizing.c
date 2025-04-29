@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 16:43:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/29 08:50:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ t_token	*tokenizing(const char *input, t_shell *shell)
 	token_list = NULL;
 	while (*input)
 	{
-		if (*input == ' ')
+		if (*input == ' ' || *input == '\t')
 		{
 			input++;
 			continue ;
