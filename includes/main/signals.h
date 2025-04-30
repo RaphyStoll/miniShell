@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:29:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 13:22:25 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 07:25:40 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,5 @@ void	set_heredoc_signals(struct sigaction *old);
 void	restore_signals(struct sigaction *old);
 void	heredoc_sigint_handler(int sig);
 void	ignore_heredoc_signals(struct sigaction *old);
-
-// exception
-void	set_exception_signals(struct sigaction *old);
-void	exception_sigint_handler(int sig);
 
 #endif
