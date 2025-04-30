@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:31:44 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/29 18:24:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:11:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <readline/readline.h>
-
 
 bool	heredoc_child_exception(t_token *token)
 {
@@ -61,6 +60,5 @@ int	handle_heredoc_exception(t_shell *shell, t_token *token)
 	}
 	shell->last_exit_status = handle_parent_process(pid, shell);
 	restore_signals(&old);
-
 	return (shell->last_exit_status);
 }

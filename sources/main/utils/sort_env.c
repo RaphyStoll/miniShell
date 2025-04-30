@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 22:43:46 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 22:43:52 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:17:42 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	split_list(t_env *source, t_env **front, t_env **back)
 	•	Elle trie récursivement chaque moitié
 	•	Elle les fusionne et remet le résultat dans *head_ref
 */
-
 void	sort_env(t_env **head_ref)
 {
 	t_env	*head;

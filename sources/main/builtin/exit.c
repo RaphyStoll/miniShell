@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:22:16 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/24 20:55:15 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:23:08 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	builtin_exit(t_shell *shell, char **args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_putstr_fd("exit\n", 1);
@@ -33,7 +33,7 @@ int	builtin_exit(t_shell *shell, char **args)
 			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(args[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
-				exit(2);
+			exit(2);
 		}
 		i++;
 	}

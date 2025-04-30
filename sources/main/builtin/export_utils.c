@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:02:51 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/27 13:24:29 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:24:10 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

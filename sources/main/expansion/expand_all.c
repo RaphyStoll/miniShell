@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 14:55:14 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:22:19 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ bool	remove_empty_args(t_node *node)
 	int	j;
 
 	i = 0;
-	j= 0;
-
+	j = 0;
 	if (!node || !node->args || !node->arg_quotes)
 		return (true);
 	while (node->args[i])
@@ -65,6 +64,7 @@ bool	expand_wildcard(t_node *node)
 	}
 	return (true);
 }
+
 /**
  * @brief Expands variables in redirection targets.
  *
@@ -96,50 +96,8 @@ bool	expand_redirections(t_node *node, t_shell *shell)
 	return (true);
 }
 
-/**
- * @brief Expands variables in command arguments based on quote type.
- *
- * Only arguments without quotes or with double quotes will be expanded.
- * Arguments inside single quotes are left untouched.
- *
- * @param node AST command node whose arguments may be expanded.
- * @param env Environment variable list
- * @return ture if expansion succeeded for all arguemnts else false
- */
-bool	expand_variables(t_node *node, t_shell *shell)
-{
-	char	**args;
-	char	*new_arg;
-	int		quote_type;
-	int		i;
-
-	if (!node || !shell || !node->args || !node->arg_quotes)
-		return (false);
-	i = 0;
-	args = node->args;
-	while (args[i])
-	{
-		quote_type = node->arg_quotes[i];
-		if (quote_type == QUOTE_NONE || quote_type == QUOTE_DOUBLE)
-		{
-			new_arg = expand_one_arg(args[i], shell);
-			if (!new_arg)
-				return (false);
-			free(args[i]);
-			args[i] = new_arg;
-		}
-		i++;
-	}
-	return (true);
-}
-
 bool	expand_all(t_node *node, t_shell *shell)
 {
-	// if (!expand_variables(node, shell))
-	// {
-	// 	perror("Error expanding variables");
-	// 	return (false);
-	// }
 	if (!remove_empty_args(node))
 		return (perror("error removing expansion"), false);
 	if (!expand_redirections(node, shell))

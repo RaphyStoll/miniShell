@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:28:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/24 10:57:09 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:13:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_node	*malloc_node(t_ast_type type)
 bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 {
 	char			**new_args;
-	t_quote			*new_quotes;
+	t_quote			*new_q;
 	int				i;
 
 	if (!node || !arg)
@@ -50,22 +50,22 @@ bool	realloc_arg(t_node *node, char *arg, t_quote quote_type, int len)
 	new_args = ft_calloc(1, sizeof(char *) * (len + 2));
 	if (!new_args)
 		return (GENERIC_ERROR);
-	new_quotes = ft_calloc(1, sizeof(t_quote) * (len + 2));
-	if (!new_quotes)
+	new_q = ft_calloc(1, sizeof(t_quote) * (len + 2));
+	if (!new_q)
 		return (free(new_args), GENERIC_ERROR);
 	i = 0;
 	while (i < len)
 	{
 		new_args[i] = node->args[i];
-		new_quotes[i] = node->arg_quotes[i];
+		new_q[i] = node->arg_quotes[i];
 		i++;
 	}
 	new_args[i] = ft_strdup(arg);
 	if (!new_args)
-		return (free(new_args), free(new_quotes), GENERIC_ERROR);
-	return (new_args[i + 1] = NULL, new_quotes[i] = quote_type, new_quotes[i + 1] = 0,
+		return (free(new_args), free(new_q), GENERIC_ERROR);
+	return (new_args[i + 1] = NULL, new_q[i] = quote_type, new_q[i + 1] = 0,
 		free(node->args), free(node->arg_quotes), node->args = new_args,
-		node->arg_quotes = new_quotes, GENERIC_ERROR);
+		node->arg_quotes = new_q, GENERIC_ERROR);
 }
 
 /**

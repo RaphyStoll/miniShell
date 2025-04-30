@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 08:02:36 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:20:23 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,25 +120,4 @@ void	append_node(t_env **env, t_env *new_node)
 			current = current->next;
 		current->next = new_node;
 	}
-}
-
-void	remplace_node(t_env **env, t_env *old_node, t_env *new_node)
-{
-	t_env	*prev;
-	t_env	*current;
-
-	prev = NULL;
-	current = *env;
-	while (current && current != old_node)
-	{
-		prev = current;
-		current = current->next;
-	}
-	if (prev)
-		prev->next = new_node;
-	else
-		*env = new_node;
-	free(old_node->type);
-	free(old_node->value);
-	free(old_node);
 }

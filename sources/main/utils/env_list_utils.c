@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:14:38 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 22:48:06 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:18:46 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ static t_env	*copy_env_node(t_env *src)
  */
 t_env	*env_dup(t_env *src)
 {
-	t_env	*copy = NULL;
-	t_env	*last = NULL;
+	t_env	*copy;
+	t_env	*last;
 	t_env	*new_node;
 
+	copy = NULL;
+	last = NULL;
 	while (src)
 	{
 		new_node = copy_env_node(src);

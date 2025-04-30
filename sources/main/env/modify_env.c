@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:15:35 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 23:17:11 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:20:36 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,25 @@ void	unset_env(t_env **env, char *type)
 		}
 		env = &(*env)->next;
 	}
+}
+
+void	remplace_node(t_env **env, t_env *old_node, t_env *new_node)
+{
+	t_env	*prev;
+	t_env	*current;
+
+	prev = NULL;
+	current = *env;
+	while (current && current != old_node)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (prev)
+		prev->next = new_node;
+	else
+		*env = new_node;
+	free(old_node->type);
+	free(old_node->value);
+	free(old_node);
 }

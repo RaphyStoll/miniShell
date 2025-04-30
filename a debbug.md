@@ -31,12 +31,12 @@
 - OK `init_env` guard si strdup ou substr
   - ??? rollback si une ligne echoue ?
 - OK `get_env_value` ft_itoa(last_exit) ?? pourquoi?? si c'est voulu itoa peut echouer a verifier
-- `get_envp` guard strjoin + si echoue rollback
+- OK `get_envp` guard strjoin + si echoue rollback
 
 ### expansion
 
-- `expand_one_arg` si arg = NULL = segfault
-- `handle_regular_char` guard a strjoin
-- `expand_variables` si expand_one_arg = NULL pas de gestion d'erreur
+- OK `expand_one_arg` si arg = NULL = segfault
+- OK `handle_regular_char` guard a strjoin
+- OK `expand_variables` si expand_one_arg = NULL pas de gestion d'erreur
   - si probleme dans la boucle pas de rollback (peut etre voulu)
   - doit pas etre un void mais un bool pour pouvoir gere les erreurs

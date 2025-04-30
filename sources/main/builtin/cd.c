@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:20:42 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/26 21:29:37 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 17:23:48 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 char	*cd_exception(t_shell *shell, char **ag)
 {
-	char *target;
+	char	*target;
+
 	if (!ag[1])
 	{
 		target = get_env_value(shell, "HOME");
@@ -41,7 +42,6 @@ char	*cd_exception(t_shell *shell, char **ag)
 	return (target);
 }
 
-
 int	builtin_cd(t_shell *shell, char **ag)
 {
 	char	*target;
@@ -49,7 +49,7 @@ int	builtin_cd(t_shell *shell, char **ag)
 	char	*newpwd;
 
 	if (ag[2])
-	return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
+		return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	if (!ag[1] || ft_strcmp(ag[1], "~") == 0 || ft_strcmp(ag[1], "-") == 0)
 		target = cd_exception(shell, ag);
 	else

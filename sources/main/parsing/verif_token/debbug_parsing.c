@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 07:25:16 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:25:38 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	print_tokens(t_token *head)
 {
 	t_token		*current;
 	const char	*type_names[] = {
-		"WORD", "PIPE", "REDIRECT_IN", "REDIRECT_OUT", 
-		"HEREDOC", "APPEND", "AND", "OR", 
+		"WORD", "PIPE", "REDIRECT_IN", "REDIRECT_OUT",
+		"HEREDOC", "APPEND", "AND", "OR",
 		"O_PARENTHESIS", "C_PARENTHESIS"
 	};
 
@@ -40,7 +40,7 @@ void	print_current_token(t_token *token)
 {
 	const char	*type_names[] = {
 		"WORD", "PIPE", "REDIRECT_IN", "REDIRECT_OUT",
-		"HEREDOC", "APPEND", "AND", "OR", 
+		"HEREDOC", "APPEND", "AND", "OR",
 		"O_PARENTHESIS", "C_PARENTHESIS"
 	};
 
@@ -102,10 +102,3 @@ void	print_list(t_token **head)
 	ft_putstr_fd("NULL\n", 1);
 	return ;
 }
-
-
-
-
-
-
-

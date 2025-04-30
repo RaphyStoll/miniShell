@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/04/29 18:17:52 by Charlye          ###   ########.fr       */
+/*   Created: 2025/04/30 17:15:12 by Charlye           #+#    #+#             */
+/*   Updated: 2025/04/30 17:15:17 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "parsing.h"
 #include "minishell.h"

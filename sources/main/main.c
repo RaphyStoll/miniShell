@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:24:34 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/28 16:06:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 17:21:07 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,12 @@ bool	process_input(char *input, t_shell *shell)
 	tokens = lexer(input, shell);
 	if (!tokens)
 		return (false);
-	//print_tokens(tokens);
 	if (!init_parsing(shell, tokens, &flag) || flag == 1)
 		return (free_tokens(tokens), false);
 	shell->ast = build_ast(tokens);
 	free_tokens(tokens);
 	if (!shell->ast)
 		return (false);
-	//print_ast_debug(shell->ast, 3, "child");
 	if (execute_ast(shell->ast, shell))
 		if (errno != 0)
 			return (false);
@@ -146,7 +144,7 @@ void	loop_non_interactive(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
-	int status;
+	int		status;
 
 	(void) argc;
 	(void) argv;
