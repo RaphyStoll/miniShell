@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/21 17:04:16 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/04/30 08:02:36 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,27 @@ char	*get_env_value(t_shell *shell, char	*type)
 	return (NULL);
 }
 
+bool	add_env_to_array(t_env *env, char **envp, int count)
+{
+	char	*tmp_type;
+
+	tmp_type = ft_strjoin(env->type, "=");
+	if (!tmp_type)
+		return (false);
+	envp[count++] = ft_strjoin(tmp_type, env->value);
+	free(tmp_type);
+	if (!envp[count])
+	{
+		while (count > 0)
+		{
+			free(envp[count]);
+			count--;
+		}
+		return (false);
+	}
+	return (true);
+}
+
 /**
  * @brief Converts the environment list into a NULL-terminated array of strings
  * that is adequate for the execve function.
@@ -54,7 +75,6 @@ char	**get_envp(t_env *env)
 {
 	t_env	*tmp;
 	char	**envp;
-	char	*tmp_type;
 	int		count;
 
 	count = 0;
@@ -70,9 +90,8 @@ char	**get_envp(t_env *env)
 	count = 0;
 	while (env)
 	{
-		tmp_type = ft_strjoin(env->type, "=");
-		envp[count++] = ft_strjoin(tmp_type, env->value);
-		free(tmp_type);
+		if (!add_env_to_array(env, envp, count))
+			return (free(envp), NULL);
 		env = env->next;
 	}
 	envp[count] = NULL;

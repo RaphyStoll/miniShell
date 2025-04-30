@@ -28,9 +28,9 @@
   - en cas d'erreur return false mais ne free pas la chaine voulu ??
 - `env_delone` tu free mais ne verifie pas que c'est pas a null !node n'empeche pas de !node->type
 - `add_env_node` si new = null = bug
-- `init_env` guard si strdup ou substr
-  - rollback si une ligne echoue ?
-- `get_env_value` ft_itoa(last_exit) ?? pourquoi?? si c'est voulu itoa peut echouer a verifier
+- OK `init_env` guard si strdup ou substr
+  - ??? rollback si une ligne echoue ?
+- OK `get_env_value` ft_itoa(last_exit) ?? pourquoi?? si c'est voulu itoa peut echouer a verifier
 - `get_envp` guard strjoin + si echoue rollback
 
 ### expansion
