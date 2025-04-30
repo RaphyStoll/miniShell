@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/29 09:00:07 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 07:38:24 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	*get_next_segment(const char **input, t_shell *shell, t_quote *quote)
 	char	*expanded;
 	t_quote	seg_quote;
 
+	if (!input || !*input)
+		return (NULL);
 	seg_quote = QUOTE_NONE;
 	seg = get_quoted_word(input, &seg_quote);
 	if (!seg)
@@ -87,6 +89,8 @@ char	*handle_word(const char **input, t_quote *quote_type, t_shell *shell)
 	char	*word;
 	char	*seg;
 
+	if (!input || !*input)
+		return (NULL);
 	word = NULL;
 	*quote_type = QUOTE_NONE;
 	seg = get_next_segment(input, shell, quote_type);
@@ -112,6 +116,8 @@ bool	handle_operator(t_token **token_list, const char **input)
 {
 	t_type	op;
 
+	if (!input || !*input)
+		return (false);
 	op = is_operator(*input);
 	if (op != WORD)
 		return (add_operator(token_list, input, op));
@@ -138,6 +144,8 @@ t_token	*tokenizing(const char *input, t_shell *shell)
 	t_quote			quote_type;
 	char			*word;
 
+	if (!input || !*input)
+		return (perror("Error: NULL input in tokenizing"), NULL);
 	token_list = NULL;
 	while (*input)
 	{

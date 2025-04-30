@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/26 14:55:40 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 07:45:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ bool	check_unclosed_quotes(const char *input)
 	char	quote;
 	char	error_token[2];
 
+	if (!input)
+		return (false);
 	quote = 0;
 	while (*input)
 	{
@@ -41,10 +43,7 @@ bool	check_unclosed_quotes(const char *input)
 		input++;
 	}
 	if (quote)
-	{
-		ft_exit_error(NULL, UNCLOSED_QUOTE, error_token);
-		return (false);
-	}
+		return (ft_exit_error(NULL, UNCLOSED_QUOTE, error_token), false);
 	return (true);
 }
 
@@ -58,6 +57,8 @@ bool	check_unclosed_parentheses(const char *input)
 {
 	int	count;
 
+	if (!input)
+		return (false);
 	count = 0;
 	while (*input)
 	{
@@ -66,18 +67,12 @@ bool	check_unclosed_parentheses(const char *input)
 		else if (*input == ')')
 		{
 			if (count == 0)
-			{
-				ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")");
-				return (false);
-			}
+				return (ft_exit_error(NULL, UNCLOSED_PARENTHESIS, ")"), false);
 			count--;
 		}
 		input++;
 	}
 	if (count > 0)
-	{
-		ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "(");
-		return (false);
-	}
+		return (ft_exit_error(NULL, UNCLOSED_PARENTHESIS, "("), false);
 	return (true);
 }
