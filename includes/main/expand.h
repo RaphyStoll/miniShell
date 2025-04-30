@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:51:34 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 14:51:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 07:22:02 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ char	**collect_matches(char *arg, int count);
 int		fill_matches(DIR *dir, char **matches, int *ptr_j, char *arg);
 void	sort_args_lexico(char **array, int count);
 void	replace_args_in_list(t_node *node, int i, char **matches, int count);
-
-
 
 #endif

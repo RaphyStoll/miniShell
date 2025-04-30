@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/29 09:03:00 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/04/30 08:02:50 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
 	char		*word;
 
 	len = 0;
-	if (**input != '"' && **input != '\'')
+	if (!input || !*input || (**input != '"' && **input != '\''))
 		return (NULL);
 	quote = **input;
 	if (quote == '"')
@@ -136,6 +136,8 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
 		return (NULL);
 	(*input) += len + 1;
 	word = ft_strndup(start, len);
+	if (!word)
+		return (NULL);
 	return (word);
 }
 
@@ -151,6 +153,8 @@ char	*get_unquoted_word(const char **input)
 	const char	*start;
 	char		*word;
 
+	if (!input || !*input)
+		return (NULL);
 	len = 0;
 	start = *input;
 	while ((*input)[len]
@@ -160,6 +164,8 @@ char	*get_unquoted_word(const char **input)
 		&& !is_quote((*input)[len]))
 		len++;
 	word = ft_strndup(start, len);
+	if (!word)
+		return (NULL);
 	*input += len;
 	return (word);
 }

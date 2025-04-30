@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   debbug_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:32:52 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/20 20:37:07 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/04/30 07:25:16 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error_code.h"
 #include "lexing.h"
 #include "parsing.h"
-
 
 // Fonction pour afficher la liste de tokens (utile pour débugger)
 void	print_tokens(t_token *head)
@@ -29,7 +28,8 @@ void	print_tokens(t_token *head)
 	printf("Liste des tokens:\n");
 	while (current != NULL)
 	{
-		printf("Token: %-15s | Type: %s\n", current->str, type_names[current->type]);
+		printf("Token: %-15s | Type: %s\n",
+			current->str, type_names[current->type]);
 		current = current->next;
 	}
 	printf("\n");
@@ -39,7 +39,7 @@ void	print_tokens(t_token *head)
 void	print_current_token(t_token *token)
 {
 	const char	*type_names[] = {
-		"WORD", "PIPE", "REDIRECT_IN", "REDIRECT_OUT", 
+		"WORD", "PIPE", "REDIRECT_IN", "REDIRECT_OUT",
 		"HEREDOC", "APPEND", "AND", "OR", 
 		"O_PARENTHESIS", "C_PARENTHESIS"
 	};
@@ -47,19 +47,18 @@ void	print_current_token(t_token *token)
 	if (!token)
 	{
 		printf(GREEN "Token actuel: NULL\n"NC);
-		return;
+		return ;
 	}
-	
-	printf(GREEN "Token actuel: %-15s | Type: %s\n"NC, token->str, type_names[token->type]);
-	
-	// Afficher les tokens adjacents pour le contexte (optionnel)
+	printf(GREEN "Token actuel: %-15s | Type: %s\n"NC,
+		token->str, type_names[token->type]);
 	if (token->prev)
-		printf(GREEN "Token précédent: %-10s | Type: %s\n"NC, token->prev->str, type_names[token->prev->type]);
+		printf(GREEN "Token précédent: %-10s | Type: %s\n"NC,
+			token->prev->str, type_names[token->prev->type]);
 	else
 		printf(GREEN "Token précédent: NULL\n"NC);
-		
 	if (token->next)
-		printf(GREEN "Token suivant:  %-10s | Type: %s\n"NC, token->next->str, type_names[token->next->type]);
+		printf(GREEN "Token suivant:  %-10s | Type: %s\n"NC,
+			token->next->str, type_names[token->next->type]);
 	else
 		printf(GREEN "Token suivant:  NULL\n"NC);
 }
@@ -85,13 +84,11 @@ void	print_tab(char **tab)
 	printf("]");
 }
 
-//print un noeud de la liste
 void	print_node(t_token *current)
 {
 	printf("(%s) [%d]", current->str, current->type);
 }
 
-//print la liste
 void	print_list(t_token **head)
 {
 	t_token	*current;
