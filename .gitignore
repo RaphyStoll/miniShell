@@ -1,4 +1,4 @@
-output/*
+mstest*
 minishell
 minishell_bonus
 *.o
