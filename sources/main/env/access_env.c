@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 17:20:23 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 07:44:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	add_env_to_array(t_env *env, char **envp, int count)
 	{
 		while (count > 0)
 		{
-			free(envp[count]);
+			free(envp[count - 1]);
 			count--;
 		}
 		return (false);
@@ -93,6 +93,7 @@ char	**get_envp(t_env *env)
 		if (!add_env_to_array(env, envp, count))
 			return (free(envp), NULL);
 		env = env->next;
+		count++;
 	}
 	envp[count] = NULL;
 	return (envp);
