@@ -1,11 +1,12 @@
 {
+    sa
     Memcheck:Leak
+    ...
     fun:readline
-    ...
 }
-
 {
+    sb
     Memcheck:Leak
-    fun:add_history
     ...
+    fun:add_history
 }
