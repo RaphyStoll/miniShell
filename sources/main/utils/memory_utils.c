@@ -44,9 +44,12 @@ void	free_env_node(t_env *node)
 {
 	if (!node)
 		return ;
-	free(node->type);
-	free(node->value);
-	free(node);
+	if (node->type)
+		free(node->type);
+	if (node->value)
+		free(node->value);
+	if (node)
+		free(node);
 }
 
 void	free_env(t_env *head)

@@ -46,21 +46,18 @@ char	*get_env_value(t_shell *shell, char	*type)
 bool	add_env_to_array(t_env *env, char **envp, int count)
 {
 	char	*tmp_type;
+	char	*entry;
 
+	if (!env->type || !env->value)
+		return false;
 	tmp_type = ft_strjoin(env->type, "=");
 	if (!tmp_type)
 		return (false);
-	envp[count++] = ft_strjoin(tmp_type, env->value);
+	entry = ft_strjoin(tmp_type, env->value);
 	free(tmp_type);
-	if (!envp[count])
-	{
-		while (count > 0)
-		{
-			free(envp[count - 1]);
-			count--;
-		}
+	if (!entry)
 		return (false);
-	}
+	envp[count] = entry;
 	return (true);
 }
 
@@ -75,27 +72,32 @@ char	**get_envp(t_env *env)
 {
 	t_env	*tmp;
 	char	**envp;
-	int		count;
+	int		len;
+	int		i;
 
-	count = 0;
+	len = 0;
 	tmp = env;
 	while (tmp)
 	{
-		count++;
+		len++;
 		tmp = tmp->next;
 	}
-	envp = malloc(sizeof(char *) * (count + 1));
+	envp = malloc(sizeof(char *) * (len + 1));
 	if (!envp)
 		return (NULL);
-	count = 0;
+	i = 0;
 	while (env)
 	{
-		if (!add_env_to_array(env, envp, count))
+		if (!add_env_to_array(env, envp, i))
+		{
+			while (i--)
+				free(envp[i]);
 			return (free(envp), NULL);
+		}
 		env = env->next;
-		count++;
+		i++;
 	}
-	envp[count] = NULL;
+	envp[i] = NULL;
 	return (envp);
 }
 
