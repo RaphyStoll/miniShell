@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:07:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/05/01 07:44:55 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:34:50 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,64 +41,6 @@ char	*get_env_value(t_shell *shell, char	*type)
 		env = env->next;
 	}
 	return (NULL);
-}
-
-bool	add_env_to_array(t_env *env, char **envp, int count)
-{
-	char	*tmp_type;
-	char	*entry;
-
-	if (!env->type || !env->value)
-		return false;
-	tmp_type = ft_strjoin(env->type, "=");
-	if (!tmp_type)
-		return (false);
-	entry = ft_strjoin(tmp_type, env->value);
-	free(tmp_type);
-	if (!entry)
-		return (false);
-	envp[count] = entry;
-	return (true);
-}
-
-/**
- * @brief Converts the environment list into a NULL-terminated array of strings
- * that is adequate for the execve function.
- * 
- * @param env Environment list.
- * @return Array of strings in the format VAR=VALUE.
- */
-char	**get_envp(t_env *env)
-{
-	t_env	*tmp;
-	char	**envp;
-	int		len;
-	int		i;
-
-	len = 0;
-	tmp = env;
-	while (tmp)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	envp = malloc(sizeof(char *) * (len + 1));
-	if (!envp)
-		return (NULL);
-	i = 0;
-	while (env)
-	{
-		if (!add_env_to_array(env, envp, i))
-		{
-			while (i--)
-				free(envp[i]);
-			return (free(envp), NULL);
-		}
-		env = env->next;
-		i++;
-	}
-	envp[i] = NULL;
-	return (envp);
 }
 
 t_env	*get_last_node(t_env *dup_env)

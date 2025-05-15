@@ -6,7 +6,7 @@
 /*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 08:40:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/24 16:01:13 by chpasqui         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:56:01 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	add_env_from_string(t_env **env_list, char *env)
 		j++;
 	if (env[j] == '=')
 	{
-		new = malloc(sizeof(t_env));
+		new = ft_calloc(1, sizeof(t_env));
 		if (!new)
 			return (false);
 		new->type = ft_substr(env, 0, j);

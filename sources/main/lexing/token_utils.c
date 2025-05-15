@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:10:56 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/30 08:02:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:51:25 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_token	*init_token(t_token *head, char *str, t_type op, t_quote quote_type)
  * @param op Operator type to add.
  * @return true on success, false on memory allocation failure.
  */
-bool	add_operator(t_token **token_list, const char **input, t_type op)
+bool	add_operator(t_token **token_list, char **input, t_type op)
 {
 	char	*operator;
 
@@ -113,7 +113,7 @@ char	*append_segment(char *word, char *seg)
  * @param quote_type Pointer to store the detected quote type.
  * @return Newly allocated quoted word or NULL on failure.
  */
-char	*get_quoted_word(const char **input, t_quote *quote_type)
+char	*get_quoted_word(char **input, t_quote *quote_type)
 {
 	int			len;
 	const char	*start;
@@ -147,7 +147,7 @@ char	*get_quoted_word(const char **input, t_quote *quote_type)
  * @param input Pointer to the input string.
  * @return Newly allocated unquoted word or NULL on failure.
  */
-char	*get_unquoted_word(const char **input)
+char	*get_unquoted_word(char **input)
 {
 	int			len;
 	const char	*start;

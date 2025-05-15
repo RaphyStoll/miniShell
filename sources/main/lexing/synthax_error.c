@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:35:59 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/30 07:45:51 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:48:51 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param input Input string to check.
  * @return true if quotes are properly closed, false otherwise
  */
-bool	check_unclosed_quotes(const char *input)
+bool	check_unclosed_quotes(char *input)
 {
 	char	quote;
 	char	error_token[2];
@@ -53,7 +53,7 @@ bool	check_unclosed_quotes(const char *input)
  * @param input Input string to check.
  * @return true if all parentheses are properly closed, false otherwise.
  */
-bool	check_unclosed_parentheses(const char *input)
+bool	check_unclosed_parentheses(char *input)
 {
 	int	count;
 

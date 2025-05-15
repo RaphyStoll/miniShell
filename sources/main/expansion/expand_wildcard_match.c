@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_match.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:01:43 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/30 18:23:12 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:48 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
-#include "debbug.h"
 
 void	handle_memory(int *i, int *j, int *star_idx, int *name_idx)
 {

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 16:03:11 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 13:05:34 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/05/01 12:27:15 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "builtin.h"
 #include "minishell.h"
-#include "debbug.h"
 
 /**
  * @brief Checks if a command is a shell builtin.
@@ -43,6 +42,8 @@ bool	is_builtin(char *cmd)
  */
 int	execute_builtin(char **args, t_shell *shell)
 {
+	int	status;
+
 	if (!args || !args[0])
 		return (1);
 	if (ft_strcmp(args[0], "echo") == 0)
@@ -59,8 +60,8 @@ int	execute_builtin(char **args, t_shell *shell)
 		return (builtin_env(shell->env));
 	if (ft_strcmp(args[0], "exit") == 0)
 	{
-		shell->last_exit_status = builtin_exit(shell, args);
-		return (shell->last_exit_status);
+		status = builtin_exit(shell, args);
+		exit (status);
 	}
 	return (1);
 }

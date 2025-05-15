@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:04:08 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/28 23:03:59 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:26 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
-#include "debbug.h"
 
 bool	builtin_export(t_env **env, char **args)
 {

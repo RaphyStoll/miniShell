@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_heredoc_append.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:18:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/03/25 21:57:52 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/05/05 16:27:12 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	valid_type_heredoc_prev(t_token *cur)
 	if (cur->type == HEREDOC)
 	{
 		if (cur->prev == NULL)
-			return (false);
+			return (true);
 		if (!(cur->prev->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
@@ -62,7 +62,7 @@ bool	valid_type_append_prev(t_token *cur)
 	if (cur->type == APPEND)
 	{
 		if (cur->prev == NULL)
-			return (false);
+			return (true);
 		if (!(cur->prev->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)

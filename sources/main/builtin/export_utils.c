@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:02:51 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 17:24:10 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:18 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "env_struct.h"
 #include "utils.h"
 #include "builtin.h"
-#include "debbug.h"
 
 bool	is_valid_identifier(const char *str)
 {

@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_sort_replace.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 17:27:08 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/30 18:21:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 13:02:22 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
-#include "debbug.h"
 
 void	copy_new_args(char **matches, char **new_args, int *dst, int count)
 {
 	int	j;
+	int	tmp;
 
+	tmp = *dst;
 	j = 0;
 	while (j < count)
-		new_args[*dst++] = matches[j++];
+	{
+		new_args[tmp] = matches[j];
+		tmp++;
+		j++;
+	}
+	*dst = tmp;
 }
 
 int	calculate_nb_args(t_node *node)

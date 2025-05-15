@@ -6,13 +6,12 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:01:18 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 13:34:49 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 09:20:55 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
-#include "debbug.h"
 
 /**
  * @brief Searches for an executable command in a list of paths.
@@ -57,7 +56,6 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 	char	**paths;
 	char	*path_var;
 	char	*cmd_path;
-	bool	path_allocated;
 
 	if (ft_strchr(cmd, '/'))
 	{
@@ -66,12 +64,13 @@ char	*find_cmd_path(char *cmd, t_shell *shell)
 		return (ft_strdup(cmd));
 	}
 	path_var = get_env_value(shell, "PATH");
-	path_allocated = (path_var != NULL);
-	if (!path_var)
-		path_var = NO_PATH;
+	if (!path_var || path_var[0] == '\0')
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
+		return (NULL);
+	}
 	paths = ft_split(path_var, ':');
-	if (path_allocated)
-		free(path_var);
 	if (!paths)
 		return (NULL);
 	cmd_path = check_all_paths(paths, cmd);
@@ -130,10 +129,7 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 	int	status;
 
 	if (waitpid(pid, &status, 0) == -1)
-	{
-		perror("waitpid");
-		return (GENERIC_ERROR);
-	}
+		return (SIGINT_ERROR);
 	if (WIFEXITED(status))
 	{
 		shell->last_exit_status = WEXITSTATUS(status);
@@ -146,6 +142,8 @@ int	handle_parent_process(pid_t pid, t_shell *shell)
 	{
 		shell->last_exit_status = 128 + WTERMSIG(status);
 		g_signal = WTERMSIG(status);
+		if (g_signal == SIGINT)
+			write(1, "\n", 1);
 	}
 	return (shell->last_exit_status);
 }
@@ -169,19 +167,21 @@ int	execute_command(t_node *cmd, t_shell *shell)
 	if (cmd->args[0][0] == '\0')
 		return (ft_putstr_fd(": command not found\n", 2), COMMAND_NOT_FOUND);
 	if (is_builtin(cmd->args[0]))
-	{
-		shell->last_exit_status = execute_builtin_redir(cmd, shell);
-		return (shell->last_exit_status);
-	}
+		return (execute_builtin_redir(cmd, shell));
+	set_signals_exec();
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("fork");
-		return (GENERIC_ERROR);
+		set_signals();
+		return (perror("fork"), GENERIC_ERROR);
 	}
-	else if (pid == 0)
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		execute_child_process(cmd, shell);
-	else
-		return (handle_parent_process(pid, shell));
-	return (GENERIC_ERROR);
+	}
+	shell->last_exit_status = handle_parent_process(pid, shell);
+	set_signals();
+	return (shell->last_exit_status);
 }

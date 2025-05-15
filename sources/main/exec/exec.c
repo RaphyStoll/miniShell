@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:20:29 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 13:58:34 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:34 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
-#include "debbug.h"
 
 /**
  * @brief Executes an AST node.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 23:14:38 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 17:18:46 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:13:02 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "env_struct.h"
 #include "error_code.h"
 #include "utils.h"
-#include "debbug.h"
 
 static t_env	*copy_env_node(t_env *src)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:30:11 by raphalme          #+#    #+#             */
-/*   Updated: 2025/04/14 16:02:57 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/05/05 15:08:18 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	valid_type_redirect_in_prev(t_token *cur)
 	if (cur->type == REDIRECT_IN)
 	{
 		if (cur->prev == NULL)
-			return (false);
+			return (true);
 		if (!(cur->prev->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)
@@ -62,7 +62,7 @@ bool	valid_type_redirect_out_prev(t_token *cur)
 	if (cur->type == REDIRECT_OUT)
 	{
 		if (cur->prev == NULL)
-			return (false);
+			return (true);
 		if (!(cur->prev->type == WORD))
 			return (false);
 		if (cur->prev->type == HEREDOC || cur->prev->type == APPEND)

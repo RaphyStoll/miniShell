@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:20:23 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/30 17:18:03 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:16:28 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "minishell.h"
-#include "debbug.h"
 
 void	print_error_message(t_error_code code, char *error_token)
 {
 	if (!error_token)
 		error_token = "newline";
-	//write (2, SHELL_NAME, ft_strlen(SHELL_NAME));
+	write (2, SHELL_NAME, ft_strlen(SHELL_NAME));
 	if (code == UNCLOSED_QUOTE)
 	{
 		write(2,

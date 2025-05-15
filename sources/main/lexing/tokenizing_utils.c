@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   tokenizing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 14:59:03 by chpasqui          #+#    #+#             */
-/*   Updated: 2025/04/30 07:38:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 10:54:10 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	add_token(t_token **head, char *str, t_type op, t_quote quote_type)
 	return (true);
 }
 
-char	*get_next_segment(const char **input, t_shell *shell, t_quote *quote)
+char	*get_next_segment(char **input, t_shell *shell, t_quote *quote)
 {
 	char	*seg;
 	char	*expanded;
@@ -84,7 +84,7 @@ char	*get_next_segment(const char **input, t_shell *shell, t_quote *quote)
  * @param quote_type Pointer to store the global quote type detected.
  * @return Newly allocated full word or NULL on failure.
  */
-char	*handle_word(const char **input, t_quote *quote_type, t_shell *shell)
+char	*handle_word(char **input, t_quote *quote_type, t_shell *shell)
 {
 	char	*word;
 	char	*seg;
@@ -112,7 +112,7 @@ char	*handle_word(const char **input, t_quote *quote_type, t_shell *shell)
  * @return true if an operator was found and added, false otherwise.
  */
 
-bool	handle_operator(t_token **token_list, const char **input)
+bool	handle_operator(t_token **token_list, char **input)
 {
 	t_type	op;
 
@@ -132,37 +132,8 @@ bool	handle_operator(t_token **token_list, const char **input)
 	return (false);
 }
 
-/**
- * @brief Converts the input line into a list of tokens.
- *
- * @param input Input string to tokenize.
- * @return Head of the token list or NULL on error.
- */
-t_token	*tokenizing(const char *input, t_shell *shell)
+void	skip_whitespace(char **input)
 {
-	t_token			*token_list;
-	t_quote			quote_type;
-	char			*word;
-
-	if (!input || !*input)
-		return (perror("Error: NULL input in tokenizing"), NULL);
-	token_list = NULL;
-	while (*input)
-	{
-		if (*input == ' ' || *input == '\t')
-		{
-			input++;
-			continue ;
-		}
-		if (handle_operator(&token_list, &input))
-			continue ;
-		if (is_forbidden_char(*input))
-			return (ft_exit_error(token_list, SYNTAX_ERROR, (char *)input));
-		word = handle_word(&input, &quote_type, shell);
-		if (!word)
-			return (ft_exit_error(token_list, MEMORY_ERROR, "word"));
-		add_token(&token_list, word, WORD, quote_type);
-		free(word);
-	}
-	return (token_list);
+	while (**input == ' ' || **input == '\t')
+		(*input)++;
 }

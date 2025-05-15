@@ -6,7 +6,7 @@
 /*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:20:36 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/26 14:53:59 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:48:18 by Charlye          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	is_forbidden_char(char c)
 	return (c == '&' || c == ';' || c == '\\');
 }
 
-t_type	is_operator(const char *input)
+t_type	is_operator(char *input)
 {
 	if (!ft_strncmp(input, ">>", 2))
 		return (APPEND);

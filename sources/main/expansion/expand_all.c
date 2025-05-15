@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_all.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 14:40:45 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/30 17:22:19 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:13:53 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
-#include "debbug.h"
 
 /**
  * @brief Remove empty, unquoted arguments from a node.
@@ -105,7 +104,7 @@ bool	expand_all(t_node *node, t_shell *shell)
 		perror("Error rexpanding redirections");
 		return (false);
 	}
-	if (!expand_wildcard(node))
+	if (node->args && !expand_wildcard(node))
 	{
 		perror("Error expanding wildcard *");
 		return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 17:15:12 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/30 17:15:17 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 15:10:02 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
  */
 bool	init_parsing(t_shell *shell, t_token *tokens, int *flag)
 {
-	if (!handle_redir_exceptions(shell, tokens, flag))
-		return (SUCCESS);
 	if (*flag == 0)
 	{
 		if (!valid_content(tokens))

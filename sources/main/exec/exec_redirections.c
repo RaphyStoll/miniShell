@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:56:09 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/25 17:32:37 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:32 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "minishell.h"
-#include "debbug.h"
 
 void	cleanup_redir_args(char **args)
 {

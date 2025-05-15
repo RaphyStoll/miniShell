@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:59:37 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 14:09:50 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/05 16:16:49 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	write_heredoc_lines(int fd, t_redirection *redir, t_shell *shell)
  */
 void	heredoc_child(t_redirection *redir, t_shell *shell)
 {
-	int					fd;
+	int	fd;
 
 	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -111,6 +111,7 @@ int	handle_heredoc(t_redirection *redir, t_shell *shell)
 	fd = open(".heredoc_tmp", O_RDONLY);
 	if (fd < 0)
 		perror("heredoc reopen");
+	unlink(".heredoc_tmp");
 	return (fd);
 }
 

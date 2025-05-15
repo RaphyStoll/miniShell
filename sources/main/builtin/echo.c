@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:23:24 by raphaelferr       #+#    #+#             */
-/*   Updated: 2025/04/29 22:44:13 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:16 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "builtin_struct.h"
 #include "error_code.h"
 #include "builtin.h"
-#include "debbug.h"
 
 /**
  * @brief Activates an option in the structure.

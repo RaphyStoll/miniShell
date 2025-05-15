@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:40:39 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/28 15:25:24 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:53 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
-#include "debbug.h"
 
 int	fill_matches(DIR *dir, char **matches, int *ptr_j, char *arg)
 {

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Charlye <Charlye@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chpasqui <chpasqui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:45:06 by Charlye           #+#    #+#             */
-/*   Updated: 2025/04/27 13:34:57 by Charlye          ###   ########.fr       */
+/*   Updated: 2025/05/01 12:12:46 by chpasqui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 #include "minishell.h"
 #include "../../../lib/libft/header/libft.h"
-#include "debbug.h"
 
 /**
  * @brief Expands the special variable `$?`.
